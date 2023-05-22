@@ -22,7 +22,6 @@ public class JeuControleur implements Initializable {
     private TilePane tilePane;
     @FXML
     private Pane zoneAffichageEnnemis;
-
     private Timeline gameLoop;
     private int temps;
 
@@ -42,9 +41,6 @@ public class JeuControleur implements Initializable {
         EnnemisVue ennemisVue = new EnnemisVue(env,zoneAffichageEnnemis);
         ennemisVue.ajouterEnnemi(listeEnnemis.get(0));
         ennemisVue.ajouterEnnemi(listeEnnemis.get(1));
-
-
-
 
 
         terrainVue.afficherTerrain();
