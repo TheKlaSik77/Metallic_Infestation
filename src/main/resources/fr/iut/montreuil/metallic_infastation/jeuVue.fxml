@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.metallic_infastation.controleur.JeuControleur">
+   <bottom>
+      <Pane prefHeight="50.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="50.0" prefWidth="750.0" style="-fx-background-color: red;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="56.0" prefWidth="750.0" text="Infos Joueur" textAlignment="CENTER" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <Pane fx:id="zoneAffichageEnnemis" BorderPane.alignment="CENTER">
+         <children>
+            <TilePane fx:id="tilePane" prefColumns="30" prefHeight="480.0" prefRows="30" prefTileHeight="16.0" prefTileWidth="16.0" prefWidth="480.0" />
+         </children>
+      </Pane>
+   </center>
+   <right>
+      <Pane prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="800.0" prefWidth="250.0" style="-fx-background-color: yellow;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="250.0" text="Boutique" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </right>
+</BorderPane>
