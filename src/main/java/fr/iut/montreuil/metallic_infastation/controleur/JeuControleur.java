@@ -22,7 +22,6 @@ public class JeuControleur implements Initializable {
     private TilePane tilePane;
     @FXML
     private Pane zoneAffichageEnnemis;
-
     private Timeline gameLoop;
     private int temps;
 
@@ -44,7 +43,7 @@ public class JeuControleur implements Initializable {
         ennemisVue.ajouterEnnemi(listeEnnemis.get(1));
 
 
-
+        System.out.println("coucou");
 
 
         terrainVue.afficherTerrain();
