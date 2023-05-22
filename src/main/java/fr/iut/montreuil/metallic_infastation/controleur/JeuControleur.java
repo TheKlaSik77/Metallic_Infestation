@@ -43,9 +43,6 @@ public class JeuControleur implements Initializable {
         ennemisVue.ajouterEnnemi(listeEnnemis.get(1));
 
 
-        System.out.println("coucou");
-
-
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
         parcoursBFS.remplirGrilleBFS();
