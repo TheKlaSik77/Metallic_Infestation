@@ -81,6 +81,8 @@ public class Terrain {
     public boolean caseEstDansTerrain(Case c){
         return  (c.getI() >= 0 && c.getI() < terrain.length) && (c.getJ() >= 0 && c.getJ() < terrain[0].length);
     }
+
+    
     public boolean arriveeSurCase(Case c){
         return terrain[c.getI()][c.getJ()] == 2;
     }
@@ -96,4 +98,6 @@ public class Terrain {
     public boolean videSurCase(Case c){
         return terrain[c.getI()][c.getJ()] == 0;
     }
+
 }
+

@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public class ParcoursBFS {
 
     private Terrain terrain;
-
-
-
     private int[][] grilleBFS;
 
     public ParcoursBFS(Terrain terrain) {
