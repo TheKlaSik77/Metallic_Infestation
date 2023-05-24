@@ -3,24 +3,51 @@ package fr.iut.montreuil.metallic_infastation.modele;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Environnement {
 
+
     static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
+    private ObservableList<Tourelle> listeTourelles;
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
+        this.listeTourelles = FXCollections.observableArrayList();
         vagueActuelle = 0;
     }
 
     public ObservableList<Ennemi> getListeEnnemis() {
         return listeEnnemis;
     }
+    public ObservableList<Tourelle> getListeTourelles(){
+        return listeTourelles;
+    }
+
+    public Ennemi ennemiSurCase(Case c){
+        for (Ennemi e : listeEnnemis){
+            if (e.getCase().caseEgale(c)){
+                return e;
+            }
+        }
+        return null;
+    }
+
+
+    public void poserTour(Case c){
+        if (this.terrain.videSurCase(c)){
+            Tourelle t = new TourelleSemi(c,this,terrain);
+            listeTourelles.add(t);
+            this.terrain.setCase(c,3);
+        }
+    }
+
 
     /**
      *

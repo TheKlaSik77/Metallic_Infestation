@@ -59,6 +59,7 @@ public class JeuControleur implements Initializable {
             }
         });
         env.lancerVague(terrainExperimental);
+
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
         parcoursBFS.remplirGrilleBFS();
@@ -80,10 +81,13 @@ public class JeuControleur implements Initializable {
                 // c'est un eventHandler d'ou le lambda
                 (ev -> {
                     // TODO: Fini quand plus de points de vie ou vagues 15.
+
                     if (temps == 1000000) {
                         System.out.println("fini");
                         gameLoop.stop();
                     } else if (temps % 2 == 0) {
+                        
+           
                         for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                             Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();
@@ -92,9 +96,25 @@ public class JeuControleur implements Initializable {
                             }
                         }
 
+                        for (Tourelle t : env.getListeTourelles()){
+                            t.raffraichirEnnemiVise();
+
+                        }
+                    }
+                    if (temps % 50 == 0){
+                        for (Tourelle t : env.getListeTourelles()){
+                            if (t instanceof TourelleSemi){
+                                t.infligerDegats();
+                                System.out.println(t.getEnnemiVise());
+                                System.out.println("tire");
+                            }
+                        }
+
                     }
                     temps++;
-                })
+                }
+
+                )
         );
         gameLoop.getKeyFrames().add(kf);
     }

@@ -24,6 +24,9 @@ public abstract class Ennemi {
         System.out.println(caseDestination.toString());
         compteur++;
     }
+    public int getPv(){
+        return this.pv;
+    }
 
     public int getId() {
         return id;
@@ -88,4 +91,5 @@ public abstract class Ennemi {
                 ", coordonnees=" + coordonnees +
                 '}';
     }
+
 }
