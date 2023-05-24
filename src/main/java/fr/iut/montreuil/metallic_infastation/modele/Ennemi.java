@@ -81,7 +81,7 @@ public abstract class Ennemi {
     }
 
     public boolean aAtteintLaCible(){
-        return  this.getCase().caseEgale(terrain.caseCible());
+        return  this.terrain.arriveeSurCase(this.getCase());
     }
 
     @Override
