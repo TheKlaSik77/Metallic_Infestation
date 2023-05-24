@@ -8,7 +8,7 @@ public class Terrain {
      * Pour le terrain :  0 = Case vide (Interdite)
      *                    1 = Chemin
      *                    2 = Arrivée
-     *                    3 = Ennemi
+     *                    3 = Tour
      */
     private int[][] terrain;
     private static final int tailleCase = 16;
@@ -72,10 +72,32 @@ public class Terrain {
     public int getTailleCase(){
         return tailleCase;
     }
+    public void setCase(Case c, int n){
+        this.terrain[c.getI()][c.getJ()] = n;
+    }
     public ArrayList<Case> getListeCasesDepartsPossibles() {
         return listeCasesDepartsPossibles;
     }
     public boolean caseEstDansTerrain(Case c){
         return  (c.getI() >= 0 && c.getI() < terrain.length) && (c.getJ() >= 0 && c.getJ() < terrain[0].length);
     }
+
+    
+    public boolean arriveeSurCase(Case c){
+        return terrain[c.getI()][c.getJ()] == 2;
+    }
+
+    public boolean cheminSurCase(Case c){
+        return terrain[c.getI()][c.getJ()] == 1;
+    }
+
+    public boolean tourSurCase(Case c){
+        return terrain[c.getI()][c.getJ()] == 3;
+    }
+
+    public boolean videSurCase(Case c){
+        return terrain[c.getI()][c.getJ()] == 0;
+    }
+
 }
+

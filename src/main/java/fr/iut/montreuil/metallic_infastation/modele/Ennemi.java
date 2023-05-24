@@ -1,11 +1,7 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
 public abstract class Ennemi {
-
     private static int compteur = 0;
-
-
-
     private int id;
     private int pv;
     private double vitesse;
@@ -13,6 +9,7 @@ public abstract class Ennemi {
     private Terrain terrain;
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
+
 
     public Ennemi (int pv, double vitesse, Point coordonnees, Terrain terrain){
         this.id = compteur;
@@ -26,6 +23,9 @@ public abstract class Ennemi {
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
         System.out.println(caseDestination.toString());
         compteur++;
+    }
+    public int getPv(){
+        return this.pv;
     }
 
     public int getId() {
@@ -60,6 +60,36 @@ public abstract class Ennemi {
         if (this.getCase().caseEgale(this.caseDestination)){
             this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
         }
+    }
+
+    /**
+     *
+     * @param n
+     * Décrémente de n pv à l'ennemi
+     */
+    public void decrementerPv(int n){
+        this.pv -= n;
+    }
+
+
+    /**
+     *
+     * @return true si les pv sont <= 0
+     */
+    public boolean estMort(){
+        return this.pv <= 0;
+    }
+
+    public boolean aAtteintLaCible(){
+        return  this.terrain.arriveeSurCase(this.getCase());
+    }
+
+    @Override
+    public String toString() {
+        return " {" +
+                "id=" + id +
+                ", coordonnees=" + coordonnees +
+                '}';
     }
 
 }

@@ -8,6 +8,9 @@ import fr.iut.montreuil.metallic_infastation.vue.TerrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,6 +33,7 @@ public class JeuControleur implements Initializable {
     private Timeline gameLoop;
     private int temps;
 
+
     @FXML
     private Label ArgentProperty;
 
@@ -50,27 +54,42 @@ public class JeuControleur implements Initializable {
 
     @FXML
     private RadioButton tour3;
+    private EnnemisVue ennemisVue;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
         Terrain terrainExperimental = new Terrain();
-        TerrainVue terrainVue = new TerrainVue(terrainExperimental,tilePane);
-
-        ArrayList<Ennemi> listeEnnemis = new ArrayList<>();
-        listeEnnemis.add(new EnnemiFacile(terrainExperimental));
-        listeEnnemis.add(new EnnemiFacile(terrainExperimental));
-        this.env = new Environnement(listeEnnemis);
-        EnnemisVue ennemisVue = new EnnemisVue(env,zoneAffichageEnnemis);
-        ennemisVue.ajouterEnnemi(listeEnnemis.get(0));
-        ennemisVue.ajouterEnnemi(listeEnnemis.get(1));
+        TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
+        this.env = new Environnement(terrainExperimental);
+        this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(150,3500);
         Boutique boutique = new Boutique(joueur, env);
         this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3);
-
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
+        env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
+            while (change.next()) {
+                System.out.println("ajouts : " + change.getAddedSubList());
+                System.out.println("supressions : " + change.getRemoved());
+                System.out.println("liste des ennemis: " + change.getList());
+                System.out.println("nombre d'ennemis : " + change.getList().size());
+                if (change.wasRemoved()) {
+                    for (Ennemi removedEnnemi : change.getRemoved()) {
+                        ennemisVue.supprimerEnnemi(removedEnnemi);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Ennemi addedEnnemi : change.getAddedSubList()) {
+                        ennemisVue.ajouterEnnemi(addedEnnemi);
+                    }
+                }
+            }
+        });
+        env.lancerVague(terrainExperimental);
+
 
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
@@ -83,7 +102,7 @@ public class JeuControleur implements Initializable {
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps=0;
+        temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -91,19 +110,42 @@ public class JeuControleur implements Initializable {
                 Duration.seconds(0.017),
                 // on définit ce qui se passe à chaque frame
                 // c'est un eventHandler d'ou le lambda
-                (ev ->{
+                (ev -> {
                     // TODO: Fini quand plus de points de vie ou vagues 15.
-                    if(temps==1000000){
+
+                    if (temps == 1000000) {
                         System.out.println("fini");
                         gameLoop.stop();
-                    }
-                    else if (temps%2==0){
-                        for (Ennemi e : env.getListeEnnemis()){
+                    } else if (temps % 2 == 0) {
+                        
+           
+                        for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
+                            Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();
+                            if (e.aAtteintLaCible() || e.estMort()) {
+                                env.getListeEnnemis().remove(e);
+                            }
+                        }
+
+                        for (Tourelle t : env.getListeTourelles()){
+                            t.raffraichirEnnemiVise();
+
                         }
                     }
+                    if (temps % 50 == 0){
+                        for (Tourelle t : env.getListeTourelles()){
+                            if (t instanceof TourelleSemi){
+                                t.infligerDegats();
+                                System.out.println(t.getEnnemiVise());
+                                System.out.println("tire");
+                            }
+                        }
+
+                    }
                     temps++;
-                })
+                }
+
+                )
         );
         gameLoop.getKeyFrames().add(kf);
     }

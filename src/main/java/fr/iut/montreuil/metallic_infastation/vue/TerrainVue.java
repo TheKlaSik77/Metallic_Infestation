@@ -28,8 +28,8 @@ public class TerrainVue {
         URL urlImArrivee = JeuApplication.class.getResource("img/arrivee16x16.png");
         Image imArrivee = new Image(String.valueOf(urlImArrivee));
 
-        URL urlImSoldat = JeuApplication.class.getResource("img/soldat16x16.png");
-        Image imSoldat = new Image(String.valueOf(urlImSoldat));
+        URL urlImTour = JeuApplication.class.getResource("img/tour16x16.png");
+        Image imTour = new Image(String.valueOf(urlImTour));
 
         for (int i = 0 ; i < terrain.getTerrain().length ; i++){
             for (int j = 0 ; j < terrain.getTerrain()[i].length ; j++) {
@@ -47,9 +47,8 @@ public class TerrainVue {
                         tilePane.getChildren().add(imageView3);
                         break;
                     case 3:
-                        ImageView imageView4 = new ImageView(imSoldat);
+                        ImageView imageView4 = new ImageView(imTour);
                         tilePane.getChildren().add(imageView4);
-                        break;
 
                 }
             }
