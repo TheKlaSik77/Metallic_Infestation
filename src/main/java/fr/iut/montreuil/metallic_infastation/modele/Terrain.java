@@ -78,4 +78,12 @@ public class Terrain {
     public boolean caseEstDansTerrain(Case c){
         return  (c.getI() >= 0 && c.getI() < terrain.length) && (c.getJ() >= 0 && c.getJ() < terrain[0].length);
     }
+    public Case caseCible(){
+        int derniereLigne = terrain.length - 1;
+        int derniereColonne = terrain[0].length - 1;
+
+        return new Case(derniereLigne, derniereColonne);
+    }
+
 }
+
