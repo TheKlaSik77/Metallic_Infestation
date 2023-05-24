@@ -27,6 +27,9 @@ public abstract class Ennemi {
         System.out.println(caseDestination.toString());
         compteur++;
     }
+    public int getPv(){
+        return this.pv;
+    }
 
     public int getId() {
         return id;
@@ -60,6 +63,10 @@ public abstract class Ennemi {
         if (this.getCase().caseEgale(this.caseDestination)){
             this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
         }
+    }
+
+    public void reduirePv(int nbPvEnMoins){
+        this.pv -= nbPvEnMoins;
     }
 
 }

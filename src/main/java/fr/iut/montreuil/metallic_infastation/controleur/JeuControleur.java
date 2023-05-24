@@ -37,10 +37,11 @@ public class JeuControleur implements Initializable {
         ArrayList<Ennemi> listeEnnemis = new ArrayList<>();
         listeEnnemis.add(new EnnemiFacile(terrainExperimental));
         listeEnnemis.add(new EnnemiFacile(terrainExperimental));
-        this.env = new Environnement(10,1,0, listeEnnemis);
+        this.env = new Environnement(1,terrainExperimental,listeEnnemis);
         EnnemisVue ennemisVue = new EnnemisVue(env,zoneAffichageEnnemis);
         ennemisVue.ajouterEnnemi(listeEnnemis.get(0));
         ennemisVue.ajouterEnnemi(listeEnnemis.get(1));
+        env.poserTour(new Case(8,10));
 
 
         terrainVue.afficherTerrain();
@@ -64,17 +65,32 @@ public class JeuControleur implements Initializable {
                 // c'est un eventHandler d'ou le lambda
                 (ev ->{
                     // TODO: Fini quand plus de points de vie ou vagues 15.
-                    if(temps==1000000){
+                    if(temps==100000000){
                         System.out.println("fini");
                         gameLoop.stop();
                     }
-                    else if (temps%2==0){
+                    else if (temps%5==0){
                         for (Ennemi e : env.getListeEnnemis()){
                             e.seDeplacer();
                         }
+                        for (Tourelle t : env.getListeTourelles()){
+                            t.raffraichirEnnemiVise();
+
+                        }
+                    }
+                    if (temps % 50 == 0){
+                        for (Tourelle t : env.getListeTourelles()){
+                            if (t instanceof TourelleSemi){
+                                t.infligerDegats();
+                                System.out.println(t.getEnnemiVise());
+                                System.out.println("tire");
+                            }
+                        }
                     }
                     temps++;
-                })
+                }
+
+                )
         );
         gameLoop.getKeyFrames().add(kf);
     }
