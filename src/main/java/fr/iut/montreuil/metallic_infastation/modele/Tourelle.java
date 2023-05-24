@@ -52,7 +52,7 @@ public abstract class Tourelle {
     }
     public void infligerDegats(){
         if(ennemiVise != null) {
-            ennemiVise.reduirePv(degats);
+            ennemiVise.decrementerPv(degats);
             System.out.println(ennemiVise.getPv());
 
         }
