@@ -11,6 +11,7 @@ import java.util.Random;
 public class Environnement {
 
 
+
     static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
@@ -24,6 +25,7 @@ public class Environnement {
     }
 
     public ObservableList<Ennemi> getListeEnnemis() {
+
         return listeEnnemis;
     }
     public ObservableList<Tourelle> getListeTourelles(){
