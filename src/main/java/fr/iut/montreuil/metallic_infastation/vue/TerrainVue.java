@@ -7,6 +7,7 @@ import javafx.scene.layout.TilePane;
 import fr.iut.montreuil.metallic_infastation.modele.Terrain;
 
 import java.net.URL;
+import java.util.Random;
 
 public class TerrainVue {
 
@@ -19,10 +20,12 @@ public class TerrainVue {
     }
 
     public void afficherTerrain(){
-        URL urlImHerbe = JeuApplication.class.getResource("img/herbe16x16.png");
+        URL urlImHerbe = JeuApplication.class.getResource("img/horsTerrain32x32.png");
         Image imHerbe= new Image(String.valueOf(urlImHerbe));
+        URL urlImHerbe2 = JeuApplication.class.getResource("img/horsTerrain(2)32x32.png");
+        Image imHerbe2= new Image(String.valueOf(urlImHerbe2));
 
-        URL urlImChemin = JeuApplication.class.getResource("img/terre16x16.png");
+        URL urlImChemin = JeuApplication.class.getResource("img/chemin16x16.png");
         Image imChemin = new Image(String.valueOf(urlImChemin));
 
         URL urlImArrivee = JeuApplication.class.getResource("img/arrivee16x16.png");
@@ -35,19 +38,27 @@ public class TerrainVue {
             for (int j = 0 ; j < terrain.getTerrain()[i].length ; j++) {
                 switch (terrain.getTerrain()[i][j]) {
                     case 0:
-                        ImageView imageView = new ImageView(imHerbe);
-                        tilePane.getChildren().add(imageView);
-                        break;
+                        double rand = Math.random();
+                        if (rand < 0.02){
+                            ImageView imageView = new ImageView(imHerbe2);
+                            tilePane.getChildren().add(imageView);
+                            break;
+                        } else {
+                            ImageView imageView = new ImageView(imHerbe);
+                            tilePane.getChildren().add(imageView);
+                            break;
+                        }
+
                     case 1:
-                        ImageView imageView2 = new ImageView(imChemin);
+                        ImageView imageView2 = new ImageView(imHerbe);
                         tilePane.getChildren().add(imageView2);
                         break;
                     case 2:
-                        ImageView imageView3 = new ImageView(imArrivee);
+                        ImageView imageView3 = new ImageView(imHerbe);
                         tilePane.getChildren().add(imageView3);
                         break;
                     case 3:
-                        ImageView imageView4 = new ImageView(imTour);
+                        ImageView imageView4 = new ImageView(imHerbe);
                         tilePane.getChildren().add(imageView4);
 
                 }
