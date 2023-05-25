@@ -64,6 +64,9 @@ public class JeuControleur implements Initializable {
         Terrain terrainExperimental = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
+        TourelleSemi tourelleSemi = new TourelleSemi(new Case(8,10),env,terrainExperimental);
+        tourelleSemi.poserTourelle();
+
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(150,3500);
         Boutique boutique = new Boutique(joueur, env);
@@ -132,7 +135,7 @@ public class JeuControleur implements Initializable {
 
                         }
                     }
-                    if (temps % 50 == 0){
+                    if (temps % 20 == 0){
                         for (Tourelle t : env.getListeTourelles()){
                             if (t instanceof TourelleSemi){
                                 t.infligerDegats();

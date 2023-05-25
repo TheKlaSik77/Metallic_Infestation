@@ -40,13 +40,6 @@ public class Environnement {
     }
 
 
-    public void poserTour(Case c){
-        if (this.terrain.videSurCase(c)){
-            Tourelle t = new TourelleSemi(c,this,terrain);
-            listeTourelles.add(t);
-            this.terrain.setCase(c,3);
-        }
-    }
 
 
     /**
@@ -60,8 +53,8 @@ public class Environnement {
         vagueActuelle++;
         System.out.println("vague n° " + vagueActuelle);
         Random random = new Random();
-        int nombreEnnemis = random.nextInt(11) + 10;
-
+        //int nombreEnnemis = random.nextInt(11) + 10;
+        int nombreEnnemis = 1;
         for (int i = 0; i < nombreEnnemis; i++) {
             int typeEnnemi = random.nextInt(3);
 

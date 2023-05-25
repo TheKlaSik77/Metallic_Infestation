@@ -7,9 +7,9 @@ public abstract class Tourelle {
     private Case position;
     private int cout;
     private int portee;
-    private Environnement env;
+    protected Environnement env;
     private Ennemi ennemiVise;
-    private Terrain terrain;
+    protected Terrain terrain;
     private int compteur = 0;
 
 
@@ -23,6 +23,10 @@ public abstract class Tourelle {
         this.env = env;
         this.ennemiVise = null;
         this.terrain = terrain;
+    }
+
+    public Case getPosition(){
+        return this.position;
     }
 
     public Ennemi ennemiLePlusProche() {
@@ -43,6 +47,7 @@ public abstract class Tourelle {
         }
         return null;
     }
+
 
     public void raffraichirEnnemiVise(){
         this.ennemiVise = this.ennemiLePlusProche();
