@@ -11,12 +11,12 @@ public abstract class Ennemi {
     private Case caseDestination;
 
 
-    public Ennemi (int pv, double vitesse, Point coordonnees, Terrain terrain){
+    public Ennemi (int pv, double vitesse, Terrain terrain){
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
-        this.coordonnees = coordonnees;
         this.terrain = terrain;
+        this.coordonnees = coordonneesDepart();
         // TODO: Mettre BFS en paramètre
         this.parcoursBFS = new ParcoursBFS(terrain);
         parcoursBFS.remplirGrilleBFS();
@@ -70,8 +70,6 @@ public abstract class Ennemi {
     public void decrementerPv(int n){
         this.pv -= n;
     }
-
-
     /**
      *
      * @return true si les pv sont <= 0
@@ -90,6 +88,10 @@ public abstract class Ennemi {
                 "id=" + id +
                 ", coordonnees=" + coordonnees +
                 '}';
+    }
+
+    public Point coordonneesDepart(){
+        return new Point(0,(int)(Math.random() * 80));
     }
 
 }
