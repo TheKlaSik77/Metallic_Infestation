@@ -20,9 +20,9 @@ public class TerrainVue {
     }
 
     public void afficherTerrain(){
-        URL urlImHerbe = JeuApplication.class.getResource("img/horsTerrain32x32.png");
+        URL urlImHerbe = JeuApplication.class.getResource("img/horsTerrain16x16.png");
         Image imHerbe= new Image(String.valueOf(urlImHerbe));
-        URL urlImHerbe2 = JeuApplication.class.getResource("img/horsTerrain(2)32x32.png");
+        URL urlImHerbe2 = JeuApplication.class.getResource("img/horsTerrain(2)16x16.png");
         Image imHerbe2= new Image(String.valueOf(urlImHerbe2));
 
         URL urlImChemin = JeuApplication.class.getResource("img/chemin16x16.png");
@@ -50,15 +50,15 @@ public class TerrainVue {
                         }
 
                     case 1:
-                        ImageView imageView2 = new ImageView(imHerbe);
+                        ImageView imageView2 = new ImageView(imChemin);
                         tilePane.getChildren().add(imageView2);
                         break;
                     case 2:
-                        ImageView imageView3 = new ImageView(imHerbe);
+                        ImageView imageView3 = new ImageView(imArrivee);
                         tilePane.getChildren().add(imageView3);
                         break;
                     case 3:
-                        ImageView imageView4 = new ImageView(imHerbe);
+                        ImageView imageView4 = new ImageView(imTour);
                         tilePane.getChildren().add(imageView4);
 
                 }

@@ -36,14 +36,14 @@
    <center>
       <Pane fx:id="zoneAffichageEnnemis" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="736.0" style="-fx-background-color: blue;" />
+            <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="16.0" prefTileWidth="16.0" prefWidth="736.0" style="-fx-background-color: blue;" />
          </children>
       </Pane>
    </center>
    <right>
       <Pane prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="-15.0" prefHeight="800.0" prefWidth="265.0" style="-fx-background-color: yellow;">
+            <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0" style="-fx-background-color: yellow;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="250.0" text="Boutique" textAlignment="CENTER" />
                   <VBox prefHeight="120.0" prefWidth="250.0">

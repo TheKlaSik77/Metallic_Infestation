@@ -64,8 +64,8 @@ public class JeuControleur implements Initializable {
         Terrain terrainExperimental = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
-        TourelleSemi tourelleSemi = new TourelleSemi(new Case(8,10),env,terrainExperimental);
-        tourelleSemi.poserTourelle();
+        //TourelleSemi tourelleSemi = new TourelleSemi(new Case(8,10),env,terrainExperimental);
+        //tourelleSemi.poserTourelle();
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(150,3500);

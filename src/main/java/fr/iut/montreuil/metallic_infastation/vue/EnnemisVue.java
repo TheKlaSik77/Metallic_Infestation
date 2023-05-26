@@ -36,9 +36,9 @@ public class EnnemisVue {
         if (e instanceof EnnemiFacile) {
             imageUrl = "img/soldat16x16.png";
         } else if (e instanceof EnnemiMoyen) {
-            imageUrl = "img/ennemi_moyen_16x16.png";
+            imageUrl = "img/soldat16x16.png";
         } else if (e instanceof EnnemiDifficile) {
-            imageUrl = "img/ennemi_difficile_16x16.png";
+            imageUrl = "img/soldat16x16.png";
         }
 
         if (imageUrl != null) {
