@@ -10,8 +10,6 @@ import java.util.Random;
 
 public class Environnement {
 
-
-
     static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
