@@ -36,7 +36,7 @@
    <center>
       <Pane fx:id="zoneAffichageEnnemis" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="16.0" prefTileWidth="16.0" prefWidth="736.0" style="-fx-background-color: blue;" />
+            <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="736.0" style="-fx-background-color: blue;" />
          </children>
       </Pane>
    </center>

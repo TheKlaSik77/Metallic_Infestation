@@ -11,7 +11,7 @@ public class TourelleSemi extends Tourelle {
         if (this.terrain.videSurCase(this.getPosition())){
 
             this.env.getListeTourelles().add(this);
-            this.terrain.setCase(this.getPosition(),3);
+            this.terrain.setCase(this.getPosition(),4);
         }
     }
 }
