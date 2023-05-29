@@ -15,6 +15,25 @@ public abstract class Ennemi {
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
+        // Position de Départ Aléatoire
+        boolean coordonneesChemin;
+        do {
+            double rand = Math.random();
+
+            // Faire apparaitre en aleatoire sur coté gauche
+            if (rand < 0.5){
+                int randY = (int)(Math.random()*737);
+                this.coordonnees = new Point(0,randY);
+                coordonneesChemin = terrain.cheminSurCase(new Case((int)(randY) / terrain.getTailleCase(),0));
+            //Faire apparaitre en aleatoire sur coté haut
+            } else {
+                int randX = (int)(Math.random()*737);
+                this.coordonnees = new Point(randX,0);
+                coordonneesChemin = terrain.cheminSurCase(new Case(0,(int)(randX) / terrain.getTailleCase()));
+            }
+        } while (!coordonneesChemin);
+        System.out.println("coordonée :  " + this.coordonnees.toString()  );
+
         this.terrain = terrain;
         this.coordonnees = coordonneesDepart();
         // TODO: Mettre BFS en paramètre
@@ -36,8 +55,8 @@ public abstract class Ennemi {
     }
 
     public Case getCase(){
-        int i = this.coordonnees.getY() / 16;
-        int j = this.coordonnees.getX() / 16;
+        int i = this.coordonnees.getY() / 32;
+        int j = this.coordonnees.getX() / 32;
         return new Case(i,j);
     }
 
