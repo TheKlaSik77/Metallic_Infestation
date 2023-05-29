@@ -40,6 +40,9 @@ public class JeuControleur implements Initializable {
     @FXML
     private Label PvProperty;
 
+    @FXML
+    private Label prixTour;
+
     private Environnement env;
     private Joueur joueur;
     private BoutiqueVue boutiqueVue;
@@ -56,18 +59,18 @@ public class JeuControleur implements Initializable {
     private RadioButton tour3;
     private EnnemisVue ennemisVue;
 
-
+    private Terrain terrainExperimental = new Terrain();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-        Terrain terrainExperimental = new Terrain();
+
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(150,3500);
-        Boutique boutique = new Boutique(joueur, env);
-        this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3);
+        Boutique boutique = new Boutique(joueur, env, terrainExperimental);
+        this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
@@ -97,6 +100,28 @@ public class JeuControleur implements Initializable {
         parcoursBFS.afficherParcours();
         gameLoop.play();
 
+        groupeRadio.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (tour1.isSelected()){
+                prixTour.setText(String.valueOf(1));
+            } else if (tour2.isSelected()) {
+                prixTour.setText(String.valueOf(2));
+            }
+            else {
+                prixTour.setText(String.valueOf(3));
+            }
+
+        });
+
+        tilePane.setOnMouseClicked(event -> {
+            Case c = new Case(0, 0);
+            c.setI((int) event.getX() / terrainExperimental.getTailleCase());
+            c.setJ((int) event.getY() / terrainExperimental.getTailleCase());
+            if (this.terrainExperimental.videSurCase(c)){
+                boutiqueVue.achatTour(c);
+            } else if (this.terrainExperimental.tourSurCase(c)) {
+                boutiqueVue.venteTour(c);
+            }
+        });
     }
 
 
@@ -160,12 +185,5 @@ public class JeuControleur implements Initializable {
 
     public void achatCinqPv(ActionEvent actionEvent) {
         boutiqueVue.achatCinqPv();
-    }
-
-
-    @FXML
-    void achatTour(ActionEvent event) {
-        System.out.println("ajour");
-        boutiqueVue.achatTour();
     }
 }

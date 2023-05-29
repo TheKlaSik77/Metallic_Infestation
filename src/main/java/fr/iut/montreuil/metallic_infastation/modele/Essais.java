@@ -4,7 +4,6 @@ public class Essais {
     public static void main(String[] args) {
 
         Ennemi ennemi = new EnnemiFacile(new Terrain());
-
         Joueur joueur = new Joueur(10, 5);
         System.out.println(joueur.pvJoueurProprerty());
         joueur.crediterPvJoueurProperty(2);

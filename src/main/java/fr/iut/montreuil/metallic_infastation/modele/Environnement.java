@@ -42,12 +42,9 @@ public class Environnement {
     }
 
 
-    public void poserTour(Case c){
-        if (this.terrain.videSurCase(c)){
-            Tourelle t = new TourelleSemi(c,this,terrain);
+    public void poserTour(Case c, Tourelle t){
             listeTourelles.add(t);
-            this.terrain.setCase(c,3);
-        }
+            this.terrain.setCase(c, 3);
     }
 
 

@@ -58,4 +58,11 @@ public abstract class Tourelle {
         }
 
     }
+    public int getCout (){
+        return this.cout;
+    }
+
+    public Case getPosition(){
+        return this.position;
+    }
 }
