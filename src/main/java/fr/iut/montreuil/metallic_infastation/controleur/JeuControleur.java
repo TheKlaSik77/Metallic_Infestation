@@ -113,9 +113,7 @@ public class JeuControleur implements Initializable {
         });
 
         tilePane.setOnMouseClicked(event -> {
-            Case c = new Case(0, 0);
-            c.setI((int) event.getX() / terrainExperimental.getTailleCase());
-            c.setJ((int) event.getY() / terrainExperimental.getTailleCase());
+            Case c = new Case((int) event.getX() / terrainExperimental.getTailleCase(), (int) event.getY() / terrainExperimental.getTailleCase());
             if (this.terrainExperimental.videSurCase(c)){
                 boutiqueVue.achatTour(c);
             } else if (this.terrainExperimental.tourSurCase(c)) {
