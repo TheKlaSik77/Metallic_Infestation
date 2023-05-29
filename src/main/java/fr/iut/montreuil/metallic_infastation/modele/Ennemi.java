@@ -35,7 +35,7 @@ public abstract class Ennemi {
         System.out.println("coordonée :  " + this.coordonnees.toString()  );
 
         this.terrain = terrain;
-        // TODO: Mettre BFS en paramètre
+        // TODO: Mettre BFS en paramètre de terrain
         this.parcoursBFS = new ParcoursBFS(terrain);
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
