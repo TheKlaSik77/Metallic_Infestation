@@ -65,97 +65,96 @@ public class TerrainVue {
         for (int i = 0 ; i < terrain.getTerrain().length ; i++){
             for (int j = 0 ; j < terrain.getTerrain()[i].length ; j++) {
                 switch (terrain.getTerrain()[i][j]) {
-                    case 0:
+                    case 0 -> {
                         double rand = Math.random();
-                        if (rand < 0.01){
+                        if (rand < 0.01) {
                             ImageView imageView = new ImageView(imHerbe);
                             ImageView imageViewBaril = new ImageView(imBaril);
                             StackPane stackPane = new StackPane();
                             stackPane.getChildren().addAll(imageView, imageViewBaril);
                             tilePane.getChildren().add(stackPane);
-                            break;
-                        } else if (rand < 0.04){
+                        } else if (rand < 0.04) {
                             ImageView imageView = new ImageView(imHerbe7);
                             tilePane.getChildren().add(imageView);
-                            break;
-                        } else if (rand < 0.08){
+                        } else if (rand < 0.08) {
                             ImageView imageView = new ImageView(imHerbe6);
                             tilePane.getChildren().add(imageView);
-                            break;
-                        } else if (rand < 0.1){
+                        } else if (rand < 0.1) {
                             ImageView imageView = new ImageView(imHerbe5);
                             tilePane.getChildren().add(imageView);
-                            break;
-                        } else if (rand < 0.2){
+                        } else if (rand < 0.2) {
                             ImageView imageView = new ImageView(imHerbe4);
                             tilePane.getChildren().add(imageView);
-                            break;
-                        } else if (rand < 0.4){
+                        } else if (rand < 0.4) {
                             ImageView imageView = new ImageView(imHerbe3);
                             tilePane.getChildren().add(imageView);
-                            break;
-                        } else if (rand < 0.6){
+                        } else if (rand < 0.6) {
                             ImageView imageView = new ImageView(imHerbe2);
                             tilePane.getChildren().add(imageView);
-                            break;
                         } else {
                             ImageView imageView = new ImageView(imHerbe);
                             tilePane.getChildren().add(imageView);
-                            break;
                         }
-
-                    case 1:
+                    }
+                    case 1 -> {
                         ImageView imageView2 = new ImageView(imChemin);
                         tilePane.getChildren().add(imageView2);
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         ImageView imageView3 = new ImageView(imContourChemin);
                         tilePane.getChildren().add(imageView3);
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
+                        ImageView imageView2_1 = new ImageView(imContourChemin);
                         ImageView imageView4 = new ImageView(imTourelleSemi);
-                        tilePane.getChildren().add(imageView4);
-                        break;
-                    case 4:
+                        StackPane stackPane = new StackPane();
+                        stackPane.getChildren().addAll(imageView2_1, imageView4);
+                        tilePane.getChildren().add(stackPane);
+                    }
+                    case 4 -> {
+                        ImageView imageView2_2 = new ImageView(imContourChemin);
                         ImageView imageView5 = new ImageView(imTourelleAuto);
-                        tilePane.getChildren().add(imageView5);
-                        break;
-                    case 5:
+                        StackPane stackPane2 = new StackPane();
+                        stackPane2.getChildren().addAll(imageView2_2, imageView5);
+                        tilePane.getChildren().add(stackPane2);
+                    }
+                    case 5 -> {
+                        ImageView imageView2_3 = new ImageView(imContourChemin);
                         ImageView imageView6 = new ImageView(imTourelleMissiles);
-                        tilePane.getChildren().add(imageView6);
-                        break;
-                    case 11:
+                        StackPane stackPane3 = new StackPane();
+                        stackPane3.getChildren().addAll(imageView2_3, imageView6);
+                        tilePane.getChildren().add(stackPane3);
+                    }
+                    case 11 -> {
                         ImageView imageView7 = new ImageView(imArriveeNO);
                         tilePane.getChildren().add(imageView7);
                         ImageView imageView7_1 = new ImageView(imChemin);
-                        StackPane stackPane = new StackPane();
-                        stackPane.getChildren().addAll(imageView7_1, imageView7);
-                        tilePane.getChildren().add(stackPane);
-                        break;
-                    case 12:
+                        StackPane stackPane4 = new StackPane();
+                        stackPane4.getChildren().addAll(imageView7_1, imageView7);
+                        tilePane.getChildren().add(stackPane4);
+                    }
+                    case 12 -> {
                         ImageView imageView8 = new ImageView(imArriveeNE);
-                        tilePane.getChildren().add(imageView8);
                         ImageView imageView7_2 = new ImageView(imChemin);
-                        StackPane stackPane2 = new StackPane();
-                        stackPane2.getChildren().addAll(imageView7_2, imageView8);
-                        tilePane.getChildren().add(stackPane2);
-                        break;
-                    case 13:
+                        StackPane stackPane5 = new StackPane();
+                        stackPane5.getChildren().addAll(imageView7_2, imageView8);
+                        tilePane.getChildren().add(stackPane5);
+                    }
+                    case 13 -> {
                         ImageView imageView9 = new ImageView(imArriveeSE);
-                        tilePane.getChildren().add(imageView9);
                         ImageView imageView7_3 = new ImageView(imChemin);
-                        StackPane stackPane3 = new StackPane();
-                        stackPane3.getChildren().addAll(imageView7_3, imageView9);
-                        tilePane.getChildren().add(stackPane3);
-                        break;
-                    case 14:
+                        StackPane stackPane6 = new StackPane();
+                        stackPane6.getChildren().addAll(imageView7_3, imageView9);
+                        tilePane.getChildren().add(stackPane6);
+                    }
+                    case 14 -> {
                         ImageView imageView10 = new ImageView(imArriveeSO);
                         tilePane.getChildren().add(imageView10);
                         ImageView imageView7_4 = new ImageView(imChemin);
-                        StackPane stackPane4 = new StackPane();
-                        stackPane4.getChildren().addAll(imageView7_4, imageView10);
-                        tilePane.getChildren().add(stackPane4);
-                        break;
+                        StackPane stackPane7 = new StackPane();
+                        stackPane7.getChildren().addAll(imageView7_4, imageView10);
+                        tilePane.getChildren().add(stackPane7);
+                    }
                 }
             }
 

@@ -97,12 +97,29 @@ public class Terrain {
     }
 
     public boolean tourSurCase(Case c){
-        return terrain[c.getI()][c.getJ()] == 3;
+        return (terrain[c.getI()][c.getJ()] == 3) || (terrain[c.getI()][c.getJ()] == 4) || (terrain[c.getI()][c.getJ()] == 5);
     }
 
     public boolean videSurCase(Case c){
         return terrain[c.getI()][c.getJ()] == 0;
     }
+    public boolean emplacementVideSurCase(Case c){
+        return terrain[c.getI()][c.getJ()] == 2;
+    }
 
+    public void afficherTerrain(){
+        for (int i = 0 ; i < terrain.length ; i++){
+            for (int j = 0 ; j < terrain[i].length ; j++){
+                if (terrain[i][j] < 10) {
+                    System.out.print(" " + terrain[i][j]);
+                }else {
+                    System.out.print(terrain[i][j]);
+                }
+                System.out.print(",");
+            }
+            System.out.println();
+
+        }
+    }
 }
 
