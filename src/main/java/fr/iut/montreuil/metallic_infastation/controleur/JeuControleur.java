@@ -91,11 +91,13 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
+
         env.lancerVague(terrainExperimental);
 
-        terrainExperimental.afficherTerrain();
+
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
+
         parcoursBFS.remplirGrilleBFS();
         parcoursBFS.afficherParcours();
         gameLoop.play();

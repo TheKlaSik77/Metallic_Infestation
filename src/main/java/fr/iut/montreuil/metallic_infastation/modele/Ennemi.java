@@ -40,7 +40,8 @@ public abstract class Ennemi {
         this.parcoursBFS = new ParcoursBFS(terrain);
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
-        System.out.println(caseDestination.toString());
+
+        System.out.println("Case de destination : " + caseDestination.toString());
         compteur++;
     }
     public int getPv(){

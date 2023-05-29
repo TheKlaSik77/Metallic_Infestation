@@ -9,7 +9,6 @@ public class TourelleSemi extends Tourelle {
     }
     public void poserTourelle(){
         if (this.terrain.emplacementVideSurCase(this.getPosition()) && !(terrain.tourSurCase(this.getPosition()))){
-            System.out.println("CA PASSE LA");
             this.env.getListeTourelles().add(this);
             this.terrain.setCase(this.getPosition(),3);
         }
