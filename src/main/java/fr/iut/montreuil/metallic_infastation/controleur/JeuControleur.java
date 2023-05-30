@@ -1,18 +1,16 @@
 package fr.iut.montreuil.metallic_infastation.controleur;
 
 import fr.iut.montreuil.metallic_infastation.modele.*;
-import fr.iut.montreuil.metallic_infastation.modele.*;
 import fr.iut.montreuil.metallic_infastation.vue.BoutiqueVue;
 import fr.iut.montreuil.metallic_infastation.vue.EnnemisVue;
 import fr.iut.montreuil.metallic_infastation.vue.TerrainVue;
 import fr.iut.montreuil.metallic_infastation.vue.TourelleVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -23,28 +21,25 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
+import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class JeuControleur implements Initializable {
+
+    final static int NB_VAGUES_JEU = 3;
 
     @FXML
     private TilePane tilePane;
     @FXML
     private Pane zoneAffichageEnnemis;
-
     private Timeline gameLoop;
     private int temps;
-
-
     @FXML
     private Label ArgentProperty;
-
     @FXML
     private Label PvProperty;
-
     @FXML
     private Label prixTour;
 
@@ -63,27 +58,32 @@ public class JeuControleur implements Initializable {
     @FXML
     private RadioButton tour3;
     private EnnemisVue ennemisVue;
-
-    private Terrain terrainExperimental = new Terrain();
+    private int vagueActuelle;
+    private Terrain terrainExperimental;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-
+        this.terrainExperimental = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-        this.joueur = new Joueur(10,10);
+        this.joueur = new Joueur(100,1000);
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
         this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
+
+
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
             while (change.next()) {
+                /*
                 System.out.println("ajouts : " + change.getAddedSubList());
                 System.out.println("supressions : " + change.getRemoved());
+                 */
                 System.out.println("liste des ennemis: " + change.getList());
                 System.out.println("nombre d'ennemis : " + change.getList().size());
                 if (change.wasRemoved()) {
@@ -120,11 +120,12 @@ public class JeuControleur implements Initializable {
         env.lancerVague(terrainExperimental);
 
 
+
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
 
         parcoursBFS.remplirGrilleBFS();
-        parcoursBFS.afficherParcours();
+        //parcoursBFS.afficherParcours();
         gameLoop.play();
 
         groupeRadio.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -167,19 +168,20 @@ public class JeuControleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
-                // on définit le FPS (nbre de frame par seconde)
                 Duration.seconds(0.017),
-                // on définit ce qui se passe à chaque frame
-                // c'est un eventHandler d'ou le lambda
-                (ev -> {
-                    // TODO: Fini quand plus de points de vie ou vagues 15.
-
-                    if (temps == 1000000) {
+                ev -> {
+                    if (vagueActuelle == NB_VAGUES_JEU ) {
                         System.out.println("fini");
                         gameLoop.stop();
-                    } else if (temps % 2 == 0) {
-                        
-           
+                    } else {
+                        if (env.getListeEnnemis().isEmpty()) {
+                            vagueActuelle++;
+                            if(vagueActuelle < NB_VAGUES_JEU){
+                                System.out.println("Une vague ennemi se prépare...");
+                                System.out.println("Vague actuelle : " + vagueActuelle);
+                                env.lancerVague(terrainExperimental);
+                            }
+                        }
                         for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                             Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();
@@ -187,8 +189,7 @@ public class JeuControleur implements Initializable {
                                 env.getListeEnnemis().remove(e);
                             }
                         }
-
-                        for (Tourelle t : env.getListeTourelles()){
+                        for (Tourelle t : env.getListeTourelles()) {
                             t.raffraichirEnnemiVise();
 
                         }
@@ -197,14 +198,13 @@ public class JeuControleur implements Initializable {
                         for (Tourelle t : env.getListeTourelles()){
                             if (t instanceof TourelleSemi){
                                 t.infligerDegats();
+
                             }
                         }
 
                     }
                     temps++;
                 }
-
-                )
         );
         gameLoop.getKeyFrames().add(kf);
     }
@@ -220,4 +220,9 @@ public class JeuControleur implements Initializable {
     public void achatCinqPv(ActionEvent actionEvent) {
         boutiqueVue.achatCinqPv();
     }
+
+    public Timeline getGameLoop() {
+        return gameLoop;
+    }
+
 }

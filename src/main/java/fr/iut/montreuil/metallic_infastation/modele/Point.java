@@ -21,7 +21,7 @@ public class Point {
         return this.pX.getValue();
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.pX.setValue(x);
     }
 
@@ -33,7 +33,7 @@ public class Point {
         return this.pY.getValue();
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.pY.setValue(y);
     }
 
