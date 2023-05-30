@@ -38,7 +38,6 @@ public abstract class Tourelle {
 
                         Ennemi ennemiCase = env.ennemiSurCase(new Case(this.position.getI() + i, this.position.getJ() + j));
                         if (ennemiCase != null) {
-
                             return ennemiCase;
                         }
                     }

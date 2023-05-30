@@ -11,11 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -119,10 +122,16 @@ public class JeuControleur implements Initializable {
 
         tilePane.setOnMouseClicked(event -> {
             Case c = new Case((int) event.getX() / terrainExperimental.getTailleCase(), (int) event.getY() / terrainExperimental.getTailleCase());
-            if (this.terrainExperimental.videSurCase(c)){
+            if (event.getButton() == MouseButton.PRIMARY && this.terrainExperimental.emplacementVideSurCase(c)){
                 boutiqueVue.achatTour(c);
-            } else if (this.terrainExperimental.tourSurCase(c)) {
-                boutiqueVue.venteTour(c);
+                System.out.println("tour posée");
+
+                terrainVue.raffraichirTourSurTuile((((c.getI() - 1) * 23) + c.getJ()) + 1);
+            } else if (event.getButton() == MouseButton.SECONDARY && this.terrainExperimental.emplacementDeTour(c)) {
+                boutique.venteTour(c);
+                System.out.println("tour vendue");
+
+                terrainVue.raffraichirTourSurTuile((((c.getI() - 1) * 23) + c.getJ()) + 1);
             }
         });
     }
@@ -164,8 +173,6 @@ public class JeuControleur implements Initializable {
                         for (Tourelle t : env.getListeTourelles()){
                             if (t instanceof TourelleSemi){
                                 t.infligerDegats();
-                                System.out.println(t.getEnnemiVise());
-                                System.out.println("tire");
                             }
                         }
 

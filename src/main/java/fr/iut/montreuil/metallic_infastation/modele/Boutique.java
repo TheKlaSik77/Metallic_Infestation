@@ -1,8 +1,5 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-import fr.iut.montreuil.metallic_infastation.vue.TerrainVue;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 
 import java.util.Iterator;
@@ -37,7 +34,7 @@ public class Boutique {
      * idTour == 2
      *
      */
-    public void AchatTour(int typeTour, Case c){
+    public void achatTour(int typeTour, Case c){
         if (typeTour == 1){
             Tourelle tourelle1 = new TourelleSemi(c, environnement, terrain);
             if(joueur.achatPossible(tourelle1.getCout())) {
@@ -54,18 +51,13 @@ public class Boutique {
         }
     }
 
-    public void VenteTour(Case c) {
-        ObservableList<Tourelle> tourelles = environnement.getListeTourelles();
-        Iterator<Tourelle> iterator = tourelles.iterator();
-        while (iterator.hasNext()) {
-            Tourelle p = iterator.next();
-            Case position = p.getPosition();
-            if (c.getI() == position.getI() && c.getJ() == position.getJ()) {
-                joueur.crediterArgentProperty(p.getCout());
-                iterator.remove();
+    public void venteTour(Case c) {
+        for (int i = environnement.getListeTourelles().size() - 1 ; i >= 0 ; i--){
+            if (environnement.getListeTourelles().get(i).getPosition().caseEgale(c)){
+                environnement.getListeTourelles().remove(i);
             }
         }
-        terrain.setCase(c, 0);
+        terrain.setCase(c, 2);
     }
 
 }

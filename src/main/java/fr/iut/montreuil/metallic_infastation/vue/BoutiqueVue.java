@@ -55,8 +55,8 @@ public class BoutiqueVue {
 
     public void achatTour(Case c){
         if (tour1.isSelected()){
-            System.out.println("Tour1");
-            boutique.AchatTour(1, c);
+            System.out.println("Tourelle 1 Posée en : " + c);
+            boutique.achatTour(1, c);
         }
         else if (tour2.isSelected()) {
             System.out.println("Tour2");
@@ -68,7 +68,5 @@ public class BoutiqueVue {
         }
     }
 
-    public void venteTour (Case c){
-        boutique.VenteTour(c);
-    }
+
 }
