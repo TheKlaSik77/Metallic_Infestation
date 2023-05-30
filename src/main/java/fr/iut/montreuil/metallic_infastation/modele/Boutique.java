@@ -2,15 +2,12 @@ package fr.iut.montreuil.metallic_infastation.modele;
 
 import javafx.collections.ObservableList;
 
-import java.util.Iterator;
-
 public class Boutique {
    private Joueur joueur;
    private Environnement environnement;
 
    private Terrain terrain;
 
-   private ObservableList<Tourelle> tourelles;
 
 
 
@@ -19,12 +16,10 @@ public class Boutique {
         this.environnement = environnement;
         this.joueur = joueur;
         this.terrain = terrain;
-        this.tourelles = environnement.getListeTourelles();
-
     }
 
     public void AchatPv (int montant, int pv) {
-        if (joueur.achatPossible(montant) == true){
+        if (joueur.achatPossible(montant)){
             joueur.crediterPvJoueurProperty(pv);
             joueur.debiterArgentProperty(montant);
         }
@@ -38,8 +33,7 @@ public class Boutique {
         if (typeTour == 1){
             Tourelle tourelle1 = new TourelleSemi(c, environnement, terrain);
             if(joueur.achatPossible(tourelle1.getCout())) {
-                tourelles.add(tourelle1);
-                environnement.poserTour(c,tourelle1);
+                environnement.ajouterDansListeTours(tourelle1);
                 joueur.debiterArgentProperty(tourelle1.getCout());
             }
         }
@@ -52,12 +46,11 @@ public class Boutique {
     }
 
     public void venteTour(Case c) {
-        for (int i = environnement.getListeTourelles().size() - 1 ; i >= 0 ; i--){
-            if (environnement.getListeTourelles().get(i).getPosition().caseEgale(c)){
-                environnement.getListeTourelles().remove(i);
-            }
+        if (terrain.tourSurCase(c)){
+            joueur.crediterArgentProperty(environnement.retirerTour(c).getCout());
+            terrain.setCase(c, 2);
+
         }
-        terrain.setCase(c, 2);
     }
 
 }

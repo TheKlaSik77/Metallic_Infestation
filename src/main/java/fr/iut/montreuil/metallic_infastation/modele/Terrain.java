@@ -92,12 +92,9 @@ public class Terrain {
     public boolean cheminSurCase(Case c){
         return terrain[c.getI()][c.getJ()] == 1;
     }
-    public boolean emplacementDeTour(Case c){
-        return terrain[c.getI()][c.getJ()] == 2;
-    }
 
     public boolean tourSurCase(Case c){
-        return (terrain[c.getI()][c.getJ()] == 3) || (terrain[c.getI()][c.getJ()] == 4) || (terrain[c.getI()][c.getJ()] == 5);
+        return (terrain[c.getI()][c.getJ()] == 3);
     }
 
     public boolean videSurCase(Case c){
@@ -119,6 +116,19 @@ public class Terrain {
             }
             System.out.println();
 
+        }
+    }
+
+    public void afficherTab() {
+
+        for(int i = 0 ; i < terrain.length ; i++){
+            for (int j = 0 ; j < terrain[i].length ; j++){
+                if (terrain[i][j] < 9)
+                    System.out.print(" " + terrain[i][j]);
+                else
+                    System.out.print(terrain[i][j]);
+            }
+            System.out.println();
         }
     }
 }

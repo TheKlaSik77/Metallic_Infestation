@@ -66,4 +66,10 @@ public abstract class Tourelle {
         return this.cout;
     }
 
+    public void poserTourelle(){
+        if (this.terrain.emplacementVideSurCase(this.getPosition())){
+            // On dit que la case est occupée par une tour
+            terrain.setCase(this.getPosition(),3);
+        }
+    }
 }

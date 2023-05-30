@@ -4,8 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Environnement {
@@ -39,15 +37,8 @@ public class Environnement {
         return null;
     }
 
-    public void poserTour(Case c, Tourelle t){
+    public void ajouterDansListeTours(Tourelle t){
             listeTourelles.add(t);
-            if (t instanceof TourelleSemi){
-                this.terrain.setCase(c, 3);
-            } else if (t instanceof TourelleAuto){
-                this.terrain.setCase(c, 4);
-            } else if (t instanceof TourelleMissiles){
-                this.terrain.setCase(c, 5);
-            }
 
     }
 
@@ -75,6 +66,17 @@ public class Environnement {
                 case 2 -> this.getListeEnnemis().add(new EnnemiDifficile(terrain));
             }
         }
+    }
+
+    public Tourelle retirerTour(Case c) {
+        Tourelle supprimee = null;
+        for (int i = this.getListeTourelles().size() - 1 ; i >= 0 ; i--){
+            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)){
+                supprimee = this.getListeTourelles().get(i);
+                this.getListeTourelles().remove(i);
+            }
+        }
+        return supprimee;
     }
 }
 

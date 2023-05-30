@@ -5,6 +5,7 @@ import fr.iut.montreuil.metallic_infastation.modele.*;
 import fr.iut.montreuil.metallic_infastation.vue.BoutiqueVue;
 import fr.iut.montreuil.metallic_infastation.vue.EnnemisVue;
 import fr.iut.montreuil.metallic_infastation.vue.TerrainVue;
+import fr.iut.montreuil.metallic_infastation.vue.TourelleVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -33,6 +34,7 @@ public class JeuControleur implements Initializable {
     private TilePane tilePane;
     @FXML
     private Pane zoneAffichageEnnemis;
+
     private Timeline gameLoop;
     private int temps;
 
@@ -70,8 +72,7 @@ public class JeuControleur implements Initializable {
 
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
-        TourelleSemi tourelleSemi = new TourelleSemi(new Case(11,16),env,terrainExperimental);
-        tourelleSemi.poserTourelle();
+        TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(150,3500);
@@ -93,6 +94,24 @@ public class JeuControleur implements Initializable {
                 if (change.wasAdded()) {
                     for (Ennemi addedEnnemi : change.getAddedSubList()) {
                         ennemisVue.ajouterEnnemi(addedEnnemi);
+                    }
+                }
+            }
+        });
+        env.getListeTourelles().addListener((ListChangeListener<Tourelle>) change -> {
+            while (change.next()) {
+                System.out.println("ajouts : " + change.getAddedSubList());
+                System.out.println("supressions : " + change.getRemoved());
+                System.out.println("liste des tours: " + change.getList());
+                System.out.println("nombre de tours : " + change.getList().size());
+                if (change.wasRemoved()) {
+                    for (Tourelle removedTourelle : change.getRemoved()) {
+                        tourelleVue.retirerTour(removedTourelle);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Tourelle addedTourelle : change.getAddedSubList()) {
+                        tourelleVue.poserTour(addedTourelle);
                     }
                 }
             }
@@ -121,18 +140,23 @@ public class JeuControleur implements Initializable {
         });
 
         tilePane.setOnMouseClicked(event -> {
-            Case c = new Case((int) event.getX() / terrainExperimental.getTailleCase(), (int) event.getY() / terrainExperimental.getTailleCase());
-            if (event.getButton() == MouseButton.PRIMARY && this.terrainExperimental.emplacementVideSurCase(c)){
+
+            Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
+
+            if (event.getButton() == MouseButton.PRIMARY && this.terrainExperimental.emplacementVideSurCase(c)) {
                 boutiqueVue.achatTour(c);
                 System.out.println("tour posée");
-
-                terrainVue.raffraichirTourSurTuile((((c.getI() - 1) * 23) + c.getJ()) + 1);
-            } else if (event.getButton() == MouseButton.SECONDARY && this.terrainExperimental.emplacementDeTour(c)) {
+                terrainExperimental.afficherTab();
+            }
+        });
+        zoneAffichageEnnemis.setOnMouseClicked(event -> {
+            Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
+            if (event.getButton() == MouseButton.SECONDARY && this.terrainExperimental.tourSurCase(c)) {
+                System.out.println("clic droit");
                 boutique.venteTour(c);
                 System.out.println("tour vendue");
-
-                terrainVue.raffraichirTourSurTuile((((c.getI() - 1) * 23) + c.getJ()) + 1);
             }
+
         });
     }
 

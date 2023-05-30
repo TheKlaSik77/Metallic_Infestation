@@ -54,12 +54,7 @@ public class TerrainVue {
         URL urlImArriveeSO = JeuApplication.class.getResource("img/bunker/SO.png");
         Image imArriveeSO = new Image(String.valueOf(urlImArriveeSO));
 
-        URL urlImTourelleSemi = JeuApplication.class.getResource("img/tourelle/tourelleSemiEteinte.png");
-        Image imTourelleSemi = new Image(String.valueOf(urlImTourelleSemi));
-        URL urlImTourelleAuto = JeuApplication.class.getResource("img/tourelle/tourelleAutoEteinte.png");
-        Image imTourelleAuto = new Image(String.valueOf(urlImTourelleAuto));
-        URL urlImTourelleMissiles = JeuApplication.class.getResource("img/tourelle/tourelleMissiles.png");
-        Image imTourelleMissiles = new Image(String.valueOf(urlImTourelleMissiles));
+
 
 
         for (int i = 0 ; i < terrain.getTerrain().length ; i++){
@@ -100,31 +95,11 @@ public class TerrainVue {
                         ImageView imageView2 = new ImageView(imChemin);
                         tilePane.getChildren().add(imageView2);
                     }
-                    case 2 -> {
+                    case 2,3 -> {
                         ImageView imageView3 = new ImageView(imContourChemin);
                         tilePane.getChildren().add(imageView3);
                     }
-                    case 3 -> {
-                        ImageView imageView2_1 = new ImageView(imContourChemin);
-                        ImageView imageView4 = new ImageView(imTourelleSemi);
-                        StackPane stackPane = new StackPane();
-                        stackPane.getChildren().addAll(imageView2_1, imageView4);
-                        tilePane.getChildren().add(stackPane);
-                    }
-                    case 4 -> {
-                        ImageView imageView2_2 = new ImageView(imContourChemin);
-                        ImageView imageView5 = new ImageView(imTourelleAuto);
-                        StackPane stackPane2 = new StackPane();
-                        stackPane2.getChildren().addAll(imageView2_2, imageView5);
-                        tilePane.getChildren().add(stackPane2);
-                    }
-                    case 5 -> {
-                        ImageView imageView2_3 = new ImageView(imContourChemin);
-                        ImageView imageView6 = new ImageView(imTourelleMissiles);
-                        StackPane stackPane3 = new StackPane();
-                        stackPane3.getChildren().addAll(imageView2_3, imageView6);
-                        tilePane.getChildren().add(stackPane3);
-                    }
+
                     case 11 -> {
                         ImageView imageView7 = new ImageView(imArriveeNO);
                         tilePane.getChildren().add(imageView7);
