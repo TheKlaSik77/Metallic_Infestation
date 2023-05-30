@@ -1,19 +1,20 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Environnement {
 
-    static int vagueActuelle;
+    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
+    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 2;
+    public static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
@@ -23,16 +24,16 @@ public class Environnement {
     }
 
     public ObservableList<Ennemi> getListeEnnemis() {
-
         return listeEnnemis;
     }
-    public ObservableList<Tourelle> getListeTourelles(){
+
+    public ObservableList<Tourelle> getListeTourelles() {
         return listeTourelles;
     }
 
-    public Ennemi ennemiSurCase(Case c){
-        for (Ennemi e : listeEnnemis){
-            if (e.getCase().caseEgale(c)){
+    public Ennemi ennemiSurCase(Case c) {
+        for (Ennemi e : listeEnnemis) {
+            if (e.getCase().caseEgale(c)) {
                 return e;
             }
         }
@@ -40,30 +41,34 @@ public class Environnement {
     }
 
 
-
-
-    /**
-     *
-     * @param terrain
-     * Choisi un nombre aléatoire entre 10 et 20 ennemis
-     * Génère un nombre entre 0 et 2 pour choisir le type d'ennemi
-     * ajoute dans le terrain les ennemis correspondants
-     */
-    public void lancerVague (Terrain terrain){
-        vagueActuelle++;
-        System.out.println("vague n° " + vagueActuelle);
+    public void lancerVague(Terrain terrain) {
         Random random = new Random();
-        //int nombreEnnemis = random.nextInt(11) + 10;
-        int nombreEnnemis = 1;
+        int nombreEnnemis = 10;
+
         for (int i = 0; i < nombreEnnemis; i++) {
             int typeEnnemi = random.nextInt(3);
+            System.out.println("Type d'ennemi : " + typeEnnemi);
 
             switch (typeEnnemi) {
-                case 0 -> this.getListeEnnemis().add(new EnnemiFacile(terrain));
-                case 1 -> this.getListeEnnemis().add(new EnnemiMoyen(terrain));
-                case 2 -> this.getListeEnnemis().add(new EnnemiDifficile(terrain));
+                case 0:
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(terrain);
+                    listeEnnemis.add(ennemiFacile);
+                    break;
+                case 1:
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(terrain);
+                    listeEnnemis.add(ennemiMoyen);
+                    break;
+                case 2:
+                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(terrain);
+                    listeEnnemis.add(ennemiDifficile);
+                    break;
             }
         }
     }
-}
 
+        public boolean listeEnnemiEstVide() {
+        return listeEnnemis.isEmpty();
+    }
+
+
+}

@@ -4,20 +4,19 @@ public abstract class Ennemi {
     private static int compteur = 0;
     private int id;
     private int pv;
-    private double vitesse;
+    private int vitesse;
     private Point coordonnees;
     private Terrain terrain;
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 
 
-    public Ennemi (int pv, double vitesse, Terrain terrain){
+    public Ennemi (int pv, int vitesse, Terrain terrain){
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
         this.terrain = terrain;
         this.coordonnees = coordonneesDepart();
-        // TODO: Mettre BFS en paramètre
         this.parcoursBFS = new ParcoursBFS(terrain);
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
@@ -43,25 +42,50 @@ public abstract class Ennemi {
 
 
     // TODO: Déplacement et Mettre à jour case destination si besoin pour chaque appel de la fonction
+   /*
     public void seDeplacer(){
 
         if (this.getCoordonnees().getX() < this.caseDestination.getJ() * terrain.getTailleCase()){
-            this.coordonnees.setX(this.coordonnees.getX()+1);
+            this.coordonnees.setX(this.coordonnees.getX() + vitesse);
         } else if (this.getCoordonnees().getX() > this.caseDestination.getJ() * terrain.getTailleCase()){
-            this.coordonnees.setX(this.coordonnees.getX()-1);
+            this.coordonnees.setX(this.coordonnees.getX() - vitesse);
         }
 
         if (this.getCoordonnees().getY() < this.caseDestination.getI() * terrain.getTailleCase()){
-            this.coordonnees.setY(this.coordonnees.getY()+1);
+            this.coordonnees.setY(this.coordonnees.getY() + vitesse);
         } else if (this.getCoordonnees().getY() > this.caseDestination.getI() * terrain.getTailleCase()){
-            this.coordonnees.setY(this.coordonnees.getY()-1);
+            this.coordonnees.setY(this.coordonnees.getY() - vitesse);
         }
 
         if (this.getCase().caseEgale(this.caseDestination)){
             this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
         }
     }
+*/
 
+    public void seDeplacer() {
+        int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
+        int distanceY = this.caseDestination.getI() * terrain.getTailleCase() - this.getCoordonnees().getY();
+
+        int deplacementX = Math.min(vitesse, Math.abs(distanceX));
+        int deplacementY = Math.min(vitesse, Math.abs(distanceY));
+
+        if (distanceX < 0) {
+            this.coordonnees.setX(this.coordonnees.getX() - deplacementX);
+        } else if (distanceX > 0) {
+            this.coordonnees.setX(this.coordonnees.getX() + deplacementX);
+        }
+
+        if (distanceY < 0) {
+            this.coordonnees.setY(this.coordonnees.getY() - deplacementY);
+        } else if (distanceY > 0) {
+            this.coordonnees.setY(this.coordonnees.getY() + deplacementY);
+        }
+
+        if (this.getCase().caseEgale(this.caseDestination)) {
+            this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
+        }
+    }
     /**
      *
      * @param n
@@ -74,6 +98,7 @@ public abstract class Ennemi {
      *
      * @return true si les pv sont <= 0
      */
+
     public boolean estMort(){
         return this.pv <= 0;
     }
