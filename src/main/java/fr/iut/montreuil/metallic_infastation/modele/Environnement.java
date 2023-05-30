@@ -10,8 +10,6 @@ import java.util.Random;
 
 public class Environnement {
 
-
-
     static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
@@ -41,11 +39,18 @@ public class Environnement {
         return null;
     }
 
-
     public void poserTour(Case c, Tourelle t){
             listeTourelles.add(t);
-            this.terrain.setCase(c, 3);
+            if (t instanceof TourelleSemi){
+                this.terrain.setCase(c, 3);
+            } else if (t instanceof TourelleAuto){
+                this.terrain.setCase(c, 4);
+            } else if (t instanceof TourelleMissiles){
+                this.terrain.setCase(c, 5);
+            }
+
     }
+
 
 
     /**
@@ -59,8 +64,8 @@ public class Environnement {
         vagueActuelle++;
         System.out.println("vague n° " + vagueActuelle);
         Random random = new Random();
-        int nombreEnnemis = random.nextInt(11) + 10;
-
+        //int nombreEnnemis = random.nextInt(11) + 10;
+        int nombreEnnemis = 1;
         for (int i = 0; i < nombreEnnemis; i++) {
             int typeEnnemi = random.nextInt(3);
 

@@ -37,16 +37,16 @@ public class Boutique {
      * idTour == 2
      *
      */
-    public void AchatTour(int idTour, Case c){
-        if (idTour == 1){
+    public void AchatTour(int typeTour, Case c){
+        if (typeTour == 1){
             Tourelle tourelle1 = new TourelleSemi(c, environnement, terrain);
             if(joueur.achatPossible(tourelle1.getCout())) {
                 tourelles.add(tourelle1);
-                terrain.setCase(c, 3);
+                environnement.poserTour(c,tourelle1);
                 joueur.debiterArgentProperty(tourelle1.getCout());
             }
         }
-        else if (idTour == 2) {
+        else if (typeTour == 2) {
             //TODO
         }
         else {

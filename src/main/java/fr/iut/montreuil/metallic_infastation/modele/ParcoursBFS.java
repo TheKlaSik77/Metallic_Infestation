@@ -1,6 +1,7 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ParcoursBFS {
 
@@ -11,9 +12,7 @@ public class ParcoursBFS {
         this.terrain = terrain;
         this.grilleBFS = new int[terrain.getTerrain().length][terrain.getTerrain()[0].length];
         for (int i = 0 ; i < grilleBFS.length ; i++){
-            for (int j = 0 ; j < grilleBFS[i].length ; j++){
-                grilleBFS[i][j] = -1;
-            }
+            Arrays.fill(grilleBFS[i], -1);
         }
     }
 
@@ -26,7 +25,7 @@ public class ParcoursBFS {
         ArrayList<Case> aFaire = new ArrayList<>();
         for (int i = 0 ; i < grilleBFS.length ; i++){
             for (int j = 0 ; j < grilleBFS[i].length ; j++){
-                if (terrain.getTerrain()[i][j] == 2){
+                if (terrain.getTerrain()[i][j] == 11){
                     Case c = new Case(i,j);
                     aFaire.add(c);
                     this.grilleBFS[i][j] = 0;
@@ -38,7 +37,7 @@ public class ParcoursBFS {
             int cI = predecesseur.getI();
             int cJ = predecesseur.getJ();
             Case c1 = new Case(cI + 1,cJ);
-            if (terrain.caseEstDansTerrain(c1) && terrain.getTerrain()[cI + 1][cJ] != 0 && grilleBFS[cI + 1][cJ] == -1){
+            if (terrain.caseEstDansTerrain(c1) && terrain.getTerrain()[cI + 1][cJ] == 1 && grilleBFS[cI + 1][cJ] == -1){
 
                 if (grilleBFS[cI+1][cJ] > grilleBFS[cI][cJ] + 1 || grilleBFS[cI+1][cJ] == -1){
                     aFaire.add(c1);
@@ -46,7 +45,7 @@ public class ParcoursBFS {
                 }
             }
             Case c2 = new Case(cI - 1,cJ);
-            if (terrain.caseEstDansTerrain(c2) && terrain.getTerrain()[cI-1][cJ] != 0 && grilleBFS[cI - 1][cJ] == -1){
+            if (terrain.caseEstDansTerrain(c2) && terrain.getTerrain()[cI-1][cJ] == 1 && grilleBFS[cI - 1][cJ] == -1){
 
                 if (grilleBFS[cI-1][cJ] > grilleBFS[cI][cJ] + 1 || grilleBFS[cI-1][cJ] == -1) {
                     aFaire.add(c2);
@@ -54,7 +53,7 @@ public class ParcoursBFS {
                 }
             }
             Case c3 = new Case(cI,cJ + 1);
-            if (terrain.caseEstDansTerrain(c3) && terrain.getTerrain()[cI][cJ+1] != 0 && grilleBFS[cI][cJ + 1] == -1){
+            if (terrain.caseEstDansTerrain(c3) && terrain.getTerrain()[cI][cJ+1] == 1 && grilleBFS[cI][cJ + 1] == -1){
 
                 if (grilleBFS[cI][cJ+1] > grilleBFS[cI][cJ] + 1 || grilleBFS[cI][cJ+1] == -1) {
                     aFaire.add(c3);
@@ -62,7 +61,7 @@ public class ParcoursBFS {
                 }
             }
             Case c4 = new Case(cI,cJ - 1);
-            if (terrain.caseEstDansTerrain(c4) && terrain.getTerrain()[cI][cJ-1] != 0 && grilleBFS[cI][cJ - 1] == -1){
+            if (terrain.caseEstDansTerrain(c4) && terrain.getTerrain()[cI][cJ-1] == 1 && grilleBFS[cI][cJ - 1] == -1){
 
                 if (grilleBFS[cI][cJ-1] > grilleBFS[cI][cJ] + 1 || grilleBFS[cI][cJ-1] == -1){
                     aFaire.add(c4);

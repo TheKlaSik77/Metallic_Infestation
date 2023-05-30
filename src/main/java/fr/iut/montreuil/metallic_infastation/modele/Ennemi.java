@@ -11,17 +11,36 @@ public abstract class Ennemi {
     private Case caseDestination;
 
 
-    public Ennemi (int pv, double vitesse, Point coordonnees, Terrain terrain){
+    public Ennemi (int pv, double vitesse, Terrain terrain){
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
-        this.coordonnees = coordonnees;
+        // Position de Départ Aléatoire
+        boolean coordonneesChemin;
+        do {
+            double rand = Math.random();
+
+            // Faire apparaitre en aleatoire sur coté gauche
+            if (rand < 0.5){
+                int randY = (int)(Math.random()*737);
+                this.coordonnees = new Point(0,randY);
+                coordonneesChemin = terrain.cheminSurCase(new Case((int)(randY) / terrain.getTailleCase(),0));
+            //Faire apparaitre en aleatoire sur coté haut
+            } else {
+                int randX = (int)(Math.random()*737);
+                this.coordonnees = new Point(randX,0);
+                coordonneesChemin = terrain.cheminSurCase(new Case(0,(int)(randX) / terrain.getTailleCase()));
+            }
+        } while (!coordonneesChemin);
+        System.out.println("coordonée :  " + this.coordonnees.toString()  );
+
         this.terrain = terrain;
-        // TODO: Mettre BFS en paramètre
+        // TODO: Mettre BFS en paramètre de terrain
         this.parcoursBFS = new ParcoursBFS(terrain);
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
-        System.out.println(caseDestination.toString());
+
+        System.out.println("Case de destination : " + caseDestination.toString());
         compteur++;
     }
     public int getPv(){
@@ -36,8 +55,8 @@ public abstract class Ennemi {
     }
 
     public Case getCase(){
-        int i = this.coordonnees.getY() / 16;
-        int j = this.coordonnees.getX() / 16;
+        int i = this.coordonnees.getY() / 32;
+        int j = this.coordonnees.getX() / 32;
         return new Case(i,j);
     }
 
@@ -70,8 +89,6 @@ public abstract class Ennemi {
     public void decrementerPv(int n){
         this.pv -= n;
     }
-
-
     /**
      *
      * @return true si les pv sont <= 0
@@ -90,6 +107,10 @@ public abstract class Ennemi {
                 "id=" + id +
                 ", coordonnees=" + coordonnees +
                 '}';
+    }
+
+    public Point coordonneesDepart(){
+        return new Point(0,(int)(Math.random() * 80));
     }
 
 }
