@@ -5,16 +5,19 @@ public abstract class Ennemi {
     private int id;
     private int pv;
     private double vitesse;
+    private int drop;
     private Point coordonnees;
     private Terrain terrain;
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 
 
-    public Ennemi (int pv, double vitesse, Terrain terrain){
+    public Ennemi (int pv, double vitesse, int drop, Terrain terrain){
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
+        // Piece Lootées par les ennemis
+        this.drop = drop;
         // Position de Départ Aléatoire
         boolean coordonneesChemin;
         do {

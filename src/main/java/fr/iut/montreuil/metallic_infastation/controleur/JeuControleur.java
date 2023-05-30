@@ -75,7 +75,7 @@ public class JeuControleur implements Initializable {
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-        this.joueur = new Joueur(150,3500);
+        this.joueur = new Joueur(10,10);
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
         this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
