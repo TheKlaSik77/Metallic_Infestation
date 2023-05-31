@@ -15,12 +15,13 @@ public class Environnement {
     private ObservableList<Tourelle> listeTourelles;
     private ParcoursBFS parcoursBFS;
 
-
+    private Joueur joueur;
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.parcoursBFS = new ParcoursBFS(terrain);
+        this.joueur = new Joueur(100,1000);
         vagueActuelle = 0;
     }
 
@@ -79,6 +80,10 @@ public class Environnement {
             }
         }
         return supprimee;
+    }
+
+    public Joueur getJoueur(){
+        return this.joueur;
     }
 }
 

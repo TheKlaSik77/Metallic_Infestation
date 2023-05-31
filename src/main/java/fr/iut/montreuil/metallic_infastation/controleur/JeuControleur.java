@@ -70,7 +70,7 @@ public class JeuControleur implements Initializable {
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-        this.joueur = new Joueur(100,1000);
+        this.joueur = env.getJoueur();
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
         this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
 
@@ -130,12 +130,12 @@ public class JeuControleur implements Initializable {
 
         groupeRadio.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (tour1.isSelected()){
-                prixTour.setText(String.valueOf(1));
+                prixTour.setText(String.valueOf(10));
             } else if (tour2.isSelected()) {
-                prixTour.setText(String.valueOf(2));
+                prixTour.setText(String.valueOf(30));
             }
             else {
-                prixTour.setText(String.valueOf(3));
+                prixTour.setText(String.valueOf(50));
             }
 
         });
@@ -170,7 +170,7 @@ public class JeuControleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
                 ev -> {
-                    if (vagueActuelle == NB_VAGUES_JEU ) {
+                    if (vagueActuelle == NB_VAGUES_JEU || joueur.pvNull()) {
                         System.out.println("fini");
                         gameLoop.stop();
                     } else {
@@ -187,6 +187,7 @@ public class JeuControleur implements Initializable {
                             e.seDeplacer();
                             if (e.aAtteintLaCible() || e.estMort()) {
                                 env.getListeEnnemis().remove(e);
+                                joueur.debiterPvJoueurProperty(e.getDrop());
                             }
                         }
                         for (Tourelle t : env.getListeTourelles()) {

@@ -60,11 +60,11 @@ public class BoutiqueVue {
         }
         else if (tour2.isSelected()) {
             System.out.println("Tour2");
-            // TODO : Appeler la méthode acheterTour dans la boutique
+            boutique.achatTour(2,c);
         }
         else{
             System.out.println("Tour3");
-            // TODO : Appeler la méthode acheterTour dans la boutique
+            boutique.achatTour(3,c);
         }
     }
 
