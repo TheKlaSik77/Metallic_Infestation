@@ -21,10 +21,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 
 public class JeuControleur implements Initializable {
 
@@ -60,6 +60,11 @@ public class JeuControleur implements Initializable {
     private EnnemisVue ennemisVue;
     private int vagueActuelle;
     private Terrain terrainExperimental;
+
+    private GestionnaireVagues gestionnaireVagues;
+
+    private boolean vagueTerminee = true;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -76,8 +81,7 @@ public class JeuControleur implements Initializable {
 
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
-
-
+        gestionnaireVagues = new GestionnaireVagues(env);
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
             while (change.next()) {
                 /*
@@ -118,7 +122,6 @@ public class JeuControleur implements Initializable {
         });
 
         env.lancerVague(terrainExperimental);
-
 
 
         terrainVue.afficherTerrain();
@@ -170,18 +173,14 @@ public class JeuControleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
                 ev -> {
-                    if (vagueActuelle == NB_VAGUES_JEU ) {
-                        System.out.println("fini");
+                    if (gestionnaireVagues.estDerniereVague()) {
+                        System.out.println("Fini");
                         gameLoop.stop();
                     } else {
                         if (env.getListeEnnemis().isEmpty()) {
-                            vagueActuelle++;
-                            if(vagueActuelle < NB_VAGUES_JEU){
-                                System.out.println("Une vague ennemi se prépare...");
-                                System.out.println("Vague actuelle : " + vagueActuelle);
-                                env.lancerVague(terrainExperimental);
-                            }
+                            gestionnaireVagues.lancerProchaineVague(terrainExperimental);
                         }
+
                         for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                             Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();

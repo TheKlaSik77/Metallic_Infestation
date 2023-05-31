@@ -7,18 +7,19 @@ import java.util.Random;
 
 public class Environnement {
 
-    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
-    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 2;
     public static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+    private ParcoursBFS parcoursBFS;
+
 
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
+        this.parcoursBFS = new ParcoursBFS(terrain);
         vagueActuelle = 0;
     }
 
@@ -54,15 +55,15 @@ public class Environnement {
 
             switch (typeEnnemi) {
                 case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(terrain);
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS,terrain);
                     listeEnnemis.add(ennemiFacile);
                     break;
                 case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(terrain);
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS,terrain);
                     listeEnnemis.add(ennemiMoyen);
                     break;
                 case 2:
-                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(terrain);
+                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiDifficile);
                     break;
             }

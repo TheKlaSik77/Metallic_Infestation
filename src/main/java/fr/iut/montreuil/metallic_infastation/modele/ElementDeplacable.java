@@ -2,7 +2,7 @@ package fr.iut.montreuil.metallic_infastation.modele;
 
 public abstract class ElementDeplacable {
 
-    private Point coordonnees;
+    protected Point coordonnees;
     private int vitesse;
 
     protected ElementDeplacable(Point coordonnees, int vitesse){

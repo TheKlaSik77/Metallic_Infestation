@@ -11,7 +11,8 @@ public abstract class Ennemi extends ElementDeplacable{
     private Case caseDestination;
 
 
-    public Ennemi (Point coordonnees, int pv, int vitesse, int drop, Terrain terrain){
+
+    public Ennemi (Point coordonnees, int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
         super(coordonnees,vitesse);
         this.id = compteur;
         this.pv = pv;
@@ -37,10 +38,7 @@ public abstract class Ennemi extends ElementDeplacable{
             }
         } while (!coordonneesChemin);
         System.out.println("coordonée :  " + this.coordonnees.toString()  );
-
-
-        // TODO : Charger une seule fois le BFS
-        this.parcoursBFS = new ParcoursBFS(terrain);
+        this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
 
