@@ -37,9 +37,6 @@ public abstract class Ennemi {
             }
         } while (!coordonneesChemin);
         System.out.println("coordonée :  " + this.coordonnees.toString()  );
-
-
-        // TODO : Charger une seule fois le BFS
         this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
