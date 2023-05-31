@@ -13,12 +13,14 @@ public class Environnement {
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+    private ParcoursBFS parcoursBFS;
 
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
+        this.parcoursBFS = new ParcoursBFS(terrain);
         vagueActuelle = 0;
     }
 
@@ -54,15 +56,15 @@ public class Environnement {
 
             switch (typeEnnemi) {
                 case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(terrain);
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS,terrain);
                     listeEnnemis.add(ennemiFacile);
                     break;
                 case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(terrain);
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS,terrain);
                     listeEnnemis.add(ennemiMoyen);
                     break;
                 case 2:
-                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(terrain);
+                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiDifficile);
                     break;
             }

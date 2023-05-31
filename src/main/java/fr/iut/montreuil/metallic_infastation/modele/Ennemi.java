@@ -12,7 +12,7 @@ public abstract class Ennemi {
     private Case caseDestination;
 
 
-    public Ennemi (int pv, int vitesse, int drop, Terrain terrain){
+    public Ennemi (int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
@@ -40,7 +40,7 @@ public abstract class Ennemi {
 
 
         // TODO : Charger une seule fois le BFS
-        this.parcoursBFS = new ParcoursBFS(terrain);
+        this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
 
