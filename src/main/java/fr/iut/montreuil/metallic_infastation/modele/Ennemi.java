@@ -4,6 +4,7 @@ public abstract class Ennemi {
     private static int compteur = 0;
     private int id;
     private int pv;
+    private int drop;
     private int vitesse;
     private Point coordonnees;
     private Terrain terrain;
@@ -11,16 +12,36 @@ public abstract class Ennemi {
     private Case caseDestination;
 
 
-    public Ennemi (int pv, int vitesse, Terrain terrain){
+    public Ennemi (int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
+        // Piece Lootées par les ennemis
+        this.drop = drop;
         this.terrain = terrain;
-        this.coordonnees = coordonneesDepart();
-        this.parcoursBFS = new ParcoursBFS(terrain);
+        // Position de Départ Aléatoire
+        boolean coordonneesChemin;
+        do {
+            double rand = Math.random();
+
+            // Faire apparaitre en aleatoire sur coté gauche
+            if (rand < 0.5){
+                int randY = (int)(Math.random()*737);
+                this.coordonnees = new Point(0,randY);
+                coordonneesChemin = terrain.cheminSurCase(new Case((int)(randY) / terrain.getTailleCase(),0));
+            //Faire apparaitre en aleatoire sur coté haut
+            } else {
+                int randX = (int)(Math.random()*737);
+                this.coordonnees = new Point(randX,0);
+                coordonneesChemin = terrain.cheminSurCase(new Case(0,(int)(randX) / terrain.getTailleCase()));
+            }
+        } while (!coordonneesChemin);
+        System.out.println("coordonée :  " + this.coordonnees.toString()  );
+        this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
-        System.out.println(caseDestination.toString());
+
+        System.out.println("Case de destination : " + caseDestination.toString());
         compteur++;
     }
     public int getPv(){
@@ -35,33 +56,10 @@ public abstract class Ennemi {
     }
 
     public Case getCase(){
-        int i = this.coordonnees.getY() / 16;
-        int j = this.coordonnees.getX() / 16;
+        int i = this.coordonnees.getY() / 32;
+        int j = this.coordonnees.getX() / 32;
         return new Case(i,j);
     }
-
-
-    // TODO: Déplacement et Mettre à jour case destination si besoin pour chaque appel de la fonction
-   /*
-    public void seDeplacer(){
-
-        if (this.getCoordonnees().getX() < this.caseDestination.getJ() * terrain.getTailleCase()){
-            this.coordonnees.setX(this.coordonnees.getX() + vitesse);
-        } else if (this.getCoordonnees().getX() > this.caseDestination.getJ() * terrain.getTailleCase()){
-            this.coordonnees.setX(this.coordonnees.getX() - vitesse);
-        }
-
-        if (this.getCoordonnees().getY() < this.caseDestination.getI() * terrain.getTailleCase()){
-            this.coordonnees.setY(this.coordonnees.getY() + vitesse);
-        } else if (this.getCoordonnees().getY() > this.caseDestination.getI() * terrain.getTailleCase()){
-            this.coordonnees.setY(this.coordonnees.getY() - vitesse);
-        }
-
-        if (this.getCase().caseEgale(this.caseDestination)){
-            this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
-        }
-    }
-*/
 
     public void seDeplacer() {
         int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
@@ -113,10 +111,6 @@ public abstract class Ennemi {
                 "id=" + id +
                 ", coordonnees=" + coordonnees +
                 '}';
-    }
-
-    public Point coordonneesDepart(){
-        return new Point(0,(int)(Math.random() * 80));
     }
 
 }

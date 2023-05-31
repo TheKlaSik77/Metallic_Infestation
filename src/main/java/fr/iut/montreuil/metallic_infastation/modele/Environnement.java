@@ -3,7 +3,6 @@ package fr.iut.montreuil.metallic_infastation.modele;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.Random;
 
 public class Environnement {
@@ -12,6 +11,7 @@ public class Environnement {
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+    private ParcoursBFS parcoursBFS;
 
 
 
@@ -19,6 +19,7 @@ public class Environnement {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
+        this.parcoursBFS = new ParcoursBFS(terrain);
         vagueActuelle = 0;
     }
 
@@ -39,6 +40,10 @@ public class Environnement {
         return null;
     }
 
+    public void ajouterDansListeTours(Tourelle t){
+            listeTourelles.add(t);
+
+    }
 
     public void lancerVague(Terrain terrain) {
         Random random = new Random();
@@ -50,24 +55,30 @@ public class Environnement {
 
             switch (typeEnnemi) {
                 case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(terrain);
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS,terrain);
                     listeEnnemis.add(ennemiFacile);
                     break;
                 case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(terrain);
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS,terrain);
                     listeEnnemis.add(ennemiMoyen);
                     break;
                 case 2:
-                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(terrain);
+                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiDifficile);
                     break;
             }
         }
     }
-
-        public boolean listeEnnemiEstVide() {
-        return listeEnnemis.isEmpty();
+    public Tourelle retirerTour(Case c) {
+        Tourelle supprimee = null;
+        for (int i = this.getListeTourelles().size() - 1 ; i >= 0 ; i--){
+            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)){
+                supprimee = this.getListeTourelles().get(i);
+                this.getListeTourelles().remove(i);
+            }
+        }
+        return supprimee;
     }
-
-
 }
+
+

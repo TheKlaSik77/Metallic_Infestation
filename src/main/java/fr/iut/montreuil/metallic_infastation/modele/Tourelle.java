@@ -38,7 +38,6 @@ public abstract class Tourelle {
 
                         Ennemi ennemiCase = env.ennemiSurCase(new Case(this.position.getI() + i, this.position.getJ() + j));
                         if (ennemiCase != null) {
-
                             return ennemiCase;
                         }
                     }
@@ -62,5 +61,15 @@ public abstract class Tourelle {
 
         }
 
+    }
+    public int getCout (){
+        return this.cout;
+    }
+
+    public void poserTourelle(){
+        if (this.terrain.emplacementVideSurCase(this.getPosition())){
+            // On dit que la case est occupée par une tour
+            terrain.setCase(this.getPosition(),3);
+        }
     }
 }

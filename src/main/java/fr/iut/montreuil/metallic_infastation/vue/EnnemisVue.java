@@ -34,16 +34,16 @@ public class EnnemisVue {
         String imageUrl = null;
 
         if (e instanceof EnnemiFacile) {
-            imageUrl = "img/soldat16x16.png";
+            imageUrl = "img/ennemis/ennemi_facile_32x32.png";
         } else if (e instanceof EnnemiMoyen) {
-            imageUrl = "img/ennemi_moyen_16x16.png";
+            imageUrl = "img/ennemis/ennemi_moyen_32x32.png";
         } else if (e instanceof EnnemiDifficile) {
-            imageUrl = "img/ennemi_difficile_16x16.png";
+            imageUrl = "img/ennemis/ennemi_difficile_32x32.png";
         }
 
         if (imageUrl != null) {
-            URL urlImSoldat = JeuApplication.class.getResource(imageUrl);
-            Image image = new Image(String.valueOf(urlImSoldat));
+            URL urlImEnnemi = JeuApplication.class.getResource(imageUrl);
+            Image image = new Image(String.valueOf(urlImEnnemi));
             ImageView ennemi = new ImageView(image);
             ennemi.translateXProperty().bind(e.getCoordonnees().pXProperty());
             ennemi.translateYProperty().bind(e.getCoordonnees().pYProperty());

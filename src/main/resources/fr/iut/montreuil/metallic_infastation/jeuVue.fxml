@@ -14,7 +14,7 @@
    <bottom>
       <Pane prefHeight="50.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="50.0" prefWidth="750.0" style="-fx-background-color: red;">
+            <HBox layoutY="-14.0" prefHeight="65.0" prefWidth="750.0" style="-fx-background-color: red;">
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -36,14 +36,14 @@
    <center>
       <Pane fx:id="zoneAffichageEnnemis" BorderPane.alignment="CENTER">
          <children>
-            <TilePane fx:id="tilePane" prefColumns="30" prefHeight="480.0" prefRows="30" prefTileHeight="16.0" prefTileWidth="16.0" prefWidth="480.0" />
+            <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="736.0" style="-fx-background-color: blue;" />
          </children>
       </Pane>
    </center>
    <right>
       <Pane prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="800.0" prefWidth="250.0" style="-fx-background-color: yellow;">
+            <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0" style="-fx-background-color: yellow;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="250.0" text="Boutique" textAlignment="CENTER" />
                   <VBox prefHeight="120.0" prefWidth="250.0">
@@ -84,7 +84,6 @@
                         <RadioButton fx:id="tour2" contentDisplay="CENTER" mnemonicParsing="false" text="Tour 2" toggleGroup="$groupeRadio" />
                         <RadioButton fx:id="tour3" mnemonicParsing="false" text="Tour 3" toggleGroup="$groupeRadio" />
                         <Label fx:id="prixTour" text="0" />
-                        <Button mnemonicParsing="false" onAction="#achatTour" text="Acheter" />
                      </children>
                   </VBox>
                </children>

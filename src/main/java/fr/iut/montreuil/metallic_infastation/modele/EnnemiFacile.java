@@ -2,8 +2,8 @@ package fr.iut.montreuil.metallic_infastation.modele;
 
 public class EnnemiFacile extends Ennemi{
 
-    public EnnemiFacile(Terrain terrain){
-        super(3,3,terrain);
+    public EnnemiFacile(ParcoursBFS parcoursBFS, Terrain terrain){
+        super(3,3,1,parcoursBFS,terrain);
     }
 
     @Override
