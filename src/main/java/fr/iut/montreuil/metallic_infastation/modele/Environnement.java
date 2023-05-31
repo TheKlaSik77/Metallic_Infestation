@@ -8,12 +8,11 @@ import java.util.Random;
 
 public class Environnement {
 
-    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
-    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 2;
     public static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+
 
 
     public Environnement(Terrain terrain) {
