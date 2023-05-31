@@ -113,4 +113,8 @@ public abstract class Ennemi {
                 '}';
     }
 
+    public int getDrop (){
+        return this.drop;
+    }
+
 }

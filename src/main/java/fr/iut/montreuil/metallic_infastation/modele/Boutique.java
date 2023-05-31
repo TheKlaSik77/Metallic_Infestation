@@ -25,9 +25,9 @@ public class Boutique {
         }
     }
     /**
-     * idTour == 1 -> TourelleSemi
-     * idTour == 2
-     *
+     * typeTour == 1 -> TourelleSemi
+     * typeTour == 2 -> TourelleAuto
+     * typeTour == 3 -> TourelleMissiles
      */
     public void achatTour(int typeTour, Case c){
         if (typeTour == 1){
@@ -38,16 +38,24 @@ public class Boutique {
             }
         }
         else if (typeTour == 2) {
-            //TODO
+            Tourelle tourelle2 = new TourelleAuto(c, environnement, terrain);
+            if(joueur.achatPossible(tourelle2.getCout())) {
+                environnement.ajouterDansListeTours(tourelle2);
+                joueur.debiterArgentProperty(tourelle2.getCout());
+            }
         }
         else {
-            //TODO
+            Tourelle tourelle3 = new TourelleMissiles(c, environnement, terrain);
+            if(joueur.achatPossible(tourelle3.getCout())) {
+                environnement.ajouterDansListeTours(tourelle3);
+                joueur.debiterArgentProperty(tourelle3.getCout());
+            }
         }
     }
 
     public void venteTour(Case c) {
         if (terrain.tourSurCase(c)){
-            joueur.crediterArgentProperty(environnement.retirerTour(c).getCout());
+            joueur.crediterArgentProperty(environnement.retirerTour(c).getCout()/2);
             terrain.setCase(c, 2);
 
         }

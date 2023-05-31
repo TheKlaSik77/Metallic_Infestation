@@ -83,7 +83,7 @@
                         </RadioButton>
                         <RadioButton fx:id="tour2" contentDisplay="CENTER" mnemonicParsing="false" text="Tour 2" toggleGroup="$groupeRadio" />
                         <RadioButton fx:id="tour3" mnemonicParsing="false" text="Tour 3" toggleGroup="$groupeRadio" />
-                        <Label fx:id="prixTour" text="0" />
+                        <Label fx:id="prixTour" text="10" />
                      </children>
                   </VBox>
                </children>
