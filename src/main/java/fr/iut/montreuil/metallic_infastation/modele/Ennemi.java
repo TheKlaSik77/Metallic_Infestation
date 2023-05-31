@@ -1,18 +1,18 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-public abstract class Ennemi {
+public abstract class Ennemi extends ElementDeplacable{
     private static int compteur = 0;
     private int id;
     private int pv;
     private int drop;
     private int vitesse;
-    private Point coordonnees;
     private Terrain terrain;
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 
 
-    public Ennemi (int pv, int vitesse, int drop, Terrain terrain){
+    public Ennemi (Point coordonnees, int pv, int vitesse, int drop, Terrain terrain){
+        super(coordonnees,vitesse);
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
