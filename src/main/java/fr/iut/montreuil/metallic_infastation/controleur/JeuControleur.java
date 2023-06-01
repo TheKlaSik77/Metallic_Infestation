@@ -173,7 +173,7 @@ public class JeuControleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
                 ev -> {
-                    if (vagueActuelle == NB_VAGUES_JEU || joueur.pvNull()) {
+                    if (vagueActuelle == NB_VAGUES_JEU  || joueur.pvNull()) {
                         System.out.println("fini");
                         gameLoop.stop();
                     } else {
@@ -194,14 +194,20 @@ public class JeuControleur implements Initializable {
 
                         }
                     }
-                    if (temps % 20 == 0){
-                        for (Tourelle t : env.getListeTourelles()){
-                            if (t instanceof TourelleSemi){
-                                t.infligerDegats();
 
+                    for (Tourelle t : env.getListeTourelles()){
+                        if (t instanceof TourelleSemi){
+                            if (temps % 20 == 0){
+                                t.infligerDegats();
                             }
                         }
-
+                        else if (t instanceof TourelleAuto) {
+                            t.infligerDegats();
+                        }
+                        else {
+                            if (temps % 50 == 0)
+                            t.infligerDegats();
+                        }
                     }
                     temps++;
                 }

@@ -1,5 +1,8 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Tourelle {
 
     private int id;
@@ -47,6 +50,26 @@ public abstract class Tourelle {
         return null;
     }
 
+    public ArrayList<Ennemi> ennemisLesPlusProches() {
+        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
+
+        // Calcul si ennemi autour de toutes les cases par rapport à sa portée
+        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
+            for (int i = zoneTest * -1; i <= zoneTest; i++) {
+                for (int j = zoneTest * -1; j <= zoneTest; j++) {
+                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
+
+                        Ennemi ennemiCase = env.ennemiSurCase(new Case(this.position.getI() + i, this.position.getJ() + j));
+                        if (ennemiCase != null) {
+                            ennemisLesPlusProches.add(ennemiCase);
+                        }
+                    }
+                }
+            }
+        }
+        return ennemisLesPlusProches;
+    }
+
 
     public void raffraichirEnnemiVise(){
         this.ennemiVise = this.ennemiLePlusProche();
@@ -54,17 +77,10 @@ public abstract class Tourelle {
     public Ennemi getEnnemiVise(){
         return this.ennemiVise;
     }
-    public void infligerDegats(){
-        if(ennemiVise != null) {
-            ennemiVise.decrementerPv(degats);
-            System.out.println(ennemiVise.getPv());
+    public abstract void infligerDegats();
+    public int getCout (){return this.cout;}
 
-        }
-
-    }
-    public int getCout (){
-        return this.cout;
-    }
+    public int getDegats(){return this.degats;}
 
     public void poserTourelle(){
         if (this.terrain.emplacementVideSurCase(this.getPosition())){
