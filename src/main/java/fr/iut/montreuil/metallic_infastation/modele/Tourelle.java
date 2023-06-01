@@ -18,8 +18,6 @@ public abstract class Tourelle {
     private int compteur = 0;
     ArrayList<Ennemi> listeDesEnnemisVisées;
 
-    private boolean tire;
-
 
     public Tourelle(int degats, Case position, int cout, int portee, Environnement env, Terrain terrain){
         this.compteur++;
@@ -93,19 +91,6 @@ public abstract class Tourelle {
         return listeDesEnnemisVisées;
     }
 
-    public boolean estEntrainDeTirer (){
-        return this.tire;
-    }
-
-    public void setTire (boolean c){
-        this.tire = c;
-    }
-
-    public Point getCoordonnées(){
-        int x = this.position.getJ() * 32;
-        int y = this.position.getI() * 32;
-        return new Point(x,y);
-    }
 
     public abstract void infligerDegats();
     public int getCout (){return this.cout;}

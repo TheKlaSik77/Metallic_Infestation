@@ -60,11 +60,7 @@ public class JeuControleur implements Initializable {
 
     private GestionnaireVagues gestionnaireVagues;
 
-    private Laser laser;
-
     private boolean vagueTerminee = true;
-
-    private LaserVue laserVue;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,8 +70,6 @@ public class JeuControleur implements Initializable {
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
-        this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
-        this.laser = new Laser(env,laserVue);
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = env.getJoueur();
@@ -172,7 +166,6 @@ public class JeuControleur implements Initializable {
         gameLoop = new Timeline();
         temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        laser.gestionLaser();
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
