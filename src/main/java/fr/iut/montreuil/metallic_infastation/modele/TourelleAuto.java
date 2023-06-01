@@ -9,7 +9,7 @@ public class TourelleAuto extends Tourelle{
 
     @Override
     public void infligerDegats() {
-        ArrayList<Ennemi> listeEnnemis = ennemisLesPlusProches();
+        ArrayList<Ennemi> listeEnnemis = ennemisLesPlusProches(getPosition());
         int tailleListe = Math.min(3, listeEnnemis.size());
         System.out.println(listeEnnemis.toString());
         for (int i = 0 ; i < tailleListe; i++){
