@@ -160,7 +160,7 @@ public class JeuControleur implements Initializable {
                         gameLoop.stop();
                     } else {
                         if (vagueActuelle < NB_VAGUES_JEU) {
-                            env.unTour();
+
                         }
                     }
                     if (temps % 20 == 0) {

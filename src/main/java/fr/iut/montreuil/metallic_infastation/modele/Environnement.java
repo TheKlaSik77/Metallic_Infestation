@@ -124,12 +124,6 @@ public class Environnement {
         }
     }
 
-    public void unTour() {
-        while(vagueEnCours){
-            la
-        }
-    }
-
     public boolean estDerniereVague() {
         return vagueActuelle >= NB_VAGUES_JEU;
     }
