@@ -1,12 +1,10 @@
 package fr.iut.montreuil.metallic_infastation.controleur;
 
 import fr.iut.montreuil.metallic_infastation.modele.*;
-import fr.iut.montreuil.metallic_infastation.vue.BoutiqueVue;
-import fr.iut.montreuil.metallic_infastation.vue.EnnemisVue;
-import fr.iut.montreuil.metallic_infastation.vue.TerrainVue;
-import fr.iut.montreuil.metallic_infastation.vue.TourelleVue;
+import fr.iut.montreuil.metallic_infastation.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -23,6 +21,7 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -73,7 +72,7 @@ public class JeuControleur implements Initializable {
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
-
+        ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(100,1000);
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
@@ -84,12 +83,6 @@ public class JeuControleur implements Initializable {
         gestionnaireVagues = new GestionnaireVagues(env);
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
             while (change.next()) {
-                /*
-                System.out.println("ajouts : " + change.getAddedSubList());
-                System.out.println("supressions : " + change.getRemoved());
-                 */
-                System.out.println("liste des ennemis: " + change.getList());
-                System.out.println("nombre d'ennemis : " + change.getList().size());
                 if (change.wasRemoved()) {
                     for (Ennemi removedEnnemi : change.getRemoved()) {
                         ennemisVue.supprimerEnnemi(removedEnnemi);
@@ -104,10 +97,6 @@ public class JeuControleur implements Initializable {
         });
         env.getListeTourelles().addListener((ListChangeListener<Tourelle>) change -> {
             while (change.next()) {
-                System.out.println("ajouts : " + change.getAddedSubList());
-                System.out.println("supressions : " + change.getRemoved());
-                System.out.println("liste des tours: " + change.getList());
-                System.out.println("nombre de tours : " + change.getList().size());
                 if (change.wasRemoved()) {
                     for (Tourelle removedTourelle : change.getRemoved()) {
                         tourelleVue.retirerTour(removedTourelle);
@@ -116,6 +105,25 @@ public class JeuControleur implements Initializable {
                 if (change.wasAdded()) {
                     for (Tourelle addedTourelle : change.getAddedSubList()) {
                         tourelleVue.poserTour(addedTourelle);
+                    }
+                }
+            }
+        });
+        env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
+            while (change.next()) {
+                System.out.println("ajouts : " + change.getAddedSubList());
+                System.out.println("supressions : " + change.getRemoved());
+                System.out.println("liste des projectiles: " + change.getList());
+                System.out.println("nombre de projectiles : " + change.getList().size());
+                if (change.wasRemoved()) {
+                    for (Projectile removedProjectile : change.getRemoved()) {
+                        System.out.println("projectile retiré de la vue");
+                        projectileSemiVue.retirerProjectile(removedProjectile);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Projectile addedProjectile : change.getAddedSubList()) {
+                        projectileSemiVue.ajouterProjectile(addedProjectile);
                     }
                 }
             }
@@ -149,14 +157,11 @@ public class JeuControleur implements Initializable {
 
             if (event.getButton() == MouseButton.PRIMARY && this.terrainExperimental.emplacementVideSurCase(c)) {
                 boutiqueVue.achatTour(c);
-                System.out.println("tour posée");
-                terrainExperimental.afficherTab();
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
             Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY && this.terrainExperimental.tourSurCase(c)) {
-                System.out.println("clic droit");
                 boutique.venteTour(c);
                 System.out.println("tour vendue");
             }
@@ -193,14 +198,38 @@ public class JeuControleur implements Initializable {
 
                         }
                     }
-                    if (temps % 20 == 0){
-                        for (Tourelle t : env.getListeTourelles()){
-                            if (t instanceof TourelleSemi){
-                                t.infligerDegats();
+                    ArrayList<Projectile> listeProjectilesASupp = new ArrayList<Projectile>();
+                    if (temps % 5 == 0){
 
+                        for (Projectile p : env.getListeProjectiles()) {
+                            if (env.getListeEnnemis().contains(p.getEnnemiVise())) {
+                                p.seDeplacer();
+                                if (p.arriveSurEnnemi()) {
+                                    p.getTourelle().infligerDegats();
+                                    listeProjectilesASupp.add(p);
+                                }
+                            } else {
+                                listeProjectilesASupp.add(p);
                             }
                         }
 
+                    }
+                    if (temps % 20 == 0){
+                        for (Tourelle t : env.getListeTourelles()){
+                            if (t instanceof TourelleSemi){
+                                // TODO: Test si arrivé, si oui infliger dégâts et supprimer de la liste de projectiles sinon se déplacer
+                                t.raffraichirEnnemiVise();
+                                if (t.getEnnemiVise() != null){
+                                    Projectile p = t.creerProjectile();
+                                    env.ajouterProjectile(p);
+                                    System.out.println("Projectile cree, coordonnées : " + p.getCoordonnees().getX() + ", " + p.getCoordonnees().getY());
+                                }
+                            }
+                        }
+
+                    }
+                    for (Projectile p : listeProjectilesASupp){
+                        env.retirerProjectile(p);
                     }
                     temps++;
                 }

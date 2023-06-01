@@ -35,6 +35,10 @@ public class Case {
                 '}';
     }
 
+    public Point getCentreCase(){
+        return new Point((this.getJ() * 32) + 16,(this.getI() * 32) + 16);
+    }
+
     public boolean caseEgale(Case c){
         return this.getI() == c.getI() && this.getJ() == c.getJ();
     }
