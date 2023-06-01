@@ -87,7 +87,6 @@ public class ParcoursBFS {
         return this.grilleBFS[c.getI()][c.getJ()];
     }
     public Case caseLaPlusProcheDArrivee(Case caseOrigine){
-        // Détermine la liste des cases possibles en fonction d'une case d'origine
         ArrayList<Case> listeCasesPossibles = new ArrayList<>();
         Case caseTest;
         for (int i = -1 ; i <= 1 ; i++){
