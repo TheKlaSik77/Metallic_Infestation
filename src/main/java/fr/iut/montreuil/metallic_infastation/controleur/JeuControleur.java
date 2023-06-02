@@ -125,13 +125,13 @@ public class JeuControleur implements Initializable {
         env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
-                    for (Laser removedProjectile : change.getRemoved()) {
-                        LaserVue.retirerLaser(removedProjectile);
+                    for (Laser removedLaser : change.getRemoved()) {
+                        LaserVue.retirerLaser(removedLaser);
                     }
                 }
                 if (change.wasAdded()) {
-                    for (Laser addedProjectile : change.getAddedSubList()) {
-                        LaserVue.creerLaser(addedProjectile);
+                    for (Laser addedLaser : change.getAddedSubList()) {
+                        LaserVue.creerLaser(addedLaser);
                     }
                 }
             }
@@ -208,8 +208,10 @@ public class JeuControleur implements Initializable {
                         for (Tourelle t : env.getListeTourelles()) {
                             t.raffraichirEnnemiVise();
                             if (t instanceof TourelleAuto){
-
-                                env.ajouterLaser(t.creerLaser());
+                                Laser l = ((TourelleAuto) t).creerLaser();
+                                if (env.destEstPresent(l.getEnnemivisée()) != true){
+                                    env.ajouterLaser(((TourelleAuto) t).creerLaser());
+                                }
                             }
 
                         }

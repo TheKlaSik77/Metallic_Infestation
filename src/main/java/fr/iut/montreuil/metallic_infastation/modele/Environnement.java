@@ -93,7 +93,20 @@ public class Environnement {
     }
 
     public void ajouterLaser(Laser p){
-        listeLasers.add(p);
+        if (p != null) {
+            if (p.getEnnemivisée() != null && p.getTourelle() != null) {
+                listeLasers.add(p);
+            }
+        }
+    }
+
+    public boolean destEstPresent (Ennemi e){
+        for (Laser l: listeLasers) {
+            if (e == l.getEnnemivisée()){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

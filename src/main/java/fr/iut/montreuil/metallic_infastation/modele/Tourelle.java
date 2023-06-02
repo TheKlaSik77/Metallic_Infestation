@@ -91,7 +91,4 @@ public abstract class Tourelle {
             terrain.setCase(this.getPosition(),3);
         }
     }
-    public Laser creerLaser(){
-        return new Laser(this,getEnnemiVise());
-    }
 }

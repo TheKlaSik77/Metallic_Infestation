@@ -10,11 +10,21 @@ public class Laser {
         this.ennemivisée = ennemivisée;
     }
 
-    public Tourelle getTourelle(){
-        return this.tourelle;
+    public Point CoordonnéeTourelleDepart(){
+        int x = tourelle.getPosition().getJ() *32;
+        int y = tourelle.getPosition().getI() *32;
+        return new Point(x, y);
+    }
+
+    public Point CordonnéeEnnemiArrive(){
+        return ennemivisée.getCoordonnees();
     }
 
     public Ennemi getEnnemivisée(){
-        return this.ennemivisée;
+        return ennemivisée;
+    }
+
+    public Tourelle getTourelle (){
+        return tourelle;
     }
 }
