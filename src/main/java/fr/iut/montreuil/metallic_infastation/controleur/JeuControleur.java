@@ -189,7 +189,6 @@ public class JeuControleur implements Initializable {
                         }
                         for (Tourelle t : env.getListeTourelles()) {
                             t.raffraichirEnnemiVise();
-                            t.rafraichieListeEnnemisVisées();
 
                         }
                     }

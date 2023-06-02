@@ -16,7 +16,6 @@ public abstract class Tourelle {
 
     protected Terrain terrain;
     private int compteur = 0;
-    ArrayList<Ennemi> listeDesEnnemisVisées;
 
 
     public Tourelle(int degats, Case position, int cout, int portee, Environnement env, Terrain terrain){
@@ -80,17 +79,6 @@ public abstract class Tourelle {
     public Ennemi getEnnemiVise(){
         return this.ennemiVise;
     }
-
-    public void rafraichieListeEnnemisVisées (){
-       this.listeDesEnnemisVisées = new ArrayList<>();
-    }
-    public void ajouterDansListeEnnemisVisées(Ennemi e) {
-        this.listeDesEnnemisVisées.add(e);
-    }
-    public ArrayList<Ennemi> getListeDesEnnemisVisées() {
-        return listeDesEnnemisVisées;
-    }
-
 
     public abstract void infligerDegats();
     public int getCout (){return this.cout;}
