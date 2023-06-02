@@ -13,6 +13,7 @@ public class Environnement {
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+    private ObservableList<Projectile> listeProjectiles;
     private ParcoursBFS parcoursBFS;
 
     public static int nbTours;
@@ -22,6 +23,7 @@ public class Environnement {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
+        this.listeProjectiles = FXCollections.observableArrayList();
         this.parcoursBFS = new ParcoursBFS(terrain);
         vagueActuelle = 0;
         nbTours = 1;
@@ -89,6 +91,24 @@ public class Environnement {
         return supprimee;
     }
 
+    public ObservableList<Projectile> getListeProjectiles(){
+        return listeProjectiles;
+    }
+
+    public void ajouterProjectile(Projectile p){
+        listeProjectiles.add(p);
+    }
+
+    public Projectile retirerProjectile(Projectile p){
+        Projectile supprime = null;
+        for (int i = this.getListeProjectiles().size() - 1 ; i >= 0 ; i--){
+            if (this.getListeProjectiles().get(i).getCoordonnees().equals(p.getCoordonnees())){
+                supprime = this.getListeProjectiles().get(i);
+                this.getListeProjectiles().remove(i);
+            }
+        }
+        return supprime;
+    }
 
 }
 

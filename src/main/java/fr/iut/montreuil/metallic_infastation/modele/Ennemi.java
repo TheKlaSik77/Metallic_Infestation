@@ -1,6 +1,6 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-public abstract class Ennemi {
+public abstract class Ennemi extends ElementDeplacable{
     private static int compteur = 0;
     private int id;
     private int pv;
@@ -13,29 +13,27 @@ public abstract class Ennemi {
 
     private Point coordonnees;
 
-    private double facteurRalentissement;
-
-    public Ennemi(int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain) {
+    public Ennemi (int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
+        super(new Point(0,0),vitesse);
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
         this.drop = drop;
         this.terrain = terrain;
         boolean coordonneesChemin;
-        facteurRalentissement = 0.5;
         this.coordonnees = new Point(0, 0);
         do {
             double rand = Math.random();
             // Faire apparaitre en aleatoire sur coté gauche
-            if (rand < 0.5) {
-                int randY = (int) (Math.random() * 736);
-                this.coordonnees = new Point(0, randY);
-                coordonneesChemin = terrain.cheminSurCase(new Case((int) (randY) / terrain.getTailleCase(), 0));
-                //Faire apparaitre en aleatoire sur coté haut
+            if (rand < 0.5){
+                int randY = (int)(Math.random()*736);
+                this.coordonnees = new Point(0,randY);
+                coordonneesChemin = terrain.cheminSurCase(new Case((int)(randY) / terrain.getTailleCase(),0));
+            //Faire apparaitre en aleatoire sur coté haut
             } else {
-                int randX = (int) (Math.random() * 736);
-                this.coordonnees = new Point(randX, 0);
-                coordonneesChemin = terrain.cheminSurCase(new Case(0, (int) (randX) / terrain.getTailleCase()));
+                int randX = (int)(Math.random()*736);
+                this.coordonnees = new Point(randX,0);
+                coordonneesChemin = terrain.cheminSurCase(new Case(0,(int)(randX) / terrain.getTailleCase()));
             }
         } while (!coordonneesChemin);
         this.parcoursBFS = parcoursBFS;
@@ -56,7 +54,8 @@ public abstract class Ennemi {
         return this.coordonnees;
     }
 
-    public Case getCase() {
+
+    public Case getCase(){
         return this.getCoordonnees().getCase();
     }
 

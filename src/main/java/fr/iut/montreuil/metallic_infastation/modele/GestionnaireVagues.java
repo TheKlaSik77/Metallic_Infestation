@@ -4,7 +4,7 @@ import fr.iut.montreuil.metallic_infastation.modele.Environnement;
 import fr.iut.montreuil.metallic_infastation.modele.Terrain;
 
 public class GestionnaireVagues {
-    private final int NB_VAGUES_JEU = 3;
+    private final int NB_VAGUES_JEU = 15;
     //final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     //final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 2;
     private int vagueActuelle;

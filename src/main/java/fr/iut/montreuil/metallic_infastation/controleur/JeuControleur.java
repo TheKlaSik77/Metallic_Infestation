@@ -4,6 +4,7 @@ import fr.iut.montreuil.metallic_infastation.modele.*;
 import fr.iut.montreuil.metallic_infastation.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -67,6 +69,10 @@ public class JeuControleur implements Initializable {
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
+<<<<<<< HEAD
+=======
+        ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
+>>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(100,1000);
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
@@ -103,12 +109,31 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
+        env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (Projectile removedProjectile : change.getRemoved()) {
+                        projectileSemiVue.retirerProjectile(removedProjectile);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Projectile addedProjectile : change.getAddedSubList()) {
+                        projectileSemiVue.ajouterProjectile(addedProjectile);
+                    }
+                }
+            }
+        });
 
+<<<<<<< HEAD
+=======
+        //env.lancerVague(terrainExperimental);
+
+
+>>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
 
         parcoursBFS.remplirGrilleBFS();
-        //parcoursBFS.afficherParcours();
         gameLoop.play();
 
         groupeRadio.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -154,6 +179,7 @@ public class JeuControleur implements Initializable {
                         System.out.println("Fini");
                         gameLoop.stop();
                     } else {
+<<<<<<< HEAD
                         if (env.getListeEnnemis().isEmpty()) {
                             gestionnaireVagues.lancerProchaineVague(terrainExperimental);
                         }
@@ -164,13 +190,27 @@ public class JeuControleur implements Initializable {
                             e.seDeplacer();
                             if (e.aAtteintLaCible() || e.estMort()) {
                                 env.getListeEnnemis().remove(e);
+=======
+                        if(temps % 2 == 0) {
+                            if (env.getListeEnnemis().isEmpty()) {
+                                gestionnaireVagues.lancerProchaineVague(terrainExperimental);
+>>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
+                            }
+
+                            for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
+                                Ennemi e = env.getListeEnnemis().get(idEnnemi);
+                                e.seDeplacer();
+                                if (e.aAtteintLaCible() || e.estMort()) {
+                                    env.getListeEnnemis().remove(e);
+                                }
+                            }
+                            for (Tourelle t : env.getListeTourelles()) {
+                                t.raffraichirEnnemiVise();
+
                             }
                         }
-                        for (Tourelle t : env.getListeTourelles()) {
-                            t.raffraichirEnnemiVise();
-
-                        }
                     }
+<<<<<<< HEAD
                     if (temps % 20 == 0){
                         for (Tourelle t : env.getListeTourelles()){
                             if (t instanceof TourelleSemi){
@@ -178,6 +218,41 @@ public class JeuControleur implements Initializable {
                                 }
                             }
                         }
+=======
+                    ArrayList<Projectile> listeProjectilesASupp = new ArrayList<Projectile>();
+                    if (temps % 2 == 0){
+
+                        for (Projectile p : env.getListeProjectiles()) {
+                            if (env.getListeEnnemis().contains(p.getEnnemiVise())) {
+                                p.seDeplacer();
+                                if (p.arriveSurEnnemi()) {
+                                    p.getTourelle().infligerDegats();
+                                    listeProjectilesASupp.add(p);
+                                }
+                            } else {
+                                listeProjectilesASupp.add(p);
+                            }
+                        }
+
+                    }
+                    if (temps % 50 == 0){
+                        for (Tourelle t : env.getListeTourelles()){
+                            if (t instanceof TourelleSemi){
+                                // TODO: Test si arrivé, si oui infliger dégâts et supprimer de la liste de projectiles sinon se déplacer
+                                t.raffraichirEnnemiVise();
+                                if (t.getEnnemiVise() != null){
+                                    Projectile p = t.creerProjectile();
+                                    env.ajouterProjectile(p);
+                                    System.out.println("Projectile cree, coordonnées : " + p.getCoordonnees().getX() + ", " + p.getCoordonnees().getY());
+                                }
+                            }
+                        }
+
+                    }
+                    for (Projectile p : listeProjectilesASupp){
+                        env.retirerProjectile(p);
+                    }
+>>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
                     temps++;
                 }
         );
