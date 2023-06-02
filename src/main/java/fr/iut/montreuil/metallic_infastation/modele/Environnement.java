@@ -11,6 +11,8 @@ public class Environnement {
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
+
+    private ObservableList<Laser> listeLasers;
     private ParcoursBFS parcoursBFS;
 
     private Joueur joueur;
@@ -19,6 +21,7 @@ public class Environnement {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
+        this.listeLasers = FXCollections.observableArrayList();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
         vagueActuelle = 0;
@@ -30,6 +33,10 @@ public class Environnement {
 
     public ObservableList<Tourelle> getListeTourelles() {
         return listeTourelles;
+    }
+
+    public ObservableList<Laser> getListeLasers(){
+        return listeLasers;
     }
 
     public Ennemi ennemiSurCase(Case c) {
@@ -81,8 +88,12 @@ public class Environnement {
         return supprimee;
     }
 
-    public Joueur getJoueur(){
+    public Joueur getJoueur() {
         return this.joueur;
+    }
+
+    public void ajouterProjectile(Laser p){
+        listeLasers.add(p);
     }
 }
 
