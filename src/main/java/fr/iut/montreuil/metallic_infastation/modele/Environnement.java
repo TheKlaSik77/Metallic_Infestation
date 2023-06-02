@@ -92,7 +92,7 @@ public class Environnement {
         return this.joueur;
     }
 
-    public void ajouterProjectile(Laser p){
+    public void ajouterLaser(Laser p){
         listeLasers.add(p);
     }
 }

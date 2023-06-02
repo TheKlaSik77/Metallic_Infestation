@@ -16,10 +16,6 @@ public abstract class Tourelle {
 
     protected Terrain terrain;
     private int compteur = 0;
-    ArrayList<Ennemi> listeDesEnnemisVisées;
-
-    private boolean tire;
-
 
     public Tourelle(int degats, Case position, int cout, int portee, Environnement env, Terrain terrain){
         this.compteur++;
@@ -82,30 +78,7 @@ public abstract class Tourelle {
     public Ennemi getEnnemiVise(){
         return this.ennemiVise;
     }
-
-    public void rafraichieListeEnnemisVisées (){
-       this.listeDesEnnemisVisées = new ArrayList<>();
-    }
-    public void ajouterDansListeEnnemisVisées(Ennemi e) {
-        this.listeDesEnnemisVisées.add(e);
-    }
-    public ArrayList<Ennemi> getListeDesEnnemisVisées() {
-        return listeDesEnnemisVisées;
-    }
-
-    public boolean estEntrainDeTirer (){
-        return this.tire;
-    }
-
-    public void setTire (boolean c){
-        this.tire = c;
-    }
-
-    public Point getCoordonnées(){
-        int x = this.position.getJ() * 32;
-        int y = this.position.getI() * 32;
-        return new Point(x,y);
-    }
+    public void setEnnemiVise(Ennemi e){this.ennemiVise = e;}
 
     public abstract void infligerDegats();
     public int getCout (){return this.cout;}
@@ -117,5 +90,8 @@ public abstract class Tourelle {
             // On dit que la case est occupée par une tour
             terrain.setCase(this.getPosition(),3);
         }
+    }
+    public Laser creerLaser(){
+        return new Laser(this,getEnnemiVise());
     }
 }

@@ -10,7 +10,11 @@ public class Laser {
         this.ennemivisée = ennemivisée;
     }
 
-    public void  gestionLaser(){
+    public Tourelle getTourelle(){
+        return this.tourelle;
+    }
 
+    public Ennemi getEnnemivisée(){
+        return this.ennemivisée;
     }
 }

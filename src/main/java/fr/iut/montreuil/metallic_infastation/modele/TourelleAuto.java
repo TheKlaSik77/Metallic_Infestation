@@ -13,11 +13,8 @@ public class TourelleAuto extends Tourelle{
         int tailleListe = Math.min(3, listeEnnemis.size());
         System.out.println(listeEnnemis.toString());
         for (int i = 0 ; i < tailleListe; i++){
-            setTire(true);
             System.out.println("ennemi visé : " + listeEnnemis.get(i));
-            ajouterDansListeEnnemisVisées(listeEnnemis.get(i));
             listeEnnemis.get(i).decrementerPv(getDegats());
-            setTire(false);
         }
     }
 }

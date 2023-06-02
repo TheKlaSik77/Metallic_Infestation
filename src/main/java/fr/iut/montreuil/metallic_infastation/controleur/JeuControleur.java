@@ -60,8 +60,6 @@ public class JeuControleur implements Initializable {
 
     private GestionnaireVagues gestionnaireVagues;
 
-    private Laser laser;
-
     private boolean vagueTerminee = true;
 
     private LaserVue laserVue;
@@ -79,6 +77,8 @@ public class JeuControleur implements Initializable {
         this.joueur = env.getJoueur();
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
         this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+
+        this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
 
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
@@ -117,6 +117,21 @@ public class JeuControleur implements Initializable {
                 if (change.wasAdded()) {
                     for (Tourelle addedTourelle : change.getAddedSubList()) {
                         tourelleVue.poserTour(addedTourelle);
+                    }
+                }
+            }
+        });
+
+        env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (Laser removedProjectile : change.getRemoved()) {
+                        LaserVue.retirerLaser(removedProjectile);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Laser addedProjectile : change.getAddedSubList()) {
+                        LaserVue.creerLaser(addedProjectile);
                     }
                 }
             }
@@ -170,7 +185,6 @@ public class JeuControleur implements Initializable {
         gameLoop = new Timeline();
         temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-        laser.gestionLaser();
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
@@ -193,7 +207,10 @@ public class JeuControleur implements Initializable {
                         }
                         for (Tourelle t : env.getListeTourelles()) {
                             t.raffraichirEnnemiVise();
-                            t.rafraichieListeEnnemisVisées();
+                            if (t instanceof TourelleAuto){
+
+                                env.ajouterLaser(t.creerLaser());
+                            }
 
                         }
                     }

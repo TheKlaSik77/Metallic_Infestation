@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infastation.vue;
 
 import fr.iut.montreuil.metallic_infastation.modele.Case;
 import fr.iut.montreuil.metallic_infastation.modele.Environnement;
+import fr.iut.montreuil.metallic_infastation.modele.Laser;
 import fr.iut.montreuil.metallic_infastation.modele.Point;
 import javafx.animation.PathTransition;
 import javafx.scene.Node;
@@ -28,19 +29,23 @@ public class LaserVue {
         this.zoneAffichageLaser = zoneAffichageLaser;
     }
 
-    public void creerLaser (Point departTourelle, Point arrivéeEnnemi){
+    public static void creerLaser (Laser laser){
         PathTransition laserTransition = new PathTransition();
         laserTransition.setNode(createCircle(0, 0, 5, Color.GREEN));
         //Image laserImage = new Image("laser.png");
         //ImageView imageView = new ImageView(laserImage);
         Path path = new Path();
-        path.getElements().addAll(new MoveTo(departTourelle.getX(),departTourelle.getY()), new LineTo(arrivéeEnnemi.getX(), arrivéeEnnemi.getY()));
+        path.getElements().addAll(new MoveTo(laser.getTourelle().getPosition().getJ()*32,laser.getTourelle().getPosition().getI()*32), new LineTo(laser.getEnnemivisée().getCoordonnees().getX(), laser.getEnnemivisée().getCoordonnees().getY()));
         laserTransition.setPath(path);
 
         laserTransition.play();
     }
 
-    private Circle createCircle(double centerX, double centerY, double radius, Color color) {
+    public static void retirerLaser (Laser laser) {
+
+    }
+
+    private static Circle createCircle(double centerX, double centerY, double radius, Color color) {
         Circle circle = new Circle(centerX, centerY, radius);
         circle.setFill(color);
         return circle;
