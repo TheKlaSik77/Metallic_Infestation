@@ -4,24 +4,27 @@ public class Projectile extends ElementDeplacable{
 
     private Tourelle tourelle;
     private Ennemi ennemiVise;
+
     public Projectile(Point coordonnees, Tourelle tourelle, Ennemi ennemiVise, int vitesse){
         super(coordonnees,vitesse);
         this.tourelle = tourelle;
         this.ennemiVise = ennemiVise;
     }
 
+    public boolean equals(Projectile p){
+        return this.getId() == p.getId();
+    }
+
     public void seDeplacer(){
 
-        if (this.ennemiVise.coordonnees.getX() > this.coordonnees.getX()){
-            this.coordonnees.setX(this.coordonnees.getX() + getVitesse());
-        } else if (this.ennemiVise.coordonnees.getX() < this.coordonnees.getX()){
-            this.coordonnees.setX(this.coordonnees.getX() - getVitesse());
-        }
-        if (this.ennemiVise.coordonnees.getY() > this.coordonnees.getY()){
-            this.coordonnees.setY(this.coordonnees.getY() + getVitesse());
-        } else if (this.ennemiVise.coordonnees.getY() < this.coordonnees.getY()){
-            this.coordonnees.setY(this.coordonnees.getY() - getVitesse());
-        }
+        int deltaX = this.ennemiVise.getCoordonnees().getX() - this.getCoordonnees().getX();
+        int deltaY = this.ennemiVise.getCoordonnees().getY() - this.getCoordonnees().getY();
+        int ro = (int)((Math.pow(deltaX,2) + Math.pow(deltaY,2)) / (Math.pow(this.getVitesse(),2)));
+
+        int deltaXModifie = (int)(deltaX / Math.sqrt(ro));
+        int deltaYModifie = (int)(deltaY / Math.sqrt(ro));
+        this.coordonnees.setX(this.coordonnees.getX() + deltaXModifie);
+        this.coordonnees.setY(this.coordonnees.getY() + deltaYModifie);
 
     }
     public boolean arriveSurEnnemi(){
