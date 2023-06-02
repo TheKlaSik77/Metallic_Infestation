@@ -181,8 +181,9 @@ public class JeuControleur implements Initializable {
                         for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                             Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();
-                            if (e.aAtteintLaCible() || e.estMort()) {
+                            if (e.aAtteintLaCible()) {
                                 env.getListeEnnemis().remove(e);
+                            } else if (e.estMort()) {
                                 joueur.debiterPvJoueurProperty(e.getDrop());
                             }
                         }
