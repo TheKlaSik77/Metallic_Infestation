@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -14,7 +16,7 @@
    <bottom>
       <Pane prefHeight="50.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox layoutY="-14.0" prefHeight="65.0" prefWidth="750.0" style="-fx-background-color: red;">
+            <HBox layoutY="-14.0" prefHeight="65.0" prefWidth="736.0" style="-fx-background-color: red;">
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
@@ -43,7 +45,12 @@
    <right>
       <Pane prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0" style="-fx-background-color: yellow;">
+            <ImageView fitHeight="800.0" fitWidth="265.0" layoutX="-15.0">
+               <image>
+                  <Image url="@img/gui/fondBoutiqueDroit.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0" style="-fx-background-image: img/gui/fondBoutiqueDroit.png;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="250.0" text="Boutique" textAlignment="CENTER" />
                   <VBox prefHeight="120.0" prefWidth="250.0">
