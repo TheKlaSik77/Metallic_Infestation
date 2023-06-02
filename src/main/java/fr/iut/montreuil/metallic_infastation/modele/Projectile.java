@@ -4,6 +4,7 @@ public class Projectile extends ElementDeplacable{
 
     private Tourelle tourelle;
     private Ennemi ennemiVise;
+
     public Projectile(Point coordonnees, Tourelle tourelle, Ennemi ennemiVise, int vitesse){
         super(coordonnees,vitesse);
         this.tourelle = tourelle;

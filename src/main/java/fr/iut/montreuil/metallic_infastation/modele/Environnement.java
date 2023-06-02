@@ -4,11 +4,18 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Environnement {
 
+    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
+    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static int vagueActuelle;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
@@ -57,10 +64,15 @@ public class Environnement {
 
     }
 
+
     public void lancerVague(Terrain terrain) {
         Random random = new Random();
         int nombreEnnemis = 10;
 
+
+        if (vagueActuelle % NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE == 0) {
+            nombreEnnemis += NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES;
+        }
         for (int i = 0; i < nombreEnnemis; i++) {
             int typeEnnemi = random.nextInt(3);
 
@@ -80,6 +92,9 @@ public class Environnement {
             }
         }
     }
+
+
+
     public Tourelle retirerTour(Case c) {
         Tourelle supprimee = null;
         for (int i = this.getListeTourelles().size() - 1 ; i >= 0 ; i--){

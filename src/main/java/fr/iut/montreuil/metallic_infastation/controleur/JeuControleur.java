@@ -69,10 +69,7 @@ public class JeuControleur implements Initializable {
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
-<<<<<<< HEAD
-=======
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
->>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(100,1000);
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
@@ -124,12 +121,6 @@ public class JeuControleur implements Initializable {
             }
         });
 
-<<<<<<< HEAD
-=======
-        //env.lancerVague(terrainExperimental);
-
-
->>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
 
@@ -179,22 +170,9 @@ public class JeuControleur implements Initializable {
                         System.out.println("Fini");
                         gameLoop.stop();
                     } else {
-<<<<<<< HEAD
-                        if (env.getListeEnnemis().isEmpty()) {
-                            gestionnaireVagues.lancerProchaineVague(terrainExperimental);
-                        }
-
-
-                        for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                            Ennemi e = env.getListeEnnemis().get(idEnnemi);
-                            e.seDeplacer();
-                            if (e.aAtteintLaCible() || e.estMort()) {
-                                env.getListeEnnemis().remove(e);
-=======
                         if(temps % 2 == 0) {
                             if (env.getListeEnnemis().isEmpty()) {
                                 gestionnaireVagues.lancerProchaineVague(terrainExperimental);
->>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
                             }
 
                             for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
@@ -204,21 +182,8 @@ public class JeuControleur implements Initializable {
                                     env.getListeEnnemis().remove(e);
                                 }
                             }
-                            for (Tourelle t : env.getListeTourelles()) {
-                                t.raffraichirEnnemiVise();
-
-                            }
                         }
                     }
-<<<<<<< HEAD
-                    if (temps % 20 == 0){
-                        for (Tourelle t : env.getListeTourelles()){
-                            if (t instanceof TourelleSemi){
-                                t.raffraichirEnnemiVise();
-                                }
-                            }
-                        }
-=======
                     ArrayList<Projectile> listeProjectilesASupp = new ArrayList<Projectile>();
                     if (temps % 2 == 0){
 
@@ -252,7 +217,6 @@ public class JeuControleur implements Initializable {
                     for (Projectile p : listeProjectilesASupp){
                         env.retirerProjectile(p);
                     }
->>>>>>> b7082afe2f2c49d71ac213ec824e0855bba48320
                     temps++;
                 }
         );
