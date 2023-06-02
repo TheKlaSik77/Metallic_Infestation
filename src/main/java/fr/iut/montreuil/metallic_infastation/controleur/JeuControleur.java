@@ -111,13 +111,8 @@ public class JeuControleur implements Initializable {
         });
         env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
             while (change.next()) {
-                System.out.println("ajouts : " + change.getAddedSubList());
-                System.out.println("supressions : " + change.getRemoved());
-                System.out.println("liste des projectiles: " + change.getList());
-                System.out.println("nombre de projectiles : " + change.getList().size());
                 if (change.wasRemoved()) {
                     for (Projectile removedProjectile : change.getRemoved()) {
-                        System.out.println("projectile retiré de la vue");
                         projectileSemiVue.retirerProjectile(removedProjectile);
                     }
                 }
@@ -129,14 +124,13 @@ public class JeuControleur implements Initializable {
             }
         });
 
-        env.lancerVague(terrainExperimental);
+        //env.lancerVague(terrainExperimental);
 
 
         terrainVue.afficherTerrain();
         ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
 
         parcoursBFS.remplirGrilleBFS();
-        //parcoursBFS.afficherParcours();
         gameLoop.play();
 
         groupeRadio.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -182,24 +176,26 @@ public class JeuControleur implements Initializable {
                         System.out.println("Fini");
                         gameLoop.stop();
                     } else {
-                        if (env.getListeEnnemis().isEmpty()) {
-                            gestionnaireVagues.lancerProchaineVague(terrainExperimental);
-                        }
-
-                        for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                            Ennemi e = env.getListeEnnemis().get(idEnnemi);
-                            e.seDeplacer();
-                            if (e.aAtteintLaCible() || e.estMort()) {
-                                env.getListeEnnemis().remove(e);
+                        if(temps % 2 == 0) {
+                            if (env.getListeEnnemis().isEmpty()) {
+                                gestionnaireVagues.lancerProchaineVague(terrainExperimental);
                             }
-                        }
-                        for (Tourelle t : env.getListeTourelles()) {
-                            t.raffraichirEnnemiVise();
 
+                            for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
+                                Ennemi e = env.getListeEnnemis().get(idEnnemi);
+                                e.seDeplacer();
+                                if (e.aAtteintLaCible() || e.estMort()) {
+                                    env.getListeEnnemis().remove(e);
+                                }
+                            }
+                            for (Tourelle t : env.getListeTourelles()) {
+                                t.raffraichirEnnemiVise();
+
+                            }
                         }
                     }
                     ArrayList<Projectile> listeProjectilesASupp = new ArrayList<Projectile>();
-                    if (temps % 5 == 0){
+                    if (temps % 2 == 0){
 
                         for (Projectile p : env.getListeProjectiles()) {
                             if (env.getListeEnnemis().contains(p.getEnnemiVise())) {
@@ -214,7 +210,7 @@ public class JeuControleur implements Initializable {
                         }
 
                     }
-                    if (temps % 20 == 0){
+                    if (temps % 50 == 0){
                         for (Tourelle t : env.getListeTourelles()){
                             if (t instanceof TourelleSemi){
                                 // TODO: Test si arrivé, si oui infliger dégâts et supprimer de la liste de projectiles sinon se déplacer
