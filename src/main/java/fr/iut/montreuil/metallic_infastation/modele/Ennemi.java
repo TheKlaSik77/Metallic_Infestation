@@ -5,67 +5,44 @@ public abstract class Ennemi {
     private int id;
     private int pv;
     private int drop;
-    private double vitesse;
-    private Point coordonnees;
+
+    private int vitesse;
     private Terrain terrain;
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 
+    private Point coordonnees;
 
-    public Ennemi(int pv, double vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain) {
+    private double facteurRalentissement;
+
+    public Ennemi(int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain) {
         this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
-        // Piece Lootées par les ennemis
         this.drop = drop;
         this.terrain = terrain;
-        // Position de Départ Aléatoire
         boolean coordonneesChemin;
+        facteurRalentissement = 0.5;
+        this.coordonnees = new Point(0, 0);
         do {
             double rand = Math.random();
-
             // Faire apparaitre en aleatoire sur coté gauche
             if (rand < 0.5) {
-                int randY = (int) (Math.random() * 737);
+                int randY = (int) (Math.random() * 736);
                 this.coordonnees = new Point(0, randY);
                 coordonneesChemin = terrain.cheminSurCase(new Case((int) (randY) / terrain.getTailleCase(), 0));
-
                 //Faire apparaitre en aleatoire sur coté haut
             } else {
-                int randX = (int) (Math.random() * 737);
+                int randX = (int) (Math.random() * 736);
                 this.coordonnees = new Point(randX, 0);
                 coordonneesChemin = terrain.cheminSurCase(new Case(0, (int) (randX) / terrain.getTailleCase()));
             }
         } while (!coordonneesChemin);
-        System.out.println("coordonée :  " + this.coordonnees.toString());
         this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
-
-        System.out.println("Case de destination : " + caseDestination.toString());
         compteur++;
     }
-
-    public void seDeplacer() {
-
-        if (this.getCoordonnees().getX() < this.caseDestination.getJ() * terrain.getTailleCase()) {
-            this.coordonnees.setX(this.coordonnees.getX() + 1);
-        } else if (this.getCoordonnees().getX() > this.caseDestination.getJ() * terrain.getTailleCase()) {
-            this.coordonnees.setX(this.coordonnees.getX() - 1);
-        }
-
-        if (this.getCoordonnees().getY() < this.caseDestination.getI() * terrain.getTailleCase()) {
-            this.coordonnees.setY(this.coordonnees.getY() + 1);
-        } else if (this.getCoordonnees().getY() > this.caseDestination.getI() * terrain.getTailleCase()) {
-            this.coordonnees.setY(this.coordonnees.getY() - 1);
-        }
-
-        if (this.getCase().caseEgale(this.caseDestination)) {
-            this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
-        }
-    }
-
-
 
     public int getPv() {
         return this.pv;
@@ -80,12 +57,34 @@ public abstract class Ennemi {
     }
 
     public Case getCase() {
-        int i = this.coordonnees.getY() / 32;
-        int j = this.coordonnees.getX() / 32;
-        return new Case(i, j);
+        return this.getCoordonnees().getCase();
     }
 
+    public void seDeplacer() {
+        if (this.getCoordonnees().getX() < this.caseDestination.getJ() * terrain.getTailleCase()){
+            this.coordonnees.setX(this.coordonnees.getX()+vitesse);
 
+
+        } else if (this.getCoordonnees().getX() > this.caseDestination.getJ() * terrain.getTailleCase()){
+            this.coordonnees.setX(this.coordonnees.getX()-vitesse);
+
+        }
+        if (this.getCoordonnees().getY() < this.caseDestination.getI() * terrain.getTailleCase()){
+            this.coordonnees.setY(this.coordonnees.getY()+vitesse);
+
+        } else if (this.getCoordonnees().getY() > this.caseDestination.getI() * terrain.getTailleCase()){
+            this.coordonnees.setY(this.coordonnees.getY()-vitesse);
+
+        }
+        if (this.getCase().caseEgale(this.caseDestination)){
+            this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
+        }
+
+    }
+
+    /**
+     * @param n Décrémente de n pv à l'ennemi
+     */
     public void decrementerPv(int n) {
         this.pv -= n;
     }
@@ -109,6 +108,5 @@ public abstract class Ennemi {
                 ", coordonnees=" + coordonnees +
                 '}';
     }
-
 
 }
