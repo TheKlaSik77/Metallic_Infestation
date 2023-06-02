@@ -23,7 +23,7 @@ public class Environnement {
     private ObservableList<Projectile> listeProjectiles;
     private ParcoursBFS parcoursBFS;
 
-    public static int nbTours;
+    public int nbTours;
 
 
     public Environnement(Terrain terrain) {
@@ -37,9 +37,10 @@ public class Environnement {
     }
 
     /**
-    public unTour(){
-        if(nbTours%vitesse==0)
-    }*/
+     * public unTour(){
+     * if(nbTours%vitesse==0)
+     * }
+     */
 
 
     public ObservableList<Ennemi> getListeEnnemis() {
@@ -59,7 +60,7 @@ public class Environnement {
         return null;
     }
 
-    public void ajouterDansListeTours(Tourelle t){
+    public void ajouterDansListeTours(Tourelle t) {
         listeTourelles.add(t);
 
     }
@@ -78,11 +79,11 @@ public class Environnement {
 
             switch (typeEnnemi) {
                 case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS,terrain);
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiFacile);
                     break;
                 case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS,terrain);
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiMoyen);
                     break;
                 case 2:
@@ -94,11 +95,10 @@ public class Environnement {
     }
 
 
-
     public Tourelle retirerTour(Case c) {
         Tourelle supprimee = null;
-        for (int i = this.getListeTourelles().size() - 1 ; i >= 0 ; i--){
-            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)){
+        for (int i = this.getListeTourelles().size() - 1; i >= 0; i--) {
+            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)) {
                 supprimee = this.getListeTourelles().get(i);
                 this.getListeTourelles().remove(i);
             }
@@ -106,24 +106,82 @@ public class Environnement {
         return supprimee;
     }
 
-    public ObservableList<Projectile> getListeProjectiles(){
+    public ObservableList<Projectile> getListeProjectiles() {
         return listeProjectiles;
     }
 
-    public void ajouterProjectile(Projectile p){
+    public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
     }
 
-    public Projectile retirerProjectile(Projectile p){
+    public Projectile retirerProjectile(Projectile p) {
         Projectile supprime = null;
-        for (int i = this.getListeProjectiles().size() - 1 ; i >= 0 ; i--){
-            if (this.getListeProjectiles().get(i).getCoordonnees().equals(p.getCoordonnees())){
+        for (int i = this.getListeProjectiles().size() - 1; i >= 0; i--) {
+            if (this.getListeProjectiles().get(i).equals(p)) {
                 supprime = this.getListeProjectiles().get(i);
                 this.getListeProjectiles().remove(i);
+                break;
             }
         }
         return supprime;
     }
+    public Ennemi retirerEnnemi(Ennemi e){
+        Ennemi supprime = null;
+        for (int i = this.listeEnnemis.size() - 1 ; i >= 0 ; i--){
+            if (this.listeEnnemis.get(i).equals(e)) {
+                supprime = this.listeEnnemis.get(i);
+                this.listeEnnemis.remove(i);
+            }
+        }
+        return supprime;
+    }
+    public void unTour(GestionnaireVagues gestionnaireVagues) {
+        ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
+        if (this.nbTours % 2 == 0) {
+            if (this.getListeEnnemis().isEmpty()) {
+                gestionnaireVagues.lancerProchaineVague(terrain);
+            }
+            for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
+                Ennemi e = this.getListeEnnemis().get(idEnnemi);
+                e.seDeplacer();
+                if (e.aAtteintLaCible() || e.estMort()) {
+                    ennemisASupp.add(e);
+                }
+            }
+        }
 
+        ArrayList<Projectile> listeProjectilesASupp = new ArrayList<>();
+        if (this.nbTours % 2 == 0) {
+            for (Projectile p : this.getListeProjectiles()) {
+                p.seDeplacer();
+                System.out.println(p.getEnnemiVise().getCoordonnees());
+                if (p.arriveSurEnnemi()) {
+                    p.getTourelle().infligerDegats();
+                    listeProjectilesASupp.add(p);
+                }
+            }
+
+        }
+        if (this.nbTours % 50 == 0) {
+            for (Tourelle t : this.getListeTourelles()) {
+                if (t instanceof TourelleSemi) {
+                    t.raffraichirEnnemiVise();
+                    if (t.getEnnemiVise() != null) {
+                        Projectile p = t.creerProjectile();
+                        this.ajouterProjectile(p);
+                    }
+                }
+            }
+
+        }
+        for (Projectile p : listeProjectilesASupp) {
+            this.retirerProjectile(p);
+        }
+        for (Ennemi e : ennemisASupp){
+            this.retirerEnnemi(e);
+        }
+        nbTours++;
+    }
 }
+
 
