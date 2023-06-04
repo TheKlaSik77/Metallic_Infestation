@@ -1,6 +1,5 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.Random;
@@ -94,7 +93,7 @@ public class Environnement {
 
     public void ajouterLaser(Laser p){
         if (p != null) {
-            if (p.getEnnemivisée() != null && p.getTourelle() != null) {
+            if (p.getEnnemiVise() != null && p.getTourelle() != null) {
                 listeLasers.add(p);
             }
         }
@@ -102,11 +101,20 @@ public class Environnement {
 
     public boolean destEstPresent (Ennemi e){
         for (Laser l: listeLasers) {
-            if (e == l.getEnnemivisée()){
+            if (e == l.getEnnemiVise()){
                 return true;
             }
         }
         return false;
+    }
+
+    public void retirerLaser (Ennemi e){
+        for (int i = listeLasers.size()-1 ; i > 0 ; i--){
+            if (listeLasers.get(i).getEnnemiVise() == e){
+                listeLasers.remove(listeLasers.get(i));
+                break;
+            }
+        }
     }
 }
 

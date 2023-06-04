@@ -36,12 +36,12 @@ public abstract class Ennemi {
                 coordonneesChemin = terrain.cheminSurCase(new Case(0,(int)(randX) / terrain.getTailleCase()));
             }
         } while (!coordonneesChemin);
-        System.out.println("coordonée :  " + this.coordonnees.toString()  );
+        //System.out.println("coordonée :  " + this.coordonnees.toString()  );
         this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
 
-        System.out.println("Case de destination : " + caseDestination.toString());
+        //System.out.println("Case de destination : " + caseDestination.toString());
         compteur++;
     }
     public int getPv(){

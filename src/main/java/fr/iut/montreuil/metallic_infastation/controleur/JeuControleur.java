@@ -200,6 +200,7 @@ public class JeuControleur implements Initializable {
                         for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                             Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();
+                            env.retirerLaser(e);
                             if (e.aAtteintLaCible() || e.estMort()) {
                                 env.getListeEnnemis().remove(e);
                                 joueur.debiterPvJoueurProperty(e.getDrop());
@@ -209,10 +210,9 @@ public class JeuControleur implements Initializable {
                             t.raffraichirEnnemiVise();
                             if (t instanceof TourelleAuto){
                                 Laser l = ((TourelleAuto) t).creerLaser();
-                                if (env.destEstPresent(l.getEnnemivisée()) != true){
                                     env.ajouterLaser(((TourelleAuto) t).creerLaser());
                                 }
-                            }
+
 
                         }
                     }
