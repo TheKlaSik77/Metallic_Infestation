@@ -1,5 +1,7 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
+import java.util.ArrayList;
+
 public abstract class Tourelle {
 
     private int id;
@@ -11,6 +13,7 @@ public abstract class Tourelle {
     private Ennemi ennemiVise;
     protected Terrain terrain;
     private int compteur = 0;
+
 
 
     public Tourelle(int degats, Case position, int cout, int portee, Environnement env, Terrain terrain){
@@ -71,5 +74,9 @@ public abstract class Tourelle {
             // On dit que la case est occupée par une tour
             terrain.setCase(this.getPosition(),3);
         }
+    }
+
+    public ProjectileSemi creerProjectile(){
+        return new ProjectileSemi(this,this.ennemiVise);
     }
 }

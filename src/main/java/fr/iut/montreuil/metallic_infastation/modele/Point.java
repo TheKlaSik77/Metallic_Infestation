@@ -44,4 +44,12 @@ public class Point {
                 ", y=" + pY.getValue() +
                 '}';
     }
+    public boolean equals(Point p){
+        return this.getX() == p.getX() && this.getY() == p.getY();
+    }
+    public Case getCase() {
+        return new Case(this.getY() / 32, this.getX() / 32);
+    }
 }
+
+
