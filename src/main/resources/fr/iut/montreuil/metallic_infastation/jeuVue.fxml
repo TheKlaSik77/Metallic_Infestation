@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -19,13 +20,19 @@
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="101.0" text="Argent" textFill="WHITE" />
-                        <Label fx:id="ArgentProperty" prefHeight="50.0" prefWidth="100.0" text="3500" textFill="#d3cfcf" />
+                        <Label fx:id="ArgentProperty" prefHeight="50.0" prefWidth="100.0" text="3500" textFill="#d3cfcf">
+                           <graphic>
+                              <ImageView fx:id="imageArgent" fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic></Label>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="101.0" text="Pv" textFill="WHITE" />
-                        <Label fx:id="PvProperty" prefHeight="50.0" prefWidth="100.0" text="150" textFill="#d3cfcf" />
+                        <Label fx:id="PvProperty" prefHeight="50.0" prefWidth="100.0" text="150" textFill="#d3cfcf">
+                           <graphic>
+                              <ImageView fx:id="imageVie" fitHeight="45.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+                           </graphic></Label>
                      </children>
                   </VBox>
                </children>
@@ -46,6 +53,7 @@
             <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0" style="-fx-background-color: yellow;">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="250.0" text="Boutique" textAlignment="CENTER" />
+                  <Label fx:id="prixTour" text="prixTour" />
                   <VBox prefHeight="120.0" prefWidth="250.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="252.0" text="Achat PV" />
@@ -73,17 +81,35 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="250.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="110.0" prefWidth="250.0" >
                      <children>
                         <Label alignment="CENTER" prefHeight="16.0" prefWidth="263.0" text="Achat Tour" />
-                        <RadioButton fx:id="tour1" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="Tour 1">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="groupeRadio" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton fx:id="tour2" contentDisplay="CENTER" mnemonicParsing="false" text="Tour 2" toggleGroup="$groupeRadio" />
-                        <RadioButton fx:id="tour3" mnemonicParsing="false" text="Tour 3" toggleGroup="$groupeRadio" />
-                        <Label fx:id="prixTour" text="0" />
+                        <VBox prefHeight="200.0" prefWidth="100.0" alignment="CENTER">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton fx:id="tour3" contentDisplay="CENTER" mnemonicParsing="false" text="Tour 3">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="groupeRadio" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <ImageView fx:id="imageTour3" fitHeight="60" fitWidth="80" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton fx:id="tour2" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="Tour 2" toggleGroup="$groupeRadio" />
+                                    <ImageView fx:id="imageTour2" fitHeight="60" fitWidth="80" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton fx:id="tour1" mnemonicParsing="false" text="Tour 1" toggleGroup="$groupeRadio" />
+                                    <ImageView fx:id="imageTour1" fitHeight="60" fitWidth="80" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>

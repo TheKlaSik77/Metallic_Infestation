@@ -1,15 +1,8 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Environnement {
@@ -17,12 +10,12 @@ public class Environnement {
     final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static int vagueActuelle;
+
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
     private ParcoursBFS parcoursBFS;
-
     public static int nbTours;
 
 
@@ -37,9 +30,10 @@ public class Environnement {
     }
 
     /**
-    public unTour(){
-        if(nbTours%vitesse==0)
-    }*/
+     * public unTour(){
+     * if(nbTours%vitesse==0)
+     * }
+     */
 
 
     public ObservableList<Ennemi> getListeEnnemis() {
@@ -59,11 +53,10 @@ public class Environnement {
         return null;
     }
 
-    public void ajouterDansListeTours(Tourelle t){
+    public void ajouterDansListeTours(Tourelle t) {
         listeTourelles.add(t);
 
     }
-
 
     public void lancerVague(Terrain terrain) {
         Random random = new Random();
@@ -78,11 +71,11 @@ public class Environnement {
 
             switch (typeEnnemi) {
                 case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS,terrain);
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiFacile);
                     break;
                 case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS,terrain);
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS, terrain);
                     listeEnnemis.add(ennemiMoyen);
                     break;
                 case 2:
@@ -94,11 +87,10 @@ public class Environnement {
     }
 
 
-
     public Tourelle retirerTour(Case c) {
         Tourelle supprimee = null;
-        for (int i = this.getListeTourelles().size() - 1 ; i >= 0 ; i--){
-            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)){
+        for (int i = this.getListeTourelles().size() - 1; i >= 0; i--) {
+            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)) {
                 supprimee = this.getListeTourelles().get(i);
                 this.getListeTourelles().remove(i);
             }
@@ -106,18 +98,18 @@ public class Environnement {
         return supprimee;
     }
 
-    public ObservableList<Projectile> getListeProjectiles(){
+    public ObservableList<Projectile> getListeProjectiles() {
         return listeProjectiles;
     }
 
-    public void ajouterProjectile(Projectile p){
+    public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
     }
 
-    public Projectile retirerProjectile(Projectile p){
+    public Projectile retirerProjectile(Projectile p) {
         Projectile supprime = null;
-        for (int i = this.getListeProjectiles().size() - 1 ; i >= 0 ; i--){
-            if (this.getListeProjectiles().get(i).getCoordonnees().equals(p.getCoordonnees())){
+        for (int i = this.getListeProjectiles().size() - 1; i >= 0; i--) {
+            if (this.getListeProjectiles().get(i).getCoordonnees().equals(p.getCoordonnees())) {
                 supprime = this.getListeProjectiles().get(i);
                 this.getListeProjectiles().remove(i);
             }
@@ -125,5 +117,15 @@ public class Environnement {
         return supprime;
     }
 
+    public boolean estCaseLibre(Case caseCourante) {
+        for (Ennemi ennemi : listeEnnemis) {
+            if (ennemi.getCase().equals(caseCourante)) {
+                return false; // La case est occupée par un ennemi
+            }
+        }
+        return true; // La case est libre
+    }
 }
+
+
 

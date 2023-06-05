@@ -131,5 +131,38 @@ public class Terrain {
             System.out.println();
         }
     }
+
+    public Case obtenirCaseAdjacenteLibre(Case caseActuelle) {
+        ArrayList<Case> casesAdjacentes = new ArrayList<>();
+        int i = caseActuelle.getI();
+        int j = caseActuelle.getJ();
+
+        // Ajouter les cases adjacentes à la liste des cases possibles
+        Case c1 = new Case(i + 1, j);
+        Case c2 = new Case(i - 1, j);
+        Case c3 = new Case(i, j + 1);
+        Case c4 = new Case(i, j - 1);
+
+        if (this.caseEstDansTerrain(c1) && terrain[c1.getI()][c1.getJ()] == 1) {
+            casesAdjacentes.add(c1);
+        }
+        if (this.caseEstDansTerrain(c2) && terrain[c2.getI()][c2.getJ()] == 1) {
+            casesAdjacentes.add(c2);
+        }
+        if (this.caseEstDansTerrain(c3) && terrain[c3.getI()][c3.getJ()] == 1) {
+            casesAdjacentes.add(c3);
+        }
+        if (this.caseEstDansTerrain(c4) && terrain[c4.getI()][c4.getJ()] == 1) {
+            casesAdjacentes.add(c4);
+        }
+
+        if (casesAdjacentes.isEmpty()) {
+            return null;
+        }
+
+        // Choisir une case adjacente libre aléatoire
+        int randomIndex = (int) (Math.random() * casesAdjacentes.size());
+        return casesAdjacentes.get(randomIndex);
+    }
 }
 

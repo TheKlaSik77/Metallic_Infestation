@@ -27,8 +27,6 @@ public class ProjectileSemiVue {
 
     public void ajouterProjectile(Projectile p){
         String imageUrl = "img/projectiles/projectileSemiAuto.png";
-
-
         URL urlImProjectile = JeuApplication.class.getResource(imageUrl);
         Image image = new Image(String.valueOf(urlImProjectile));
         ImageView projectile = new ImageView(image);

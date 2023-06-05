@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -19,6 +21,7 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -26,6 +29,21 @@ public class JeuControleur implements Initializable {
 
     final static int NB_VAGUES_JEU = 3;
 
+
+
+    @FXML
+    private ImageView imageTour1;
+
+    @FXML
+    private ImageView imageTour2;
+
+    @FXML
+    private ImageView imageTour3;
+    @FXML
+    private ImageView imageArgent;
+
+    @FXML
+    private ImageView imageVie;
     @FXML
     private TilePane tilePane;
     @FXML
@@ -65,6 +83,10 @@ public class JeuControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
+        Image imageArgent = new Image(getClass().getResourceAsStream("/fr/iut/montreuil/metallic_infastation/img/infosJoueur/coin.png"));
+        this.imageArgent.setImage(imageArgent);
+        Image imageVie = new Image(getClass().getResourceAsStream("/fr/iut/montreuil/metallic_infastation/img/infosJoueur/coeur.png"));
+        this.imageVie.setImage(imageVie);
         this.terrainExperimental = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
@@ -73,7 +95,7 @@ public class JeuControleur implements Initializable {
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = new Joueur(100,1000);
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
-        this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+        this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental,imageTour1, imageTour2, imageTour3);
 
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));

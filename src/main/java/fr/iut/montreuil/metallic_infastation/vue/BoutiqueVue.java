@@ -1,18 +1,30 @@
 package fr.iut.montreuil.metallic_infastation.vue;
 
-import fr.iut.montreuil.metallic_infastation.controleur.JeuControleur;
-import fr.iut.montreuil.metallic_infastation.modele.*;
-import javafx.event.ActionEvent;
+import fr.iut.montreuil.metallic_infastation.JeuApplication;
+import fr.iut.montreuil.metallic_infastation.modele.Boutique;
+import fr.iut.montreuil.metallic_infastation.modele.Case;
+import fr.iut.montreuil.metallic_infastation.modele.Terrain;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.net.URL;
 
 
 public class BoutiqueVue {
+
+    @FXML
+    private ImageView imageTour1;
+
+    @FXML
+    private ImageView imageTour2;
+
+    @FXML
+    private ImageView imageTour3;
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
@@ -31,7 +43,7 @@ public class BoutiqueVue {
     private Terrain terrain;
 
 
-    public BoutiqueVue (Boutique boutique, ToggleGroup groupeRadio, RadioButton tour1, RadioButton tour2, RadioButton tour3, Label prixTour, TilePane tilePane, Terrain terrain){
+    public BoutiqueVue(Boutique boutique, ToggleGroup groupeRadio, RadioButton tour1, RadioButton tour2, RadioButton tour3, Label prixTour, TilePane tilePane, Terrain terrain, ImageView t1, ImageView t2, ImageView t3) {
         this.boutique = boutique;
         this.groupeRadio = groupeRadio;
         this.tour1 = tour1;
@@ -40,32 +52,55 @@ public class BoutiqueVue {
         this.prixTour = prixTour;
         this.tilePane = tilePane;
         this.terrain = terrain;
+        this.imageTour1 = t1;
+        this.imageTour2 = t2;
+        this.imageTour3 = t3;
+        chargerImageTours();
     }
+
     public void achatUnPv() {
-        boutique.AchatPv(10,1);
+        boutique.AchatPv(10, 1);
     }
 
     public void achatTroisPv() {
-        boutique.AchatPv(30,3);
+        boutique.AchatPv(30, 3);
     }
 
     public void achatCinqPv() {
-        boutique.AchatPv(50,5);
+        boutique.AchatPv(50, 5);
     }
 
-    public void achatTour(Case c){
-        if (tour1.isSelected()){
-
+    public void achatTour(Case c) {
+        if (tour1.isSelected()) {
             boutique.achatTour(1, c);
-        }
-        else if (tour2.isSelected()) {
+        } else if (tour2.isSelected()) {
             System.out.println("Tour2");
-            // TODO : Appeler la méthode acheterTour dans la boutique
-        }
-        else{
+            boutique.achatTour(2, c);
+        } else {
             System.out.println("Tour3");
-            // TODO : Appeler la méthode acheterTour dans la boutique
+            boutique.achatTour(3, c);
         }
+    }
+
+    public void chargerImageTours() {
+        String imageUrlt1 = "img/tourelle/tourelleSemiEteinte.png";
+        URL urlImTourelleSemi = JeuApplication.class.getResource(imageUrlt1);
+        Image imageTour1 = new Image(String.valueOf(urlImTourelleSemi));
+        ImageView tour1 = new ImageView(imageTour1);
+        this.imageTour1.setImage(tour1.getImage());
+
+        String imageUrlt2 = "img/tourelle/tourelleAutoEteinte.png";
+        URL urlImTourelleAuto = JeuApplication.class.getResource(imageUrlt2);
+        Image imageTour2 = new Image(String.valueOf(urlImTourelleAuto));
+        ImageView tour2 = new ImageView(imageTour2);
+        this.imageTour2.setImage(tour2.getImage());
+
+        String imageUrlt3 = "img/tourelle/tourelleMissiles.png";
+        URL urlImTourelleMissile = JeuApplication.class.getResource(imageUrlt3);
+        Image imageTour3 = new Image(String.valueOf(urlImTourelleMissile));
+        ImageView tour3 = new ImageView(imageTour3);
+        this.imageTour3.setImage(tour3.getImage());
+
     }
 
 
