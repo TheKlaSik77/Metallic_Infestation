@@ -10,13 +10,11 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -67,6 +65,22 @@ public class JeuControleur implements Initializable {
 
     @FXML
     private ToggleButton tour3;
+    @FXML
+    private Button bouton1Pv;
+
+    @FXML
+    private Button bouton3Pv;
+
+    @FXML
+    private Button bouton5Pv;
+    @FXML
+    private ImageView im1Pv;
+
+    @FXML
+    private ImageView im3Pv;
+
+    @FXML
+    private ImageView im5Pv;
     private EnnemisVue ennemisVue;
     private int vagueActuelle;
     private Terrain terrainExperimental;
@@ -239,6 +253,35 @@ public class JeuControleur implements Initializable {
 
     public Timeline getGameLoop() {
         return gameLoop;
+    }
+    @FXML
+    void boutonNonPresse1(MouseEvent event) {
+        im1Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_non_pressé.png"))));
+    }
+
+    @FXML
+    void boutonNonPresse2(MouseEvent event) {
+        im3Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_non_pressé.png"))));
+    }
+
+    @FXML
+    void boutonNonPresse3(MouseEvent event) {
+        im5Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_non_pressé.png"))));
+    }
+
+    @FXML
+    void boutonPresse1(MouseEvent event) {
+        im1Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_pressé.png"))));
+    }
+
+    @FXML
+    void boutonPresse2(MouseEvent event) {
+        im3Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_pressé.png"))));
+    }
+
+    @FXML
+    void boutonPresse3(MouseEvent event) {
+        im5Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_pressé.png"))));
     }
 
 }

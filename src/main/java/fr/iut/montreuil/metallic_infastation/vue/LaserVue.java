@@ -34,11 +34,11 @@ public class LaserVue {
             Image imageLaser = new Image(urlImageLaser.toString());
             ImageView imageViewLaser = new ImageView(imageLaser);
             imageViewLaser.setId(laser.getId());
-            imageViewLaser.setX(x1-32);
-            imageViewLaser.setY(y1-32);
+            imageViewLaser.setX(x1);
+            imageViewLaser.setY(y1);
             double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
             imageViewLaser.setFitWidth(distance + 32);
-            imageViewLaser.setFitHeight(48);
+            imageViewLaser.setFitHeight(30);
             System.out.println("ID du laser vue : " + imageViewLaser.getId());
 
             Rotate rotate = new Rotate(angle, x1, y1);
