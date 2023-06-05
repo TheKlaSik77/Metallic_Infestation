@@ -1,6 +1,5 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -23,15 +22,15 @@ public class Environnement {
     private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
     private ParcoursBFS parcoursBFS;
-
-
     public int nbTours;
+    private ObservableList<Laser> listeLasers;
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
+        this.listeLasers = FXCollections.observableArrayList();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
         vagueActuelle = 0;
@@ -51,6 +50,10 @@ public class Environnement {
 
     public ObservableList<Tourelle> getListeTourelles() {
         return listeTourelles;
+    }
+
+    public ObservableList<Laser> getListeLasers(){
+        return listeLasers;
     }
 
     public Ennemi ennemiSurCase(Case c) {
@@ -174,8 +177,29 @@ public class Environnement {
                     }
                 }
             }
+        }
+        for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
+            Ennemi e = this.getListeEnnemis().get(idEnnemi);
+            e.seDeplacer();
+            this.retirerLaser(e);
+        }
+        for (Tourelle t : this.getListeTourelles()) {
+            t.raffraichirEnnemiVise();
+            if (t instanceof TourelleSemi) {
+                if (nbTours % 20 == 0) {
+                    t.infligerDegats();
+                }
+            } else if (t instanceof TourelleAuto) {
+                Laser l = ((TourelleAuto) t).creerLaser();
+                t.infligerDegats();
+                this.ajouterLaser(((TourelleAuto) t).creerLaser());
+            } else {
+                if (nbTours % 50 == 0)
+                    t.infligerDegats();
+            }
 
         }
+
         for (Projectile p : listeProjectilesASupp) {
             this.retirerProjectile(p);
         }
@@ -187,6 +211,37 @@ public class Environnement {
 
     public Joueur getJoueur() {
         return this.joueur;
+    }
+
+    public void ajouterLaser(Laser p){
+        if (p != null) {
+            if (p.getEnnemiVise() != null && p.getTourelle() != null) {
+                listeLasers.add(p);
+            }
+        }
+    }
+
+    /**
+     * Regarde si ennemi est déjà visé par un laser
+     * @param e
+     * @return
+     */
+    public boolean destEstPresent (Ennemi e){
+        for (Laser l: listeLasers) {
+            if (e == l.getEnnemiVise()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void retirerLaser(Ennemi e){
+        for (int i = listeLasers.size()-1 ; i >= 0 ; i--){
+            if (listeLasers.get(i).getEnnemiVise() == e){
+                listeLasers.remove(listeLasers.get(i));
+                break;
+            }
+        }
     }
 }
 

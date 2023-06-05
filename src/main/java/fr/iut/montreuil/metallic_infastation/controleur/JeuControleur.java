@@ -75,6 +75,8 @@ public class JeuControleur implements Initializable {
 
     private boolean vagueTerminee = true;
 
+    private LaserVue laserVue;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -90,6 +92,8 @@ public class JeuControleur implements Initializable {
         this.joueur = env.getJoueur();
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
         this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+
+        this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
 
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
@@ -124,15 +128,28 @@ public class JeuControleur implements Initializable {
         });
         env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
             while (change.next()) {
-
                 if (change.wasRemoved()) {
-                    for (int i = change.getRemoved().size() - 1 ; i >= 0 ; i--) {
+                    for (int i = change.getRemoved().size() - 1; i >= 0; i--) {
                         projectileSemiVue.retirerProjectile(change.getRemoved().get(i));
                     }
                 }
                 if (change.wasAdded()) {
                     for (Projectile addedProjectile : change.getAddedSubList()) {
                         projectileSemiVue.ajouterProjectile(addedProjectile);
+                    }
+                }
+            }
+        });
+        env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (Laser removedLaser : change.getRemoved()) {
+                        laserVue.retirerLaser(removedLaser);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Laser addedLaser : change.getAddedSubList()) {
+                        laserVue.creerLaser(addedLaser);
                     }
                 }
             }
@@ -204,6 +221,7 @@ public class JeuControleur implements Initializable {
                     } else {
                         env.unTour(gestionnaireVagues);
                     }
+
                 }
         );
         gameLoop.getKeyFrames().add(kf);

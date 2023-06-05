@@ -39,6 +39,7 @@ public abstract class Ennemi extends ElementDeplacable{
         this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
+
     }
     public int getPv(){
         return this.pv;
