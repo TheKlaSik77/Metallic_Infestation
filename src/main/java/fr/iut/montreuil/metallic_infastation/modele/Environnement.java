@@ -150,6 +150,7 @@ public class Environnement {
             for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                 Ennemi e = this.getListeEnnemis().get(idEnnemi);
                 e.seDeplacer();
+                listeLasers.clear();
                 if (e.aAtteintLaCible() || e.estMort()) {
                     ennemisASupp.add(e);
                 }
@@ -178,11 +179,6 @@ public class Environnement {
                     }
                 }
             }
-        }
-        for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-            Ennemi e = this.getListeEnnemis().get(idEnnemi);
-            e.seDeplacer();
-            listeLasers.clear();
         }
         for (Tourelle t : this.getListeTourelles()) {
             if (t instanceof TourelleAuto) {
