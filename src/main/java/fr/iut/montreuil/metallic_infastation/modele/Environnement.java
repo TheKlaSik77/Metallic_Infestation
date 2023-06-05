@@ -109,7 +109,7 @@ public class Environnement {
     }
 
     public void retirerLaser (Ennemi e){
-        for (int i = listeLasers.size()-1 ; i > 0 ; i--){
+        for (int i = listeLasers.size()-1 ; i >= 0 ; i--){
             if (listeLasers.get(i).getEnnemiVise() == e){
                 listeLasers.remove(listeLasers.get(i));
                 break;

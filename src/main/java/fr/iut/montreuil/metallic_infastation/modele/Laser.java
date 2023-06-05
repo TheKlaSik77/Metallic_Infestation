@@ -9,9 +9,6 @@ public class Laser {
     private Tourelle tourelle;
     private Ennemi ennemiVise;
     private String id;
-    private DoubleProperty distanceProperty;
-
-    private DoubleProperty angleProperty;
     static int compteur = 0;
 
     public Laser(Tourelle tourelle, Ennemi ennemivisée) {
@@ -27,12 +24,6 @@ public class Laser {
         return new Point(x, y);
     }
 
-    public void seDeplace(){
-        this.distanceProperty.set(Math.sqrt(Math.pow(CordonnéeEnnemiArrive().getX() - CoordonnéeTourelleDepart().getX(), 2) + Math.pow(CordonnéeEnnemiArrive().getY() - CoordonnéeTourelleDepart().getX(), 2)) +32);
-        this.angleProperty.set(Math.toDegrees(Math.atan2(CordonnéeEnnemiArrive().getY() - CoordonnéeTourelleDepart().getY(), CordonnéeEnnemiArrive().getX() - CoordonnéeTourelleDepart().getX())));
-
-    }
-
     public Point CordonnéeEnnemiArrive(){
         return ennemiVise.getCoordonnees();
     }
@@ -45,11 +36,7 @@ public class Laser {
         return tourelle;
     }
 
-    public DoubleProperty angleProperty (){
-        return this.angleProperty;
-    }
-
     public String getId(){
-        return id;}
+        System.out.println(id);return id;}
 
 }

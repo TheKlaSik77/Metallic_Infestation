@@ -126,12 +126,12 @@ public class JeuControleur implements Initializable {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     for (Laser removedLaser : change.getRemoved()) {
-                        LaserVue.retirerLaser(removedLaser);
+                        laserVue.retirerLaser(removedLaser);
                     }
                 }
                 if (change.wasAdded()) {
                     for (Laser addedLaser : change.getAddedSubList()) {
-                        LaserVue.creerLaser(addedLaser);
+                        laserVue.creerLaser(addedLaser);
                     }
                 }
             }
@@ -201,7 +201,11 @@ public class JeuControleur implements Initializable {
                             Ennemi e = env.getListeEnnemis().get(idEnnemi);
                             e.seDeplacer();
                             env.retirerLaser(e);
-                            if (e.aAtteintLaCible() || e.estMort()) {
+                            if (e.estMort()) {
+                                env.getListeEnnemis().remove(e);
+
+                            }
+                            else if (e.aAtteintLaCible()) {
                                 env.getListeEnnemis().remove(e);
                                 joueur.debiterPvJoueurProperty(e.getDrop());
                             }
