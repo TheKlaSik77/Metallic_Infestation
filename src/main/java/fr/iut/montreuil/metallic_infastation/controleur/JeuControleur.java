@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infastation.controleur;
 
+import fr.iut.montreuil.metallic_infastation.JeuApplication;
 import fr.iut.montreuil.metallic_infastation.modele.*;
 import fr.iut.montreuil.metallic_infastation.vue.*;
 import javafx.animation.KeyFrame;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,15 +64,25 @@ public class JeuControleur implements Initializable {
     private BoutiqueVue boutiqueVue;
 
     @FXML
-    private ToggleGroup groupeRadio;
-    @FXML
-    private RadioButton tour1;
+    private ToggleGroup toursGroupe;
 
     @FXML
-    private RadioButton tour2;
+    private ImageView imTour1;
 
     @FXML
-    private RadioButton tour3;
+    private ImageView imTour2;
+
+    @FXML
+    private ImageView imTour3;
+
+    @FXML
+    private ToggleButton tour1;
+
+    @FXML
+    private ToggleButton tour2;
+
+    @FXML
+    private ToggleButton tour3;
     private EnnemisVue ennemisVue;
     private int vagueActuelle;
     private Terrain terrainExperimental;
@@ -79,24 +91,25 @@ public class JeuControleur implements Initializable {
 
     private boolean vagueTerminee = true;
 
+    private LaserVue laserVue;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-        Image imageArgent = new Image(getClass().getResourceAsStream("/fr/iut/montreuil/metallic_infastation/img/infosJoueur/coin.png"));
-        this.imageArgent.setImage(imageArgent);
-        Image imageVie = new Image(getClass().getResourceAsStream("/fr/iut/montreuil/metallic_infastation/img/infosJoueur/coeur.png"));
-        this.imageVie.setImage(imageVie);
         this.terrainExperimental = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
-        ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
-        this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-        this.joueur = new Joueur(100,1000);
-        Boutique boutique = new Boutique(joueur, env, terrainExperimental);
-        this.boutiqueVue = new BoutiqueVue(boutique, groupeRadio, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental,imageTour1, imageTour2, imageTour3);
 
+
+        ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
+
+        this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
+        this.joueur = env.getJoueur();
+        Boutique boutique = new Boutique(joueur, env, terrainExperimental);
+        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+        this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
         gestionnaireVagues = new GestionnaireVagues(env);
@@ -131,13 +144,27 @@ public class JeuControleur implements Initializable {
         env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
-                    for (Projectile removedProjectile : change.getRemoved()) {
-                        projectileSemiVue.retirerProjectile(removedProjectile);
+                    for (int i = change.getRemoved().size() - 1; i >= 0; i--) {
+                        projectileSemiVue.retirerProjectile(change.getRemoved().get(i));
                     }
                 }
                 if (change.wasAdded()) {
                     for (Projectile addedProjectile : change.getAddedSubList()) {
                         projectileSemiVue.ajouterProjectile(addedProjectile);
+                    }
+                }
+            }
+        });
+        env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (Laser removedLaser : change.getRemoved()) {
+                        laserVue.retirerLaser(removedLaser);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (Laser addedLaser : change.getAddedSubList()) {
+                        laserVue.creerLaser(addedLaser);
                     }
                 }
             }
@@ -149,14 +176,29 @@ public class JeuControleur implements Initializable {
         parcoursBFS.remplirGrilleBFS();
         gameLoop.play();
 
-        groupeRadio.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        toursGroupe.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            String imgUrl1 = "img/gui/bouton_non_pressé.png";
+            String imgUrl2 = "img/gui/bouton_pressé.png";
+            URL urlImTour1 = JeuApplication.class.getResource(imgUrl1);
+            Image nonPresse = new Image(String.valueOf(urlImTour1));
+            URL urlImTour2 = JeuApplication.class.getResource(imgUrl2);
+            Image presse = new Image(String.valueOf(urlImTour2));
             if (tour1.isSelected()){
-                prixTour.setText(String.valueOf(1));
+                imTour1.setImage(presse);
+                imTour2.setImage(nonPresse);
+                imTour3.setImage(nonPresse);
+                prixTour.setText(String.valueOf(10));
             } else if (tour2.isSelected()) {
-                prixTour.setText(String.valueOf(2));
+                imTour1.setImage(nonPresse);
+                imTour2.setImage(presse);
+                imTour3.setImage(nonPresse);
+                prixTour.setText(String.valueOf(30));
             }
             else {
-                prixTour.setText(String.valueOf(3));
+                imTour1.setImage(nonPresse);
+                imTour2.setImage(nonPresse);
+                imTour3.setImage(presse);
+                prixTour.setText(String.valueOf(50));
             }
 
         });
@@ -192,54 +234,10 @@ public class JeuControleur implements Initializable {
                         System.out.println("Fini");
                         gameLoop.stop();
                     } else {
-                        if(temps % 2 == 0) {
-                            if (env.getListeEnnemis().isEmpty()) {
-                                gestionnaireVagues.lancerProchaineVague(terrainExperimental);
-                            }
 
-                            for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                                Ennemi e = env.getListeEnnemis().get(idEnnemi);
-                                e.seDeplacer(env);
-                                if (e.aAtteintLaCible() || e.estMort()) {
-                                    env.getListeEnnemis().remove(e);
-                                }
-                            }
-                        }
+                        env.unTour(gestionnaireVagues);
                     }
-                    ArrayList<Projectile> listeProjectilesASupp = new ArrayList<Projectile>();
-                    if (temps % 2 == 0){
 
-                        for (Projectile p : env.getListeProjectiles()) {
-                            if (env.getListeEnnemis().contains(p.getEnnemiVise())) {
-                                p.seDeplacer();
-                                if (p.arriveSurEnnemi()) {
-                                    p.getTourelle().infligerDegats();
-                                    listeProjectilesASupp.add(p);
-                                }
-                            } else {
-                                listeProjectilesASupp.add(p);
-                            }
-                        }
-
-                    }
-                    if (temps % 50 == 0){
-                        for (Tourelle t : env.getListeTourelles()){
-                            if (t instanceof TourelleSemi){
-                                // TODO: Test si arrivé, si oui infliger dégâts et supprimer de la liste de projectiles sinon se déplacer
-                                t.raffraichirEnnemiVise();
-                                if (t.getEnnemiVise() != null){
-                                    Projectile p = t.creerProjectile();
-                                    env.ajouterProjectile(p);
-                                    System.out.println("Projectile cree, coordonnées : " + p.getCoordonnees().getX() + ", " + p.getCoordonnees().getY());
-                                }
-                            }
-                        }
-
-                    }
-                    for (Projectile p : listeProjectilesASupp){
-                        env.retirerProjectile(p);
-                    }
-                    temps++;
                 }
         );
         gameLoop.getKeyFrames().add(kf);

@@ -7,6 +7,7 @@ import fr.iut.montreuil.metallic_infastation.modele.Terrain;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,13 +29,13 @@ public class BoutiqueVue {
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
-    private RadioButton tour1;
+    private ToggleButton tour1;
 
     @FXML
-    private RadioButton tour2;
+    private ToggleButton tour2;
 
     @FXML
-    private RadioButton tour3;
+    private ToggleButton tour3;
 
     private Boutique boutique;
     private Label prixTour;
@@ -43,7 +44,8 @@ public class BoutiqueVue {
     private Terrain terrain;
 
 
-    public BoutiqueVue(Boutique boutique, ToggleGroup groupeRadio, RadioButton tour1, RadioButton tour2, RadioButton tour3, Label prixTour, TilePane tilePane, Terrain terrain, ImageView t1, ImageView t2, ImageView t3) {
+    public BoutiqueVue (Boutique boutique, ToggleGroup groupeRadio, ToggleButton tour1, ToggleButton tour2, ToggleButton tour3, Label prixTour, TilePane tilePane, Terrain terrain){
+
         this.boutique = boutique;
         this.groupeRadio = groupeRadio;
         this.tour1 = tour1;
@@ -52,10 +54,6 @@ public class BoutiqueVue {
         this.prixTour = prixTour;
         this.tilePane = tilePane;
         this.terrain = terrain;
-        this.imageTour1 = t1;
-        this.imageTour2 = t2;
-        this.imageTour3 = t3;
-        chargerImageTours();
     }
 
     public void achatUnPv() {
@@ -75,10 +73,12 @@ public class BoutiqueVue {
             boutique.achatTour(1, c);
         } else if (tour2.isSelected()) {
             System.out.println("Tour2");
-            boutique.achatTour(2, c);
-        } else {
+
+            boutique.achatTour(2,c);
+        }
+        else{
             System.out.println("Tour3");
-            boutique.achatTour(3, c);
+            boutique.achatTour(3,c);
         }
     }
 

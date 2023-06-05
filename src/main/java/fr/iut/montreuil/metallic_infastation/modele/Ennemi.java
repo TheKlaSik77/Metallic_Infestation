@@ -1,8 +1,8 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
 public abstract class Ennemi extends ElementDeplacable{
-    private static int compteur = 0;
-    private int id;
+
+
     private int pv;
     private int drop;
     private int vitesse;
@@ -17,7 +17,6 @@ public abstract class Ennemi extends ElementDeplacable{
 
     public Ennemi (int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
         super(new Point(0,0),vitesse);
-        this.id = compteur;
         this.pv = pv;
         this.vitesse = vitesse;
         // Piece Lootées par les ennemis
@@ -43,15 +42,13 @@ public abstract class Ennemi extends ElementDeplacable{
         this.parcoursBFS = parcoursBFS;
         parcoursBFS.remplirGrilleBFS();
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
-        compteur++;
+
     }
     public int getPv(){
         return this.pv;
     }
 
-    public int getId() {
-        return id;
-    }
+
     public Point getCoordonnees(){
         return this.coordonnees;
     }
@@ -64,7 +61,7 @@ public abstract class Ennemi extends ElementDeplacable{
         return parcoursBFS;
     }
 
-    public void seDeplacer(Environnement e) {
+    public void seDeplacer() {
         // detecterCollision(e);
         int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
         int distanceY = this.caseDestination.getI() * terrain.getTailleCase() - this.getCoordonnees().getY();
@@ -118,6 +115,9 @@ public abstract class Ennemi extends ElementDeplacable{
         return this.pv <= 0;
     }
 
+    public boolean equals(Ennemi e){
+        return this.getId() == e.getId();
+    }
 
     public boolean aAtteintLaCible(){
         return  this.terrain.arriveeSurCase(this.getCase());
@@ -126,16 +126,20 @@ public abstract class Ennemi extends ElementDeplacable{
     @Override
     public String toString() {
         return " {" +
-                "id=" + id +
+                "id=" + getId() +
                 ", coordonnees=" + coordonnees +
                 '}';
     }
+
 
     public boolean estEnCollisionAvec(Ennemi autreEnnemi) {
         return this.getCoordonnees().equals(autreEnnemi.getCoordonnees());
     }
 
 
-//fais en sorte de gerer
+    public int getDrop (){
+        return this.drop;
+    }
 
 }
+

@@ -1,13 +1,9 @@
 package fr.iut.montreuil.metallic_infastation.vue;
 
 import fr.iut.montreuil.metallic_infastation.JeuApplication;
-import fr.iut.montreuil.metallic_infastation.modele.EnnemiFacile;
 import fr.iut.montreuil.metallic_infastation.modele.Environnement;
 import fr.iut.montreuil.metallic_infastation.modele.Projectile;
-import fr.iut.montreuil.metallic_infastation.modele.ProjectileSemi;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -32,22 +28,16 @@ public class ProjectileSemiVue {
         ImageView projectile = new ImageView(image);
         projectile.translateXProperty().bind(p.getCoordonnees().pXProperty());
         projectile.translateYProperty().bind(p.getCoordonnees().pYProperty());
+        projectile.setId(String.valueOf(p.getId()));
         zoneAffichageProjectiles.getChildren().add(projectile);
 
 
     }
 
     public void retirerProjectile(Projectile p) {
-        ObservableList<Node> enfants = zoneAffichageProjectiles.getChildren();
-        for (Node enfant : enfants) {
-            if (enfant instanceof ImageView) {
-                ImageView projectile = (ImageView) enfant;
-                if (projectile.getTranslateX() == p.getCoordonnees().getX()
-                        && projectile.getTranslateY() == p.getCoordonnees().getY()) {
-                    enfants.remove(projectile);
-                    break;
-                }
-            }
-        }
+        System.out.println("supprimé");
+        System.out.println(p.getId());
+        System.out.println(zoneAffichageProjectiles.lookup("#" + p.getId()));
+        zoneAffichageProjectiles.getChildren().remove(zoneAffichageProjectiles.lookup("#" + p.getId()));
     }
 }
