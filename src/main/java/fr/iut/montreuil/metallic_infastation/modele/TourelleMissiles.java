@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TourelleMissiles extends Tourelle{
     public TourelleMissiles(Case position,Environnement env,Terrain terrain) {
-        super(1,position,50,5,env,terrain);
+        super(10,position,50,5,env,terrain);
     }
 
     @Override
