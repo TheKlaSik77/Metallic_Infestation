@@ -58,33 +58,6 @@ public class Environnement {
 
     }
 
-    public void lancerVague(Terrain terrain) {
-        Random random = new Random();
-        int nombreEnnemis = 10;
-
-
-        if (vagueActuelle % NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE == 0) {
-            nombreEnnemis += NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES;
-        }
-        for (int i = 0; i < nombreEnnemis; i++) {
-            int typeEnnemi = random.nextInt(3);
-
-            switch (typeEnnemi) {
-                case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS, terrain);
-                    listeEnnemis.add(ennemiFacile);
-                    break;
-                case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS, terrain);
-                    listeEnnemis.add(ennemiMoyen);
-                    break;
-                case 2:
-                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(parcoursBFS, terrain);
-                    listeEnnemis.add(ennemiDifficile);
-                    break;
-            }
-        }
-    }
 
 
     public Tourelle retirerTour(Case c) {
@@ -117,13 +90,31 @@ public class Environnement {
         return supprime;
     }
 
-    public boolean estCaseLibre(Case caseCourante) {
-        for (Ennemi ennemi : listeEnnemis) {
-            if (ennemi.getCase().equals(caseCourante)) {
-                return false; // La case est occupée par un ennemi
+    public void lancerVague(Terrain terrain) {
+        Random random = new Random();
+        int nombreEnnemis = 10;
+
+        if (vagueActuelle % NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE == 0) {
+            nombreEnnemis += NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES;
+        }
+        for (int i = 0; i < nombreEnnemis; i++) {
+            int typeEnnemi = random.nextInt(3);
+
+            switch (typeEnnemi) {
+                case 0:
+                    EnnemiFacile ennemiFacile = new EnnemiFacile(parcoursBFS, terrain);
+                    listeEnnemis.add(ennemiFacile);
+                    break;
+                case 1:
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(parcoursBFS, terrain);
+                    listeEnnemis.add(ennemiMoyen);
+                    break;
+                case 2:
+                    EnnemiDifficile ennemiDifficile = new EnnemiDifficile(parcoursBFS, terrain);
+                    listeEnnemis.add(ennemiDifficile);
+                    break;
             }
         }
-        return true; // La case est libre
     }
 }
 

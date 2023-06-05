@@ -199,7 +199,7 @@ public class JeuControleur implements Initializable {
 
                             for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                                 Ennemi e = env.getListeEnnemis().get(idEnnemi);
-                                e.seDeplacer();
+                                e.seDeplacer(env);
                                 if (e.aAtteintLaCible() || e.estMort()) {
                                     env.getListeEnnemis().remove(e);
                                 }

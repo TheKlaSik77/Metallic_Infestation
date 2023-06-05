@@ -15,12 +15,12 @@ public class GestionnaireVagues {
     public void lancerProchaineVague(Terrain terrainExperimental) {
         Environnement.vagueActuelle++;
         if (Environnement.vagueActuelle < NB_VAGUES_JEU) {
-                if(!estDerniereVague()) {
-                    System.out.println("Une vague ennemie se prépare...");
-                    System.out.println("Vague actuelle : " + (Environnement.vagueActuelle));
-                    environnement.lancerVague(terrainExperimental);
+            if(!estDerniereVague()) {
+                System.out.println("Une vague ennemie se prépare...");
+                System.out.println("Vague actuelle : " + (Environnement.vagueActuelle));
+                environnement.lancerVague(terrainExperimental);
 
-                }
+            }
         }
     }
 
