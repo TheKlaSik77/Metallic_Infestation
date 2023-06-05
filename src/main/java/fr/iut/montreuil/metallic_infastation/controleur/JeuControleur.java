@@ -92,9 +92,7 @@ public class JeuControleur implements Initializable {
         this.joueur = env.getJoueur();
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
         this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
-
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
-
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
         gestionnaireVagues = new GestionnaireVagues(env);

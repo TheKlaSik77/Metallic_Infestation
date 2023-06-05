@@ -142,6 +142,7 @@ public class Environnement {
     }
     public void unTour(GestionnaireVagues gestionnaireVagues) {
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
+
         if (this.nbTours % 2 == 0) {
             if (this.getListeEnnemis().isEmpty()) {
                 gestionnaireVagues.lancerProchaineVague(terrain);
@@ -181,25 +182,27 @@ public class Environnement {
         for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
             Ennemi e = this.getListeEnnemis().get(idEnnemi);
             e.seDeplacer();
-            this.retirerLaser(e);
+            listeLasers.clear();
         }
         for (Tourelle t : this.getListeTourelles()) {
-            t.raffraichirEnnemiVise();
-            if (t instanceof TourelleSemi) {
-                if (nbTours % 20 == 0) {
+            if (t instanceof TourelleAuto) {
+                t.raffraichirEnnemiVise();
+                if (t.getEnnemiVise() != null) {
+                    Laser l = ((TourelleAuto) t).creerLaser();
+                    this.ajouterLaser(l);
                     t.infligerDegats();
                 }
-            } else if (t instanceof TourelleAuto) {
-                Laser l = ((TourelleAuto) t).creerLaser();
-                t.infligerDegats();
-                this.ajouterLaser(((TourelleAuto) t).creerLaser());
             } else {
                 if (nbTours % 50 == 0)
                     t.infligerDegats();
             }
 
         }
-
+        for (Laser l : listeLasers){
+            if (l.getEnnemiVise() == null){
+                listeLasers.clear();
+            }
+        }
         for (Projectile p : listeProjectilesASupp) {
             this.retirerProjectile(p);
         }
@@ -235,11 +238,10 @@ public class Environnement {
         return false;
     }
 
-    public void retirerLaser(Ennemi e){
+    public void retirerLaser(Laser l){
         for (int i = listeLasers.size()-1 ; i >= 0 ; i--){
-            if (listeLasers.get(i).getEnnemiVise() == e){
-                listeLasers.remove(listeLasers.get(i));
-                break;
+            if (listeLasers.get(i).equals(l)){
+                this.listeLasers.remove(listeLasers.get(i));
             }
         }
     }
