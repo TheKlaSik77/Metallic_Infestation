@@ -8,4 +8,6 @@ module com.application.metallic_infastation {
     exports fr.iut.montreuil.metallic_infastation;
     opens fr.iut.montreuil.metallic_infastation.controleur to javafx.fxml;
     exports fr.iut.montreuil.metallic_infastation.controleur;
+    exports fr.iut.montreuil.metallic_infastation.modele;
+    opens fr.iut.montreuil.metallic_infastation.modele to javafx.fxml;
 }

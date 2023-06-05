@@ -3,6 +3,7 @@ package fr.iut.montreuil.metallic_infastation.modele;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public abstract class Tourelle {
 
     private int id;
@@ -90,5 +91,9 @@ public abstract class Tourelle {
             // On dit que la case est occupée par une tour
             terrain.setCase(this.getPosition(),3);
         }
+    }
+
+    public ProjectileSemi creerProjectile(){
+        return new ProjectileSemi(this,this.ennemiVise);
     }
 }

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.TilePane;
 
@@ -16,13 +17,13 @@ public class BoutiqueVue {
     @FXML
     private ToggleGroup groupeRadio;
     @FXML
-    private RadioButton tour1;
+    private ToggleButton tour1;
 
     @FXML
-    private RadioButton tour2;
+    private ToggleButton tour2;
 
     @FXML
-    private RadioButton tour3;
+    private ToggleButton tour3;
 
     private Boutique boutique;
     private Label prixTour;
@@ -31,7 +32,7 @@ public class BoutiqueVue {
     private Terrain terrain;
 
 
-    public BoutiqueVue (Boutique boutique, ToggleGroup groupeRadio, RadioButton tour1, RadioButton tour2, RadioButton tour3, Label prixTour, TilePane tilePane, Terrain terrain){
+    public BoutiqueVue (Boutique boutique, ToggleGroup groupeRadio, ToggleButton tour1, ToggleButton tour2, ToggleButton tour3, Label prixTour, TilePane tilePane, Terrain terrain){
         this.boutique = boutique;
         this.groupeRadio = groupeRadio;
         this.tour1 = tour1;
