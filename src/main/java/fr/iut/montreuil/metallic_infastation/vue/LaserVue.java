@@ -34,8 +34,8 @@ public class LaserVue {
             Image imageLaser = new Image(urlImageLaser.toString());
             ImageView imageViewLaser = new ImageView(imageLaser);
             imageViewLaser.setId(laser.getId());
-            imageViewLaser.setX(x1);
-            imageViewLaser.setY(y1);
+            imageViewLaser.setX(x1 - 32);
+            imageViewLaser.setY(y1 - 32);
             double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
             imageViewLaser.setFitWidth(distance + 32);
             imageViewLaser.setFitHeight(30);

@@ -49,6 +49,17 @@ public class JeuControleur implements Initializable {
     private ToggleGroup toursGroupe;
 
     @FXML
+    private ImageView imObs1;
+
+    @FXML
+    private ImageView imObs2;
+    @FXML
+    private ToggleButton obs1;
+
+    @FXML
+    private ToggleButton obs2;
+
+    @FXML
     private ImageView imTour1;
 
     @FXML
@@ -184,20 +195,39 @@ public class JeuControleur implements Initializable {
                 imTour1.setImage(presse);
                 imTour2.setImage(nonPresse);
                 imTour3.setImage(nonPresse);
+                imObs1.setImage(nonPresse);
+                imObs2.setImage(nonPresse);
                 prixTour.setText(String.valueOf(10));
             } else if (tour2.isSelected()) {
                 imTour1.setImage(nonPresse);
                 imTour2.setImage(presse);
                 imTour3.setImage(nonPresse);
+                imObs1.setImage(nonPresse);
+                imObs2.setImage(nonPresse);
                 prixTour.setText(String.valueOf(30));
             }
-            else {
+            else if (tour3.isSelected()){
                 imTour1.setImage(nonPresse);
                 imTour2.setImage(nonPresse);
                 imTour3.setImage(presse);
+                imObs1.setImage(nonPresse);
+                imObs2.setImage(nonPresse);
                 prixTour.setText(String.valueOf(50));
+            } else if (obs1.isSelected()){
+                imTour1.setImage(nonPresse);
+                imTour2.setImage(nonPresse);
+                imTour3.setImage(nonPresse);
+                imObs1.setImage(presse);
+                imObs2.setImage(nonPresse);
+                prixTour.setText(String.valueOf(10));
+            } else {
+                imTour1.setImage(nonPresse);
+                imTour2.setImage(nonPresse);
+                imTour3.setImage(nonPresse);
+                imObs1.setImage(nonPresse);
+                imObs2.setImage(presse);
+                prixTour.setText(String.valueOf(20));
             }
-
         });
 
         tilePane.setOnMouseClicked(event -> {
