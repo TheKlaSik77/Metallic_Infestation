@@ -88,7 +88,6 @@ public class JeuControleur implements Initializable {
     private GestionnaireVagues gestionnaireVagues;
 
     private boolean vagueTerminee = true;
-
     private LaserVue laserVue;
 
     @Override
@@ -100,7 +99,9 @@ public class JeuControleur implements Initializable {
         this.env = new Environnement(terrainExperimental);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
 
+
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
+
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = env.getJoueur();
@@ -231,7 +232,9 @@ public class JeuControleur implements Initializable {
                         System.out.println("Fini");
                         gameLoop.stop();
                     } else {
+
                         env.unTour(gestionnaireVagues);
+
                     }
 
                 }
