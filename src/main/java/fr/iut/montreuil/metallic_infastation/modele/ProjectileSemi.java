@@ -6,5 +6,4 @@ public class ProjectileSemi extends Projectile{
         super(new Point(tourelleSemi.getPosition().getCentreCase().getX() - 16,tourelleSemi.getPosition().getCentreCase().getY() - 7),tourelleSemi,ennemiVise,10);
     }
 
-
 }

@@ -3,23 +3,25 @@ package fr.iut.montreuil.metallic_infastation.modele;
 import java.util.ArrayList;
 
 public class TourelleMissiles extends Tourelle{
+
     public TourelleMissiles(Case position,Environnement env,Terrain terrain) {
-        super(10,position,50,5,env,terrain);
+
+        super(5,position,50,5,env,terrain, 10);
     }
 
     @Override
     public void infligerDegats() {
-        if(getEnnemiVise() != null) {
-            getEnnemiVise().decrementerPv(getDegats());
-            System.out.println(getEnnemiVise().getPv());
+        Ennemi ennemiVise = this.ennemiLePlusProche();
+        if(ennemiVise != null) {
+            System.out.println(ennemiVise.toString());
+            ArrayList<Ennemi> listeDesEnnemisVisés = this.ennemisLesPlusProches(ennemiVise.getCase(), this.getPorteeMissile());
+            if(listeDesEnnemisVisés != null){
+                System.out.println(listeDesEnnemisVisés.toString());
+                for (Ennemi e: listeDesEnnemisVisés) {
+                    e.decrementerPv(this.getDegats());
+                    System.out.println(e.getPv());
+                }
+            }
         }
-    }
-
-    public void tirerMissile(Case position){
-        ArrayList<Ennemi> listeEnnemis = ennemisLesPlusProches(position);
-        for (Ennemi e: listeEnnemis) {
-            e.decrementerPv(getDegats());
-        }
-
     }
 }

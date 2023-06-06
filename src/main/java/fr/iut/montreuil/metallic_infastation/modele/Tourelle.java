@@ -1,7 +1,6 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public abstract class Tourelle {
@@ -11,32 +10,36 @@ public abstract class Tourelle {
     private Case position;
 
     private int cout;
-    private int portee;
+    private int porteeTourelle;
     protected Environnement env;
     private Ennemi ennemiVise;
 
     protected Terrain terrain;
     private int compteur = 0;
 
-    public Tourelle(int degats, Case position, int cout, int portee, Environnement env, Terrain terrain){
+    private int porteeMissile;
+
+
+    public Tourelle(int degats, Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain, int porteeMissile){
         this.compteur++;
         this.id = compteur;
         this.degats = degats;
         this.position = position;
         this.cout = cout;
-        this.portee = portee;
+        this.porteeTourelle = porteeTourelle;
         this.env = env;
         this.ennemiVise = null;
         this.terrain = terrain;
+        this.porteeMissile = porteeMissile;
     }
 
     public Case getPosition(){
         return this.position;
     }
 
-    public Ennemi ennemiLePlusProche() {
+    /*public Ennemi ennemiLePlusProche() {
         // Calcul si ennemi autour de toutes les cases par rapport à sa portée
-        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
+        for (int zoneTest = 1; zoneTest <= porteeTourelle; zoneTest++) {
             for (int i = zoneTest * -1; i <= zoneTest; i++) {
                 for (int j = zoneTest * -1; j <= zoneTest; j++) {
                     if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
@@ -50,12 +53,21 @@ public abstract class Tourelle {
             }
         }
         return null;
+    }*/
+
+    public Ennemi ennemiLePlusProche() {
+        ArrayList<Ennemi> ennemisLesPlusProches = ennemisLesPlusProches(position, porteeTourelle);
+
+        if (!ennemisLesPlusProches.isEmpty()) {
+            return ennemisLesPlusProches.get(0);
+        }
+
+        return null;
     }
 
-    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement) {
+    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
         ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
 
-        // Calcul si ennemi autour de toutes les cases par rapport à sa portée
         for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
             for (int i = zoneTest * -1; i <= zoneTest; i++) {
                 for (int j = zoneTest * -1; j <= zoneTest; j++) {
@@ -79,12 +91,13 @@ public abstract class Tourelle {
     public Ennemi getEnnemiVise(){
         return this.ennemiVise;
     }
-    public void setEnnemiVise(Ennemi e){this.ennemiVise = e;}
 
     public abstract void infligerDegats();
     public int getCout (){return this.cout;}
 
     public int getDegats(){return this.degats;}
+
+    public int getPorteeMissile(){return this.porteeMissile;}
 
     public void poserTourelle(){
         if (this.terrain.emplacementVideSurCase(this.getPosition())){
@@ -96,4 +109,6 @@ public abstract class Tourelle {
     public ProjectileSemi creerProjectile(){
         return new ProjectileSemi(this,this.ennemiVise);
     }
+
+    public ProjectileMissile creerProjectileMissile() {return new ProjectileMissile(this, this.ennemiVise);}
 }

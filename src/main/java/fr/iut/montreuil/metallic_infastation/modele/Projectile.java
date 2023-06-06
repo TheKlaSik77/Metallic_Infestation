@@ -25,7 +25,6 @@ public class Projectile extends ElementDeplacable{
         int deltaYModifie = (int)(deltaY / Math.sqrt(ro));
         this.coordonnees.setX(this.coordonnees.getX() + deltaXModifie);
         this.coordonnees.setY(this.coordonnees.getY() + deltaYModifie);
-
     }
     public boolean arriveSurEnnemi(){
         return this.coordonnees.getCase().caseEgale(this.ennemiVise.getCase());
