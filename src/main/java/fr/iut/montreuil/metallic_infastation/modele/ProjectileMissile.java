@@ -21,6 +21,5 @@ public class ProjectileMissile extends Projectile{
         this.coordonnees.setX(this.coordonnees.getX() + deltaXModifie);
         this.coordonnees.setY(this.coordonnees.getY() + deltaYModifie);
     }
-    public DoubleProperty AngleProperty(){
-        System.out.println("Angle renvoyé" + angleProperty);return angleProperty;}
+    public DoubleProperty AngleProperty(){return angleProperty;}
 }

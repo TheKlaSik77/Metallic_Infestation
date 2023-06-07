@@ -21,6 +21,9 @@ public class Environnement {
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
+
+    private ObservableList<Explosion> listExplosions;
+
     private ParcoursBFS parcoursBFS;
     public int nbTours;
     private ObservableList<Laser> listeLasers;
@@ -31,6 +34,7 @@ public class Environnement {
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
         this.listeLasers = FXCollections.observableArrayList();
+        this.listExplosions = FXCollections.observableArrayList();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
         vagueActuelle = 0;
@@ -115,6 +119,8 @@ public class Environnement {
         return listeProjectiles;
     }
 
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
     }
@@ -165,6 +171,9 @@ public class Environnement {
                 if (p.arriveSurEnnemi()) {
                     p.getTourelle().infligerDegats();
                     listeProjectilesASupp.add(p);
+                    if (p instanceof ProjectileMissile){
+                        listExplosions.add(p.creerExplosion());
+                    }
                 }
             }
 
@@ -178,7 +187,12 @@ public class Environnement {
                         this.ajouterProjectile(p);
                     }
                 }
-                else if (t instanceof TourelleMissiles) {
+            }
+        }
+
+        if (this.nbTours % 100 == 0){
+            for (Tourelle t: this.getListeTourelles()){
+                if (t instanceof TourelleMissiles) {
                     t.raffraichirEnnemiVise();
                     if (t.getEnnemiVise() != null) {
                         Projectile p = t.creerProjectileMissile();
@@ -238,10 +252,10 @@ public class Environnement {
         return false;
     }
 
-    public void retirerLaser(Laser l){
-        for (int i = listeLasers.size()-1 ; i >= 0 ; i--){
-            if (listeLasers.get(i).equals(l)){
-                this.listeLasers.remove(listeLasers.get(i));
+    public void retirerExplosion(Explosion e){
+        for (int i = listExplosions.size()-1 ; i >= 0 ; i--){
+            if (listExplosions.get(i).equals(e)){
+                this.listExplosions.remove(listExplosions.get(i));
             }
         }
     }

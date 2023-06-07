@@ -27,4 +27,8 @@ public abstract class Projectile extends ElementDeplacable{
     public Ennemi getEnnemiVise() {
         return ennemiVise;
     }
+
+    public Explosion creerExplosion () {
+        return new Explosion(this.ennemiVise.getCoordonnees(), tourelle.getPorteeMissile());
+    }
 }

@@ -113,6 +113,7 @@ public class JeuControleur implements Initializable {
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
+        ExplosionVue  explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
 
 
 
@@ -186,6 +187,16 @@ public class JeuControleur implements Initializable {
                 if (change.wasAdded()) {
                     for (Laser addedLaser : change.getAddedSubList()) {
                         laserVue.creerLaser(addedLaser);
+                    }
+                }
+            }
+        });
+
+        env.getListExplosions().addListener((ListChangeListener<Explosion>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Explosion addedExplosion : change.getAddedSubList()) {
+                        explostionVue.explosion(addedExplosion);
                     }
                 }
             }
