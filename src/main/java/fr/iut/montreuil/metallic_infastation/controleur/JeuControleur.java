@@ -112,6 +112,8 @@ public class JeuControleur implements Initializable {
 
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
+        ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
+
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
@@ -154,12 +156,22 @@ public class JeuControleur implements Initializable {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     for (int i = change.getRemoved().size() - 1; i >= 0; i--) {
-                        projectileSemiVue.retirerProjectile(change.getRemoved().get(i));
+                        if (change.getRemoved() instanceof ProjectileSemi){
+                            projectileSemiVue.retirerProjectile(change.getRemoved().get(i));
+                        }
+                        else {
+                            projectileMissileVue.retirerProjectile(change.getRemoved().get(i));
+                        }
                     }
                 }
                 if (change.wasAdded()) {
                     for (Projectile addedProjectile : change.getAddedSubList()) {
-                        projectileSemiVue.ajouterProjectile(addedProjectile);
+                        if (addedProjectile instanceof ProjectileSemi){
+                            projectileSemiVue.ajouterProjectile(addedProjectile);
+                        }
+                        else {
+                            projectileMissileVue.ajouterMissile(addedProjectile);
+                        }
                     }
                 }
             }

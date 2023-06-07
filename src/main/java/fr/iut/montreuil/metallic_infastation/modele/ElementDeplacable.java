@@ -10,6 +10,7 @@ public abstract class ElementDeplacable {
         this.id = compteur;
         this.coordonnees = coordonnees;
         this.vitesse = vitesse;
+
         compteur++;
     }
     public int getId() {
@@ -26,4 +27,5 @@ public abstract class ElementDeplacable {
     public void setVitesse(int vitesse){
         this.vitesse = vitesse;
     }
+
 }

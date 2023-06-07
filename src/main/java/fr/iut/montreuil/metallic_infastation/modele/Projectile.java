@@ -1,6 +1,6 @@
 package fr.iut.montreuil.metallic_infastation.modele;
 
-public class Projectile extends ElementDeplacable{
+public abstract class Projectile extends ElementDeplacable{
 
     private Tourelle tourelle;
     private Ennemi ennemiVise;
@@ -15,17 +15,7 @@ public class Projectile extends ElementDeplacable{
         return this.getId() == p.getId();
     }
 
-    public void seDeplacer(){
-
-        int deltaX = this.ennemiVise.getCoordonnees().getX() - this.getCoordonnees().getX();
-        int deltaY = this.ennemiVise.getCoordonnees().getY() - this.getCoordonnees().getY();
-        int ro = (int)((Math.pow(deltaX,2) + Math.pow(deltaY,2)) / (Math.pow(this.getVitesse(),2)));
-
-        int deltaXModifie = (int)(deltaX / Math.sqrt(ro));
-        int deltaYModifie = (int)(deltaY / Math.sqrt(ro));
-        this.coordonnees.setX(this.coordonnees.getX() + deltaXModifie);
-        this.coordonnees.setY(this.coordonnees.getY() + deltaYModifie);
-    }
+    public abstract void seDeplacer();
     public boolean arriveSurEnnemi(){
         return this.coordonnees.getCase().caseEgale(this.ennemiVise.getCase());
     }

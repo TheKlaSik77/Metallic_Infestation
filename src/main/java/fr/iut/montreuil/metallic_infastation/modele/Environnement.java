@@ -178,6 +178,13 @@ public class Environnement {
                         this.ajouterProjectile(p);
                     }
                 }
+                else if (t instanceof TourelleMissiles) {
+                    t.raffraichirEnnemiVise();
+                    if (t.getEnnemiVise() != null) {
+                        Projectile p = t.creerProjectileMissile();
+                        this.ajouterProjectile(p);
+                    }
+                }
             }
         }
         for (Tourelle t : this.getListeTourelles()) {
@@ -188,9 +195,6 @@ public class Environnement {
                     this.ajouterLaser(l);
                     t.infligerDegats();
                 }
-            } else {
-                if (nbTours % 50 == 0)
-                    t.infligerDegats();
             }
 
         }
