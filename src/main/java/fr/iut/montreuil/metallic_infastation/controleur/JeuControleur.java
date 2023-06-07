@@ -1,5 +1,4 @@
 package fr.iut.montreuil.metallic_infastation.controleur;
-
 import fr.iut.montreuil.metallic_infastation.JeuApplication;
 import fr.iut.montreuil.metallic_infastation.modele.*;
 import fr.iut.montreuil.metallic_infastation.vue.*;

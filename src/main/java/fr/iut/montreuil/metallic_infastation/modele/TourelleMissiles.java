@@ -20,6 +20,6 @@ public class TourelleMissiles extends Tourelle{
         for (Ennemi e: listeEnnemis) {
             e.decrementerPv(getDegats());
         }
-
     }
+
 }
