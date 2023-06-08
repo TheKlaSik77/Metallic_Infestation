@@ -151,8 +151,12 @@ public class Environnement {
                 Ennemi e = this.getListeEnnemis().get(idEnnemi);
                 e.seDeplacer();
                 listeLasers.clear();
-                if (e.aAtteintLaCible() || e.estMort()) {
+                if (e.aAtteintLaCible()) {
                     ennemisASupp.add(e);
+                    joueur.debiterPvJoueurProperty(e.getDrop());
+                } else if (e.estMort()) {
+                    ennemisASupp.add(e);
+                    joueur.crediterArgentProperty(e.getDrop());
                 }
             }
         }
