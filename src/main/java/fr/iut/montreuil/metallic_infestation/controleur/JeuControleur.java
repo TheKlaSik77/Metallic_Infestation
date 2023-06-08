@@ -277,7 +277,7 @@ public class JeuControleur implements Initializable {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.017),
+                Duration.seconds(0.020),
                 ev -> {
                     if (gestionnaireVagues.estDerniereVague()) {
                         System.out.println("Fini");
