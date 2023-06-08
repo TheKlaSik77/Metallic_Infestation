@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.application</groupId>
-    <artifactId>Metallic_Infastation</artifactId>
+    <artifactId>Metallic_Infestation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Metallic_Infastation</name>
 
@@ -70,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.application.metallic_infastation/fr.iut.montreuil.metallic_infastation.JeuApplication
+                                com.application.metallic_infastation/fr.iut.montreuil.metallic_infestation.JeuApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

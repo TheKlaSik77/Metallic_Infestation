@@ -1,13 +1,13 @@
-module com.application.metallic_infastation {
+module com.application.metallic_infestation {
     requires javafx.controls;
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
 
-    opens fr.iut.montreuil.metallic_infastation to javafx.fxml;
-    exports fr.iut.montreuil.metallic_infastation;
-    opens fr.iut.montreuil.metallic_infastation.controleur to javafx.fxml;
-    exports fr.iut.montreuil.metallic_infastation.controleur;
-    exports fr.iut.montreuil.metallic_infastation.modele;
-    opens fr.iut.montreuil.metallic_infastation.modele to javafx.fxml;
+    opens fr.iut.montreuil.metallic_infestation to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation;
+    opens fr.iut.montreuil.metallic_infestation.controleur to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.controleur;
+    exports fr.iut.montreuil.metallic_infestation.modele;
+    opens fr.iut.montreuil.metallic_infestation.modele to javafx.fxml;
 }
