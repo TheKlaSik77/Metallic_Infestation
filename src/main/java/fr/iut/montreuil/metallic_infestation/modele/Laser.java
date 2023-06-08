@@ -34,6 +34,6 @@ public class Laser {
         return this.getId().equals(l.getId());
     }
     public String getId(){
-        System.out.println(id);return id;}
+        return id;}
 
 }

@@ -33,7 +33,6 @@ public class ProjectileSemiVue {
         projectile.setId(String.valueOf(p.getId()));
         zoneAffichageProjectiles.getChildren().add(projectile);
 
-
     }
 
     public void retirerProjectile(Projectile p) {
