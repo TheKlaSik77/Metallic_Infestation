@@ -64,6 +64,7 @@ public class GestionnaireVagues {
                 }
             }
         }
+        for (int i = 0; i<environnement.getListeEnnemis().size(); i)
     }
 
     public boolean estDerniereVague() {
@@ -77,6 +78,7 @@ public class GestionnaireVagues {
     public void setDebutPartie(Instant debutPartie) {
         this.debutPartie = debutPartie;
     }
+
 
 
 }

@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.util.Duration.*;
 
 
 import java.time.Duration;
@@ -87,7 +86,7 @@ public class Environnement {
      * } else {
      * nombreEnnemis += ennemisSupplementaires;
      * for (int i = 0; i < nombreEnnemis; i++) {
-     * int typeEnnemi = random.nextInt(3);
+     * int typeEnnemi = random.nextInt(3);        Duration tempsEcoule = Duration.between(gestionnaireVagues.getDebutPartie(), Instant.now());
      * <p>
      * switch (typeEnnemi) {
      * case 0:
@@ -154,17 +153,16 @@ public class Environnement {
     public void unTour(GestionnaireVagues gestionnaireVagues) {
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
 
-        Duration tempsEcoule;
-        tempsEcoule = Duration.between(gestionnaireVagues.getDebutPartie(), Instant.now());
-        if (tempsEcoule.toSeconds() >= 20) {
-            gestionnaireVagues.lancerProchaineVague(terrain);
-            gestionnaireVagues.setDebutPartie(Instant.now());
-        }
+        Duration tempsEcoule = Duration.between(gestionnaireVagues.getDebutPartie(), Instant.now());
+        if (tempsEcoule.getSeconds() >= 20) {
+                gestionnaireVagues.lancerProchaineVague(terrain);
+                gestionnaireVagues.setDebutPartie(Instant.now());
 
+        }
+        
         if (this.getListeEnnemis().isEmpty()) {
             gestionnaireVagues.lancerProchaineVague(terrain);
         }
-
         for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
             Ennemi e = this.getListeEnnemis().get(idEnnemi);
             e.seDeplacer();
