@@ -39,7 +39,6 @@ public class LaserVue {
             double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
             imageViewLaser.setFitWidth(distance + 32);
             imageViewLaser.setFitHeight(30);
-            System.out.println("ID du laser vue : " + imageViewLaser.getId());
 
             Rotate rotate = new Rotate(angle, x1, y1);
             imageViewLaser.getTransforms().add(rotate);

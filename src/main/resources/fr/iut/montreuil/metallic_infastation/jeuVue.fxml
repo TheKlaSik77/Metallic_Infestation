@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.metallic_infastation.controleur.JeuControleur">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/gui/fond.png" />
+         </image>
+      </ImageView>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0">
+         <bottom>
+            <Pane prefHeight="50.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutY="-14.0" prefHeight="65.0" prefWidth="736.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+
+                           <children>
+                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="101.0" text="Argent" textFill="#d3cfcf" />
+                              <Label fx:id="ArgentProperty" alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="3500" textFill="#d3cfcf" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="101.0" text="Points de Vie" textFill="#d3cfcf" />
+                              <Label fx:id="PvProperty" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="100.0" text="150" textAlignment="CENTER" textFill="#d3cfcf" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </bottom>
+         <center>
+            <Pane fx:id="zoneAffichageEnnemis" BorderPane.alignment="CENTER">
+               <children>
+                  <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="736.0" style="-fx-background-color: grey;" />
+               </children>
+            </Pane>
+         </center>
+         <right>
+            <Pane prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="250.0" text="Boutique" textAlignment="CENTER" textFill="#d3cfcf" />
+                        <VBox prefHeight="120.0" prefWidth="250.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="252.0" text="Achat PV" textFill="#d3cfcf" />
+                              <VBox prefHeight="77.0" prefWidth="250.0">
+                                 <children>
+                                    <HBox prefHeight="34.0" prefWidth="250.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="25.0" prefWidth="167.0" text="1 PV" textFill="#d3cfcf" />
+                                          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achatUnPv" text="10CR" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="29.0" prefWidth="250.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="25.0" prefWidth="167.0" text="3 PV" textFill="#d3cfcf" />
+                                          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achatTroisPv" text="30CR" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="120.0" prefWidth="250.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="25.0" prefWidth="167.0" text="5 PV" textFill="#d3cfcf" />
+                                          <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#achatCinqPv" text="50CR" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="265.0" prefWidth="264.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="263.0" text="Achat Tour" textFill="#d3cfcf">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Label>
+                              <ToggleButton fx:id="tour1" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" selected="true" style="-fx-background-radius: 50%; -fx-background-color: transparent;">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toursGroupe" />
+                                 </toggleGroup>
+                                 <graphic>
+                                    <ImageView fx:id="imTour1" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/gui/bouton_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tour2" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 50%; -fx-background-color: transparent;" toggleGroup="$toursGroupe">
+                                 <graphic>
+                                    <ImageView fx:id="imTour2" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/gui/bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tour3" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 50%; -fx-background-color: transparent;" toggleGroup="$toursGroupe">
+                                 <graphic>
+                                    <ImageView fx:id="imTour3" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/gui/bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ToggleButton>
+                              <Label fx:id="prixTour" text="10" textFill="#d3cfcf">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </right>
+      </BorderPane>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="848.0" layoutY="219.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@img/tourelle/tourelleSemiAllumee.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="848.0" layoutY="299.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@img/tourelle/tourelleAutoAllumee.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="847.0" layoutY="372.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@img/tourelle/tourelleMissiles.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

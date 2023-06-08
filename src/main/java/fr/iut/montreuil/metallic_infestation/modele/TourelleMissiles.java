@@ -6,7 +6,7 @@ public class TourelleMissiles extends Tourelle{
 
     public TourelleMissiles(Case position,Environnement env,Terrain terrain) {
 
-        super(300,position,50,5,env,terrain, 7);
+        super(100,position,50,5,env,terrain, 7);
     }
 
     @Override

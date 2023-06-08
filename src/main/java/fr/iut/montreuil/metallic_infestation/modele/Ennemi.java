@@ -7,6 +7,9 @@ public abstract class Ennemi extends ElementDeplacable{
     private int drop;
     private int vitesse;
     private Terrain terrain;
+
+
+
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 
@@ -54,7 +57,12 @@ public abstract class Ennemi extends ElementDeplacable{
         return this.getCoordonnees().getCase();
     }
 
+    public ParcoursBFS getParcoursBFS() {
+        return parcoursBFS;
+    }
+
     public void seDeplacer() {
+        // detecterCollision(e);
         int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
         int distanceY = this.caseDestination.getI() * terrain.getTailleCase() - this.getCoordonnees().getY();
 
@@ -76,7 +84,12 @@ public abstract class Ennemi extends ElementDeplacable{
         if (this.getCase().caseEgale(this.caseDestination)) {
             this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
         }
+
+
     }
+
+
+
     /**
      *
      * @param n
@@ -110,11 +123,13 @@ public abstract class Ennemi extends ElementDeplacable{
                 '}';
     }
 
+    public boolean estEnCollisionAvec(Ennemi autreEnnemi) {
+        return this.getCoordonnees().equals(autreEnnemi.getCoordonnees());
+    }
+
     public int getDrop (){
         return this.drop;
     }
 
 }
-
-
 

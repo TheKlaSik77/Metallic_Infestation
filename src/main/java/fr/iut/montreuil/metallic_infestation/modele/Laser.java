@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+
 public class Laser {
     private Tourelle tourelle;
     private Ennemi ennemiVise;
@@ -34,6 +35,7 @@ public class Laser {
         return this.getId().equals(l.getId());
     }
     public String getId(){
-        return id;}
+        return id;
+    }
 
 }
