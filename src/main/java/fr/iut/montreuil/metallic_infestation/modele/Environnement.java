@@ -136,7 +136,7 @@ public class Environnement {
             for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                 Ennemi e = this.getListeEnnemis().get(idEnnemi);
                 e.seDeplacer();
-                listeLasers.clear();
+
                 if (e.aAtteintLaCible() || e.estMort()) {
                     ennemisASupp.add(e);
                 }
@@ -147,11 +147,11 @@ public class Environnement {
             for (Projectile p : this.getListeProjectiles()) {
                 p.seDeplacer();
                 if (p.arriveSurEnnemi()) {
+                    if (p instanceof ProjectileMissile){
+                        listExplosions.add(((ProjectileMissile) p).creerExplosion());
+                    }
                     p.getTourelle().infligerDegats();
                     listeProjectilesASupp.add(p);
-                    if (p instanceof ProjectileMissile){
-                        listExplosions.add(p.creerExplosion());
-                    }
                 }
             }
 
@@ -200,6 +200,9 @@ public class Environnement {
         }
         for (Ennemi e : ennemisASupp){
             this.retirerEnnemi(e);
+        }
+        if(nbTours % 2 == 0) {
+            listeLasers.clear();
         }
         nbTours++;
     }
