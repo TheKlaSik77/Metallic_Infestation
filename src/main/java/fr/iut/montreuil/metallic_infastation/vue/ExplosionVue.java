@@ -36,8 +36,8 @@ public class ExplosionVue {
         explosion.setY(e.getCoordonneeExplosion().getY() - image.getHeight()/ 2);
         explosion.setBlendMode(BlendMode.MULTIPLY);
 
-        double tempsAparition = 2;
-        double tempsDisparition = 1;
+        double tempsAparition = 1;
+        double tempsDisparition = 0.5;
         ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(tempsAparition), explosion);
         scaleTransition.setFromX(0.0);
         scaleTransition.setFromY(0.0);
