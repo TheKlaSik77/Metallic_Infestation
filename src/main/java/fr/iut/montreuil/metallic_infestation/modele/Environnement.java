@@ -145,7 +145,7 @@ public class Environnement {
     public void unTour(GestionnaireVagues gestionnaireVagues) {
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
 
-        if (this.nbTours % 3 == 0) {
+        if (this.nbTours % 2 == 0) {
             if (this.getListeEnnemis().isEmpty()) {
                 gestionnaireVagues.lancerProchaineVague(terrain);
             }
