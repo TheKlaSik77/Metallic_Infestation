@@ -1,5 +1,8 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+import fr.iut.montreuil.metallic_infestation.vue.PieceVue;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -139,22 +142,7 @@ public class Environnement {
             System.out.println(ennemisASpawn);
             System.out.println(ennemisASpawn.size());
         }
-        if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
-            this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
-            System.out.println(ennemisASpawn.size());
-        }
 
-        if (this.nbTours % 2 == 0) {
-
-            for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                Ennemi e = this.getListeEnnemis().get(idEnnemi);
-                e.seDeplacer();
-                listeLasers.clear();
-                if (e.aAtteintLaCible() || e.estMort()) {
-                    ennemisASupp.add(e);
-                }
-            }
-        }
         if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
             this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
             System.out.println(ennemisASpawn.size());
@@ -167,6 +155,8 @@ public class Environnement {
                 listeLasers.clear();
                 if (e.aAtteintLaCible() || e.estMort()) {
                     ennemisASupp.add(e);
+                    joueur.argentProperty().setValue(joueur.argentProperty().getValue() + e.getDrop());
+
                 }
             }
         }
@@ -175,11 +165,12 @@ public class Environnement {
             for (Projectile p : this.getListeProjectiles()) {
                 p.seDeplacer();
                 if (p.arriveSurEnnemi()) {
+                    if (p instanceof ProjectileMissile) {
+                        listExplosions.add(((ProjectileMissile) p).creerExplosion());
+                    }
                     p.getTourelle().infligerDegats();
                     listeProjectilesASupp.add(p);
-                    if (p instanceof ProjectileMissile) {
-                        listExplosions.add(p.creerExplosion());
-                    }
+
                 }
             }
 
@@ -228,6 +219,10 @@ public class Environnement {
         }
         for (Ennemi e : ennemisASupp) {
             this.retirerEnnemi(e);
+
+        }
+        if (nbTours % 2 == 0) {
+            listeLasers.clear();
         }
         nbTours++;
     }

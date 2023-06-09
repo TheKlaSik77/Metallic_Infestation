@@ -1,13 +1,15 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public abstract class Ennemi extends ElementDeplacable{
 
 
     private int pv;
-    private int drop;
+    private IntegerProperty drop;
     private int vitesse;
     private Terrain terrain;
-
 
 
     private ParcoursBFS parcoursBFS;
@@ -20,7 +22,7 @@ public abstract class Ennemi extends ElementDeplacable{
         this.pv = pv;
         this.vitesse = vitesse;
         // Piece Lootées par les ennemis
-        this.drop = drop;
+        this.drop = new SimpleIntegerProperty(drop);
         this.terrain = terrain;
         // Position de Départ Aléatoire
         boolean coordonneesChemin;
@@ -127,8 +129,14 @@ public abstract class Ennemi extends ElementDeplacable{
         return this.getCoordonnees().equals(autreEnnemi.getCoordonnees());
     }
 
-    public int getDrop (){
-        return this.drop;
+    public final int getDrop() {
+        return drop.getValue();
+    }
+    public final void setDrop(int n) {
+        drop.setValue(n);
+    }
+    public final IntegerProperty dropProperty() {
+        return drop;
     }
 
 }

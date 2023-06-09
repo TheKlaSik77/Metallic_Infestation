@@ -99,6 +99,7 @@ public class JeuControleur implements Initializable {
     private boolean vagueTerminee = true;
     private LaserVue laserVue;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -112,8 +113,7 @@ public class JeuControleur implements Initializable {
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
         ExplosionVue  explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
-
-
+        PieceVue pieceVue = new PieceVue(env,zoneAffichageEnnemis);
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = env.getJoueur();
@@ -268,6 +268,7 @@ public class JeuControleur implements Initializable {
             }
 
         });
+
     }
 
 

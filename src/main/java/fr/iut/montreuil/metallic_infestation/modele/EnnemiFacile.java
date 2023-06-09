@@ -3,7 +3,7 @@ package fr.iut.montreuil.metallic_infestation.modele;
 public class EnnemiFacile extends Ennemi{
 
     public EnnemiFacile(ParcoursBFS parcoursBFS, Terrain terrain){
-        super(100,4,1,parcoursBFS,terrain);
+        super(50,4,1,parcoursBFS,terrain);
     }
 
     @Override
