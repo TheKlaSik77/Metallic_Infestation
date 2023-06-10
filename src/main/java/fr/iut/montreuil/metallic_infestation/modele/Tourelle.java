@@ -1,7 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 

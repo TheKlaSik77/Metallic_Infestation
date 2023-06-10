@@ -16,4 +16,5 @@ public class ProjectileSemi extends Projectile{
         this.coordonnees.setX(this.coordonnees.getX() + deltaXModifie);
         this.coordonnees.setY(this.coordonnees.getY() + deltaYModifie);
     }
+
 }

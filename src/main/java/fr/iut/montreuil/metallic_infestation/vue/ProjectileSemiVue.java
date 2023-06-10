@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
+
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
 import fr.iut.montreuil.metallic_infestation.modele.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.Projectile;
