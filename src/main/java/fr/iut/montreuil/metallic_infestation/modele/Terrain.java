@@ -46,17 +46,7 @@ public class Terrain {
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 1,11,12},
                 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1, 1, 1, 1,14,13}
         };
-        /*
-        listeDepartsPossibles = new ArrayList<>();
-        Point depart1 = new Point(0, 0);
-        Point depart2 = new Point(1, 0);
-        Point depart3 = new Point(0, 1);
-        Point depart4 = new Point(0, 2);
-        Point depart5 = new Point(0, 3);
-        Point depart6 = new Point(0, 4);
-        Point depart7 = new Point(0, 5);
-        listeDepartsPossibles.addAll(Arrays.asList(depart1, depart2, depart3, depart4, depart5, depart6, depart7));
-        */
+
 
     }
 
