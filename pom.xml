@@ -70,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.application.metallic_infastation/fr.iut.montreuil.metallic_infastation.JeuApplication
+                                com.application.metallic_infastation/fr.iut.montreuil.metallic_infestation.JeuApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
