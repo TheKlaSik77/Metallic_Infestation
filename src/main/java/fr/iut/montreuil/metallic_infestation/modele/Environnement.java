@@ -139,7 +139,7 @@ public class Environnement {
             for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                 Ennemi e = this.getListeEnnemis().get(idEnnemi);
                 e.seDeplacer();
-                if (e.aAtteintLaCible() || e.estMort()) {
+                if (e.aAtteintLaCible()) {
                     ennemisASupp.add(e);
                     joueur.debiterPvJoueurProperty(e.getDrop());
                 } else if (e.estMort()) {
