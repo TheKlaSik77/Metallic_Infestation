@@ -28,8 +28,11 @@ public class JeuControleur implements Initializable {
 
     @FXML
     private TilePane tilePane;
+
     @FXML
     private Pane zoneAffichageEnnemis;
+    @FXML
+    private Pane zoneAffichageObjets;
     private Timeline gameLoop;
     private int temps;
     @FXML
@@ -42,6 +45,7 @@ public class JeuControleur implements Initializable {
     private Environnement env;
     private Joueur joueur;
     private BoutiqueVue boutiqueVue;
+    private ObstacleVue obstacleVue;
 
     @FXML
     private ToggleGroup toursGroupe;
@@ -74,14 +78,7 @@ public class JeuControleur implements Initializable {
 
     @FXML
     private ToggleButton tour3;
-    @FXML
-    private Button bouton1Pv;
 
-    @FXML
-    private Button bouton3Pv;
-
-    @FXML
-    private Button bouton5Pv;
     @FXML
     private ImageView im1Pv;
 
@@ -106,8 +103,8 @@ public class JeuControleur implements Initializable {
         this.terrainExperimental = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
         this.env = new Environnement(terrainExperimental);
-        TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
-
+        TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
+        this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
@@ -116,9 +113,10 @@ public class JeuControleur implements Initializable {
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
+
         this.joueur = env.getJoueur();
         Boutique boutique = new Boutique(joueur, env, terrainExperimental);
-        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrainExperimental);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
@@ -147,6 +145,20 @@ public class JeuControleur implements Initializable {
                 if (change.wasAdded()) {
                     for (Tourelle addedTourelle : change.getAddedSubList()) {
                         tourelleVue.poserTour(addedTourelle);
+                    }
+                }
+            }
+        });
+        env.getListeObstacles().addListener((ListChangeListener<Obstacle>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (Obstacle removedObstacle : change.getRemoved()) {
+                        obstacleVue.retirerObstacle(removedObstacle);
+                    }
+                }
+                if (change.wasAdded()){
+                    for (Obstacle addedObstacle : change.getAddedSubList()) {
+                        obstacleVue.poserObstacle(addedObstacle);
                     }
                 }
             }
@@ -256,18 +268,27 @@ public class JeuControleur implements Initializable {
 
             Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
 
-            if (event.getButton() == MouseButton.PRIMARY && this.terrainExperimental.emplacementVideSurCase(c)) {
-                boutiqueVue.achatTour(c);
+            if (event.getButton() == MouseButton.PRIMARY){
+                if (this.terrainExperimental.emplacementVideSurCase(c)) {
+                    boutiqueVue.achatTour(c);
+                } else if (this.terrainExperimental.cheminSurCase(c)){
+                    boutiqueVue.achatObstacle(c);
+                }
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
             Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
-            if (event.getButton() == MouseButton.SECONDARY && this.terrainExperimental.tourSurCase(c)) {
-                boutique.venteTour(c);
-                System.out.println("tour vendue");
+            if (event.getButton() == MouseButton.SECONDARY) {
+                if (this.terrainExperimental.tourSurCase(c)) {
+                    boutique.venteTour(c);
+                } else if (this.terrainExperimental.obstacleSurCase(c)){
+                    boutique.venteObstacle(c);
+                }
             }
 
         });
+
+
     }
 
 
@@ -285,6 +306,13 @@ public class JeuControleur implements Initializable {
                     } else {
 
                         env.unTour(gestionnaireVagues);
+                        for (Obstacle o : this.env.getListeObstacles()){
+                            if (o.ennemisSurPics()){
+                                obstacleVue.actionnerPics(o);
+                            } else {
+                                obstacleVue.desactiverPics(o);
+                            }
+                        }
 
                     }
 

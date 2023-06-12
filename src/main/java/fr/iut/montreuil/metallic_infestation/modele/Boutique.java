@@ -50,6 +50,15 @@ public class Boutique {
             }
         }
     }
+    public void achatObstacle(int typeObstacle, Case c) {
+        if (typeObstacle == 1){
+            Obstacle piques = new Pics(c,environnement,terrain);
+            if(joueur.achatPossible(piques.getCout())){
+                environnement.ajouterDansListeObstacles(piques);
+                joueur.debiterArgentProperty(piques.getCout());
+            }
+        }
+    }
 
     public void venteTour(Case c) {
         if (terrain.tourSurCase(c)){
@@ -59,4 +68,10 @@ public class Boutique {
         }
     }
 
+    public void venteObstacle(Case c) {
+        if (terrain.obstacleSurCase(c)){
+            joueur.crediterArgentProperty(environnement.retirerObstacle(c).getCout()/2);
+            terrain.setCase(c, 1);
+        }
+    }
 }

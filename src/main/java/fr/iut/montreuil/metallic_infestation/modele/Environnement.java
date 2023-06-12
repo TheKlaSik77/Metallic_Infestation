@@ -4,9 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Environnement {
 
@@ -25,6 +23,7 @@ public class Environnement {
     private ParcoursBFS parcoursBFS;
     public int nbTours;
     private ObservableList<Laser> listeLasers;
+    private ObservableList<Obstacle> listeObstacles;
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
@@ -33,6 +32,7 @@ public class Environnement {
         this.listeProjectiles = FXCollections.observableArrayList();
         this.listeLasers = FXCollections.observableArrayList();
         this.listExplosions = FXCollections.observableArrayList();
+        this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
@@ -63,7 +63,7 @@ public class Environnement {
 
     public Ennemi ennemiSurCase(Case c) {
         for (Ennemi e : listeEnnemis) {
-            if (e.getCase().caseEgale(c)) {
+            if (e.getCase().equals(c)) {
                 return e;
             }
         }
@@ -74,13 +74,27 @@ public class Environnement {
         listeTourelles.add(t);
 
     }
+    public void ajouterDansListeObstacles(Obstacle o) {
+        listeObstacles.add(o);
+    }
 
     public Tourelle retirerTour(Case c) {
         Tourelle supprimee = null;
         for (int i = this.getListeTourelles().size() - 1; i >= 0; i--) {
-            if (this.getListeTourelles().get(i).getPosition().caseEgale(c)) {
+            if (this.getListeTourelles().get(i).getPosition().equals(c)) {
                 supprimee = this.getListeTourelles().get(i);
                 this.getListeTourelles().remove(i);
+            }
+        }
+        return supprimee;
+    }
+
+    public Obstacle retirerObstacle(Case c) {
+        Obstacle supprimee = null;
+        for (int i = this.getListeObstacles().size() - 1; i >= 0; i--) {
+            if (this.getListeObstacles().get(i).getPosition().equals(c)) {
+                supprimee = this.getListeObstacles().get(i);
+                this.getListeObstacles().remove(i);
             }
         }
         return supprimee;
@@ -126,12 +140,9 @@ public class Environnement {
         }
         if (this.nbTours % 500 == 0 || nbTours == 1) {
             ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
-            System.out.println(ennemisASpawn);
-            System.out.println(ennemisASpawn.size());
         }
         if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
             this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
-            System.out.println(ennemisASpawn.size());
         }
 
         if (this.nbTours % 2 == 0) {
@@ -194,7 +205,16 @@ public class Environnement {
                     t.infligerDegats();
                 }
             }
-
+        }
+        // TODO: Fixer ça
+        ArrayList<Ennemi> listeEnnemisRalentis = new ArrayList<>();
+        for (Obstacle o : this.getListeObstacles()){
+            for (Ennemi e : listeEnnemis) {
+                if (o instanceof Pics && e.getCase().equals(o.getPosition())) {
+                    listeEnnemisRalentis.add(e);
+                    ((Pics) o).actionnerPics(e);
+                }
+            }
         }
         for (Laser l : listeLasers){
             if (l.getEnnemiVise() == null){
@@ -245,6 +265,11 @@ public class Environnement {
                 this.listExplosions.remove(listExplosions.get(i));
             }
         }
+    }
+
+
+    public ObservableList<Obstacle> getListeObstacles() {
+        return this.listeObstacles;
     }
 }
 

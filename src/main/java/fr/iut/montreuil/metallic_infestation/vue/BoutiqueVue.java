@@ -35,7 +35,10 @@ public class BoutiqueVue {
 
     @FXML
     private ToggleButton tour3;
-
+    @FXML
+    private ToggleButton obs1;
+    @FXML
+    private ToggleButton obs2;
     private Boutique boutique;
     private Label prixTour;
     private TilePane tilePane;
@@ -43,12 +46,14 @@ public class BoutiqueVue {
     private Terrain terrain;
 
 
-    public BoutiqueVue (Boutique boutique, ToggleGroup groupeRadio, ToggleButton tour1, ToggleButton tour2, ToggleButton tour3, Label prixTour, TilePane tilePane, Terrain terrain){
+    public BoutiqueVue (Boutique boutique, ToggleGroup groupeRadio, ToggleButton tour1, ToggleButton tour2, ToggleButton tour3, ToggleButton obs1, ToggleButton obs2, Label prixTour, TilePane tilePane, Terrain terrain){
         this.boutique = boutique;
         this.groupeRadio = groupeRadio;
         this.tour1 = tour1;
         this.tour2 = tour2;
         this.tour3 = tour3;
+        this.obs1 = obs1;
+        this.obs2 = obs2;
         this.prixTour = prixTour;
         this.tilePane = tilePane;
         this.terrain = terrain;
@@ -73,8 +78,16 @@ public class BoutiqueVue {
         else if (tour2.isSelected()) {
             boutique.achatTour(2,c);
         }
-        else{
+        else {
             boutique.achatTour(3,c);
+        }
+    }
+
+    public void achatObstacle(Case c) {
+        if (obs1.isSelected()){
+            boutique.achatObstacle(1,c);
+        } else if (obs2.isSelected()){
+            boutique.achatObstacle(2,c);
         }
     }
 
@@ -98,4 +111,6 @@ public class BoutiqueVue {
         this.imageTour3.setImage(tour3.getImage());
 
     }
+
+
 }

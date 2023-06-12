@@ -20,7 +20,7 @@ public abstract class Projectile extends ElementDeplacable{
     public abstract void seDeplacer();
 
     public boolean arriveSurEnnemi(){
-        return this.coordonnees.getCase().caseEgale(this.ennemiVise.getCase());
+        return this.coordonnees.getCase().equals(this.ennemiVise.getCase());
     }
 
     public Tourelle getTourelle() {

@@ -12,7 +12,7 @@ class CaseTest {
         Case c2 = new Case(1,1);
         Case c3 = new Case(1,1);
 
-        assertTrue(c2.caseEgale(c3));
-        assertFalse(c1.caseEgale(c2));
+        assertTrue(c2.equals(c3));
+        assertFalse(c1.equals(c2));
     }
 }

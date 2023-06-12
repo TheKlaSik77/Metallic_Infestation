@@ -39,7 +39,7 @@ public class Case {
         return new Point((this.getJ() * 32) + 16,(this.getI() * 32) + 16);
     }
 
-    public boolean caseEgale(Case c){
+    public boolean equals(Case c){
         return this.getI() == c.getI() && this.getJ() == c.getJ();
     }
 }

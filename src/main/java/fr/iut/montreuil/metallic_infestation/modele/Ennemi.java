@@ -5,7 +5,6 @@ public abstract class Ennemi extends ElementDeplacable{
 
     private int pv;
     private int drop;
-    private int vitesse;
     private Terrain terrain;
 
 
@@ -18,7 +17,6 @@ public abstract class Ennemi extends ElementDeplacable{
     public Ennemi (int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
         super(new Point(0,0),vitesse);
         this.pv = pv;
-        this.vitesse = vitesse;
         // Piece Lootées par les ennemis
         this.drop = drop;
         this.terrain = terrain;
@@ -62,12 +60,12 @@ public abstract class Ennemi extends ElementDeplacable{
     }
 
     public void seDeplacer() {
-        // detecterCollision(e);
+
         int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
         int distanceY = this.caseDestination.getI() * terrain.getTailleCase() - this.getCoordonnees().getY();
 
-        int deplacementX = Math.min(vitesse, Math.abs(distanceX));
-        int deplacementY = Math.min(vitesse, Math.abs(distanceY));
+        int deplacementX = Math.min(getVitesse(), Math.abs(distanceX));
+        int deplacementY = Math.min(getVitesse(), Math.abs(distanceY));
 
         if (distanceX < 0) {
             this.coordonnees.setX(this.coordonnees.getX() - deplacementX);
@@ -81,7 +79,7 @@ public abstract class Ennemi extends ElementDeplacable{
             this.coordonnees.setY(this.coordonnees.getY() + deplacementY);
         }
 
-        if (this.getCase().caseEgale(this.caseDestination)) {
+        if (this.getCase().equals(this.caseDestination)) {
             this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
         }
 

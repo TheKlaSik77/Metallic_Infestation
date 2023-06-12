@@ -6,11 +6,10 @@ public class Terrain {
 
     /**
      * Pour le terrain :  0 = Case vide (Interdite)
-     *                    1 = Chemin
-     *                    2 = Emplacement de Tour
-     *                    3 = Tourelle semiAuto
-     *                    4 = Tourelle Auto
-     *                    5 = Tourelle Missiles
+     *                    1 = Chemin vide
+     *                    2 = Emplacement de Tour vide
+     *                    3 = Tourelle
+     *                    4 = Obstacle
      *                    11 = Bunker Nord Ouest
      *                    12 = Bunker Nord Est
      *                    13 = Bunker Sud Est
@@ -90,7 +89,9 @@ public class Terrain {
     public boolean emplacementVideSurCase(Case c){
         return terrain[c.getI()][c.getJ()] == 2;
     }
-
+    public boolean obstacleSurCase(Case c) {
+        return terrain[c.getI()][c.getJ()] == 4;
+    }
     public void afficherTerrain(){
         for (int i = 0 ; i < terrain.length ; i++){
             for (int j = 0 ; j < terrain[i].length ; j++){
@@ -151,5 +152,7 @@ public class Terrain {
         int randomIndex = (int) (Math.random() * casesAdjacentes.size());
         return casesAdjacentes.get(randomIndex);
     }
+
+
 }
 

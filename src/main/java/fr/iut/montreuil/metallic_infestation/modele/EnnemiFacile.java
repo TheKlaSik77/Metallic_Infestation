@@ -10,4 +10,7 @@ public class EnnemiFacile extends Ennemi{
     public String toString() {
         return "EnnemiFacile" + super.toString();
     }
+    public void retablirVitesse(){
+        this.setVitesse(4);
+    }
 }

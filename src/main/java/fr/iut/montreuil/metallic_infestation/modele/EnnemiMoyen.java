@@ -9,4 +9,7 @@ public class EnnemiMoyen extends Ennemi{
         public String toString() {
             return "EnnemiMoyen" + super.toString();
         }
+        public void retablirVitesse(){
+            this.setVitesse(3);
+        }
     }
