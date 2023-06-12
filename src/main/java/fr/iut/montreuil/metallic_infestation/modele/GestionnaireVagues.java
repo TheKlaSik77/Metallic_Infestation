@@ -53,7 +53,7 @@ public class GestionnaireVagues {
             for (int i = 0; i < nombreEnnemis; i++) {
                 if (Environnement.vagueActuelle >= 3 && Environnement.vagueActuelle <= 5) {
                     typeEnnemi = random.nextInt(2);
-                } else if (Environnement.vagueActuelle > 6){
+                } else if (Environnement.vagueActuelle > 6) {
                     typeEnnemi = random.nextInt(3);
                 }
                 switch (typeEnnemi) {
@@ -90,6 +90,3 @@ public class GestionnaireVagues {
 
 
 }
- 
-
-

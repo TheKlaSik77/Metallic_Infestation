@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele;
 
 public abstract class Projectile extends ElementDeplacable{
 
+
     private Tourelle tourelle;
     private Ennemi ennemiVise;
 
@@ -15,7 +16,9 @@ public abstract class Projectile extends ElementDeplacable{
         return this.getId() == p.getId();
     }
 
+
     public abstract void seDeplacer();
+
     public boolean arriveSurEnnemi(){
         return this.coordonnees.getCase().caseEgale(this.ennemiVise.getCase());
     }
@@ -27,6 +30,5 @@ public abstract class Projectile extends ElementDeplacable{
     public Ennemi getEnnemiVise() {
         return ennemiVise;
     }
-
 
 }

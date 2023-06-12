@@ -134,10 +134,13 @@ public class Environnement {
 
 
     public void unTour(GestionnaireVagues gestionnaireVagues) {
-        ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.nbTours % 500 == 0 || nbTours == 1) {
-            System.out.println("coucou");
 
+        ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
+        if (this.joueur.pvJoueurProprerty().get() <= 0){
+            // TODO: Ecran de loose
+
+        }
+        if (this.nbTours % 500 == 0 || nbTours == 1) {
             ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
             System.out.println(ennemisASpawn);
             System.out.println(ennemisASpawn.size());
@@ -152,11 +155,13 @@ public class Environnement {
             for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                 Ennemi e = this.getListeEnnemis().get(idEnnemi);
                 e.seDeplacer();
-                listeLasers.clear();
+
                 if (e.aAtteintLaCible() || e.estMort()) {
                     ennemisASupp.add(e);
-                    joueur.argentProperty().setValue(joueur.argentProperty().getValue() + e.getDrop());
-
+                    joueur.debiterPvJoueurProperty(e.getDrop());
+                } else if (e.estMort()) {
+                    ennemisASupp.add(e);
+                    joueur.crediterArgentProperty(e.getDrop());
                 }
             }
         }

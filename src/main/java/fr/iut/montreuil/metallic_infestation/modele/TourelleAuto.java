@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+
 public class TourelleAuto extends Tourelle{
     public TourelleAuto(Case position,Environnement env,Terrain terrain) {
         super(5,position,30,3,env,terrain, 0);
@@ -11,6 +12,7 @@ public class TourelleAuto extends Tourelle{
         if(getEnnemiVise() != null) {
             getEnnemiVise().decrementerPv(getDegats());
             System.out.println(getEnnemiVise().getPv());
+
         }
     }
 

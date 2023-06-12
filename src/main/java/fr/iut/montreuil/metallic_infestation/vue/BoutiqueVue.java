@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
+
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
 import fr.iut.montreuil.metallic_infestation.modele.*;
 import javafx.fxml.FXML;
@@ -73,7 +74,6 @@ public class BoutiqueVue {
             boutique.achatTour(2,c);
         }
         else{
-
             boutique.achatTour(3,c);
         }
     }
@@ -98,8 +98,4 @@ public class BoutiqueVue {
         this.imageTour3.setImage(tour3.getImage());
 
     }
-
-
-
-
 }
