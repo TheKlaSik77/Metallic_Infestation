@@ -23,7 +23,7 @@ public class VagueVue {
     }
 
     public void affichageLancementVague (int numeroDeVague){
-        this.texteVague = "La vague "+ numeroDeVague + " arrive ! ";
+        this.texteVague = "La vague "+ numeroDeVague + " arrive... ";
 
         texteLancementVague.setText(texteVague);
 

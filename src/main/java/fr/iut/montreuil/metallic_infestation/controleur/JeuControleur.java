@@ -40,6 +40,9 @@ public class JeuControleur implements Initializable {
     private Label prixTour;
 
     @FXML
+    private Label vagueActuelleLabel;
+
+    @FXML
     private Label lancementVagueLabel;
 
     private Environnement env;
@@ -126,7 +129,8 @@ public class JeuControleur implements Initializable {
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
-        env.vagueActuelleProperty().addListener((obs, old, nouv) -> vagueVue.affichageLancementVague(env.vagueActuelleProperty().get()));
+        env.vagueActuelleProperty().addListener((obs, old, nouv) -> {vagueVue.affichageLancementVague(env.vagueActuelleProperty().get()); this.vagueActuelleLabel.setText(nouv.toString());});
+
         gestionnaireVagues = new GestionnaireVagues(env);
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
             while (change.next()) {
