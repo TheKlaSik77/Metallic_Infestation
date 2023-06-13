@@ -57,6 +57,12 @@ public class Boutique {
                 environnement.ajouterDansListeObstacles(piques);
                 joueur.debiterArgentProperty(piques.getCout());
             }
+        } else if (typeObstacle == 2){
+            Mine mine = new Mine(c,environnement,terrain);
+            if(joueur.achatPossible(mine.getCout())){
+                environnement.ajouterDansListeObstacles(mine);
+                joueur.debiterArgentProperty(mine.getCout());
+            }
         }
     }
 
@@ -72,6 +78,7 @@ public class Boutique {
         if (terrain.obstacleSurCase(c)){
             joueur.crediterArgentProperty(environnement.retirerObstacle(c).getCout()/2);
             terrain.setCase(c, 1);
+            System.out.println(terrain.getTerrain()[c.getI()][c.getJ()]);
         }
     }
 }

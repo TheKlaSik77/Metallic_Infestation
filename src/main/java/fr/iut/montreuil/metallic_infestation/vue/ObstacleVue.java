@@ -34,15 +34,15 @@ public class ObstacleVue {
             this.zoneAffichageObjets.getChildren().add(imageView1);
 
 
-        } /*else if (obstacle instanceof Mine){
-            URL urlImMine = JeuApplication.class.getResource("img/obstacle/mine.png");
+        }else if (obstacle instanceof Mine){
+            URL urlImMine = JeuApplication.class.getResource("img/obstacles/mine.png");
             Image imMine = new Image(String.valueOf(urlImMine));
             ImageView imageView2 = new ImageView(imMine);
             imageView2.setTranslateX(obstacle.getPosition().getJ() * 32);
             imageView2.setTranslateY(obstacle.getPosition().getI() * 32);
-            zoneAffichage.getChildren().add(imageView2);
+            zoneAffichageObjets.getChildren().add(imageView2);
         }
- */
+
     }
 
     public void retirerObstacle(Obstacle removedObstacle) {

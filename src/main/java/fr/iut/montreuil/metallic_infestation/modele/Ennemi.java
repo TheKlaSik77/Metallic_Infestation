@@ -129,5 +129,10 @@ public abstract class Ennemi extends ElementDeplacable{
         return this.drop;
     }
 
+    public abstract void retablirVitesse();
+
+    public boolean estSurChemin() {
+        return this.terrain.getTerrain()[this.getCase().getI()][this.getCase().getJ()] == 1;
+    }
 }
 

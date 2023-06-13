@@ -66,6 +66,7 @@ public abstract class Tourelle {
         return null;
     }
 
+    // TODO : A revoir
     public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
         ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
 
@@ -85,25 +86,6 @@ public abstract class Tourelle {
         return ennemisLesPlusProches;
     }
 
-    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement) {
-        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
-
-        // Calcul si ennemi autour de toutes les cases par rapport à sa portée
-        for (int zoneTest = 1; zoneTest <= porteeTourelle; zoneTest++) {
-            for (int i = zoneTest * -1; i <= zoneTest; i++) {
-                for (int j = zoneTest * -1; j <= zoneTest; j++) {
-                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
-
-                        Ennemi ennemiCase = env.ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
-                        if (ennemiCase != null) {
-                            ennemisLesPlusProches.add(ennemiCase);
-                        }
-                    }
-                }
-            }
-        }
-        return ennemisLesPlusProches;
-    }
 
 
     public void raffraichirEnnemiVise(){

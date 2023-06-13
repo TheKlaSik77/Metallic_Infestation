@@ -44,12 +44,15 @@ public abstract class Obstacle {
         }
     }
 
-    public boolean ennemisSurPics() {
+    public boolean ennemisSurObstacle() {
         for (Ennemi e : environnement.getListeEnnemis()){
             if (e.getCase().equals(this.getPosition())){
                 return true;
             }
         }
         return false;
+    }
+
+    public void infligerDegats() {
     }
 }

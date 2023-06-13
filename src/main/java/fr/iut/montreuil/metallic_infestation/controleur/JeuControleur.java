@@ -307,10 +307,12 @@ public class JeuControleur implements Initializable {
 
                         env.unTour(gestionnaireVagues);
                         for (Obstacle o : this.env.getListeObstacles()){
-                            if (o.ennemisSurPics()){
-                                obstacleVue.actionnerPics(o);
-                            } else {
-                                obstacleVue.desactiverPics(o);
+                            if (o instanceof Pics) {
+                                if (o.ennemisSurObstacle()) {
+                                    obstacleVue.actionnerPics(o);
+                                } else {
+                                    obstacleVue.desactiverPics(o);
+                                }
                             }
                         }
 
