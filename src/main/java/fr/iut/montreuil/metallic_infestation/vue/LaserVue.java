@@ -47,19 +47,9 @@ public class LaserVue {
     }
 
     public  void  retirerLaser(Laser laser) {
-        ObservableList<Node> enfants = zoneAffichageLaser.getChildren();
-
-        for (int i = enfants.size()-1; i >= 0; i--) {
-            Node enfant = enfants.get(i);
-
-            if (enfant instanceof ImageView) {
-                System.out.println("Image Laser ID: " + enfant.getId() + ", Laser ID: " + laser.getId());
-                if (enfant.lookup("#" + laser.getId()) != null) {
-                    enfants.remove(i);
-                    System.out.println("Laser removed: " + laser.getId());
-                    break;
-                }
-            }
-        }
+        System.out.println("supprimé");
+        System.out.println(laser.getId());
+        System.out.println(zoneAffichageLaser.lookup("#" + laser.getId()));
+        zoneAffichageLaser.getChildren().remove(zoneAffichageLaser.lookup("#" + laser.getId()));
     }
 }
