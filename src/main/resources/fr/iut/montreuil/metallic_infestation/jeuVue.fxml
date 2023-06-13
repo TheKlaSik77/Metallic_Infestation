@@ -240,7 +240,7 @@
             </Pane>
          </right>
       </BorderPane>
-      <HBox alignment="CENTER" layoutX="315.0" layoutY="736.0" prefHeight="64.0" prefWidth="422.0">
+      <HBox alignment="CENTER" layoutX="274.0" layoutY="736.0" prefHeight="64.0" prefWidth="463.0">
          <children>
             <Label text="Coût de la sélection :" textFill="#d3cfcf">
                <font>
