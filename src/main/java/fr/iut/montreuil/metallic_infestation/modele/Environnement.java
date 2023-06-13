@@ -1,5 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,7 +14,7 @@ public class Environnement {
 
     final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
-    public static int vagueActuelle;
+    public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
@@ -36,7 +38,7 @@ public class Environnement {
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
-        vagueActuelle = 0;
+        vagueActuelleProperty = new SimpleIntegerProperty(0);
         nbTours = 1;
     }
 
@@ -245,6 +247,17 @@ public class Environnement {
                 this.listExplosions.remove(listExplosions.get(i));
             }
         }
+    }
+
+
+
+
+    public IntegerProperty vagueActuelleProperty(){
+        return this.vagueActuelleProperty;
+    }
+
+    public static void incrementerVagueActuelleProperty(){
+        vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
 }
 

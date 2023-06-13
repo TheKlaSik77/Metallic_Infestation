@@ -1,4 +1,4 @@
-package fr.iut.montreuil.metallic_infastation.modele;
+package fr.iut.montreuil.metallic_infestation.modele;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

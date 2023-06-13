@@ -39,6 +39,9 @@ public class JeuControleur implements Initializable {
     @FXML
     private Label prixTour;
 
+    @FXML
+    private Label lancementVagueLabel;
+
     private Environnement env;
     private Joueur joueur;
     private BoutiqueVue boutiqueVue;
@@ -112,6 +115,7 @@ public class JeuControleur implements Initializable {
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
         ExplosionVue  explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
+        VagueVue vagueVue = new VagueVue(lancementVagueLabel);
 
 
 
@@ -122,6 +126,7 @@ public class JeuControleur implements Initializable {
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
+        env.vagueActuelleProperty().addListener((obs, old, nouv) -> vagueVue.affichageLancementVague(env.vagueActuelleProperty().get()));
         gestionnaireVagues = new GestionnaireVagues(env);
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
             while (change.next()) {
