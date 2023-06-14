@@ -18,7 +18,7 @@
       </ImageView>
       <VBox prefHeight="400.0" prefWidth="700.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="710.0" text="Metallic Infestation!" textFill="#d3cfcf">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="710.0" text="Metallic Infestation!" textFill="#d3cfcf" underline="true">
                <font>
                   <Font name="Metal Mania" size="45.0" />
                </font>
