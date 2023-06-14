@@ -49,7 +49,10 @@ public class Terrain {
             };
         }
         else if (LiaisonEntreLeMenuEtLeJeu.nbTerrain == 2) {
-
+            //TODO ajouterTerrain2
+        }
+        else {
+            //TODO ajouterTerrain3
         }
 
 

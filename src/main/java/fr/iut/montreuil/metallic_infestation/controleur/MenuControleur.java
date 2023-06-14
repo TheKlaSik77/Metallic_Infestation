@@ -34,11 +34,26 @@ public class MenuControleur implements Initializable {
 
     @FXML
     void demarreMAP2(ActionEvent event) {
+        LiaisonEntreLeMenuEtLeJeu.nbTerrain = 2;
+        try {
+            jeuApplication.start(jeuMap);
+            stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActuel.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void demarreMAP3(ActionEvent event) {
-
+        LiaisonEntreLeMenuEtLeJeu.nbTerrain = 3;
+        try {
+            jeuApplication.start(jeuMap);
+            stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stageActuel.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
