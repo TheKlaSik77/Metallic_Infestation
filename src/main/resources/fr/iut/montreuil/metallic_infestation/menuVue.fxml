@@ -8,23 +8,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.metallic_infestation.controleur.MenuControleur">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.metallic_infestation.controleur.MenuControleur">
    <children>
-      <ImageView fitHeight="300.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="400.0" fitWidth="737.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/gui/fondMenu.png" />
          </image>
       </ImageView>
-      <VBox prefHeight="300.0" prefWidth="600.0">
+      <VBox prefHeight="400.0" prefWidth="700.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="627.0" text="Metallic Infestation!" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="710.0" text="Metallic Infestation!" textFill="#d3cfcf">
                <font>
                   <Font name="Metal Mania" size="45.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="627.0" text="Choix de la map :" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="70.0" prefWidth="710.0" text="Choix de la map :" textFill="#d3cfcf">
                <font>
                   <Font name="Metal Mania" size="35.0" />
                </font>
@@ -33,16 +32,11 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/gui/cheminpremier.jpg" />
-                           </image>
-                        </ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#demarreMAP1" onMousePressed="#boutonPresseMap1" onMouseReleased="#boutonNonPresseMap1" style="-fx-background-color: transparent;">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#demarreMAP1" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fx:id="imMap1" fitHeight="150.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/gui/pv_bouton_non_pressé.png" />
+                                    <Image url="@img/gui/cheminpremier.jpg" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -50,16 +44,11 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/gui/cheminpremier.jpg" />
-                           </image>
-                        </ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#demarreMAP2" onMousePressed="#boutonPresseMap2" onMouseReleased="#boutonNonPresseMap2" style="-fx-background-color: transparent;">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#demarreMAP2" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fx:id="imMap2" fitHeight="150.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/gui/pv_bouton_non_pressé.png" />
+                                    <Image url="@img/gui/cheminpremier.jpg" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -68,16 +57,11 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <ImageView fitHeight="101.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/gui/cheminpremier.jpg" />
-                           </image>
-                        </ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#demarreMAP3" onMousePressed="#boutonPresseMap3" onMouseReleased="#boutonNonPresseMap3" style="-fx-background-color: transparent;">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#demarreMAP3" style="-fx-background-color: transparent;">
                            <graphic>
-                              <ImageView fx:id="imMap3" fitHeight="150.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@img/gui/pv_bouton_non_pressé.png" />
+                                    <Image url="@img/gui/cheminpremier.jpg" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -88,20 +72,5 @@
             </HBox>
          </children>
       </VBox>
-      <Text fill="#d3cfcf" layoutX="145.0" layoutY="275.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="MAP 1">
-         <font>
-            <Font name="Metal Mania" size="23.0" />
-         </font>
-      </Text>
-      <Text fill="#d3cfcf" layoutX="275.0" layoutY="275.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="MAP 2">
-         <font>
-            <Font name="Metal Mania" size="23.0" />
-         </font>
-      </Text>
-      <Text fill="#d3cfcf" layoutX="403.0" layoutY="275.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="MAP 3">
-         <font>
-            <Font name="Metal Mania" size="23.0" />
-         </font>
-      </Text>
    </children>
 </Pane>
