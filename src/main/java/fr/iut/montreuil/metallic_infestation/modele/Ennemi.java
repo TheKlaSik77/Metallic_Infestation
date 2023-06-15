@@ -20,7 +20,7 @@ public abstract class Ennemi extends ElementDeplacable{
         // Piece Lootées par les ennemis
         this.drop = drop;
         this.terrain = terrain;
-        // Position de Départ Aléatoire
+        // Position de Départ Aléatoire ( /!\ On part du principe que pour chaque map, les spawns des ennemis se trouvent en x = 0 et y aleatoire ou en y = 0 et x aléatoire
         boolean coordonneesChemin;
         do {
             double rand = Math.random();
