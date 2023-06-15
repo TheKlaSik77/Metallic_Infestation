@@ -126,14 +126,12 @@ public class Environnement {
             // TODO: Ecran de loose
 
         }
-        if (this.nbTours % 500 == 0 || nbTours == 1) {
+        if (this.nbTours % 700 == 0 || nbTours == 100) {
             ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
-            System.out.println(ennemisASpawn);
-            System.out.println(ennemisASpawn.size());
+
         }
         if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
             this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
-            System.out.println(ennemisASpawn.size());
         }
 
         if (this.nbTours % 2 == 0) {

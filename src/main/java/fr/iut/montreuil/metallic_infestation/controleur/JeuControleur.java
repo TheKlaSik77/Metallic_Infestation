@@ -98,7 +98,7 @@ public class JeuControleur implements Initializable {
     private ImageView im5Pv;
     private EnnemisVue ennemisVue;
     private int vagueActuelle;
-    private Terrain terrainExperimental;
+    private Terrain terrain;
 
     private GestionnaireVagues gestionnaireVagues;
 
@@ -109,9 +109,9 @@ public class JeuControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-        this.terrainExperimental = new Terrain();
-        TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
-        this.env = new Environnement(terrainExperimental);
+        this.terrain = new Terrain();
+        TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
+        this.env = new Environnement(terrain);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageEnnemis);
 
 
@@ -124,8 +124,8 @@ public class JeuControleur implements Initializable {
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
         this.joueur = env.getJoueur();
-        Boutique boutique = new Boutique(joueur, env, terrainExperimental);
-        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, prixTour, tilePane, terrainExperimental);
+        Boutique boutique = new Boutique(joueur, env, terrain);
+        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
@@ -210,7 +210,7 @@ public class JeuControleur implements Initializable {
         });
 
         terrainVue.afficherTerrain();
-        ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
+        ParcoursBFS parcoursBFS = new ParcoursBFS(terrain);
 
         parcoursBFS.remplirGrilleBFS();
         gameLoop.play();
@@ -263,15 +263,15 @@ public class JeuControleur implements Initializable {
 
         tilePane.setOnMouseClicked(event -> {
 
-            Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
+            Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
 
-            if (event.getButton() == MouseButton.PRIMARY && this.terrainExperimental.emplacementVideSurCase(c)) {
+            if (event.getButton() == MouseButton.PRIMARY && this.terrain.emplacementVideSurCase(c)) {
                 boutiqueVue.achatTour(c);
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
-            Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
-            if (event.getButton() == MouseButton.SECONDARY && this.terrainExperimental.tourSurCase(c)) {
+            Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
+            if (event.getButton() == MouseButton.SECONDARY && this.terrain.tourSurCase(c)) {
                 boutique.venteTour(c);
                 System.out.println("tour vendue");
             }
