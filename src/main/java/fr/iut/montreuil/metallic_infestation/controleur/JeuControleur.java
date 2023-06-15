@@ -42,6 +42,12 @@ public class JeuControleur implements Initializable {
     @FXML
     private Label prixTour;
 
+    @FXML
+    private Label vagueActuelleLabel;
+
+    @FXML
+    private Label lancementVagueLabel;
+
     private Environnement env;
     private Joueur joueur;
     private BoutiqueVue boutiqueVue;
@@ -89,7 +95,7 @@ public class JeuControleur implements Initializable {
     private ImageView im5Pv;
     private EnnemisVue ennemisVue;
     private int vagueActuelle;
-    private Terrain terrainExperimental;
+    private Terrain terrain;
 
     private GestionnaireVagues gestionnaireVagues;
 
@@ -100,26 +106,31 @@ public class JeuControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-        this.terrainExperimental = new Terrain();
-        TerrainVue terrainVue = new TerrainVue(terrainExperimental, tilePane);
-        this.env = new Environnement(terrainExperimental);
+        this.terrain = new Terrain();
+        TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
+        this.env = new Environnement(terrain);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
+
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
         ExplosionVue  explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
+        VagueVue vagueVue = new VagueVue(lancementVagueLabel);
 
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
 
         this.joueur = env.getJoueur();
-        Boutique boutique = new Boutique(joueur, env, terrainExperimental);
-        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrainExperimental);
+
+        Boutique boutique = new Boutique(joueur, env, terrain);
+        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         joueur.pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));
+        env.vagueActuelleProperty().addListener((obs, old, nouv) -> {vagueVue.affichageLancementVague(env.vagueActuelleProperty().get()); this.vagueActuelleLabel.setText(nouv.toString());});
+
         gestionnaireVagues = new GestionnaireVagues(env);
         env.getListeEnnemis().addListener((ListChangeListener<Ennemi>) change -> {
             while (change.next()) {
@@ -213,7 +224,7 @@ public class JeuControleur implements Initializable {
         });
 
         terrainVue.afficherTerrain();
-        ParcoursBFS parcoursBFS = new ParcoursBFS(terrainExperimental);
+        ParcoursBFS parcoursBFS = new ParcoursBFS(terrain);
 
         parcoursBFS.remplirGrilleBFS();
         gameLoop.play();
@@ -266,24 +277,25 @@ public class JeuControleur implements Initializable {
 
         tilePane.setOnMouseClicked(event -> {
 
-            Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
+            Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
 
             if (event.getButton() == MouseButton.PRIMARY){
-                if (this.terrainExperimental.emplacementVideSurCase(c)) {
+                if (this.terrain.emplacementVideSurCase(c)) {
                     boutiqueVue.achatTour(c);
-                } else if (this.terrainExperimental.cheminSurCase(c)){
+                } else if (this.terrain.cheminSurCase(c)){
                     boutiqueVue.achatObstacle(c);
                 }
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
-            Case c = new Case((int) event.getY() / terrainExperimental.getTailleCase(), (int) event.getX() / terrainExperimental.getTailleCase());
+            Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY) {
-                if (this.terrainExperimental.tourSurCase(c)) {
+                if (this.terrain.tourSurCase(c)) {
                     boutique.venteTour(c);
-                } else if (this.terrainExperimental.obstacleSurCase(c)){
+                } else if (this.terrain.obstacleSurCase(c)){
                     boutique.venteObstacle(c);
                 }
+
             }
 
         });

@@ -22,11 +22,9 @@ public class GestionnaireVagues {
 
     public ArrayList<Ennemi> lancerProchaineVague(Terrain terrainExperimental) {
         ArrayList<Ennemi> ennemisASpawn = new ArrayList<>();
-        Environnement.vagueActuelle++;
-        if (Environnement.vagueActuelle < NB_VAGUES_JEU) {
+        Environnement.incrementerVagueActuelleProperty();
+        if (Environnement.vagueActuelleProperty.get() < NB_VAGUES_JEU) {
             if (!estDerniereVague()) {
-                System.out.println("Une vague ennemie se prépare...");
-                System.out.println("Vague actuelle : " + (Environnement.vagueActuelle));
                 ennemisASpawn = lancerVague(terrainExperimental);
 
             }
@@ -38,10 +36,10 @@ public class GestionnaireVagues {
         ArrayList<Ennemi> listeEnnemisASpawn = new ArrayList<>();
         Random random = new Random();
         int nombreEnnemis = 3;
-        int ennemisSupplementaires = (Environnement.vagueActuelle / 2) * 2; // Calcule le nombre d'ennemis supplémentaires à ajouter
+        int ennemisSupplementaires = (Environnement.vagueActuelleProperty.get() / 2) * 2; // Calcule le nombre d'ennemis supplémentaires à ajouter
 
         // À partir de la 10e vague, tous les ennemis sont des ennemis difficiles
-        if (Environnement.vagueActuelle >= NB_VAGUES_JEU_TRANSITION_ENNEMIS_DIFF) {
+        if (Environnement.vagueActuelleProperty.get() >= NB_VAGUES_JEU_TRANSITION_ENNEMIS_DIFF) {
             nombreEnnemis += ennemisSupplementaires;
             for (int i = 0; i < nombreEnnemis; i++) {
                 EnnemiDifficile ennemiDifficile = new EnnemiDifficile(environnement.getParcoursBFS(), terrain);
@@ -51,9 +49,9 @@ public class GestionnaireVagues {
             int typeEnnemi = 0;
             nombreEnnemis += ennemisSupplementaires;
             for (int i = 0; i < nombreEnnemis; i++) {
-                if (Environnement.vagueActuelle >= 3 && Environnement.vagueActuelle <= 5) {
+                if (Environnement.vagueActuelleProperty.get() >= 3 && Environnement.vagueActuelleProperty.get() <= 5) {
                     typeEnnemi = random.nextInt(2);
-                } else if (Environnement.vagueActuelle > 6) {
+                } else if (Environnement.vagueActuelleProperty.get() > 6) {
                     typeEnnemi = random.nextInt(3);
                 }
                 switch (typeEnnemi) {
@@ -76,7 +74,7 @@ public class GestionnaireVagues {
     }
 
     public boolean estDerniereVague() {
-        return Environnement.vagueActuelle >= NB_VAGUES_JEU;
+        return Environnement.vagueActuelleProperty.get() >= NB_VAGUES_JEU;
     }
 
     public Instant getDebutPartie() {

@@ -61,6 +61,20 @@
                               </Label>
                            </children>
                         </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="38.0" fitWidth="29.0">
+                                 <image>
+                                    <Image url="@img/gui/TeteVagueChauve.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="vagueActuelleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="100.0" text="1" textAlignment="CENTER" textFill="#d3cfcf">
+                                 <font>
+                                    <Font name="Metal Mania" size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                </children>
@@ -234,7 +248,7 @@
             </Pane>
          </right>
       </BorderPane>
-      <HBox alignment="CENTER" layoutX="253.0" layoutY="736.0" prefHeight="64.0" prefWidth="395.0">
+      <HBox alignment="CENTER" layoutX="274.0" layoutY="736.0" prefHeight="64.0" prefWidth="463.0">
          <children>
             <Label text="Coût de la sélection :" textFill="#d3cfcf">
                <font>
@@ -308,5 +322,10 @@
             <Font name="Metal Mania" size="20.0" />
          </font>
       </Text>
+      <Label fx:id="lancementVagueLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="737.0" prefWidth="737.0" textFill="#9a1616">
+         <font>
+            <Font name="Metal Mania" size="56.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

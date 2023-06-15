@@ -1,6 +1,8 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
 import fr.iut.montreuil.metallic_infestation.vue.ObstacleVue;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,7 +13,7 @@ public class Environnement {
 
     final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
-    public static int vagueActuelle;
+    public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
@@ -37,7 +39,7 @@ public class Environnement {
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
-        vagueActuelle = 0;
+        vagueActuelleProperty = new SimpleIntegerProperty(0);
         nbTours = 1;
     }
 
@@ -134,14 +136,14 @@ public class Environnement {
     }
     public void unTour(GestionnaireVagues gestionnaireVagues) {
 
-        System.out.println(listeObstacles);
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
         if (this.joueur.pvJoueurProprerty().get() <= 0){
             // TODO: Ecran de loose
 
         }
-        if (this.nbTours % 500 == 0 || nbTours == 1) {
+        if (this.nbTours % 700 == 0 || nbTours == 100) {
             ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
+
         }
         if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
             this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
@@ -290,6 +292,15 @@ public class Environnement {
 
     public ObservableList<Obstacle> getListeObstacles() {
         return this.listeObstacles;
+
+    }
+
+    public IntegerProperty vagueActuelleProperty(){
+        return this.vagueActuelleProperty;
+    }
+
+    public static void incrementerVagueActuelleProperty(){
+        vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
 }
 
