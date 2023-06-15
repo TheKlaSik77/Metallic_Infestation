@@ -14,7 +14,7 @@ public class MenuDepartApplication extends Application{
         @Override
         public void start(Stage stage) throws IOException {
             FXMLLoader fxmlLoader = new FXMLLoader(fr.iut.montreuil.metallic_infestation.JeuApplication.class.getResource("menuVue.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 700, 400);
+            Scene scene = new Scene(fxmlLoader.load(), 748, 428);
             stage.setResizable(false);
             stage.setTitle("Metallic Infestation!");
             stage.setScene(scene);

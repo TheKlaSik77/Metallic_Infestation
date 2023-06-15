@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +18,14 @@ import java.util.ResourceBundle;
 
 public class MenuControleur implements Initializable {
 
+    @FXML
+    private ImageView imMap1;
+
+    @FXML
+    private ImageView imMap2;
+
+    @FXML
+    private ImageView imMap3;
     private JeuApplication jeuApplication;
     private Stage jeuMap, stageActuel;
 
@@ -61,5 +72,47 @@ public class MenuControleur implements Initializable {
         this.jeuApplication = new JeuApplication();
         this.jeuMap = new Stage();
 
+    }
+
+    @FXML
+    void map1Pointee(MouseEvent event) {
+        URL imgUrl = JeuApplication.class.getResource("img/gui/map1.png");
+        Image img = new Image(String.valueOf(imgUrl));
+        imMap1.setImage(img);
+    }
+
+    @FXML
+    void map1nonPointee(MouseEvent event) {
+        URL imgUrl = JeuApplication.class.getResource("img/gui/map1NonSéléctionnée.png");
+        Image img = new Image(String.valueOf(imgUrl));
+        imMap1.setImage(img);
+    }
+
+    @FXML
+    void map2NonPointee(MouseEvent event) {
+        URL imgUrl = JeuApplication.class.getResource("img/gui/map2NonSéléctionnée.png");
+        Image img = new Image(String.valueOf(imgUrl));
+        imMap2.setImage(img);
+    }
+
+    @FXML
+    void map2Pointee(MouseEvent event) {
+        URL imgUrl = JeuApplication.class.getResource("img/gui/map2.png");
+        Image img = new Image(String.valueOf(imgUrl));
+        imMap2.setImage(img);
+    }
+
+    @FXML
+    void map3NonPointee(MouseEvent event) {
+        URL imgUrl = JeuApplication.class.getResource("img/gui/map3NonSéléctionnée.png");
+        Image img = new Image(String.valueOf(imgUrl));
+        imMap3.setImage(img);
+    }
+
+    @FXML
+    void map3Pointee(MouseEvent event) {
+        URL imgUrl = JeuApplication.class.getResource("img/gui/map3.png");
+        Image img = new Image(String.valueOf(imgUrl));
+        imMap3.setImage(img);
     }
 }
