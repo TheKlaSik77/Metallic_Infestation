@@ -6,9 +6,6 @@ public abstract class Ennemi extends ElementDeplacable{
     private int pv;
     private int drop;
     private Terrain terrain;
-
-
-
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 
@@ -42,6 +39,8 @@ public abstract class Ennemi extends ElementDeplacable{
         this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
 
     }
+
+
     public int getPv(){
         return this.pv;
     }
