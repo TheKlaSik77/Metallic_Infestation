@@ -157,7 +157,7 @@ public class Environnement {
     public int unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 90) {
+        if (this.joueur.pvJoueurProprerty().get() <= 0) {
             return 1;
         }
         if (this.nbTours % 700 == 0 || nbTours == 100) {

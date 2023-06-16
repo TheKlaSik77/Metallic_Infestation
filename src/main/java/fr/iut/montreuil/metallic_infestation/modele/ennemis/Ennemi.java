@@ -13,8 +13,8 @@ public abstract class Ennemi extends ElementDeplacable{
 
 
     private int pv;
-    private IntegerProperty drop;
-    private int vitesse;
+    private int drop;
+
     private Terrain terrain;
 
 
@@ -27,7 +27,7 @@ public abstract class Ennemi extends ElementDeplacable{
         super(new Point(0,0),vitesse);
         this.pv = pv;
         // Piece Lootées par les ennemis
-        this.drop = new SimpleIntegerProperty(drop);
+        this.drop = drop;
         this.terrain = terrain;
         // Position de Départ Aléatoire ( /!\ On part du principe que pour chaque map, les spawns des ennemis se trouvent en x = 0 et y aleatoire ou en y = 0 et x aléatoire
         boolean coordonneesChemin;
@@ -130,19 +130,10 @@ public abstract class Ennemi extends ElementDeplacable{
                 '}';
     }
 
-    public boolean estEnCollisionAvec(Ennemi autreEnnemi) {
-        return this.getCoordonnees().equals(autreEnnemi.getCoordonnees());
-    }
-
     public final int getDrop() {
-        return drop.getValue();
-    }
-    public final void setDrop(int n) {
-        drop.setValue(n);
-    }
-    public final IntegerProperty dropProperty() {
         return drop;
     }
+
 
     public abstract void retablirVitesse();
 
