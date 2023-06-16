@@ -81,13 +81,6 @@ public class GestionnaireVagues {
         return Environnement.vagueActuelleProperty.get() >= NB_VAGUES_JEU;
     }
 
-    public Instant getDebutPartie() {
-        return debutPartie;
-    }
-
-    public void setDebutPartie(Instant debutPartie) {
-        this.debutPartie = debutPartie;
-    }
 
 
 

@@ -16,9 +16,6 @@ public class ParcoursBFS {
         }
     }
 
-    public int[][] getGrilleBFS() {
-        return grilleBFS;
-    }
 
     public void remplirGrilleBFS(){
 
@@ -109,44 +106,5 @@ public class ParcoursBFS {
         return caseMin;
     }
 
-
-    public Case obtenirCaseSuivante(Case caseActuelle) {
-        ArrayList<Case> casesAdjacentes = new ArrayList<>();
-        int i = caseActuelle.getI();
-        int j = caseActuelle.getJ();
-
-        // Ajouter les cases adjacentes à la liste des cases possibles
-        Case c1 = new Case(i + 1, j);
-        Case c2 = new Case(i - 1, j);
-        Case c3 = new Case(i, j + 1);
-        Case c4 = new Case(i, j - 1);
-
-        if (terrain.caseEstDansTerrain(c1)) {
-            casesAdjacentes.add(c1);
-        }
-        if (terrain.caseEstDansTerrain(c2)) {
-            casesAdjacentes.add(c2);
-        }
-        if (terrain.caseEstDansTerrain(c3)) {
-            casesAdjacentes.add(c3);
-        }
-        if (terrain.caseEstDansTerrain(c4)) {
-            casesAdjacentes.add(c4);
-        }
-
-        // Trouver la case suivante avec la plus petite valeur dans la grille BFS
-        Case caseSuivante = null;
-        int valeurMin = Integer.MAX_VALUE;
-
-        for (Case c : casesAdjacentes) {
-            int valeurCase = getValeurCase(c);
-            if (valeurCase != -1 && valeurCase < valeurMin) {
-                valeurMin = valeurCase;
-                caseSuivante = c;
-            }
-        }
-
-        return caseSuivante;
-    }
 
 }

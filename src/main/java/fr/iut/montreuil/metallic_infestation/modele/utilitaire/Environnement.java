@@ -142,7 +142,7 @@ public class Environnement {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
         if (this.joueur.pvJoueurProprerty().get() <= 0){
-            // TODO: Ecran de loose
+
 
         }
         if (this.nbTours % 700 == 0 || nbTours == 100) {

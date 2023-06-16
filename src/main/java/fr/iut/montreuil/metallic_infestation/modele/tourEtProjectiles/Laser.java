@@ -34,9 +34,6 @@ public class Laser {
     public Tourelle getTourelle (){
         return tourelle;
     }
-    public boolean equals(Laser l){
-        return this.getId().equals(l.getId());
-    }
     public String getId(){
         return id;
     }

@@ -108,6 +108,8 @@ public class JeuControleur implements Initializable {
 
     private boolean vagueTerminee = true;
     private LaserVue laserVue;
+    @FXML
+    private Label gameOverLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -122,7 +124,7 @@ public class JeuControleur implements Initializable {
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
-        ExplosionVue  explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
+        ExplosionVue explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
         VagueVue vagueVue = new VagueVue(lancementVagueLabel);
 
 
@@ -334,6 +336,10 @@ public class JeuControleur implements Initializable {
                                 }
                             }
                         }
+                        if (joueur.pvJoueurProprerty().get() <= 0){
+                            gameOverLabel.setVisible(true);
+                            gameLoop.stop();
+                        }
 
                     }
 
@@ -354,9 +360,6 @@ public class JeuControleur implements Initializable {
         boutiqueVue.achatCinqPv();
     }
 
-    public Timeline getGameLoop() {
-        return gameLoop;
-    }
     @FXML
     void boutonNonPresse1(MouseEvent event) {
         im1Pv.setImage(new Image(String.valueOf(JeuApplication.class.getResource("img/gui/pv_bouton_non_pressé.png"))));

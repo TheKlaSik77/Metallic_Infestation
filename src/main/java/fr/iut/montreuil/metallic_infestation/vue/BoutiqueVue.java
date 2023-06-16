@@ -93,26 +93,6 @@ public class BoutiqueVue {
         }
     }
 
-    public void chargerImageTours() {
-        String imageUrlt1 = "img/tourelle/tourelleSemiEteinte.png";
-        URL urlImTourelleSemi = JeuApplication.class.getResource(imageUrlt1);
-        Image imageTour1 = new Image(String.valueOf(urlImTourelleSemi));
-        ImageView tour1 = new ImageView(imageTour1);
-        this.imageTour1.setImage(tour1.getImage());
-
-        String imageUrlt2 = "img/tourelle/tourelleAutoEteinte.png";
-        URL urlImTourelleAuto = JeuApplication.class.getResource(imageUrlt2);
-        Image imageTour2 = new Image(String.valueOf(urlImTourelleAuto));
-        ImageView tour2 = new ImageView(imageTour2);
-        this.imageTour2.setImage(tour2.getImage());
-
-        String imageUrlt3 = "img/tourelle/tourelleMissiles.png";
-        URL urlImTourelleMissile = JeuApplication.class.getResource(imageUrlt3);
-        Image imageTour3 = new Image(String.valueOf(urlImTourelleMissile));
-        ImageView tour3 = new ImageView(imageTour3);
-        this.imageTour3.setImage(tour3.getImage());
-
-    }
 
 
 }

@@ -19,7 +19,7 @@ public class TerrainVue {
         this.tilePane = tilePane;
     }
 
-    public void afficherTerrain(){
+    public void afficherTerrain() {
         URL urlImHerbe = JeuApplication.class.getResource("img/terrain/horsZone(1).png");
         Image imHerbe = new Image(String.valueOf(urlImHerbe));
         URL urlImHerbe2 = JeuApplication.class.getResource("img/terrain/horsZone(2).png");
@@ -54,10 +54,8 @@ public class TerrainVue {
         Image imArriveeSO = new Image(String.valueOf(urlImArriveeSO));
 
 
-
-
-        for (int i = 0 ; i < terrain.getTerrain().length ; i++){
-            for (int j = 0 ; j < terrain.getTerrain()[i].length ; j++) {
+        for (int i = 0; i < terrain.getTerrain().length; i++) {
+            for (int j = 0; j < terrain.getTerrain()[i].length; j++) {
                 switch (terrain.getTerrain()[i][j]) {
                     case 0 -> {
                         double rand = Math.random();
@@ -94,7 +92,7 @@ public class TerrainVue {
                         ImageView imageView2 = new ImageView(imChemin);
                         tilePane.getChildren().add(imageView2);
                     }
-                    case 2,3 -> {
+                    case 2, 3 -> {
                         ImageView imageView3 = new ImageView(imContourChemin);
                         tilePane.getChildren().add(imageView3);
                     }
@@ -133,48 +131,6 @@ public class TerrainVue {
             }
 
         }
-
     }
 
-    public void raffraichirTourSurTuile(int index){
-        int i = index / 22;
-        int j = (index - (i * 22)) - 1;
-        URL urlImContourChemin = JeuApplication.class.getResource("img/terrain/contourChemin.png");
-        Image imContourChemin = new Image(String.valueOf(urlImContourChemin));
-        switch (terrain.getTerrain()[i][j]) {
-            case 2 -> {
-                URL urlImContourChemin_1 = JeuApplication.class.getResource("img/terrain/contourChemin.png");
-                Image imContourChemin_1 = new Image(String.valueOf(urlImContourChemin_1));
-                ImageView imageView2_1 = new ImageView(imContourChemin_1);
-                tilePane.getChildren().set(index,imageView2_1);
-            }
-            case 3 -> {
-                URL urlImTourelleSemi = JeuApplication.class.getResource("img/tourelle/tourelleSemiEteinte.png");
-                Image imTourelleSemi = new Image(String.valueOf(urlImTourelleSemi));
-                ImageView imageView2_1 = new ImageView(imContourChemin);
-                ImageView imageView4 = new ImageView(imTourelleSemi);
-                StackPane stackPane = new StackPane();
-                stackPane.getChildren().addAll(imageView2_1, imageView4);
-                tilePane.getChildren().set(index,stackPane);
-            }
-            case 4 -> {
-                URL urlImTourelleAuto = JeuApplication.class.getResource("img/tourelle/tourelleAutoEteinte.png");
-                Image imTourelleAuto = new Image(String.valueOf(urlImTourelleAuto));
-                ImageView imageView2_2 = new ImageView(imContourChemin);
-                ImageView imageView5 = new ImageView(imTourelleAuto);
-                StackPane stackPane2 = new StackPane();
-                stackPane2.getChildren().addAll(imageView2_2, imageView5);
-                tilePane.getChildren().set(index, stackPane2);
-            }
-            case 5 -> {
-                URL urlImTourelleMissiles = JeuApplication.class.getResource("img/tourelle/tourelleMissiles.png");
-                Image imTourelleMissiles = new Image(String.valueOf(urlImTourelleMissiles));
-                ImageView imageView2_3 = new ImageView(imContourChemin);
-                ImageView imageView6 = new ImageView(imTourelleMissiles);
-                StackPane stackPane3 = new StackPane();
-                stackPane3.getChildren().addAll(imageView2_3, imageView6);
-                tilePane.getChildren().set(index, stackPane3);
-            }
-        }
-    }
 }

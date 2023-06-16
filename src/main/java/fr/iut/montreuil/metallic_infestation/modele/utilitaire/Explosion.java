@@ -31,7 +31,6 @@ public class Explosion {
         }
     }
 
-    // TODO : A revoir
     public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
         ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
         for (int i = portee * -1; i <= portee; i++) {

@@ -23,5 +23,4 @@ public class Joueur {
     public void crediterPvJoueurProperty (int credit){this.pvJoueurProperty.set(pvJoueurProperty.get()+credit);}
     public void debiterPvJoueurProperty (int debit){this.pvJoueurProperty.set(pvJoueurProperty.get()-debit);}
     public boolean achatPossible (int montant) {return argentProperty().get() >= montant;}
-    public boolean pvNull () {return this.pvJoueurProperty.get() <= 0;}
 }
