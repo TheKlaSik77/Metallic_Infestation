@@ -1,4 +1,4 @@
-module com.application.metallic_infastation {
+module com.application.metallic_infestation {
     requires javafx.controls;
     requires javafx.fxml;
 

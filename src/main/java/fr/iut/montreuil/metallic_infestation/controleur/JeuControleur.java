@@ -15,7 +15,10 @@ import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,8 +26,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,6 +38,12 @@ import java.util.ResourceBundle;
 public class JeuControleur implements Initializable {
 
     final static int NB_VAGUES_JEU = 3;
+
+    @FXML
+    private VBox parentGameOver;
+    @FXML
+    private Label gameOverLabel;
+    private GameOverVue gameOverVue;
 
     @FXML
     private TilePane tilePane;
@@ -109,6 +121,7 @@ public class JeuControleur implements Initializable {
     private boolean vagueTerminee = true;
     private LaserVue laserVue;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -123,8 +136,9 @@ public class JeuControleur implements Initializable {
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
         ExplosionVue  explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
-        VagueVue vagueVue = new VagueVue(lancementVagueLabel);
 
+        VagueVue vagueVue = new VagueVue(lancementVagueLabel);
+        this.gameOverVue = new GameOverVue(gameOverLabel);
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
@@ -319,11 +333,11 @@ public class JeuControleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.030),
                 ev -> {
-                    if (gestionnaireVagues.estDerniereVague()) {
+                    if (gestionnaireVagues.estDerniereVague() || env.unTour(gestionnaireVagues)==1) {
                         System.out.println("Fini");
+                        gameOverVue.affichageGameOver();
                         gameLoop.stop();
                     } else {
-
                         env.unTour(gestionnaireVagues);
                         for (Obstacle o : this.env.getListeObstacles()){
                             if (o instanceof Pics) {
@@ -341,6 +355,7 @@ public class JeuControleur implements Initializable {
         );
         gameLoop.getKeyFrames().add(kf);
     }
+
 
     public void achatUnPv(ActionEvent actionEvent) {
         boutiqueVue.achatUnPv();

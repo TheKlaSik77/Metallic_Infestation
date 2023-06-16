@@ -1,17 +1,21 @@
 package fr.iut.montreuil.metallic_infestation.modele.ennemis;
 
+
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ParcoursBFS;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 
-public abstract class Ennemi extends ElementDeplacable {
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+public abstract class Ennemi extends ElementDeplacable{
 
 
     private int pv;
-    private int drop;
+    private IntegerProperty drop;
+    private int vitesse;
     private Terrain terrain;
-
 
 
     private ParcoursBFS parcoursBFS;
@@ -23,7 +27,7 @@ public abstract class Ennemi extends ElementDeplacable {
         super(new Point(0,0),vitesse);
         this.pv = pv;
         // Piece Lootées par les ennemis
-        this.drop = drop;
+        this.drop = new SimpleIntegerProperty(drop);
         this.terrain = terrain;
         // Position de Départ Aléatoire ( /!\ On part du principe que pour chaque map, les spawns des ennemis se trouvent en x = 0 et y aleatoire ou en y = 0 et x aléatoire
         boolean coordonneesChemin;
@@ -130,8 +134,14 @@ public abstract class Ennemi extends ElementDeplacable {
         return this.getCoordonnees().equals(autreEnnemi.getCoordonnees());
     }
 
-    public int getDrop (){
-        return this.drop;
+    public final int getDrop() {
+        return drop.getValue();
+    }
+    public final void setDrop(int n) {
+        drop.setValue(n);
+    }
+    public final IntegerProperty dropProperty() {
+        return drop;
     }
 
     public abstract void retablirVitesse();

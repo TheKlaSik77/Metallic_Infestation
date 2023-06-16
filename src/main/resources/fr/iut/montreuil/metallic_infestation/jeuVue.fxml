@@ -322,10 +322,17 @@
             <Font name="Metal Mania" size="20.0" />
          </font>
       </Text>
+
       <Label fx:id="lancementVagueLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="737.0" prefWidth="737.0" textFill="#9a1616">
          <font>
             <Font name="Metal Mania" size="56.0" />
          </font>
       </Label>
+      <Label fx:id="gameOverLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="737.0" prefWidth="757.0" textFill="#9a1616">
+         <font>
+            <Font name="Metal Mania" size="56.0" />
+         </font>
+      </Label>
+
    </children>
 </Pane>
