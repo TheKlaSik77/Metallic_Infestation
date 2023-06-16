@@ -54,7 +54,7 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Label fx:id="PvProperty" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="100.0" text="150" textAlignment="CENTER" textFill="#d3cfcf">
+                              <Label fx:id="PvProperty" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="100.0" text="100" textAlignment="CENTER" textFill="#d3cfcf">
                                  <font>
                                     <Font name="Metal Mania" size="23.0" />
                                  </font>
