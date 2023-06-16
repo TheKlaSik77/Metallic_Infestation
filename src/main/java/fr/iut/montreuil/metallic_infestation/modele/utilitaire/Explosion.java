@@ -1,4 +1,6 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
+
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 
 import java.util.ArrayList;
 

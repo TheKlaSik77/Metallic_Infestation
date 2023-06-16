@@ -1,6 +1,10 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
-public class Mine extends Obstacle{
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+
+public class Mine extends Obstacle {
 
     private int degats;
 

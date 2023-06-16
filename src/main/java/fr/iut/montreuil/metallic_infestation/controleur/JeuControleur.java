@@ -1,7 +1,14 @@
 package fr.iut.montreuil.metallic_infestation.controleur;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.*;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
 import fr.iut.montreuil.metallic_infestation.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

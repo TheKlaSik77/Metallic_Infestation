@@ -1,6 +1,11 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.ennemis;
 
-public abstract class Ennemi extends ElementDeplacable{
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ParcoursBFS;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+
+public abstract class Ennemi extends ElementDeplacable {
 
 
     private int pv;

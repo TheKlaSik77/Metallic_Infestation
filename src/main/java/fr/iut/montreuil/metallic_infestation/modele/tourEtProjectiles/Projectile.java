@@ -1,6 +1,10 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
-public abstract class Projectile extends ElementDeplacable{
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
+
+public abstract class Projectile extends ElementDeplacable {
 
 
     private Tourelle tourelle;

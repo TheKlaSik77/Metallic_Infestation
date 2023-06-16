@@ -1,4 +1,7 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
+
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.LiaisonEntreLeMenuEtLeJeu;
 
 import java.util.ArrayList;
 

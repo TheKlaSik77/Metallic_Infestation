@@ -1,4 +1,11 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
+
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileMissile;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 import java.util.ArrayList;
 
@@ -66,7 +73,6 @@ public abstract class Tourelle {
         return null;
     }
 
-    // TODO : A revoir
     public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
         ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
 

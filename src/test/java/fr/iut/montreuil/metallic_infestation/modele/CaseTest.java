@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

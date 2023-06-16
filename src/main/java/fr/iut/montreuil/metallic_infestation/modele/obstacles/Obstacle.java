@@ -1,4 +1,9 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.obstacles;
+
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 
 public abstract class Obstacle {
 
@@ -53,6 +58,5 @@ public abstract class Obstacle {
         return false;
     }
 
-    public void infligerDegats() {
-    }
+
 }

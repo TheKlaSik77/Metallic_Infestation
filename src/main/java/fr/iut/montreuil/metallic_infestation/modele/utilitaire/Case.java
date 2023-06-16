@@ -1,4 +1,4 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 public class Case {
 

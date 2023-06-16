@@ -1,6 +1,9 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.ennemis;
 
-public class EnnemiFacile extends Ennemi{
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ParcoursBFS;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+
+public class EnnemiFacile extends Ennemi {
 
     public EnnemiFacile(ParcoursBFS parcoursBFS, Terrain terrain){
         super(50,4,1,parcoursBFS,terrain);

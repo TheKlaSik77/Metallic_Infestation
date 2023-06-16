@@ -1,18 +1,13 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.Environnement;
-import fr.iut.montreuil.metallic_infestation.modele.Projectile;
-import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.Environnement;
-import fr.iut.montreuil.metallic_infestation.modele.Projectile;
-import fr.iut.montreuil.metallic_infestation.modele.ProjectileMissile;
-import fr.iut.montreuil.metallic_infestation.modele.TourelleAuto;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileMissile;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Rotate;
 
 import java.net.URL;
 

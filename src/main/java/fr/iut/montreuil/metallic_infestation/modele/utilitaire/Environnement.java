@@ -1,6 +1,10 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
-import fr.iut.montreuil.metallic_infestation.vue.ObstacleVue;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;

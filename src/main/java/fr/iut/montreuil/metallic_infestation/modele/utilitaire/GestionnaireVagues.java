@@ -1,7 +1,11 @@
 
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
-import java.time.Duration;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiDifficile;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiFacile;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiMoyen;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Random;

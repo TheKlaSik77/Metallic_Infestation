@@ -1,6 +1,9 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
-public class ProjectileSemi extends Projectile{
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
+
+public class ProjectileSemi extends Projectile {
 
     public ProjectileSemi(Tourelle tourelleSemi, Ennemi ennemiVise){
         super(new Point(tourelleSemi.getPosition().getCentreCase().getX() - 16,tourelleSemi.getPosition().getCentreCase().getY() - 7),tourelleSemi,ennemiVise,20);

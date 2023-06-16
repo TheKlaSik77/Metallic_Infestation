@@ -1,7 +1,8 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.*;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;

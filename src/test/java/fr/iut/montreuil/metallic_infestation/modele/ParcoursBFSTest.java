@@ -1,5 +1,8 @@
 package fr.iut.montreuil.metallic_infestation.modele;
 
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ParcoursBFS;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

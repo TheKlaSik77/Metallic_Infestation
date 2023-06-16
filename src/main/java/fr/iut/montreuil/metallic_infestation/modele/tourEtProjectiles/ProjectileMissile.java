@@ -1,9 +1,12 @@
-package fr.iut.montreuil.metallic_infestation.modele;
+package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Explosion;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
-public class ProjectileMissile extends Projectile{
+public class ProjectileMissile extends Projectile {
     private DoubleProperty angleProperty;
     public ProjectileMissile (Tourelle tourelleMissile, Ennemi ennemiVisee){
         super(new Point(tourelleMissile.getPosition().getCentreCase().getX()-16, tourelleMissile.getPosition().getCentreCase().getY()-7),tourelleMissile,ennemiVisee,20);
