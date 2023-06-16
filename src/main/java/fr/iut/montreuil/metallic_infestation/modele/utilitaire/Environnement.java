@@ -10,9 +10,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-
 import java.util.ArrayList;
+
 
 public class Environnement {
 
@@ -45,7 +44,6 @@ public class Environnement {
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
-
         nbTours = 1;
     }
 
@@ -54,7 +52,7 @@ public class Environnement {
      * if(nbTours%vitesse==0)
      * }
      */
-    public ParcoursBFS getParcoursBFS() {
+    public ParcoursBFS getParcoursBFS(){
         return parcoursBFS;
     }
 
@@ -66,7 +64,7 @@ public class Environnement {
         return listeTourelles;
     }
 
-    public ObservableList<Laser> getListeLasers() {
+    public ObservableList<Laser> getListeLasers(){
         return listeLasers;
     }
 
@@ -113,9 +111,7 @@ public class Environnement {
         return listeProjectiles;
     }
 
-    public ObservableList<Explosion> getListExplosions() {
-        return listExplosions;
-    }
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
 
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
@@ -132,10 +128,9 @@ public class Environnement {
         }
         return supprime;
     }
-
-    public Ennemi retirerEnnemi(Ennemi e) {
+    public Ennemi retirerEnnemi(Ennemi e){
         Ennemi supprime = null;
-        for (int i = this.listeEnnemis.size() - 1; i >= 0; i--) {
+        for (int i = this.listeEnnemis.size() - 1 ; i >= 0 ; i--){
             if (this.listeEnnemis.get(i).equals(e)) {
                 supprime = this.listeEnnemis.get(i);
                 this.listeEnnemis.remove(i);
@@ -143,33 +138,23 @@ public class Environnement {
         }
         return supprime;
     }
-
-    /**
-     * Duration tempsEcoule = Duration.between(gestionnaireVagues.getDebutPartie(), Instant.now());
-     * if (tempsEcoule.getSeconds() >= 20) {
-     * gestionnaireVagues.lancerProchaineVague(terrain);
-     * gestionnaireVagues.setDebutPartie(Instant.now());
-     * <p>
-     * }
-     */
-
-
-    public int unTour(GestionnaireVagues gestionnaireVagues) {
+    public void unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 0) {
-            return 1;
+        if (this.joueur.pvJoueurProprerty().get() <= 0){
+            // TODO: Ecran de loose
+
         }
         if (this.nbTours % 700 == 0 || nbTours == 100) {
             ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
 
         }
-
         if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
             this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
         }
 
         if (this.nbTours % 2 == 0) {
+
             for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
                 Ennemi e = this.getListeEnnemis().get(idEnnemi);
                 e.seDeplacer();
@@ -187,7 +172,7 @@ public class Environnement {
             for (Projectile p : this.getListeProjectiles()) {
                 p.seDeplacer();
                 if (p.arriveSurEnnemi()) {
-                    if (p instanceof ProjectileMissile) {
+                    if (p instanceof ProjectileMissile){
                         listExplosions.add(((ProjectileMissile) p).creerExplosion());
                     }
                     p.getTourelle().infligerDegats();
@@ -208,8 +193,8 @@ public class Environnement {
             }
         }
 
-        if (this.nbTours % 100 == 0) {
-            for (Tourelle t : this.getListeTourelles()) {
+        if (this.nbTours % 100 == 0){
+            for (Tourelle t: this.getListeTourelles()){
                 if (t instanceof TourelleMissiles) {
                     t.raffraichirEnnemiVise();
                     if (t.getEnnemiVise() != null) {
@@ -251,19 +236,18 @@ public class Environnement {
             }
 
         }
-        for (Laser l : listeLasers) {
-            if (l.getEnnemiVise() == null) {
+        for (Laser l : listeLasers){
+            if (l.getEnnemiVise() == null){
                 listeLasers.clear();
             }
         }
         for (Projectile p : listeProjectilesASupp) {
             this.retirerProjectile(p);
         }
-        for (Ennemi e : ennemisASupp) {
+        for (Ennemi e : ennemisASupp){
             this.retirerEnnemi(e);
-
         }
-        if (nbTours % 2 == 0) {
+        if(nbTours % 2 == 0) {
             listeLasers.clear();
         }
         for (Ennemi e : listeEnnemis){
@@ -273,14 +257,13 @@ public class Environnement {
         }
 
         nbTours++;
-        return 0;
     }
 
     public Joueur getJoueur() {
         return this.joueur;
     }
 
-    public void ajouterLaser(Laser p) {
+    public void ajouterLaser(Laser p){
         if (p != null) {
             if (p.getEnnemiVise() != null && p.getTourelle() != null) {
                 listeLasers.add(p);
@@ -290,22 +273,21 @@ public class Environnement {
 
     /**
      * Regarde si ennemi est déjà visé par un laser
-     *
      * @param e
      * @return
      */
-    public boolean destEstPresent(Ennemi e) {
-        for (Laser l : listeLasers) {
-            if (e == l.getEnnemiVise()) {
+    public boolean destEstPresent (Ennemi e){
+        for (Laser l: listeLasers) {
+            if (e == l.getEnnemiVise()){
                 return true;
             }
         }
         return false;
     }
 
-    public void retirerExplosion(Explosion e) {
-        for (int i = listExplosions.size() - 1; i >= 0; i--) {
-            if (listExplosions.get(i).equals(e)) {
+    public void retirerExplosion(Explosion e){
+        for (int i = listExplosions.size()-1 ; i >= 0 ; i--){
+            if (listExplosions.get(i).equals(e)){
                 this.listExplosions.remove(listExplosions.get(i));
             }
         }
@@ -325,3 +307,6 @@ public class Environnement {
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
 }
+
+
+
