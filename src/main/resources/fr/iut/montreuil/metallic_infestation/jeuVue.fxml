@@ -332,11 +332,5 @@
             <Font name="Metal Mania" size="56.0" />
          </font>
       </Label>
-      <Label fx:id="gameOverLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mouseTransparent="true" prefHeight="737.0" prefWidth="737.0" text="Game Over " textFill="#9a1616" visible="false">
-         <font>
-            <Font name="Metal Mania" size="56.0" />
-         </font>
-      </Label>
-
    </children>
 </Pane>
