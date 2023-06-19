@@ -1,7 +1,11 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.*;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiDifficile;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiFacile;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiMoyen;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

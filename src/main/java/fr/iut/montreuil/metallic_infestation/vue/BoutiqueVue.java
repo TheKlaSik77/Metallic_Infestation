@@ -2,7 +2,9 @@ package fr.iut.montreuil.metallic_infestation.vue;
 
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.*;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Boutique;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import javafx.fxml.FXML;
 import javafx.scene.layout.TilePane;
 import javafx.scene.control.Label;

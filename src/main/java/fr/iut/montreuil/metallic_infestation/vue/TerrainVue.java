@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import fr.iut.montreuil.metallic_infestation.modele.Terrain;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 import java.net.URL;
 

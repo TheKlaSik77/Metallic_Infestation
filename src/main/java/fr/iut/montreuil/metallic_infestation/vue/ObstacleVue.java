@@ -1,7 +1,10 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.*;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

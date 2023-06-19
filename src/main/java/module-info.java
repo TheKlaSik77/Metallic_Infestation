@@ -8,6 +8,14 @@ module com.application.metallic_infastation {
     exports fr.iut.montreuil.metallic_infestation;
     opens fr.iut.montreuil.metallic_infestation.controleur to javafx.fxml;
     exports fr.iut.montreuil.metallic_infestation.controleur;
-    exports fr.iut.montreuil.metallic_infestation.modele;
-    opens fr.iut.montreuil.metallic_infestation.modele to javafx.fxml;
+
+
+    exports fr.iut.montreuil.metallic_infestation.modele.utilitaire;
+    opens fr.iut.montreuil.metallic_infestation.modele.utilitaire to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.ennemis;
+    opens fr.iut.montreuil.metallic_infestation.modele.ennemis to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
+    opens fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.obstacles;
+    opens fr.iut.montreuil.metallic_infestation.modele.obstacles to javafx.fxml;
 }
