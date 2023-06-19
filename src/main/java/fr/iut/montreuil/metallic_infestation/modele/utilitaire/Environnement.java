@@ -302,6 +302,9 @@ public class Environnement {
     public IntegerProperty vagueActuelleProperty(){
         return this.vagueActuelleProperty;
     }
+    public void setVagueActuelleProperty(int n ){
+        this.vagueActuelleProperty().setValue(n);
+    }
 
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);

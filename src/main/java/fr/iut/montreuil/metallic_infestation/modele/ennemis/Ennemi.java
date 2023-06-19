@@ -140,5 +140,10 @@ public abstract class Ennemi extends ElementDeplacable{
     public boolean estSurChemin() {
         return this.terrain.getTerrain()[this.getCase().getI()][this.getCase().getJ()] == 1;
     }
+
+    public void setCoordonnees(int x, int y){
+        this.coordonnees.setX(x);
+        this.coordonnees.setY(y);
+    }
 }
 
