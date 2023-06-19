@@ -103,4 +103,5 @@ public abstract class Tourelle {
     }
 
     public ProjectileMissile creerProjectileMissile() {return new ProjectileMissile(this, this.ennemiVise);}
+
 }

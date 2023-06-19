@@ -36,7 +36,7 @@ public class GestionnaireVagues {
         return ennemisASpawn;
     }
 
-    private ArrayList<Ennemi> lancerVague(Terrain terrain) {
+    public ArrayList<Ennemi> lancerVague(Terrain terrain) {
         ArrayList<Ennemi> listeEnnemisASpawn = new ArrayList<>();
         Random random = new Random();
         int nombreEnnemis = 3;

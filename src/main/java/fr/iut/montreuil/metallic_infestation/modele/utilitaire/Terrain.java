@@ -19,7 +19,9 @@ public class Terrain {
      *                    14 = Bunker Sud Ouest
      */
     private int[][] terrain;
+
     private static final int tailleCase = 32;
+
     private ArrayList<Case> listeCasesDepartsPossibles;
 
     public Terrain() {
@@ -104,9 +106,12 @@ public class Terrain {
                     {2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1, 1,14,13}
             };
         }
-
-
     }
+
+    public Terrain(int [][] terrainGrille) {
+       terrainGrille = new int[5][5];
+    }
+
 
     /**
      * Retourne le terrain

@@ -44,6 +44,18 @@ public class Point {
                 ", y=" + pY.getValue() +
                 '}';
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Point other = (Point) obj;
+        return pX.getValue() == other.pX.getValue() && pY.getValue() == other.pY.getValue();
+    }
+
     public Case getCase() {
         return new Case(this.getY() / 32, this.getX() / 32);
     }
