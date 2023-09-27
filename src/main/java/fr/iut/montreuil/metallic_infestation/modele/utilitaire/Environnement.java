@@ -20,6 +20,7 @@ public class Environnement {
     public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
+    private Boutique boutique;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
@@ -29,11 +30,13 @@ public class Environnement {
 
     private ParcoursBFS parcoursBFS;
     public int nbTours;
+    private GestionnaireVagues gestionnaireVagues;
     private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
 
-    public Environnement(Terrain terrain) {
-        this.terrain = terrain;
+
+    public Environnement() {
+        this.terrain = new Terrain();
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
@@ -42,16 +45,22 @@ public class Environnement {
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
+        parcoursBFS.remplirGrilleBFS();
         this.joueur = new Joueur(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
+        this.boutique = new Boutique(joueur, this, terrain);
+        this.gestionnaireVagues = new GestionnaireVagues(this);
         nbTours = 1;
     }
-
-    /**
-     * public unTour(){
-     * if(nbTours%vitesse==0)
-     * }
-     */
+    public GestionnaireVagues getGestionnaireVagues(){
+        return gestionnaireVagues;
+    }
+    public Boutique getBoutique() {
+        return boutique;
+    }
+    public Terrain getTerrain(){
+        return this.terrain;
+    }
     public ParcoursBFS getParcoursBFS(){
         return parcoursBFS;
     }
@@ -138,7 +147,7 @@ public class Environnement {
         }
         return supprime;
     }
-    public void unTour(GestionnaireVagues gestionnaireVagues) {
+    public void unTour() {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
         if (this.joueur.pvJoueurProprerty().get() <= 0){
