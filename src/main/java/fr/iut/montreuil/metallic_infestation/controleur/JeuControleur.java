@@ -133,7 +133,7 @@ public class JeuControleur implements Initializable {
 
         this.joueur = env.getJoueur();
 
-        Boutique boutique = new Boutique(joueur, env, terrain);
+        Boutique boutique = new Boutique(env);
         this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
