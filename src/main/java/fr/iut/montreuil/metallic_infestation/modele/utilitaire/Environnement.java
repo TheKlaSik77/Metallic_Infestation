@@ -107,16 +107,6 @@ public class Environnement {
         return supprimee;
     }
 
-    public ObservableList<Projectile> getListeProjectiles() {
-        return listeProjectiles;
-    }
-
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
-
-    public void ajouterProjectile(Projectile p) {
-        listeProjectiles.add(p);
-    }
-
     public Projectile retirerProjectile(Projectile p) {
         Projectile supprime = null;
         for (int i = this.getListeProjectiles().size() - 1; i >= 0; i--) {
@@ -138,6 +128,18 @@ public class Environnement {
         }
         return supprime;
     }
+
+    public ObservableList<Projectile> getListeProjectiles() {
+        return listeProjectiles;
+    }
+
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+
+    public void ajouterProjectile(Projectile p) {
+        listeProjectiles.add(p);
+    }
+
+
     public void unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
@@ -309,6 +311,8 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
+
+    public Terrain getTerrain(){return this.terrain;}
 }
 
 
