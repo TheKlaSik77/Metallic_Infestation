@@ -309,6 +309,8 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
+
+    public Terrain getTerrain(){return this.terrain;}
 }
 
 

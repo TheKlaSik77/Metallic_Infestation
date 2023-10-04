@@ -14,14 +14,17 @@ public class Boutique {
 
    private Terrain terrain;
 
+   private TourFactory tourFactory;
 
-
+   private ObstacleFactory obstacleFactory;
 
 
     public Boutique (Joueur joueur, Environnement environnement, Terrain terrain){
         this.environnement = environnement;
         this.joueur = joueur;
         this.terrain = terrain;
+        this.tourFactory = new TourFactory(environnement);
+        this.obstacleFactory = new ObstacleFactory(environnement);
     }
 
     public void AchatPv (int montant, int pv) {
@@ -36,41 +39,19 @@ public class Boutique {
      * typeTour == 3 -> TourelleMissiles
      */
     public void achatTour(int typeTour, Case c){
-        if (typeTour == 1){
-            Tourelle tourelle1 = new TourelleSemi(c, environnement, terrain);
-            if(joueur.achatPossible(tourelle1.getCout())) {
-                environnement.ajouterDansListeTours(tourelle1);
-                joueur.debiterArgentProperty(tourelle1.getCout());
-            }
-        }
-        else if (typeTour == 2) {
-            Tourelle tourelle2 = new TourelleAuto(c, environnement, terrain);
-            if(joueur.achatPossible(tourelle2.getCout())) {
-                environnement.ajouterDansListeTours(tourelle2);
-                joueur.debiterArgentProperty(tourelle2.getCout());
-            }
-        }
-        else {
-            Tourelle tourelle3 = new TourelleMissiles(c, environnement, terrain);
-            if(joueur.achatPossible(tourelle3.getCout())) {
-                environnement.ajouterDansListeTours(tourelle3);
-                joueur.debiterArgentProperty(tourelle3.getCout());
-            }
+       Tourelle tourelle = this.tourFactory.creerTour(typeTour,c);
+
+        if(joueur.achatPossible(tourelle.getCout())) {
+            environnement.ajouterDansListeTours(tourelle);
+            joueur.debiterArgentProperty(tourelle.getCout());
         }
     }
+
     public void achatObstacle(int typeObstacle, Case c) {
-        if (typeObstacle == 1){
-            Obstacle piques = new Pics(c,environnement,terrain);
-            if(joueur.achatPossible(piques.getCout())){
-                environnement.ajouterDansListeObstacles(piques);
-                joueur.debiterArgentProperty(piques.getCout());
-            }
-        } else if (typeObstacle == 2){
-            Mine mine = new Mine(c,environnement,terrain);
-            if(joueur.achatPossible(mine.getCout())){
-                environnement.ajouterDansListeObstacles(mine);
-                joueur.debiterArgentProperty(mine.getCout());
-            }
+        Obstacle obstacle = this.obstacleFactory.creerObstacle(typeObstacle,c);
+        if(joueur.achatPossible(obstacle.getCout())){
+            environnement.ajouterDansListeObstacles(obstacle);
+            joueur.debiterArgentProperty(obstacle.getCout());
         }
     }
 
