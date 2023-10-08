@@ -190,6 +190,12 @@ public class Environnement {
             }
 
         }
+        //TODO: Retirer les instanceof
+        /*
+        inverser la ligne nbTours % et for en dessous
+        this.nbTours % t.getVitesseAttaque()
+        remplacer instanceof par t.tirer (les dégats seront gérés dans une autre boucle : parcourir les projectiles et si projectile.getPosition() == projectile.getEnnemiVise => infligerDégats() 
+         */
         if (this.nbTours % 20 == 0) {
             for (Tourelle t : this.getListeTourelles()) {
                 if (t instanceof TourelleSemi) {

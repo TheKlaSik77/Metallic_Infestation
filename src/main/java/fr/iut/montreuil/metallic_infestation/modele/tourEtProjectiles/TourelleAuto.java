@@ -13,14 +13,7 @@ public class TourelleAuto extends Tourelle {
     }
 
 
-    @Override
-    public void infligerDegats() {
-        if(getEnnemiVise() != null) {
-            getEnnemiVise().decrementerPv(getDegats());
-            System.out.println(getEnnemiVise().getPv());
 
-        }
-    }
 
     public Laser creerLaser() {
         if (!env.destEstPresent(getEnnemiVise())){

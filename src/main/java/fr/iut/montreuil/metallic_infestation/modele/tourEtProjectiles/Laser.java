@@ -10,9 +10,9 @@ public class Laser {
     private String id;
     static int compteur = 0;
 
-    public Laser(Tourelle tourelle, Ennemi ennemivisée) {
+    public Laser(Tourelle tourelle, Ennemi ennemivisé) {
         this.tourelle = tourelle;
-        this.ennemiVise = ennemivisée;
+        this.ennemiVise = ennemivisé;
         this.compteur++;
         this.id = "L" +compteur;
     }

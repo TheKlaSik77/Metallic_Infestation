@@ -10,10 +10,5 @@ public class TourelleSemi extends Tourelle {
         super(20,position,10,5,env,terrain,0);
     }
 
-    @Override
-    public void infligerDegats() {
-        if(getEnnemiVise() != null) {
-            getEnnemiVise().decrementerPv(getDegats());
-        }
-    }
+
 }

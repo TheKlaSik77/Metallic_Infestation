@@ -25,6 +25,7 @@ public abstract class Tourelle {
     protected Terrain terrain;
     private int compteur = 0;
 
+    //TODO: A retirer et mettre dans Missile
     private int porteeMissile;
 
 
