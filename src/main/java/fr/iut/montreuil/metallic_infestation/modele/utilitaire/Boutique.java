@@ -16,7 +16,7 @@ public class Boutique {
    private ObstacleFactory obstacleFactory;
 
 
-    public Boutique (Joueur joueur, Environnement environnement, Terrain terrain){
+    public Boutique (Environnement environnement){
         this.environnement = environnement;
         this.tourFactory = new TourFactory(environnement);
         this.obstacleFactory = new ObstacleFactory(environnement);

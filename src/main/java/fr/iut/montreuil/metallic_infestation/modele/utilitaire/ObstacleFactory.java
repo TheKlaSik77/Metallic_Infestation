@@ -18,10 +18,10 @@ public class ObstacleFactory {
         Obstacle obstacle = null;
         switch (typeTour) {
             case 1:
-                obstacle = new Pics(c,this.environnement,this.environnement.getTerrain());
+                obstacle = new Pics(c,this.environnement);
                 break;
             case 2:
-                obstacle = new Mine(c,this.environnement,this.environnement.getTerrain());
+                obstacle = new Mine(c,this.environnement);
                 break;
 
             default:break;
