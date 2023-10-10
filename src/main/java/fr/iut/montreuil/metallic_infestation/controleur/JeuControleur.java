@@ -117,10 +117,9 @@ public class JeuControleur implements Initializable {
         initAnimation();
         this.terrain = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
-        this.env = new Environnement(terrain);
+        this.env = Environnement.getInstance(this.terrain);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
-
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
