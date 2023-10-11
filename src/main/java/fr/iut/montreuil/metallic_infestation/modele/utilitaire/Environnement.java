@@ -44,7 +44,7 @@ public class Environnement {
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
-        this.joueur = new Joueur(100,1000);
+        this.joueur = Joueur.getInstance(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
         nbTours = 1;
     }

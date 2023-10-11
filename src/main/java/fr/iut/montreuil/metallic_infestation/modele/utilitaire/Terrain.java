@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Terrain {
 
+    private static Terrain uniqueInstance=null;
+
     /**
      * Pour le terrain :  0 = Case vide (Interdite)
      *                    1 = Chemin vide
@@ -24,7 +26,7 @@ public class Terrain {
 
     private ArrayList<Case> listeCasesDepartsPossibles;
 
-    public Terrain() {
+    private Terrain() {
         if (LiaisonEntreLeMenuEtLeJeu.nbTerrain == 1) {
             this.terrain = new int[][]{
                     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0},
@@ -108,8 +110,15 @@ public class Terrain {
         }
     }
 
-    public Terrain(int [][] terrainGrille) {
+    private Terrain(int [][] terrainGrille) {
        terrainGrille = new int[5][5];
+    }
+
+    public static Terrain getInstance(){
+        if (uniqueInstance==null){
+            uniqueInstance = new Terrain();
+        }
+        return uniqueInstance;
     }
 
 

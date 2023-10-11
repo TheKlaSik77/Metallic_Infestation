@@ -4,14 +4,23 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Joueur {
+
+    private static Joueur uniqueInstance = null;
+
     private IntegerProperty pvJoueurProperty;
     private IntegerProperty argentProperty;
 
-    public Joueur (int pvJoueur, int argent) {
+    private Joueur (int pvJoueur, int argent) {
         this.pvJoueurProperty = new SimpleIntegerProperty(pvJoueur);
         this.argentProperty =new SimpleIntegerProperty(argent);
     }
 
+    public static Joueur getInstance(int pvJoueur, int argent){
+        if(uniqueInstance==null){
+            uniqueInstance = new Joueur(pvJoueur,argent);
+        }
+        return uniqueInstance;
+    }
 
 
     public IntegerProperty argentProperty() {return this.argentProperty;}

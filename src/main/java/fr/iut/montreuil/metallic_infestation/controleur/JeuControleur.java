@@ -115,7 +115,7 @@ public class JeuControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-        this.terrain = new Terrain();
+        this.terrain = Terrain.getInstance();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
         this.env = Environnement.getInstance(this.terrain);
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
