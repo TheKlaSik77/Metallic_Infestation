@@ -116,7 +116,7 @@ public class JeuControleur implements Initializable {
 
         Terrain terrain = Terrain.getInstance();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
-        this.env = new Environnement();
+        this.env = Environnement.getInstance(terrain);
 
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);

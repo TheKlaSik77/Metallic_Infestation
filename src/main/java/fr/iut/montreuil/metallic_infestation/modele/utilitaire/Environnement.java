@@ -36,7 +36,7 @@ public class Environnement {
     private ObservableList<Obstacle> listeObstacles;
 
 
-    public Environnement() {
+    private Environnement() {
         this.terrain = Terrain.getInstance();
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
