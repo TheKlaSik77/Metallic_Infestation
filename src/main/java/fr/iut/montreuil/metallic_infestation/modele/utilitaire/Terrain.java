@@ -110,10 +110,6 @@ public class Terrain {
         }
     }
 
-    private Terrain(int [][] terrainGrille) {
-       terrainGrille = new int[5][5];
-    }
-
     public static Terrain getInstance(){
         if (uniqueInstance==null){
             uniqueInstance = new Terrain();
