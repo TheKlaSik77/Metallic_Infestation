@@ -116,7 +116,7 @@ public class JeuControleur implements Initializable {
 
         Terrain terrain = Terrain.getInstance();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
-        this.env = Environnement.getInstance(terrain);
+        this.env = Environnement.getInstance();
 
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
@@ -129,7 +129,7 @@ public class JeuControleur implements Initializable {
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-        Boutique boutique = new Boutique(env);
+        Boutique boutique = Boutique.getInstance();
         this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         env.getJoueur().argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));

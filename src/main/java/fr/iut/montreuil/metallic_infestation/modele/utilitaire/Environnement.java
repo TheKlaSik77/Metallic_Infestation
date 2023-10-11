@@ -16,9 +16,6 @@ import java.util.ArrayList;
 public class Environnement {
 
     private static Environnement uniqueInstance = null;
-
-    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
-    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
@@ -34,8 +31,7 @@ public class Environnement {
     private GestionnaireVagues gestionnaireVagues;
     private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
-
-
+    
     private Environnement() {
         this.terrain = Terrain.getInstance();
         this.listeEnnemis = FXCollections.observableArrayList();
@@ -45,7 +41,7 @@ public class Environnement {
         this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
-        this.parcoursBFS = new ParcoursBFS(terrain);
+        this.parcoursBFS = new ParcoursBFS();
 
         parcoursBFS.remplirGrilleBFS();
         this.joueur = Joueur.getInstance(100,1000);
@@ -53,7 +49,7 @@ public class Environnement {
         this.gestionnaireVagues = new GestionnaireVagues(this);
         nbTours = 1;
     }
-    public static Environnement getInstance(Terrain terrain){
+    public static Environnement getInstance(){
         if (uniqueInstance==null){
             uniqueInstance = new Environnement();
         }

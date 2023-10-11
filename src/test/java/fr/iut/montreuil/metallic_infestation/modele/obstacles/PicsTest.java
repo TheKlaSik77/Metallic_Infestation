@@ -17,11 +17,11 @@ public class PicsTest {
     @Test
     public void testActionnerPics() {
         Case c = new Case(1, 2);
-        Terrain terrain = new Terrain();
-        Environnement env = new Environnement(terrain);
-        Pics pics = new Pics(c, env, terrain);
-        ParcoursBFS parcoursBFS = new ParcoursBFS(terrain);
-        Ennemi ennemi = new EnnemiFacile(parcoursBFS, terrain);
+        Terrain terrain = Terrain.getInstance();
+        Environnement env =Environnement.getInstance();
+        Pics pics = new Pics(c, env);
+        ParcoursBFS parcoursBFS = new ParcoursBFS();
+        Ennemi ennemi = new EnnemiFacile(Environnement.getInstance());
         ennemi.setVitesse(5);
         pics.actionnerPics(ennemi);
         int expectedVitesse = 1;

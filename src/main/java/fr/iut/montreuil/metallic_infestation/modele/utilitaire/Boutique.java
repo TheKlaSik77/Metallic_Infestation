@@ -9,6 +9,7 @@ import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleMi
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleSemi;
 
 public class Boutique {
+    private static Boutique uniqueInstance = null;
    private Environnement environnement;
 
    private TourFactory tourFactory;
@@ -16,11 +17,19 @@ public class Boutique {
    private ObstacleFactory obstacleFactory;
 
 
-    public Boutique (Environnement environnement){
-        this.environnement = environnement;
+    private Boutique (){
+        this.environnement = Environnement.getInstance();
         this.tourFactory = new TourFactory(environnement);
         this.obstacleFactory = new ObstacleFactory(environnement);
     }
+
+     public static Boutique getInstance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new Boutique();
+        }
+        return uniqueInstance;
+     }
+     
 
     public void AchatPv (int montant, int pv) {
         if (this.environnement.getJoueur().achatPossible(montant)){
