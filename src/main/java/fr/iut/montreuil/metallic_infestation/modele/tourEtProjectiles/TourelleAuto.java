@@ -16,7 +16,7 @@ public class TourelleAuto extends Tourelle {
 
 
     public Laser creerLaser() {
-        if (!env.destEstPresent(getEnnemiVise())){
+        if (!env.estEstPresent(getEnnemiVise())){
             return new Laser(this, getEnnemiVise());
         }
         return null;

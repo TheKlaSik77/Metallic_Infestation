@@ -10,8 +10,8 @@ public class Mine extends Obstacle {
 
 
     private int porteeExplosion;
-    public Mine(Case c, Environnement environnement, Terrain terrain) {
-        super(c, environnement, terrain, 20);
+    public Mine(Case c, Environnement environnement) {
+        super(c, environnement, 20);
         this.degats = 300;
         this.porteeExplosion = 2;
     }

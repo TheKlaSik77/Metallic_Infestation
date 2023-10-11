@@ -113,11 +113,13 @@ public class JeuControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
+
+        Terrain terrain = Terrain.getInstance();
+        TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
         this.env = new Environnement();
-        TerrainVue terrainVue = new TerrainVue(env.getTerrain(), tilePane);
+
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
-
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
@@ -127,8 +129,8 @@ public class JeuControleur implements Initializable {
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-
-        this.boutiqueVue = new BoutiqueVue(env.getBoutique(), toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, env.getTerrain());
+        Boutique boutique = new Boutique(env);
+        this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         env.getJoueur().argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
         env.getJoueur().pvJoueurProprerty().addListener((obs, old, nouv) -> this.PvProperty.setText(nouv.toString()));

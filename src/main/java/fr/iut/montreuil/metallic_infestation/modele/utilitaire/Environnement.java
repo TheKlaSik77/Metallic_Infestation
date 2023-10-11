@@ -36,7 +36,7 @@ public class Environnement {
 
 
     public Environnement() {
-        this.terrain = new Terrain();
+        this.terrain = Terrain.getInstance();
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
@@ -45,13 +45,14 @@ public class Environnement {
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
+
         parcoursBFS.remplirGrilleBFS();
-        this.joueur = new Joueur(100,1000);
+        this.joueur = Joueur.getInstance(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
-        this.boutique = new Boutique(joueur, this, terrain);
         this.gestionnaireVagues = new GestionnaireVagues(this);
         nbTours = 1;
     }
+
     public GestionnaireVagues getGestionnaireVagues(){
         return gestionnaireVagues;
     }
@@ -147,6 +148,7 @@ public class Environnement {
         }
         return supprime;
     }
+
     public void unTour() {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
@@ -291,7 +293,7 @@ public class Environnement {
      * @param e
      * @return
      */
-    public boolean destEstPresent (Ennemi e){
+    public boolean estEstPresent (Ennemi e){
         for (Laser l: listeLasers) {
             if (e == l.getEnnemiVise()){
                 return true;
