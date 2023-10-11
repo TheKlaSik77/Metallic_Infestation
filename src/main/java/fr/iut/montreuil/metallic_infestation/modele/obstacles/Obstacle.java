@@ -12,30 +12,13 @@ public abstract class Obstacle {
     private Terrain terrain;
     private int cout;
 
-    public Obstacle(Case c, Environnement environnement, Terrain terrain, int cout) {
+    public Obstacle(Case c, Environnement environnement, int cout) {
         this.c = c;
         this.environnement = environnement;
-        this.terrain = terrain;
         this.cout = cout;
     }
     public int getCout() {
         return cout;
-    }
-
-    public Environnement getEnvironnement() {
-        return environnement;
-    }
-
-    public void setEnvironnement(Environnement environnement) {
-        this.environnement = environnement;
-    }
-
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
     }
 
     public Case getPosition() {
@@ -43,12 +26,11 @@ public abstract class Obstacle {
     }
 
     public void poserObstacle() {
-        if (this.terrain.cheminSurCase(this.getPosition())){
+        if (this.environnement.getTerrain().cheminSurCase(this.getPosition())){
             // On dit que la case est occupée par une tour
-            terrain.setCase(this.getPosition(),4);
+            this.environnement.getTerrain().setCase(this.getPosition(),4);
         }
     }
-
     public boolean ennemisSurObstacle() {
         for (Ennemi e : environnement.getListeEnnemis()){
             if (e.getCase().equals(this.getPosition())){

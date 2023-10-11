@@ -15,6 +15,8 @@ import java.util.ArrayList;
 
 public class Environnement {
 
+    private static Environnement uniqueInstance = null;
+
     final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static IntegerProperty vagueActuelleProperty;
@@ -35,8 +37,9 @@ public class Environnement {
     private ObservableList<Obstacle> listeObstacles;
 
 
-    public Environnement() {
-        this.terrain = new Terrain();
+    private Environnement(Terrain terrain) {
+        this.terrain = terrain;
+
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
@@ -45,22 +48,25 @@ public class Environnement {
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
-        parcoursBFS.remplirGrilleBFS();
-        this.joueur = new Joueur(100,1000);
+        this.joueur = Joueur.getInstance(100,1000);
+
         vagueActuelleProperty = new SimpleIntegerProperty(0);
-        this.boutique = new Boutique(joueur, this, terrain);
         this.gestionnaireVagues = new GestionnaireVagues(this);
         nbTours = 1;
     }
-    public GestionnaireVagues getGestionnaireVagues(){
-        return gestionnaireVagues;
+
+    public static Environnement getInstance(Terrain terrain){
+        if (uniqueInstance==null){
+            uniqueInstance = new Environnement(terrain);
+        }
+        return uniqueInstance;
     }
-    public Boutique getBoutique() {
-        return boutique;
-    }
-    public Terrain getTerrain(){
-        return this.terrain;
-    }
+
+    /**
+     * public unTour(){
+     * if(nbTours%vitesse==0)
+     * }
+     */
     public ParcoursBFS getParcoursBFS(){
         return parcoursBFS;
     }
@@ -116,16 +122,6 @@ public class Environnement {
         return supprimee;
     }
 
-    public ObservableList<Projectile> getListeProjectiles() {
-        return listeProjectiles;
-    }
-
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
-
-    public void ajouterProjectile(Projectile p) {
-        listeProjectiles.add(p);
-    }
-
     public Projectile retirerProjectile(Projectile p) {
         Projectile supprime = null;
         for (int i = this.getListeProjectiles().size() - 1; i >= 0; i--) {
@@ -147,6 +143,24 @@ public class Environnement {
         }
         return supprime;
     }
+
+
+    public ObservableList<Projectile> getListeProjectiles() {
+        return listeProjectiles;
+    }
+
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+
+    public void ajouterProjectile(Projectile p) {
+        listeProjectiles.add(p);
+    }
+    public Boutique getBoutique(){
+        return this.boutique;
+    }
+    public GestionnaireVagues getGestionnaireVagues(){
+        return this.gestionnaireVagues;
+    }
+
     public void unTour() {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
@@ -318,6 +332,8 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
+
+    public Terrain getTerrain(){return this.terrain;}
 }
 
 
