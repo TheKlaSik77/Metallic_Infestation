@@ -21,7 +21,7 @@ public class PicsTest {
         Environnement env =Environnement.getInstance();
         Pics pics = new Pics(c);
         ParcoursBFS parcoursBFS = new ParcoursBFS();
-        Ennemi ennemi = new EnnemiFacile(Environnement.getInstance());
+        Ennemi ennemi = new EnnemiFacile();
         ennemi.setVitesse(5);
         pics.actionnerPics(ennemi);
         int expectedVitesse = 1;
