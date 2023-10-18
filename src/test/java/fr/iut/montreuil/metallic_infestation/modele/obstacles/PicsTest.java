@@ -19,7 +19,7 @@ public class PicsTest {
         Case c = new Case(1, 2);
         Terrain terrain = Terrain.getInstance();
         Environnement env =Environnement.getInstance();
-        Pics pics = new Pics(c, env);
+        Pics pics = new Pics(c);
         ParcoursBFS parcoursBFS = new ParcoursBFS();
         Ennemi ennemi = new EnnemiFacile(Environnement.getInstance());
         ennemi.setVitesse(5);

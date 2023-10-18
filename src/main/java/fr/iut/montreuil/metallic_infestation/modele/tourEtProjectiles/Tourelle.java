@@ -25,7 +25,7 @@ public abstract class Tourelle extends ElementNonDeplacable {
     private int porteeMissile;
 
 
-    public Tourelle(int degats, Case position, int cout, int porteeTourelle, Environnement env, int porteeMissile){
+    public Tourelle(int degats, Case position, int cout, int porteeTourelle, int porteeMissile){
         super(position);
         this.compteur++;
         this.id = compteur;

@@ -5,8 +5,8 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 
 public class TourelleAuto extends Tourelle {
-    public TourelleAuto(Case position, Environnement env) {
-        super(5,position,30,3,env, 0);
+    public TourelleAuto(Case position) {
+        super(5,position,30,3, 0);
     }
 
 

@@ -8,6 +8,7 @@ public class Mine extends Obstacle {
 
     private int degats;
 
+
     private int porteeExplosion;
     public Mine(Case c) {
         super(c, 20);

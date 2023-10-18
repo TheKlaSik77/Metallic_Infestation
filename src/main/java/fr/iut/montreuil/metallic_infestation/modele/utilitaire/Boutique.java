@@ -17,7 +17,7 @@ public class Boutique {
 
     private Boutique (){
         this.environnement = Environnement.getInstance();
-        this.tourFactory = new TourFactory(environnement);
+        this.tourFactory = new TourFactory();
         this.obstacleFactory = new ObstacleFactory();
     }
 

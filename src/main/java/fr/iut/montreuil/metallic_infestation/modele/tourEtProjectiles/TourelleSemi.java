@@ -8,8 +8,8 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import javafx.collections.ObservableList;
 
 public class TourelleSemi extends Tourelle {
-    public TourelleSemi(Case position, Environnement env){
-        super(20,position,10,5,env,0);
+    public TourelleSemi(Case position){
+        super(20,position,10,5,0);
     }
 
 

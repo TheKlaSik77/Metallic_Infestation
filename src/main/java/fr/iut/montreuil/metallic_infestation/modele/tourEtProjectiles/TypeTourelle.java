@@ -7,22 +7,22 @@ public enum TypeTourelle {
 
     TourelleSemi {
         @Override
-        public Tourelle creerTourelle(Case c, Environnement environnement) {
-            return new TourelleSemi(c, environnement);
+        public Tourelle creerTourelle(Case c) {
+            return new TourelleSemi(c);
         }
     },
     TourelleAuto {
         @Override
-        public Tourelle creerTourelle(Case c, Environnement environnement) {
-            return new TourelleAuto(c, environnement);
+        public Tourelle creerTourelle(Case c) {
+            return new TourelleAuto(c);
         }
     },
     TourelleMissiles {
         @Override
-        public Tourelle creerTourelle(Case c, Environnement environnement) {
-            return new TourelleMissiles(c, environnement);
+        public Tourelle creerTourelle(Case c) {
+            return new TourelleMissiles(c);
         }
     };
 
-    public abstract Tourelle creerTourelle(Case c, Environnement environnement);
+    public abstract Tourelle creerTourelle(Case c);
 }
