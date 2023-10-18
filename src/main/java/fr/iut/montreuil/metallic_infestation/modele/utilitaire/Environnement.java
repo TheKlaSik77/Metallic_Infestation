@@ -6,11 +6,13 @@ import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.utilitaire.DistanceEnnemiCible;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.util.ArrayList;
+
+import java.util.*;
 
 
 public class Environnement {
@@ -325,6 +327,29 @@ public class Environnement {
 
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
+    }
+    public ArrayList<Ennemi> getEnnemiLesPlusProchesDePosition(Point coordonneDepart,int portee) {
+        SortedSet<DistanceEnnemiCible> distanceEnnemiCibleSortedSet = new TreeSet<>();
+        ArrayList<Ennemi> ennemisTrie = new ArrayList<>();
+        double distance = 0;
+        for (Ennemi ennemi : listeEnnemis) {
+            distance = calculerDistance(coordonneDepart, ennemi);
+            if (distance / 32 <= portee) {
+                DistanceEnnemiCible distanceEnnemiCible = new DistanceEnnemiCible(ennemi,distance);
+                distanceEnnemiCibleSortedSet.add(distanceEnnemiCible);
+            }
+        }
+        for (DistanceEnnemiCible dec : distanceEnnemiCibleSortedSet){
+            ennemisTrie.add(dec.getEnnemi());
+        }
+
+
+
+    }
+    private double calculerDistance(Point coordonneeDepart, Ennemi ennemi) {
+        double dx = ennemi.getCoordonnees().getX() - coordonneeDepart.getX();
+        double dy = ennemi.getCoordonnees().getY() - coordonneeDepart.getY();
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }
 

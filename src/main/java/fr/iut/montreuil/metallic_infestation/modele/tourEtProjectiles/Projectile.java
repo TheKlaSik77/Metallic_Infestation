@@ -7,14 +7,15 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 public abstract class Projectile extends ElementDeplacable {
 
 
-    private Tourelle tourelle;
+    private Point coordonneesDepart;
     private Ennemi ennemiVise;
 
-    public Projectile(Point coordonnees, Tourelle tourelle, Ennemi ennemiVise, int vitesse){
-        super(coordonnees,vitesse);
-        this.tourelle = tourelle;
+    protected Projectile(Point coordonneesDepart, int vitesse, Ennemi ennemiVise) {
+        super(coordonneesDepart, vitesse);
+        this.coordonneesDepart = coordonneesDepart;
         this.ennemiVise = ennemiVise;
     }
+
 
     public boolean equals(Projectile p){
         return this.getId() == p.getId();
@@ -25,10 +26,6 @@ public abstract class Projectile extends ElementDeplacable {
 
     public boolean arriveSurEnnemi(){
         return this.coordonnees.getCase().equals(this.ennemiVise.getCase());
-    }
-
-    public Tourelle getTourelle() {
-        return this.tourelle;
     }
 
     public Ennemi getEnnemiVise() {

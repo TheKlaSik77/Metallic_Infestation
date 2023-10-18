@@ -5,10 +5,14 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
-public class TourelleSemi extends Tourelle {
-    public TourelleSemi(Case position, Environnement env, Terrain terrain){
-        super(20,position,10,5,env,terrain,0);
+public class TourelleSemi extends TourelleCiblageIndividuel {
+
+    public TourelleSemi(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
+        super(position, cout, porteeTourelle, env, terrain);
     }
 
-
+    @Override
+    public Projectile creerProjectile() {
+        return new ProjectileSemi();
+    }
 }
