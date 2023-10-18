@@ -11,9 +11,7 @@ class MineTest {
     @Test
     public void testGetDegats() {
         Case c = new Case(1, 2);
-        Terrain terrain = new Terrain();
-        Environnement env = new Environnement(terrain);
-        Mine mine = new Mine(c, env, terrain);
+        Mine mine = new Mine(c);
 
         int expectedDegats = 300;
         int actualDegats = mine.getDegats();
@@ -24,9 +22,7 @@ class MineTest {
     @Test
     public void testGetPorteeExplosion() {
         Case c = new Case(1, 2);
-        Terrain terrain = new Terrain();
-        Environnement env = new Environnement(terrain);
-        Mine mine = new Mine(c, env, terrain);
+        Mine mine = new Mine(c);
 
         int expectedPorteeExplosion = 2;
         int actualPorteeExplosion = mine.getPorteeExplosion();

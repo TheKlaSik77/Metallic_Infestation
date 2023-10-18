@@ -13,8 +13,8 @@ public class Explosion {
     private static int compteur = 0;
 
 
-    public Explosion (Environnement env, Point coordonneeExplosion, int degatsExplosion, int porteeExplosion){
-        this.env = env;
+    public Explosion (Point coordonneeExplosion, int degatsExplosion, int porteeExplosion){
+        this.env = Environnement.getInstance();
         this.coordonneeExplosion = coordonneeExplosion;
         this.degatsExplosion = degatsExplosion;
         this.porteeExplosion = porteeExplosion;

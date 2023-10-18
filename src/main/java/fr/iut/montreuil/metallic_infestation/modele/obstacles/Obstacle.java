@@ -9,12 +9,11 @@ public abstract class Obstacle {
 
     private Case c;
     private Environnement environnement;
-    private Terrain terrain;
     private int cout;
 
-    public Obstacle(Case c, Environnement environnement, int cout) {
+    public Obstacle(Case c, int cout) {
         this.c = c;
-        this.environnement = environnement;
+        this.environnement = Environnement.getInstance();
         this.cout = cout;
     }
     public int getCout() {

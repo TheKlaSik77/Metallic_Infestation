@@ -319,7 +319,7 @@ public class JeuControleur implements Initializable {
                         gameLoop.stop();
                     } else {
 
-                        env.unTour(env.getGestionnaireVagues());
+                        env.unTour();
                         for (Obstacle o : this.env.getListeObstacles()){
                             if (o instanceof Pics) {
                                 if (o.ennemisSurObstacle()) {

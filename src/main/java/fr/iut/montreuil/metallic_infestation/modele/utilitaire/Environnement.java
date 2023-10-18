@@ -31,6 +31,7 @@ public class Environnement {
     private GestionnaireVagues gestionnaireVagues;
     private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
+    private UnTour tour;
     
     private Environnement() {
         this.terrain = Terrain.getInstance();
@@ -42,11 +43,11 @@ public class Environnement {
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS();
-
         parcoursBFS.remplirGrilleBFS();
         this.joueur = Joueur.getInstance(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
         this.gestionnaireVagues = new GestionnaireVagues(this);
+        this.tour = new UnTour();
         nbTours = 1;
     }
     public static Environnement getInstance(){
@@ -151,128 +152,7 @@ public class Environnement {
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
     }
-
-
-    public void unTour(GestionnaireVagues gestionnaireVagues) {
-
-        ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 0){
-
-
-        }
-        if (this.nbTours % 700 == 0 || nbTours == 100) {
-            ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
-
-        }
-        if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
-            this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
-        }
-
-        if (this.nbTours % 2 == 0) {
-
-            for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                Ennemi e = this.getListeEnnemis().get(idEnnemi);
-                e.seDeplacer();
-                if (e.aAtteintLaCible()) {
-                    ennemisASupp.add(e);
-                    joueur.debiterPvJoueurProperty(e.getDrop());
-                } else if (e.estMort()) {
-                    ennemisASupp.add(e);
-                    joueur.crediterArgentProperty(e.getDrop());
-                }
-            }
-        }
-        ArrayList<Projectile> listeProjectilesASupp = new ArrayList<>();
-        if (this.nbTours % 2 == 0) {
-            for (Projectile p : this.getListeProjectiles()) {
-                p.seDeplacer();
-                if (p.arriveSurEnnemi()) {
-                    if (p instanceof ProjectileMissile){
-                        listExplosions.add(((ProjectileMissile) p).creerExplosion());
-                    }
-                    p.getTourelle().infligerDegats();
-                    listeProjectilesASupp.add(p);
-                }
-            }
-
-        }
-        if (this.nbTours % 20 == 0) {
-            for (Tourelle t : this.getListeTourelles()) {
-                if (t instanceof TourelleSemi) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-
-        if (this.nbTours % 100 == 0){
-            for (Tourelle t: this.getListeTourelles()){
-                if (t instanceof TourelleMissiles) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectileMissile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-        for (Tourelle t : this.getListeTourelles()) {
-            if (t instanceof TourelleAuto) {
-                t.raffraichirEnnemiVise();
-                if (t.getEnnemiVise() != null) {
-                    Laser l = ((TourelleAuto) t).creerLaser();
-                    this.ajouterLaser(l);
-                    t.infligerDegats();
-                }
-            }
-        }
-        if (!listeObstacles.isEmpty()) {
-            for (int i = listeObstacles.size() - 1; i >= 0; i--) {
-                for (Ennemi e : listeEnnemis) {
-                    if (listeObstacles.get(i).ennemisSurObstacle()) {
-                        if (listeObstacles.get(i) instanceof Pics) {
-                            if (listeObstacles.get(i).ennemisSurObstacle()) {
-                                ((Pics) listeObstacles.get(i)).actionnerPics(e);
-                            }
-                        } else if (listeObstacles.get(i) instanceof Mine) {
-                            terrain.setCase(listeObstacles.get(i).getPosition(), 1);
-                            Explosion explosion = new Explosion(this,listeObstacles.get(i).getPosition().getCentreCase(), ((Mine) listeObstacles.get(i)).getDegats(),((Mine) listeObstacles.get(i)).getPorteeExplosion());
-                            listExplosions.add(explosion);
-                            explosion.infligerDegats();
-                            this.listeObstacles.remove(listeObstacles.get(i));
-                            break;
-                        }
-                    }
-
-                }
-            }
-
-        }
-        for (Laser l : listeLasers){
-            if (l.getEnnemiVise() == null){
-                listeLasers.clear();
-            }
-        }
-        for (Projectile p : listeProjectilesASupp) {
-            this.retirerProjectile(p);
-        }
-        for (Ennemi e : ennemisASupp){
-            this.retirerEnnemi(e);
-        }
-        if(nbTours % 2 == 0) {
-            listeLasers.clear();
-        }
-        for (Ennemi e : listeEnnemis){
-            if (e.estSurChemin()){
-                e.retablirVitesse();
-            }
-        }
-
-        nbTours++;
-    }
+    
 
     public Joueur getJoueur() {
         return this.joueur;
@@ -326,6 +206,17 @@ public class Environnement {
     }
 
     public Terrain getTerrain(){return this.terrain;}
+
+
+    //Déplacement méthode unTour
+    public void unTour() {
+        this.tour.unTour();
+    }
+    public int getNbTours(){return this.nbTours;}
+    public void incrementeNbTours(){this.nbTours++;}
+    public ArrayList<Ennemi> getEnnemisASpawn(){return this.ennemisASpawn;}
+    public void setEnnemisASpawn(ArrayList<Ennemi> ennemisASpawn){ this.ennemisASpawn = ennemisASpawn;}
+    
 }
 
 

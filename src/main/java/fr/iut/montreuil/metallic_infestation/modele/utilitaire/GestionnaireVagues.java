@@ -30,7 +30,6 @@ public class GestionnaireVagues {
         if (Environnement.vagueActuelleProperty.get() < NB_VAGUES_JEU) {
             if (!estDerniereVague()) {
                 ennemisASpawn = lancerVague(terrainExperimental);
-
             }
         }
         return ennemisASpawn;

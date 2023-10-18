@@ -8,10 +8,9 @@ public class Mine extends Obstacle {
 
     private int degats;
 
-
     private int porteeExplosion;
-    public Mine(Case c, Environnement environnement) {
-        super(c, environnement, 20);
+    public Mine(Case c) {
+        super(c, 20);
         this.degats = 300;
         this.porteeExplosion = 2;
     }
