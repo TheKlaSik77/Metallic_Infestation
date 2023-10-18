@@ -12,7 +12,6 @@ public class Explosion {
     private String id;
     private static int compteur = 0;
 
-
     public Explosion (Point coordonneeExplosion, int degatsExplosion, int porteeExplosion){
         this.env = Environnement.getInstance();
         this.coordonneeExplosion = coordonneeExplosion;

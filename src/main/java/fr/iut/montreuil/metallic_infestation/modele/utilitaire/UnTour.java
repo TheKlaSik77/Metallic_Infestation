@@ -9,11 +9,13 @@ import java.util.ArrayList;
 
 public class UnTour {
 
+    private Ennemi ennemi;
     private ArrayList<Ennemi> ennemisASupp;
     private ArrayList<Projectile> listeProjectilesASupp;
     public UnTour() {
         this.ennemisASupp = new ArrayList<>();
         this.listeProjectilesASupp = new ArrayList<>();
+        this.ennemi = null;
     }
 
     public void unTour() {
@@ -107,23 +109,15 @@ public class UnTour {
 
     public void actionObstacles(Environnement env){
         if (!env.getListeObstacles().isEmpty()) {
-            for (int i = env.getListeObstacles().size() - 1; i >= 0; i--) {
-                for (Ennemi e : env.getListeEnnemis()) {
-                    if (env.getListeObstacles().get(i).ennemisSurObstacle()) {
-                        if (env.getListeObstacles().get(i) instanceof Pics) {
-                            if (env.getListeObstacles().get(i).ennemisSurObstacle()) {
-                                ((Pics) env.getListeObstacles().get(i)).actionnerPics(e);
-                            }
-                        } else if (env.getListeObstacles().get(i) instanceof Mine) {
-                            env.getTerrain().setCase(env.getListeObstacles().get(i).getPosition(), 1);
-                            Explosion explosion = new Explosion(env.getListeObstacles().get(i).getPosition().getCentreCase(), ((Mine) env.getListeObstacles().get(i)).getDegats(), ((Mine) env.getListeObstacles().get(i)).getPorteeExplosion());
-                            env.getListExplosions().add(explosion);
-                            explosion.infligerDegats();
-                            env.getListeObstacles().remove(env.getListeObstacles().get(i));
-                            break;
-                        }
-                    }
 
+            for (int i = env.getListeObstacles().size() - 1; i >= 0; i--) {
+
+                for (Ennemi e : env.getListeEnnemis()) {
+                    
+                    if (env.getListeObstacles().get(i).ennemisSurObstacle()) {
+                        this.ennemi = e;
+                        env.getListeObstacles().get(i).actionObstacle();
+                    }
                 }
             }
         }
@@ -152,5 +146,7 @@ public class UnTour {
         }
         
     }
+
+    public Ennemi getEnnemi(){return this.ennemi;}
     
 }

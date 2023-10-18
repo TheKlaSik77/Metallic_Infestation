@@ -32,5 +32,7 @@ public abstract class Obstacle extends ElementNonDeplacable {
         return false;
     }
 
+    public abstract void actionObstacle();
+
 
 }

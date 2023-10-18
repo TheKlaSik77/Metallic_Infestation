@@ -183,7 +183,6 @@ public class Environnement {
         }
     }
 
-
     public void setVagueActuelleProperty(int n ){
         this.vagueActuelleProperty().setValue(n);
     }
@@ -191,8 +190,7 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
-
-
+    
     //Déplacement méthode unTour
     public void unTour() {
         this.tour.unTour();
