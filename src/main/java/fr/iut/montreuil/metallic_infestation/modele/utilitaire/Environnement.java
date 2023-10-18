@@ -17,12 +17,13 @@ import java.util.*;
 
 public class Environnement {
 
+    private static Environnement uniqueInstance = null;
+
     final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
-    private Boutique boutique;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
@@ -37,7 +38,7 @@ public class Environnement {
     private ObservableList<Obstacle> listeObstacles;
 
 
-    public Environnement() {
+    private Environnement() {
         this.terrain = Terrain.getInstance();
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
@@ -54,16 +55,22 @@ public class Environnement {
         this.gestionnaireVagues = new GestionnaireVagues(this);
         nbTours = 1;
     }
+    public static Environnement getInstance(Terrain terrain){
+        if (uniqueInstance==null){
+            uniqueInstance = new Environnement();
+        }
+        return uniqueInstance;
+    }
 
     public GestionnaireVagues getGestionnaireVagues(){
         return gestionnaireVagues;
     }
-    public Boutique getBoutique() {
-        return boutique;
-    }
-    public Terrain getTerrain(){
-        return this.terrain;
-    }
+
+    /**
+     * public unTour(){
+     * if(nbTours%vitesse==0)
+     * }
+     */
     public ParcoursBFS getParcoursBFS(){
         return parcoursBFS;
     }
@@ -119,16 +126,6 @@ public class Environnement {
         return supprimee;
     }
 
-    public ObservableList<Projectile> getListeProjectiles() {
-        return listeProjectiles;
-    }
-
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
-
-    public void ajouterProjectile(Projectile p) {
-        listeProjectiles.add(p);
-    }
-
     public Projectile retirerProjectile(Projectile p) {
         Projectile supprime = null;
         for (int i = this.getListeProjectiles().size() - 1; i >= 0; i--) {
@@ -151,7 +148,18 @@ public class Environnement {
         return supprime;
     }
 
-    public void unTour() {
+    public ObservableList<Projectile> getListeProjectiles() {
+        return listeProjectiles;
+    }
+
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+
+    public void ajouterProjectile(Projectile p) {
+        listeProjectiles.add(p);
+    }
+
+
+    public void unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
         if (this.joueur.pvJoueurProprerty().get() <= 0){
@@ -329,6 +337,7 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
+
     public ArrayList<Ennemi> getEnnemiLesPlusProchesDePosition(Point coordonneDepart,int portee) {
         SortedSet<DistanceEnnemiCible> distanceEnnemiCibleSortedSet = new TreeSet<>();
         ArrayList<Ennemi> ennemisTrie = new ArrayList<>();
@@ -350,6 +359,10 @@ public class Environnement {
         double dy = ennemi.getCoordonnees().getY() - coordonneeDepart.getY();
         return Math.sqrt(dx * dx + dy * dy);
     }
+
+
+    public Terrain getTerrain(){return this.terrain;}
+
 }
 
 

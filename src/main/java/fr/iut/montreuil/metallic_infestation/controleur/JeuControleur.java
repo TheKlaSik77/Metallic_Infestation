@@ -116,7 +116,7 @@ public class JeuControleur implements Initializable {
 
         Terrain terrain = Terrain.getInstance();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
-        this.env = new Environnement();
+        this.env = Environnement.getInstance(terrain);
 
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
@@ -293,9 +293,9 @@ public class JeuControleur implements Initializable {
             Case c = new Case((int) event.getY() / env.getTerrain().getTailleCase(), (int) event.getX() / env.getTerrain().getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY) {
                 if (this.env.getTerrain().tourSurCase(c)) {
-                    env.getBoutique().venteTour(c);
+                    boutique.venteTour(c);
                 } else if (this.env.getTerrain().obstacleSurCase(c)){
-                    env.getBoutique().venteObstacle(c);
+                   boutique.venteObstacle(c);
                 }
 
             }
@@ -319,7 +319,7 @@ public class JeuControleur implements Initializable {
                         gameLoop.stop();
                     } else {
 
-                        env.unTour();
+                        env.unTour(env.getGestionnaireVagues());
                         for (Obstacle o : this.env.getListeObstacles()){
                             if (o instanceof Pics) {
                                 if (o.ennemisSurObstacle()) {
