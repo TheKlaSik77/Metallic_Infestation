@@ -4,12 +4,11 @@ import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiDifficile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiFacile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiMoyen;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
+import fr.iut.montreuil.metallic_infestation.modele.vagues.GestionnaireVagues;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
