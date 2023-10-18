@@ -5,23 +5,15 @@ import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 
-public abstract class Obstacle {
-
-    private Case c;
-    private Environnement environnement;
+public abstract class Obstacle extends ElementNonDeplacable {
     private int cout;
 
-    public Obstacle(Case c, int cout) {
-        this.c = c;
-        this.environnement = Environnement.getInstance();
+    public Obstacle(Case c, Environnement environnement, int cout) {
+        super(c, environnement);
         this.cout = cout;
     }
     public int getCout() {
         return cout;
-    }
-
-    public Case getPosition() {
-        return this.c;
     }
 
     public void poserObstacle() {

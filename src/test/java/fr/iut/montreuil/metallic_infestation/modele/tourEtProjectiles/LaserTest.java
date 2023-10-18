@@ -29,7 +29,7 @@ public class LaserTest {
         environnement = Environnement.getInstance();
         tourelle = new TourelleSemi(position, environnement, terrain);
         Point coordonneesEnnemi = new Point(10, 10);
-        ennemiVise = new EnnemiFacile(Environnement.getInstance());
+        ennemiVise = new EnnemiFacile(environnement);
         ennemiVise.setCoordonnees(coordonneesEnnemi.getX(), coordonneesEnnemi.getY());
         laser = new Laser(tourelle, ennemiVise);
 

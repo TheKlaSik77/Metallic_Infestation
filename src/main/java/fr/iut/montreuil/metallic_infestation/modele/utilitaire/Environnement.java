@@ -16,6 +16,9 @@ import java.util.ArrayList;
 public class Environnement {
 
     private static Environnement uniqueInstance = null;
+
+    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
+    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
@@ -32,7 +35,7 @@ public class Environnement {
     private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
     private UnTour tour;
-    
+
     private Environnement() {
         this.terrain = Terrain.getInstance();
         this.listeEnnemis = FXCollections.observableArrayList();
@@ -42,7 +45,7 @@ public class Environnement {
         this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
-        this.parcoursBFS = new ParcoursBFS();
+        this.parcoursBFS = ParcoursBFS.getInstance();
         parcoursBFS.remplirGrilleBFS();
         this.joueur = Joueur.getInstance(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
@@ -57,6 +60,23 @@ public class Environnement {
         return uniqueInstance;
     }
 
+    //GETTERS
+    public Terrain getTerrain(){return this.terrain;}
+    public ObservableList<Ennemi> getListeEnnemis() {
+        return listeEnnemis;
+    }
+    public ObservableList<Tourelle> getListeTourelles() {return listeTourelles;}
+    public ObservableList<Projectile> getListeProjectiles() {return listeProjectiles;}
+    public ObservableList<Laser> getListeLasers(){
+        return listeLasers;
+    }
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+    public ObservableList<Obstacle> getListeObstacles() {return this.listeObstacles;}
+    public ParcoursBFS getParcoursBFS(){
+        return parcoursBFS;
+    }
+    public Joueur getJoueur() {return this.joueur;}
+    public IntegerProperty vagueActuelleProperty(){return vagueActuelleProperty;}
     public GestionnaireVagues getGestionnaireVagues(){
         return gestionnaireVagues;
     }
@@ -66,22 +86,8 @@ public class Environnement {
      * if(nbTours%vitesse==0)
      * }
      */
-    public ParcoursBFS getParcoursBFS(){
-        return parcoursBFS;
-    }
 
-    public ObservableList<Ennemi> getListeEnnemis() {
-        return listeEnnemis;
-    }
-
-    public ObservableList<Tourelle> getListeTourelles() {
-        return listeTourelles;
-    }
-
-    public ObservableList<Laser> getListeLasers(){
-        return listeLasers;
-    }
-
+    //MÉTHODES
     public Ennemi ennemiSurCase(Case c) {
         for (Ennemi e : listeEnnemis) {
             if (e.getCase().equals(c)) {
@@ -143,19 +149,8 @@ public class Environnement {
         return supprime;
     }
 
-    public ObservableList<Projectile> getListeProjectiles() {
-        return listeProjectiles;
-    }
-
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
-
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
-    }
-    
-
-    public Joueur getJoueur() {
-        return this.joueur;
     }
 
     public void ajouterLaser(Laser p){
@@ -189,14 +184,6 @@ public class Environnement {
     }
 
 
-    public ObservableList<Obstacle> getListeObstacles() {
-        return this.listeObstacles;
-
-    }
-
-    public IntegerProperty vagueActuelleProperty(){
-        return this.vagueActuelleProperty;
-    }
     public void setVagueActuelleProperty(int n ){
         this.vagueActuelleProperty().setValue(n);
     }
@@ -204,8 +191,6 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
-
-    public Terrain getTerrain(){return this.terrain;}
 
 
     //Déplacement méthode unTour
@@ -216,7 +201,7 @@ public class Environnement {
     public void incrementeNbTours(){this.nbTours++;}
     public ArrayList<Ennemi> getEnnemisASpawn(){return this.ennemisASpawn;}
     public void setEnnemisASpawn(ArrayList<Ennemi> ennemisASpawn){ this.ennemisASpawn = ennemisASpawn;}
-    
+
 }
 
 
