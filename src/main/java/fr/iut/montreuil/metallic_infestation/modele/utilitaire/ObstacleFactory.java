@@ -15,20 +15,7 @@ public class ObstacleFactory {
 
 
     public Obstacle creerObstacle(TypeObstacle type, Case c){
-        Obstacle obstacle = type.creerObstacle(c, environnement);
+        Obstacle obstacle = type.creerObstacle(c);
         return obstacle;
     }
 }
-
- /*Obstacle obstacle = null;
-        switch (typeTour) {
-            case 1:
-                obstacle = new Pics(c);
-                break;
-            case 2:
-                obstacle = new Mine(c);
-                break;
-
-            default:break;
-        }
-        return obstacle;*/

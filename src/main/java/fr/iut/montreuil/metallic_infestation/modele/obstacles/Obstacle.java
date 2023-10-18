@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ElementNonDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
@@ -8,8 +9,8 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 public abstract class Obstacle extends ElementNonDeplacable {
     private int cout;
 
-    public Obstacle(Case c, Environnement environnement, int cout) {
-        super(c, environnement);
+    public Obstacle(Case c, int cout) {
+        super(c);
         this.cout = cout;
     }
     public int getCout() {

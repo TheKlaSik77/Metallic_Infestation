@@ -6,15 +6,15 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 public enum TypeObstacle {
     Mine{
         @Override
-        public Obstacle creerObstacle(Case c, Environnement environnement) {
-            return new Mine(c,environnement);
+        public Obstacle creerObstacle(Case c) {
+            return new Mine(c);
         }
     },
     Pics{
         @Override
-        public Obstacle creerObstacle(Case c, Environnement environnement) {
-            return new Pics(c,environnement);
+        public Obstacle creerObstacle(Case c) {
+            return new Pics(c);
         }
     };
-    public abstract Obstacle creerObstacle(Case c, Environnement environnement);
+    public abstract Obstacle creerObstacle(Case c);
 }

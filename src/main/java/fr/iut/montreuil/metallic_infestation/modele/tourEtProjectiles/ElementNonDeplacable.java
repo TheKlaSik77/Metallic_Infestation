@@ -10,9 +10,9 @@ public abstract class ElementNonDeplacable {
     protected Case position;
     protected Environnement environnement;
 
-    public ElementNonDeplacable(Case c, Environnement e){
+    public ElementNonDeplacable(Case c){
          this.position = c;
-         this.environnement = e;
+         this.environnement = Environnement.getInstance();
     }
 
     public Case getPosition() {
