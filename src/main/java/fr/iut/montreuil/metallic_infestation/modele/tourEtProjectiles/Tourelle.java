@@ -11,39 +11,31 @@ import java.util.ArrayList;
 
 
 
-public abstract class Tourelle {
+public abstract class Tourelle extends ElementNonDeplacable {
 
     private int id;
     private int degats;
-    private Case position;
-
     private int cout;
     private int porteeTourelle;
-    protected Environnement env;
+
     private Ennemi ennemiVise;
 
-    protected Terrain terrain;
     private int compteur = 0;
 
     private int porteeMissile;
 
 
-    public Tourelle(int degats, Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain, int porteeMissile){
+    public Tourelle(int degats, Case position, int cout, int porteeTourelle, Environnement env, int porteeMissile){
+        super(position, env);
         this.compteur++;
         this.id = compteur;
         this.degats = degats;
-        this.position = position;
         this.cout = cout;
         this.porteeTourelle = porteeTourelle;
-        this.env = env;
         this.ennemiVise = null;
-        this.terrain = terrain;
         this.porteeMissile = porteeMissile;
     }
 
-    public Case getPosition(){
-        return this.position;
-    }
 
     public Ennemi ennemiLePlusProche() {
         ArrayList<Ennemi> ennemisLesPlusProches = ennemisLesPlusProches(position, porteeTourelle);
@@ -63,7 +55,7 @@ public abstract class Tourelle {
                 for (int j = zoneTest * -1; j <= zoneTest; j++) {
                     if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
 
-                        Ennemi ennemiCase = env.ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
+                        Ennemi ennemiCase = environnement.ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
                         if (ennemiCase != null) {
                             ennemisLesPlusProches.add(ennemiCase);
                         }
@@ -92,12 +84,11 @@ public abstract class Tourelle {
     public int getPorteeMissile(){return this.porteeMissile;}
 
     public void poserTourelle(){
-        if (this.terrain.emplacementVideSurCase(this.getPosition())){
+        if (this.environnement.getTerrain().emplacementVideSurCase(this.getPosition())){
             // On dit que la case est occupée par une tour
-            terrain.setCase(this.getPosition(),3);
+            this.environnement.getTerrain().setCase(this.getPosition(),3);
         }
     }
-
     public ProjectileSemi creerProjectile(){
         return new ProjectileSemi(this,this.ennemiVise);
     }

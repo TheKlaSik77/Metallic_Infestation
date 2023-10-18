@@ -25,11 +25,10 @@ public class LaserTest {
     @Before
     public void setUp() {
         Case position = new Case(0, 0);
-        terrain = new Terrain();
-        environnement = new Environnement(terrain);
-        tourelle = new TourelleSemi(position, environnement, terrain);
+        environnement = Environnement.getInstance();
+        tourelle = new TourelleSemi(position, environnement);
         Point coordonneesEnnemi = new Point(10, 10);
-        ennemiVise = new EnnemiFacile(new ParcoursBFS(terrain), terrain);
+        ennemiVise = new EnnemiFacile(environnement);
         ennemiVise.setCoordonnees(coordonneesEnnemi.getX(), coordonneesEnnemi.getY());
         laser = new Laser(tourelle, ennemiVise);
 

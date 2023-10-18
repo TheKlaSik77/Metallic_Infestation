@@ -1,29 +1,23 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ElementNonDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 
-public abstract class Obstacle {
-
-    private Case c;
-    private Environnement environnement;
-    private Terrain terrain;
+public abstract class Obstacle extends ElementNonDeplacable {
     private int cout;
 
     public Obstacle(Case c, Environnement environnement, int cout) {
-        this.c = c;
-        this.environnement = environnement;
+        super(c, environnement);
         this.cout = cout;
     }
     public int getCout() {
         return cout;
     }
 
-    public Case getPosition() {
-        return this.c;
-    }
 
     public void poserObstacle() {
         if (this.environnement.getTerrain().cheminSurCase(this.getPosition())){

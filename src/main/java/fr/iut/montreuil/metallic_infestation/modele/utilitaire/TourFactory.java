@@ -1,9 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleAuto;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleMissiles;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleSemi;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 
 import javax.net.ssl.SSLEngineResult;
 
@@ -14,20 +11,23 @@ public class TourFactory {
         this.environnement = environnement;
     }
 
-    public Tourelle creerTour(int typeTour, Case c){
-        Tourelle tourelle = null;
+    public Tourelle creerTour(TypeTourelle type, Case c){
+        Tourelle tourelle = type.creerTourelle(c, environnement);
+        return tourelle;
+    }
+
+    /*Tourelle tourelle = null;
         switch (typeTour) {
             case 1:
-                tourelle = new TourelleSemi(c,this.environnement,this.environnement.getTerrain());
+                tourelle = new TourelleSemi(c,this.environnement);
                 break;
             case 2:
-                tourelle = new TourelleAuto(c,this.environnement,this.environnement.getTerrain());
+                tourelle = new TourelleAuto(c,this.environnement);
                 break;
             case 3:
-                tourelle = new TourelleMissiles(c,this.environnement,this.environnement.getTerrain());
+                tourelle = new TourelleMissiles(c,this.environnement);
                 break;
             default:break;
         }
-        return tourelle;
-    }
+        return tourelle;*/
 }

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class TourelleMissiles extends Tourelle {
 
 
-    public TourelleMissiles(Case position, Environnement env, Terrain terrain) {
+    public TourelleMissiles(Case position, Environnement env) {
 
-        super(100,position,50,5,env,terrain, 7);
+        super(100,position,50,5,env, 7);
 
     }
 

@@ -2,6 +2,8 @@ package fr.iut.montreuil.metallic_infestation.vue;
 
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.TypeObstacle;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TypeTourelle;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Boutique;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
@@ -75,21 +77,21 @@ public class BoutiqueVue {
 
     public void achatTour(Case c){
         if (tour1.isSelected()){
-            boutique.achatTour(1, c);
+            boutique.achatTour(TypeTourelle.TourelleSemi, c);
         }
         else if (tour2.isSelected()) {
-            boutique.achatTour(2,c);
+            boutique.achatTour(TypeTourelle.TourelleAuto,c);
         }
         else {
-            boutique.achatTour(3,c);
+            boutique.achatTour(TypeTourelle.TourelleMissiles,c);
         }
     }
 
     public void achatObstacle(Case c) {
         if (obs1.isSelected()){
-            boutique.achatObstacle(1,c);
+            boutique.achatObstacle(TypeObstacle.Pics,c);
         } else if (obs2.isSelected()){
-            boutique.achatObstacle(2,c);
+            boutique.achatObstacle(TypeObstacle.Mine,c);
         }
     }
 
