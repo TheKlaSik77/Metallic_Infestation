@@ -200,6 +200,7 @@ public class Environnement {
         this.nbTours % t.getVitesseAttaque()
         remplacer instanceof par t.tirer (les dégats seront gérés dans une autre boucle : parcourir les projectiles et si projectile.getPosition() == projectile.getEnnemiVise => infligerDégats() 
          */
+        // TODO : MODIFIER (TOURS)
         if (this.nbTours % 20 == 0) {
             for (Tourelle t : this.getListeTourelles()) {
                 if (t instanceof TourelleSemi) {
@@ -342,9 +343,7 @@ public class Environnement {
         for (DistanceEnnemiCible dec : distanceEnnemiCibleSortedSet){
             ennemisTrie.add(dec.getEnnemi());
         }
-
-
-
+        return ennemisTrie;
     }
     private double calculerDistance(Point coordonneeDepart, Ennemi ennemi) {
         double dx = ennemi.getCoordonnees().getX() - coordonneeDepart.getX();

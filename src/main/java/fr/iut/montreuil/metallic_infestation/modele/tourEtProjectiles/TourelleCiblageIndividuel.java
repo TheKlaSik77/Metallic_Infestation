@@ -17,4 +17,7 @@ public abstract class TourelleCiblageIndividuel extends Tourelle{
         ArrayList<Ennemi> tabDistanceEnnemiTrie = this.getEnv().getEnnemiLesPlusProchesDePosition(this.getCoordonnes(),this.getPorteeTourelle());
         return tabDistanceEnnemiTrie.get(0);
     }
+    public void raffraichirEnnemi(){
+        ennemiLePlusProche();
+    }
 }

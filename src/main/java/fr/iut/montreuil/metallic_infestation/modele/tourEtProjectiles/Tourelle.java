@@ -42,9 +42,7 @@ public abstract class Tourelle {
     public int getPorteeTourelle(){
         return this.porteeTourelle;
     }
-    public void raffraichirEnnemiVise(){
-        this.ennemisCibles = this.nEnnemisLesPlusProches(nbEnnemisCibles);
-    }
+    public abstract void raffraichirEnnemi();
     public ArrayList<Ennemi> getEnnemisCibles(){
         return this.ennemisCibles;
     }

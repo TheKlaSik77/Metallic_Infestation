@@ -31,5 +31,8 @@ public abstract class TourelleCiblageMultiple extends Tourelle{
         }
         return ennemisLesPlusProches;
     }
+    public void raffraichirEnnemi(){
+        nEnnemisLesPlusProches();
+    }
     public abstract Projectile creerProjectile();
 }
