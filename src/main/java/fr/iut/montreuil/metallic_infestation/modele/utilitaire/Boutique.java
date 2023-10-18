@@ -14,10 +14,6 @@ public class Boutique {
 
    private Terrain terrain;
 
-
-
-
-
     public Boutique (Joueur joueur, Environnement environnement, Terrain terrain){
         this.environnement = environnement;
         this.joueur = joueur;

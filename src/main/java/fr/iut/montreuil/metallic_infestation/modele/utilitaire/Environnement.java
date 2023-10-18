@@ -6,6 +6,7 @@ import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
+import fr.iut.montreuil.metallic_infestation.modele.vagues.GestionnaireVagues;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -14,9 +15,6 @@ import java.util.ArrayList;
 
 
 public class Environnement {
-
-    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
-    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
@@ -42,7 +40,7 @@ public class Environnement {
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
-        this.joueur = new Joueur(100,1000);
+        this.joueur = new Joueur(10000,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
         nbTours = 1;
     }

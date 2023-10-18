@@ -16,8 +16,6 @@ public abstract class Ennemi extends ElementDeplacable{
     private int drop;
 
     private Terrain terrain;
-
-
     private ParcoursBFS parcoursBFS;
     private Case caseDestination;
 

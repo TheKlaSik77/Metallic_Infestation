@@ -18,4 +18,6 @@ module com.application.metallic_infestation {
     opens fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles to javafx.fxml;
     exports fr.iut.montreuil.metallic_infestation.modele.obstacles;
     opens fr.iut.montreuil.metallic_infestation.modele.obstacles to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.vagues;
+    opens fr.iut.montreuil.metallic_infestation.modele.vagues to javafx.fxml;
 }
