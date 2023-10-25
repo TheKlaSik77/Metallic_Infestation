@@ -12,7 +12,7 @@ public class TourelleMissiles extends TourelleCiblageIndividuel {
 
 
     public TourelleMissiles(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain);
+        super(position, cout, porteeTourelle, env, terrain,100);
     }
 
     @Override

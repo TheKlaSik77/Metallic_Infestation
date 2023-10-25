@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javafx-graphics-20-linux">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/20/javafx-graphics-20-linux.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

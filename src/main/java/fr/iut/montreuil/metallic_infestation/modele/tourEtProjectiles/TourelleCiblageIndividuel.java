@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class TourelleCiblageIndividuel extends Tourelle{
-    public TourelleCiblageIndividuel(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain);
+    public TourelleCiblageIndividuel(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain,int vitesseAttaque) {
+        super(position, cout, porteeTourelle, env, terrain,vitesseAttaque);
     }
 
     public Ennemi ennemiLePlusProche() {
@@ -20,4 +20,5 @@ public abstract class TourelleCiblageIndividuel extends Tourelle{
     public void raffraichirEnnemi(){
         ennemiLePlusProche();
     }
+
 }

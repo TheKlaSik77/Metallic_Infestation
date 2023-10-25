@@ -10,7 +10,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 public class TourelleAuto extends TourelleCiblageIndividuel {
 
     public TourelleAuto(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain);
+        super(position, cout, porteeTourelle, env, terrain,20);
     }
 
     @Override

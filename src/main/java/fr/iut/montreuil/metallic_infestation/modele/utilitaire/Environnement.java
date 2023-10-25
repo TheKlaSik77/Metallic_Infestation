@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.tourelle.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
@@ -209,37 +210,12 @@ public class Environnement {
         remplacer instanceof par t.tirer (les dégats seront gérés dans une autre boucle : parcourir les projectiles et si projectile.getPosition() == projectile.getEnnemiVise => infligerDégats() 
          */
         // TODO : MODIFIER (TOURS)
-        if (this.nbTours % 20 == 0) {
-            for (Tourelle t : this.getListeTourelles()) {
-                if (t instanceof TourelleSemi) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectile();
-                        this.ajouterProjectile(p);
-                    }
-                }
+        for (Tourelle t : getListeTourelles()){
+            if (nbTours % 20 == 0){
+                t.raffraichirEnnemi();
             }
-        }
-
-        if (this.nbTours % 100 == 0){
-            for (Tourelle t: this.getListeTourelles()){
-                if (t instanceof TourelleMissiles) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectileMissile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-        for (Tourelle t : this.getListeTourelles()) {
-            if (t instanceof TourelleAuto) {
-                t.raffraichirEnnemiVise();
-                if (t.getEnnemiVise() != null) {
-                    Laser l = ((TourelleAuto) t).creerLaser();
-                    this.ajouterLaser(l);
-                    t.infligerDegats();
-                }
+            if (nbTours % t.getVitesseAttaque() == 0){
+                t.creerProjectile();
             }
         }
         if (!listeObstacles.isEmpty()) {

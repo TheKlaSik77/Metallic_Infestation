@@ -21,11 +21,11 @@ public abstract class Tourelle {
     private int porteeTourelle; //En nombre de case
     private Environnement env;
     private Terrain terrain;
+    private int vitesseAttaque; // Vitesse d'attaque des tours (tous les combien de tours elle attaque)
     private ArrayList<Ennemi> ennemisCibles;
-    private int nbEnnemisCibles;
     private int compteur = 0;
 
-    public Tourelle(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain){
+    public Tourelle(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain,int vitesseAttaque){
         this.compteur++;
         this.id = compteur;
         this.position = position;
@@ -33,6 +33,7 @@ public abstract class Tourelle {
         this.porteeTourelle = porteeTourelle;
         this.env = env;
         this.terrain = terrain;
+        this.vitesseAttaque = vitesseAttaque;
     }
 
     public Case getPosition(){
@@ -45,6 +46,23 @@ public abstract class Tourelle {
     public abstract void raffraichirEnnemi();
     public ArrayList<Ennemi> getEnnemisCibles(){
         return this.ennemisCibles;
+    }
+    public ArrayList<Ennemi> nEnnemisLesPlusProches(int nbEnnemisCibles) {
+        int cpt = 0;
+        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
+        ArrayList<Ennemi> tabDistanceEnnemiTrie = this.getEnv().getEnnemiLesPlusProchesDePosition(this.getCoordonnes(),this.getPorteeTourelle());
+        for (Ennemi e : tabDistanceEnnemiTrie) {
+            if (cpt < nbEnnemisCibles) {
+                ennemisLesPlusProches.add(e);
+                cpt++;
+            } else {
+                break;
+            }
+        }
+        return ennemisLesPlusProches;
+    }
+    public int getVitesseAttaque(){
+        return this.vitesseAttaque;
     }
     public int getCout() {return this.cout;}
     public void poserTourelle(){

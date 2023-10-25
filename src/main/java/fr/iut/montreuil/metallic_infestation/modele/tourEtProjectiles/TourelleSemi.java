@@ -8,11 +8,12 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 public class TourelleSemi extends TourelleCiblageIndividuel {
 
     public TourelleSemi(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain);
+        super(position, cout, porteeTourelle, env, terrain,200);
     }
 
     @Override
     public Projectile creerProjectile() {
         return new ProjectileSemi();
     }
+
 }
