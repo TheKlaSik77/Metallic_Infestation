@@ -7,6 +7,7 @@ import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.utilitaire.DistanceEnnemiCible;
+import fr.iut.montreuil.metallic_infestation.modele.vagues.GestionnaireVagues;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
