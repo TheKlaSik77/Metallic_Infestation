@@ -2,10 +2,9 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.utilitaire.DistanceEnnemiCible;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -190,6 +189,8 @@ public class Environnement {
         this.tour.unTour();
     }
     public int getNbTours(){return this.nbTours;}
+
+    public UnTour getTourDeJeu(){return this.tour;}
     public void incrementeNbTours(){this.nbTours++;}
     public ArrayList<Ennemi> getEnnemisASpawn(){return this.ennemisASpawn;}
     public void setEnnemisASpawn(ArrayList<Ennemi> ennemisASpawn){ this.ennemisASpawn = ennemisASpawn;}

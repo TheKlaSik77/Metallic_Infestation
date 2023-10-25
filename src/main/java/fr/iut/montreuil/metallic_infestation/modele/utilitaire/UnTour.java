@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 
@@ -12,8 +13,10 @@ public class UnTour {
     private Ennemi ennemi;
     private ArrayList<Ennemi> ennemisASupp;
     private ArrayList<Projectile> listeProjectilesASupp;
+    private ArrayList<Obstacle> listeObstaclesASupp;
     public UnTour() {
         this.ennemisASupp = new ArrayList<>();
+        this.listeObstaclesASupp = new ArrayList<>();
         this.listeProjectilesASupp = new ArrayList<>();
         this.ennemi = null;
     }
@@ -113,9 +116,8 @@ public class UnTour {
             for (int i = env.getListeObstacles().size() - 1; i >= 0; i--) {
 
                 for (Ennemi e : env.getListeEnnemis()) {
-                    
+                    this.ennemi = e;
                     if (env.getListeObstacles().get(i).ennemisSurObstacle()) {
-                        this.ennemi = e;
                         env.getListeObstacles().get(i).actionObstacle();
                     }
                 }
@@ -133,6 +135,11 @@ public class UnTour {
         for (Projectile p : listeProjectilesASupp) {
             env.retirerProjectile(p);
         }
+
+        for (Obstacle o : listeObstaclesASupp) {
+            env.getListeObstacles().remove(o);
+        }
+
         for (Ennemi e : ennemisASupp){
             env.retirerEnnemi(e);
         }
@@ -148,5 +155,7 @@ public class UnTour {
     }
 
     public Ennemi getEnnemi(){return this.ennemi;}
+
+    public ArrayList<Obstacle> getObstaclesASupp(){return this.listeObstaclesASupp;}
     
 }

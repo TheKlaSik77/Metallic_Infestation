@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 public class ProjectileMissile extends Projectile {
     private DoubleProperty angleProperty;
     public ProjectileMissile (Tourelle tourelleMissile, Ennemi ennemiVisee){
-        super(new Point(tourelleMissile.getPosition().getCentreCase().getX()-16, tourelleMissile.getPosition().getCentreCase().getY()-7),tourelleMissile,ennemiVisee,20);
+        super(new Point(tourelleMissile.getPosition().getCentreCase().getX()-16, tourelleMissile.getPosition().getCentreCase().getY()-7),tourelleMissile,20,ennemiVisee);
         this.angleProperty = new SimpleDoubleProperty(Math.toDegrees(Math.atan2(this.getEnnemiVise().getCoordonnees().getY() - this.getCoordonnees().getY(),this.getEnnemiVise().getCoordonnees().getX() - this.getCoordonnees().getX())));
     }
     @Override
@@ -27,5 +27,7 @@ public class ProjectileMissile extends Projectile {
     public Explosion creerExplosion () {
         return new Explosion(this.getEnnemiVise().getCoordonnees(), getTourelle().getDegats(), getTourelle().getPorteeMissile());
     }
+
+
     public DoubleProperty AngleProperty(){return angleProperty;}
 }

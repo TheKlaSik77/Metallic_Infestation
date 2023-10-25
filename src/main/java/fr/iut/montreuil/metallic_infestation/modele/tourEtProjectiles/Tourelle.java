@@ -36,6 +36,7 @@ public abstract class Tourelle extends ElementNonDeplacable {
         this.ennemiVise = null;
         this.porteeMissile = porteeMissile;
     }
+
     public Case getPosition(){
         return this.position;
     }

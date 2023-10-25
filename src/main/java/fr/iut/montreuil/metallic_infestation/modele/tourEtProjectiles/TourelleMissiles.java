@@ -17,10 +17,10 @@ public class TourelleMissiles extends Tourelle {
 
     }
 
-    @Override
-    public Projectile creerProjectile() {
-        return new ProjectileMissile();
-    }
+//    @Override
+//    public Projectile creerProjectile() {
+//        return new ProjectileMissile();
+//    }
 
     @Override
     public void infligerDegats() {

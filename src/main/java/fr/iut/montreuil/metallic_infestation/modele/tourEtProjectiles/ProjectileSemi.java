@@ -6,7 +6,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 public class ProjectileSemi extends Projectile {
 
     public ProjectileSemi(Tourelle tourelleSemi, Ennemi ennemiVise){
-        super(new Point(tourelleSemi.getPosition().getCentreCase().getX() - 16,tourelleSemi.getPosition().getCentreCase().getY() - 7),tourelleSemi,ennemiVise,20);
+        super(new Point(tourelleSemi.getPosition().getCentreCase().getX() - 16,tourelleSemi.getPosition().getCentreCase().getY() - 7),tourelleSemi,20,ennemiVise);
     }
     @Override
     public void seDeplacer(){

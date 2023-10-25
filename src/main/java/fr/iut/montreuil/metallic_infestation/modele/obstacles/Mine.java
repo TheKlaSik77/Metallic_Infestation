@@ -1,7 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Explosion;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 
@@ -31,7 +30,8 @@ public class Mine extends Obstacle {
         Explosion explosion = new Explosion(this.getPosition().getCentreCase(), this.getDegats(), this.getPorteeExplosion());
         Environnement.getInstance().getListExplosions().add(explosion);
         explosion.infligerDegats();
-        Environnement.getInstance().getListeObstacles().remove(this);
-        
+        Environnement.getInstance().getTourDeJeu().getObstaclesASupp().add(this);
+
+
     }
 }

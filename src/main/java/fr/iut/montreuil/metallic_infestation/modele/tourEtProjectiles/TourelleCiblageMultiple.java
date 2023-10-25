@@ -10,29 +10,34 @@ import java.util.Map;
 
 public abstract class TourelleCiblageMultiple extends Tourelle{
 
-    int nbEnnemisCibles;
-
-    public TourelleCiblageMultiple(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain, int nbEnnemisCibles){
-        super(position,cout,porteeTourelle,env,terrain);
-        this.nbEnnemisCibles = nbEnnemisCibles;
+    //Par défaut juste en attendant le merge de Kylian qui va tout résoudre !
+    public TourelleCiblageMultiple(int degats, Case position, int cout, int porteeTourelle, int porteeMissile) {
+        super(degats, position, cout, porteeTourelle, porteeMissile);
     }
 
-    public ArrayList<Ennemi> nEnnemisLesPlusProches() {
-        int cpt = 0;
-        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
-        ArrayList<Ennemi> tabDistanceEnnemiTrie = this.getEnv().getEnnemiLesPlusProchesDePosition(this.getCoordonnes(),this.getPorteeTourelle());
-        for (Ennemi e : tabDistanceEnnemiTrie) {
-            if (cpt < this.nbEnnemisCibles) {
-                ennemisLesPlusProches.add(e);
-                cpt++;
-            } else {
-                break;
-            }
-        }
-        return ennemisLesPlusProches;
-    }
-    public void raffraichirEnnemi(){
-        nEnnemisLesPlusProches();
-    }
-    public abstract Projectile creerProjectile();
+//    int nbEnnemisCibles;
+//
+//    public TourelleCiblageMultiple(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain, int nbEnnemisCibles){
+//        super(position,cout,porteeTourelle,env,terrain);
+//        this.nbEnnemisCibles = nbEnnemisCibles;
+//    }
+//
+//    public ArrayList<Ennemi> nEnnemisLesPlusProches() {
+//        int cpt = 0;
+//        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
+//        ArrayList<Ennemi> tabDistanceEnnemiTrie = this.getEnv().getEnnemiLesPlusProchesDePosition(this.getCoordonnes(),this.getPorteeTourelle());
+//        for (Ennemi e : tabDistanceEnnemiTrie) {
+//            if (cpt < this.nbEnnemisCibles) {
+//                ennemisLesPlusProches.add(e);
+//                cpt++;
+//            } else {
+//                break;
+//            }
+//        }
+//        return ennemisLesPlusProches;
+//    }
+//    public void raffraichirEnnemi(){
+//        nEnnemisLesPlusProches();
+//    }
+//    public abstract Projectile creerProjectile();
 }

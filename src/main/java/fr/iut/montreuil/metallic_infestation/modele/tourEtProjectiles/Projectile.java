@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Explosion;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 
 public abstract class Projectile extends ElementDeplacable {
@@ -10,10 +11,13 @@ public abstract class Projectile extends ElementDeplacable {
     private Point coordonneesDepart;
     private Ennemi ennemiVise;
 
-    protected Projectile(Point coordonneesDepart, int vitesse, Ennemi ennemiVise) {
+    private Tourelle tourelle;
+
+    protected Projectile(Point coordonneesDepart, Tourelle tourelle, int vitesse, Ennemi ennemiVise) {
         super(coordonneesDepart, vitesse);
         this.coordonneesDepart = coordonneesDepart;
         this.ennemiVise = ennemiVise;
+        this.tourelle = tourelle;
     }
 
 
@@ -31,5 +35,7 @@ public abstract class Projectile extends ElementDeplacable {
     public Ennemi getEnnemiVise() {
         return ennemiVise;
     }
+
+    public Tourelle getTourelle(){return this.tourelle;}
 
 }
