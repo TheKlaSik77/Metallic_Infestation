@@ -2,7 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.ennemis;
 
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 
-public abstract class ElementDeplacable {
+public class ElementDeplacable {
     private static int compteur = 0;
     private int id;
     protected Point coordonnees;

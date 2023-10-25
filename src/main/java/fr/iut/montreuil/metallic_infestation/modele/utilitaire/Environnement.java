@@ -6,12 +6,10 @@ import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.utilitaire.DistanceEnnemiCible;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.util.*;
 
 
@@ -36,7 +34,7 @@ public class Environnement {
     private GestionnaireVagues gestionnaireVagues;
     private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
-
+    private UnTour tour;
 
     private Environnement() {
         this.terrain = Terrain.getInstance();
@@ -47,44 +45,40 @@ public class Environnement {
         this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
-        this.parcoursBFS = new ParcoursBFS(terrain);
-
+        this.parcoursBFS = ParcoursBFS.getInstance();
         parcoursBFS.remplirGrilleBFS();
         this.joueur = Joueur.getInstance(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
         this.gestionnaireVagues = new GestionnaireVagues(this);
+        this.tour = new UnTour();
         nbTours = 1;
     }
-    public static Environnement getInstance(Terrain terrain){
+    public static Environnement getInstance(){
         if (uniqueInstance==null){
             uniqueInstance = new Environnement();
         }
         return uniqueInstance;
     }
 
-    public GestionnaireVagues getGestionnaireVagues(){
-        return gestionnaireVagues;
-    }
-
-    /**
-     * public unTour(){
-     * if(nbTours%vitesse==0)
-     * }
-     */
-    public ParcoursBFS getParcoursBFS(){
-        return parcoursBFS;
-    }
-
+    //GETTERS
+    public Terrain getTerrain(){return this.terrain;}
     public ObservableList<Ennemi> getListeEnnemis() {
         return listeEnnemis;
     }
-
-    public ObservableList<Tourelle> getListeTourelles() {
-        return listeTourelles;
-    }
-
+    public ObservableList<Tourelle> getListeTourelles() {return listeTourelles;}
+    public ObservableList<Projectile> getListeProjectiles() {return listeProjectiles;}
     public ObservableList<Laser> getListeLasers(){
         return listeLasers;
+    }
+    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+    public ObservableList<Obstacle> getListeObstacles() {return this.listeObstacles;}
+    public ParcoursBFS getParcoursBFS(){
+        return parcoursBFS;
+    }
+    public Joueur getJoueur() {return this.joueur;}
+    public IntegerProperty vagueActuelleProperty(){return vagueActuelleProperty;}
+    public GestionnaireVagues getGestionnaireVagues(){
+        return gestionnaireVagues;
     }
 
     public Ennemi ennemiSurCase(Case c) {
@@ -148,147 +142,8 @@ public class Environnement {
         return supprime;
     }
 
-    public ObservableList<Projectile> getListeProjectiles() {
-        return listeProjectiles;
-    }
-
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
-
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
-    }
-
-
-    public void unTour(GestionnaireVagues gestionnaireVagues) {
-
-        ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 0){
-
-
-        }
-        if (this.nbTours % 700 == 0 || nbTours == 100) {
-            ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
-
-        }
-        if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
-            this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
-        }
-
-        if (this.nbTours % 2 == 0) {
-
-            for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                Ennemi e = this.getListeEnnemis().get(idEnnemi);
-                e.seDeplacer();
-                if (e.aAtteintLaCible()) {
-                    ennemisASupp.add(e);
-                    joueur.debiterPvJoueurProperty(e.getDrop());
-                } else if (e.estMort()) {
-                    ennemisASupp.add(e);
-                    joueur.crediterArgentProperty(e.getDrop());
-                }
-            }
-        }
-        ArrayList<Projectile> listeProjectilesASupp = new ArrayList<>();
-        if (this.nbTours % 2 == 0) {
-            for (Projectile p : this.getListeProjectiles()) {
-                p.seDeplacer();
-                if (p.arriveSurEnnemi()) {
-                    if (p instanceof ProjectileMissile){
-                        listExplosions.add(((ProjectileMissile) p).creerExplosion());
-                    }
-                    p.getTourelle().infligerDegats();
-                    listeProjectilesASupp.add(p);
-                }
-            }
-
-        }
-        //TODO: Retirer les instanceof
-        /*
-        inverser la ligne nbTours % et for en dessous
-        this.nbTours % t.getVitesseAttaque()
-        remplacer instanceof par t.tirer (les dégats seront gérés dans une autre boucle : parcourir les projectiles et si projectile.getPosition() == projectile.getEnnemiVise => infligerDégats() 
-         */
-        // TODO : MODIFIER (TOURS)
-        if (this.nbTours % 20 == 0) {
-            for (Tourelle t : this.getListeTourelles()) {
-                if (t instanceof TourelleSemi) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-
-        if (this.nbTours % 100 == 0){
-            for (Tourelle t: this.getListeTourelles()){
-                if (t instanceof TourelleMissiles) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectileMissile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-        for (Tourelle t : this.getListeTourelles()) {
-            if (t instanceof TourelleAuto) {
-                t.raffraichirEnnemiVise();
-                if (t.getEnnemiVise() != null) {
-                    Laser l = ((TourelleAuto) t).creerLaser();
-                    this.ajouterLaser(l);
-                    t.infligerDegats();
-                }
-            }
-        }
-        if (!listeObstacles.isEmpty()) {
-            for (int i = listeObstacles.size() - 1; i >= 0; i--) {
-                for (Ennemi e : listeEnnemis) {
-                    if (listeObstacles.get(i).ennemisSurObstacle()) {
-                        if (listeObstacles.get(i) instanceof Pics) {
-                            if (listeObstacles.get(i).ennemisSurObstacle()) {
-                                ((Pics) listeObstacles.get(i)).actionnerPics(e);
-                            }
-                        } else if (listeObstacles.get(i) instanceof Mine) {
-                            terrain.setCase(listeObstacles.get(i).getPosition(), 1);
-                            Explosion explosion = new Explosion(this,listeObstacles.get(i).getPosition().getCentreCase(), ((Mine) listeObstacles.get(i)).getDegats(),((Mine) listeObstacles.get(i)).getPorteeExplosion());
-                            listExplosions.add(explosion);
-                            explosion.infligerDegats();
-                            this.listeObstacles.remove(listeObstacles.get(i));
-                            break;
-                        }
-                    }
-
-                }
-            }
-
-        }
-        for (Laser l : listeLasers){
-            if (l.getEnnemiVise() == null){
-                listeLasers.clear();
-            }
-        }
-        for (Projectile p : listeProjectilesASupp) {
-            this.retirerProjectile(p);
-        }
-        for (Ennemi e : ennemisASupp){
-            this.retirerEnnemi(e);
-        }
-        if(nbTours % 2 == 0) {
-            listeLasers.clear();
-        }
-        for (Ennemi e : listeEnnemis){
-            if (e.estSurChemin()){
-                e.retablirVitesse();
-            }
-        }
-
-        nbTours++;
-    }
-
-    public Joueur getJoueur() {
-        return this.joueur;
     }
 
     public void ajouterLaser(Laser p){
@@ -322,14 +177,6 @@ public class Environnement {
     }
 
 
-    public ObservableList<Obstacle> getListeObstacles() {
-        return this.listeObstacles;
-
-    }
-
-    public IntegerProperty vagueActuelleProperty(){
-        return this.vagueActuelleProperty;
-    }
     public void setVagueActuelleProperty(int n ){
         this.vagueActuelleProperty().setValue(n);
     }
@@ -337,6 +184,15 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
+
+    //Déplacement méthode unTour
+    public void unTour() {
+        this.tour.unTour();
+    }
+    public int getNbTours(){return this.nbTours;}
+    public void incrementeNbTours(){this.nbTours++;}
+    public ArrayList<Ennemi> getEnnemisASpawn(){return this.ennemisASpawn;}
+    public void setEnnemisASpawn(ArrayList<Ennemi> ennemisASpawn){ this.ennemisASpawn = ennemisASpawn;}
 
     public ArrayList<Ennemi> getEnnemiLesPlusProchesDePosition(Point coordonneDepart,int portee) {
         SortedSet<DistanceEnnemiCible> distanceEnnemiCibleSortedSet = new TreeSet<>();
@@ -359,9 +215,6 @@ public class Environnement {
         double dy = ennemi.getCoordonnees().getY() - coordonneeDepart.getY();
         return Math.sqrt(dx * dx + dy * dy);
     }
-
-
-    public Terrain getTerrain(){return this.terrain;}
 
 }
 

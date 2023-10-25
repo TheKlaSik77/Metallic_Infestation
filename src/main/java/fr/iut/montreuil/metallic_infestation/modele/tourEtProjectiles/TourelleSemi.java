@@ -5,14 +5,21 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
-public class TourelleSemi extends TourelleCiblageIndividuel {
-
-    public TourelleSemi(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain);
+public class TourelleSemi extends Tourelle {
+    public TourelleSemi(Case position){
+        super(20,position,10,5,0);
     }
 
+
+//    @Override
+//    public Projectile creerProjectile() {
+//        return new ProjectileSemi();
+//    }
+
     @Override
-    public Projectile creerProjectile() {
-        return new ProjectileSemi();
+    public void infligerDegats() {
+        if(getEnnemiVise() != null) {
+            getEnnemiVise().decrementerPv(getDegats());
+        }
     }
 }

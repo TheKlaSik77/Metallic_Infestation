@@ -14,12 +14,12 @@ public abstract class Ennemi extends ElementDeplacable{
     private Case caseDestination;
     private Environnement environnement;
 
-    public Ennemi (int pv, int vitesse, int drop, Environnement environnement){
+    public Ennemi (int pv, int vitesse, int drop){
         super(new Point(0,0),vitesse);
         this.pv = pv;
         // Piece Lootées par les ennemis
         this.drop = drop;
-        this.environnement = environnement;
+        this.environnement = Environnement.getInstance();
         //this.terrain = terrain;
         // Position de Départ Aléatoire ( /!\ On part du principe que pour chaque map, les spawns des ennemis se trouvent en x = 0 et y aleatoire ou en y = 0 et x aléatoire
         boolean coordonneesChemin;

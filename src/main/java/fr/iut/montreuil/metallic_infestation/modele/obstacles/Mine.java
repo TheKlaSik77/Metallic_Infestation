@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Explosion;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
@@ -10,8 +11,8 @@ public class Mine extends Obstacle {
 
 
     private int porteeExplosion;
-    public Mine(Case c, Environnement environnement) {
-        super(c, environnement, 20);
+    public Mine(Case c) {
+        super(c, 20);
         this.degats = 300;
         this.porteeExplosion = 2;
     }
@@ -22,5 +23,15 @@ public class Mine extends Obstacle {
     public int getPorteeExplosion() {
         return porteeExplosion;
     }
+    
+    @Override
+    public void actionObstacle() {
 
+        Environnement.getInstance().getTerrain().setCase(this.getPosition(), 1);
+        Explosion explosion = new Explosion(this.getPosition().getCentreCase(), this.getDegats(), this.getPorteeExplosion());
+        Environnement.getInstance().getListExplosions().add(explosion);
+        explosion.infligerDegats();
+        Environnement.getInstance().getListeObstacles().remove(this);
+        
+    }
 }

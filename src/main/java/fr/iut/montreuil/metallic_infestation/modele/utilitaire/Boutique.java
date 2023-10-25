@@ -3,12 +3,11 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleAuto;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleMissiles;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleSemi;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.TypeObstacle;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 
 public class Boutique {
+    private static Boutique uniqueInstance = null;
    private Environnement environnement;
 
    private TourFactory tourFactory;
@@ -16,11 +15,19 @@ public class Boutique {
    private ObstacleFactory obstacleFactory;
 
 
-    public Boutique (Environnement environnement){
-        this.environnement = environnement;
-        this.tourFactory = new TourFactory(environnement);
-        this.obstacleFactory = new ObstacleFactory(environnement);
+    private Boutique (){
+        this.environnement = Environnement.getInstance();
+        this.tourFactory = new TourFactory();
+        this.obstacleFactory = new ObstacleFactory();
     }
+
+     public static Boutique getInstance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new Boutique();
+        }
+        return uniqueInstance;
+     }
+     
 
     public void AchatPv (int montant, int pv) {
         if (this.environnement.getJoueur().achatPossible(montant)){
@@ -33,7 +40,7 @@ public class Boutique {
      * typeTour == 2 -> TourelleAuto
      * typeTour == 3 -> TourelleMissiles
      */
-    public void achatTour(int typeTour, Case c){
+    public void achatTour(TypeTourelle typeTour, Case c){
        Tourelle tourelle = this.tourFactory.creerTour(typeTour,c);
 
         if(this.environnement.getJoueur().achatPossible(tourelle.getCout())) {
@@ -41,7 +48,7 @@ public class Boutique {
             this.environnement.getJoueur().debiterArgentProperty(tourelle.getCout());
         }
     }
-    public void achatObstacle(int typeObstacle, Case c) {
+    public void achatObstacle(TypeObstacle typeObstacle, Case c) {
         Obstacle obstacle = this.obstacleFactory.creerObstacle(typeObstacle,c);
         if(this.environnement.getJoueur().achatPossible(obstacle.getCout())){
             environnement.ajouterDansListeObstacles(obstacle);

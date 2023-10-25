@@ -5,7 +5,6 @@ import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 import java.util.ArrayList;
@@ -13,53 +12,91 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class Tourelle {
+public abstract class Tourelle extends ElementNonDeplacable {
 
     private int id;
-    private Case position;
+    private int degats;
     private int cout;
-    private int porteeTourelle; //En nombre de case
-    private Environnement env;
-    private Terrain terrain;
-    private ArrayList<Ennemi> ennemisCibles;
-    private int nbEnnemisCibles;
+    private int porteeTourelle;
+
+    private Ennemi ennemiVise;
+
     private int compteur = 0;
 
-    public Tourelle(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain){
+    private int porteeMissile;
+
+
+    public Tourelle(int degats, Case position, int cout, int porteeTourelle, int porteeMissile){
+        super(position);
         this.compteur++;
         this.id = compteur;
-        this.position = position;
+        this.degats = degats;
         this.cout = cout;
         this.porteeTourelle = porteeTourelle;
-        this.env = env;
-        this.terrain = terrain;
+        this.ennemiVise = null;
+        this.porteeMissile = porteeMissile;
     }
-
     public Case getPosition(){
         return this.position;
     }
 
-    public int getPorteeTourelle(){
-        return this.porteeTourelle;
+    public Ennemi ennemiLePlusProche() {
+        ArrayList<Ennemi> ennemisLesPlusProches = ennemisLesPlusProches(position, porteeTourelle);
+
+        if (!ennemisLesPlusProches.isEmpty()) {
+            return ennemisLesPlusProches.get(0);
+        }
+
+        return null;
     }
-    public abstract void raffraichirEnnemi();
-    public ArrayList<Ennemi> getEnnemisCibles(){
-        return this.ennemisCibles;
+
+    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
+        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<>();
+
+        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
+            for (int i = zoneTest * -1; i <= zoneTest; i++) {
+                for (int j = zoneTest * -1; j <= zoneTest; j++) {
+                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
+
+                        Ennemi ennemiCase = environnement.ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
+                        if (ennemiCase != null) {
+                            ennemisLesPlusProches.add(ennemiCase);
+                        }
+                    }
+                }
+            }
+        }
+        return ennemisLesPlusProches;
     }
-    public int getCout() {return this.cout;}
+
+
+
+    public void raffraichirEnnemiVise(){
+        this.ennemiVise = this.ennemiLePlusProche();
+    }
+    public Ennemi getEnnemiVise(){
+        return this.ennemiVise;
+    }
+
+
+    public abstract void infligerDegats();
+    public int getCout (){return this.cout;}
+
+    public int getDegats(){return this.degats;}
+
+    public int getPorteeMissile(){return this.porteeMissile;}
+
     public void poserTourelle(){
-        if (this.terrain.emplacementVideSurCase(this.getPosition())){
+        if (this.environnement.getTerrain().emplacementVideSurCase(this.getPosition())){
             // On dit que la case est occupée par une tour
-            terrain.setCase(this.getPosition(),3);
+            this.environnement.getTerrain().setCase(this.getPosition(),3);
         }
     }
 
-    public Point getCoordonnes(){
-        return getPosition().getCentreCase();
+    public ProjectileSemi creerProjectile(){
+        return new ProjectileSemi(this,this.ennemiVise);
     }
-    public abstract Projectile creerProjectile();
 
-    public Environnement getEnv() {
-        return env;
-    }
+    public ProjectileMissile creerProjectileMissile() {return new ProjectileMissile(this, this.ennemiVise);}
+
 }

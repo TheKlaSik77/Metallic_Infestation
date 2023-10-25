@@ -8,15 +8,33 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 import java.util.ArrayList;
 
-public class TourelleMissiles extends TourelleCiblageIndividuel {
+public class TourelleMissiles extends Tourelle {
 
 
-    public TourelleMissiles(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain);
+    public TourelleMissiles(Case position) {
+
+        super(100,position,50,5, 7);
+
     }
 
     @Override
     public Projectile creerProjectile() {
         return new ProjectileMissile();
     }
+
+    @Override
+    public void infligerDegats() {
+
+        Ennemi ennemiVise = this.ennemiLePlusProche();
+        if(ennemiVise != null) {
+            ArrayList<Ennemi> listeDesEnnemisVisés = this.ennemisLesPlusProches(ennemiVise.getCase(), this.getPorteeMissile());
+            if(listeDesEnnemisVisés != null){
+                for (Ennemi e: listeDesEnnemisVisés) {
+                    e.decrementerPv(this.getDegats());
+
+                }
+            }
+        }
+    }
+
 }
