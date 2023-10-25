@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class TourelleMissiles extends TourelleCiblageIndividuel {
 
 
-    public TourelleMissiles(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-        super(position, cout, porteeTourelle, env, terrain,100);
+    public TourelleMissiles(Case position, Environnement env, Terrain terrain) {
+        super(position, 30, 6, env, terrain,100);
     }
 
     @Override
