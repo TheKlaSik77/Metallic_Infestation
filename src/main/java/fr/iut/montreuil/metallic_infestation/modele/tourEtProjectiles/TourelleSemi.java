@@ -13,7 +13,7 @@ public class TourelleSemi extends TourelleCiblageIndividuel {
 
     @Override
     public Projectile creerProjectile() {
-        return new ProjectileSemi();
+        return null;
     }
 
 }

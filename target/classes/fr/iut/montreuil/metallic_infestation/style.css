@@ -1,8 +1,0 @@
-@font-face {
-    font-family: 'Metal Mania';
-    src: url('MetalMania-Regular.ttf');
-}
-
-* {
-    -fx-font-family: 'Metal Mania';
-}

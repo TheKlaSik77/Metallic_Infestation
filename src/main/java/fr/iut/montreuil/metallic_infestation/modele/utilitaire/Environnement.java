@@ -2,7 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.tourelle.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
@@ -197,7 +197,7 @@ public class Environnement {
                     if (p instanceof ProjectileMissile){
                         listExplosions.add(((ProjectileMissile) p).creerExplosion());
                     }
-                    p.getTourelle().infligerDegats();
+                    p.appliquerEffet();
                     listeProjectilesASupp.add(p);
                 }
             }
