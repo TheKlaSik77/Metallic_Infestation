@@ -203,6 +203,8 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
+        //TODO:
+        /*
         env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
@@ -218,6 +220,9 @@ public class JeuControleur implements Initializable {
             }
         });
 
+         */
+        //TODO:
+        /*
         env.getListExplosions().addListener((ListChangeListener<Explosion>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
@@ -227,6 +232,8 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
+
+         */
 
         terrainVue.afficherTerrain();
         gameLoop.play();

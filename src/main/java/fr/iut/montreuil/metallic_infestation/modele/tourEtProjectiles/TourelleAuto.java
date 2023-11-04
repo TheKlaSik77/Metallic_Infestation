@@ -15,6 +15,6 @@ public class TourelleAuto extends TourelleCiblageIndividuel {
 
     @Override
     public Projectile creerProjectile() {
-        return new Laser();
+        return new Laser(this.getCoordonnes(),this.ennemiLePlusProche());
     }
 }

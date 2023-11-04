@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.effets.Effet;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import javafx.scene.effect.Effect;
 
@@ -10,11 +11,12 @@ public abstract class Projectile extends ElementDeplacable {
     private int id;
     private Point coordonneesDepart;
     private Ennemi ennemiVise;
-
+    private Effet effet;
     private static int compteur = 0;
 
-    protected Projectile(Point coordonneesDepart, int vitesse, Ennemi ennemiVise) {
+    protected Projectile(Effet effet, Point coordonneesDepart, int vitesse, Ennemi ennemiVise) {
         super(coordonneesDepart, vitesse);
+        this.effet = effet;
         this.coordonneesDepart = coordonneesDepart;
         this.ennemiVise = ennemiVise;
         this.id = compteur;
@@ -26,6 +28,9 @@ public abstract class Projectile extends ElementDeplacable {
         return this.getId() == p.getId();
     }
 
+    public void appliquerEffet(){
+        effet.appliquerEffet(ennemiVise);
+    }
     public void seDeplacer(){
         int deltaX = this.getEnnemiVise().getCoordonnees().getX() - this.getCoordonnees().getX();
         int deltaY = this.getEnnemiVise().getCoordonnees().getY() - this.getCoordonnees().getY();

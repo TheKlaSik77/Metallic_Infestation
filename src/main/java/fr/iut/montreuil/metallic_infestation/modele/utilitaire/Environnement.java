@@ -29,7 +29,7 @@ public class Environnement {
     private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
 
-    private ObservableList<Explosion> listExplosions;
+    //private ObservableList<Explosion> listExplosions;
     private ArrayList<Ennemi> ennemisASpawn;
 
     private ParcoursBFS parcoursBFS;
@@ -45,7 +45,7 @@ public class Environnement {
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
         this.listeLasers = FXCollections.observableArrayList();
-        this.listExplosions = FXCollections.observableArrayList();
+        //this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
@@ -153,7 +153,7 @@ public class Environnement {
         return listeProjectiles;
     }
 
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+    //public ObservableList<Explosion> getListExplosions(){return listExplosions;}
 
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
@@ -189,6 +189,7 @@ public class Environnement {
                 }
             }
         }
+        /*
         ArrayList<Projectile> listeProjectilesASupp = new ArrayList<>();
         if (this.nbTours % 2 == 0) {
             for (Projectile p : this.getListeProjectiles()) {
@@ -203,6 +204,8 @@ public class Environnement {
             }
 
         }
+
+         */
         //TODO: Retirer les instanceof
         /*
         inverser la ligne nbTours % et for en dessous
@@ -218,6 +221,7 @@ public class Environnement {
                 t.creerProjectile();
             }
         }
+        /*
         if (!listeObstacles.isEmpty()) {
             for (int i = listeObstacles.size() - 1; i >= 0; i--) {
                 for (Ennemi e : listeEnnemis) {
@@ -240,14 +244,19 @@ public class Environnement {
             }
 
         }
+
+         */
         for (Laser l : listeLasers){
             if (l.getEnnemiVise() == null){
                 listeLasers.clear();
             }
         }
+        /*
         for (Projectile p : listeProjectilesASupp) {
             this.retirerProjectile(p);
         }
+
+         */
         for (Ennemi e : ennemisASupp){
             this.retirerEnnemi(e);
         }
@@ -266,7 +275,7 @@ public class Environnement {
     public Joueur getJoueur() {
         return this.joueur;
     }
-
+    /*
     public void ajouterLaser(Laser p){
         if (p != null) {
             if (p.getEnnemiVise() != null && p.getTourelle() != null) {
@@ -274,6 +283,8 @@ public class Environnement {
             }
         }
     }
+
+     */
 
     /**
      * Regarde si ennemi est déjà visé par un laser
@@ -288,7 +299,7 @@ public class Environnement {
         }
         return false;
     }
-
+    /*
     public void retirerExplosion(Explosion e){
         for (int i = listExplosions.size()-1 ; i >= 0 ; i--){
             if (listExplosions.get(i).equals(e)){
@@ -296,6 +307,8 @@ public class Environnement {
             }
         }
     }
+
+     */
 
 
     public ObservableList<Obstacle> getListeObstacles() {

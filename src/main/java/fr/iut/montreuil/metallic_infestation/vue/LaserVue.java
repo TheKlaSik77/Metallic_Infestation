@@ -21,7 +21,8 @@ public class LaserVue {
         this.environnement = environnement;
         this.zoneAffichageLaser = zoneAffichageLaser;
     }
-
+    //TODO:
+    /*
     public  void creerLaser(Laser laser) {
         if (laser.CordonnéeEnnemiArrive() != null) {
             double x1 = laser.CoordonnéeTourelleDepart().getX();
@@ -63,4 +64,5 @@ public class LaserVue {
             }
         }
     }
+    */
 }
