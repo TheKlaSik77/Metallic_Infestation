@@ -44,7 +44,7 @@ public class Environnement {
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
-        this.listeLasers = FXCollections.observableArrayList();
+        //this.listeLasers = FXCollections.observableArrayList();
         //this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
@@ -83,11 +83,11 @@ public class Environnement {
     public ObservableList<Tourelle> getListeTourelles() {
         return listeTourelles;
     }
-
+    /*
     public ObservableList<Laser> getListeLasers(){
         return listeLasers;
     }
-
+*/
     public Ennemi ennemiSurCase(Case c) {
         for (Ennemi e : listeEnnemis) {
             if (e.getCase().equals(c)) {
@@ -246,11 +246,14 @@ public class Environnement {
         }
 
          */
+        /*
         for (Laser l : listeLasers){
             if (l.getEnnemiVise() == null){
                 listeLasers.clear();
             }
         }
+
+         */
         /*
         for (Projectile p : listeProjectilesASupp) {
             this.retirerProjectile(p);
@@ -286,11 +289,7 @@ public class Environnement {
 
      */
 
-    /**
-     * Regarde si ennemi est déjà visé par un laser
-     * @param e
-     * @return
-     */
+    /*
     public boolean estEstPresent (Ennemi e){
         for (Laser l: listeLasers) {
             if (e == l.getEnnemiVise()){
@@ -299,6 +298,7 @@ public class Environnement {
         }
         return false;
     }
+    */
     /*
     public void retirerExplosion(Explosion e){
         for (int i = listExplosions.size()-1 ; i >= 0 ; i--){

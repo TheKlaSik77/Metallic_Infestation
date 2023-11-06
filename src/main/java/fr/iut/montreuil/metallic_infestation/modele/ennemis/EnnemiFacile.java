@@ -6,8 +6,8 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 public class EnnemiFacile extends Ennemi {
 
-    public EnnemiFacile(Environnement environnement){
-        super(50,4,1,environnement);
+    public EnnemiFacile(){
+        super(50,4,1);
     }
 
     @Override

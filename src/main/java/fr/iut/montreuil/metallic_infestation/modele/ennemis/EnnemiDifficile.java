@@ -5,8 +5,8 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ParcoursBFS;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 public class EnnemiDifficile extends Ennemi {
-    public EnnemiDifficile(Environnement environnement) {
-        super(300, 2,5, environnement);
+    public EnnemiDifficile() {
+        super(300, 2,5);
     }
 
     @Override
