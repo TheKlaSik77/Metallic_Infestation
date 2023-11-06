@@ -35,7 +35,7 @@ public class Environnement {
     private ParcoursBFS parcoursBFS;
     public int nbTours;
     private GestionnaireVagues gestionnaireVagues;
-    private ObservableList<Laser> listeLasers;
+    private ObservableList<ProjectileAuto> listeProjectilesAuto;
     private ObservableList<Obstacle> listeObstacles;
 
 
@@ -48,7 +48,7 @@ public class Environnement {
         //this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
-        this.parcoursBFS = new ParcoursBFS(terrain);
+        this.parcoursBFS = new ParcoursBFS();
 
         parcoursBFS.remplirGrilleBFS();
         this.joueur = Joueur.getInstance(100,1000);
@@ -56,7 +56,7 @@ public class Environnement {
         this.gestionnaireVagues = new GestionnaireVagues(this);
         nbTours = 1;
     }
-    public static Environnement getInstance(Terrain terrain){
+    public static Environnement getInstance(){
         if (uniqueInstance==null){
             uniqueInstance = new Environnement();
         }
@@ -210,7 +210,7 @@ public class Environnement {
         /*
         inverser la ligne nbTours % et for en dessous
         this.nbTours % t.getVitesseAttaque()
-        remplacer instanceof par t.tirer (les dégats seront gérés dans une autre boucle : parcourir les projectiles et si projectile.getPosition() == projectile.getEnnemiVise => infligerDégats() 
+        remplacer instanceof par t.tirer (les dégats seront gérés dans une autre boucle : parcourir les projectiles et si projectile.getPosition() == projectile.getEnnemiVise => infligerDégats()
          */
         // TODO : MODIFIER (TOURS)
         for (Tourelle t : getListeTourelles()){
@@ -264,7 +264,7 @@ public class Environnement {
             this.retirerEnnemi(e);
         }
         if(nbTours % 2 == 0) {
-            listeLasers.clear();
+            listeProjectilesAuto.clear();
         }
         for (Ennemi e : listeEnnemis){
             if (e.estSurChemin()){
