@@ -21,7 +21,6 @@ public class DistanceEnnemiCible implements Comparable<DistanceEnnemiCible>{
 
     @Override
     public int compareTo(DistanceEnnemiCible distanceEnnemiCible) {
-        // Comparez les personnes en fonction de leur âge
         return Double.compare(this.distance, distanceEnnemiCible.getDistance());
     }
 }

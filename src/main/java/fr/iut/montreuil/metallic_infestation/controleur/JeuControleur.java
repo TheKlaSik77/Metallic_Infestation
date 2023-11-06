@@ -4,7 +4,6 @@ import fr.iut.montreuil.metallic_infestation.JeuApplication;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
@@ -116,7 +115,7 @@ public class JeuControleur implements Initializable {
 
         Terrain terrain = Terrain.getInstance();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
-        this.env = Environnement.getInstance(terrain);
+        this.env = Environnement.getInstance();
 
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
@@ -129,7 +128,7 @@ public class JeuControleur implements Initializable {
 
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
-        Boutique boutique = new Boutique(env);
+        Boutique boutique = Boutique.getInstance();
         this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         env.getJoueur().argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));
@@ -326,7 +325,7 @@ public class JeuControleur implements Initializable {
                         gameLoop.stop();
                     } else {
 
-                        env.unTour(env.getGestionnaireVagues());
+                        env.unTour();
                         for (Obstacle o : this.env.getListeObstacles()){
                             if (o instanceof Pics) {
                                 if (o.ennemisSurObstacle()) {

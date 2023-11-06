@@ -1,8 +1,8 @@
-package fr.iut.montreuil.metallic_infestation.modele.ennemis;
+package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 
-public abstract class ElementDeplacable {
+public class ElementDeplacable {
     private static int compteur = 0;
     private int id;
     protected Point coordonnees;
@@ -24,6 +24,9 @@ public abstract class ElementDeplacable {
 
     public int getVitesse(){
         return this.vitesse;
+    }
+    public Environnement getE(){
+        return Environnement.getInstance();
     }
 
     public void setVitesse(int vitesse){

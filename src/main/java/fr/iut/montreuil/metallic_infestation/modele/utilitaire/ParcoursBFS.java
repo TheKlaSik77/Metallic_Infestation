@@ -5,15 +5,22 @@ import java.util.Arrays;
 
 public class ParcoursBFS {
 
+    private static ParcoursBFS uniqueInstance=null;
     private Terrain terrain;
     private int[][] grilleBFS;
 
-    public ParcoursBFS(Terrain terrain) {
-        this.terrain = terrain;
+    public ParcoursBFS() {
+        this.terrain = Terrain.getInstance();
         this.grilleBFS = new int[terrain.getTerrain().length][terrain.getTerrain()[0].length];
         for (int i = 0 ; i < grilleBFS.length ; i++){
             Arrays.fill(grilleBFS[i], -1);
         }
+    }
+    public static ParcoursBFS getInstance(){
+        if(uniqueInstance==null){
+            uniqueInstance = new ParcoursBFS();
+        }
+        return uniqueInstance;
     }
 
 
