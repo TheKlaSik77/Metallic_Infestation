@@ -15,24 +15,24 @@ import java.util.Map;
 
 public abstract class Tourelle {
 
-    private int id;
-    private Case position;
-    private int cout;
-    private int porteeTourelle; //En nombre de case
+    private final int id;
+    private final Case position;
+    private final int cout;
+    private final int porteeTourelle; //En nombre de case
     private Environnement env;
     private Terrain terrain;
-    private int vitesseAttaque; // Vitesse d'attaque des tours (tous les combien de tours elle attaque)
+    private final int vitesseAttaque; // Vitesse d'attaque des tours (tous les combien de tours elle attaque)
     private ArrayList<Ennemi> ennemisCibles;
     private int compteur = 0;
 
-    public Tourelle(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain,int vitesseAttaque){
+    public Tourelle(Case position, int cout, int porteeTourelle,int vitesseAttaque){
         this.compteur++;
         this.id = compteur;
         this.position = position;
         this.cout = cout;
         this.porteeTourelle = porteeTourelle;
-        this.env = env;
-        this.terrain = terrain;
+        this.env = Environnement.getInstance();
+        this.terrain = Terrain.getInstance();
         this.vitesseAttaque = vitesseAttaque;
     }
 
@@ -79,5 +79,11 @@ public abstract class Tourelle {
 
     public Environnement getEnv() {
         return env;
+    }
+    public boolean ennemiEstCible(){
+        return !this.getEnnemisCibles().isEmpty();
+    }
+    public void setEnnemisCibles(ArrayList<Ennemi> ennemisCibles){
+        this.ennemisCibles = ennemisCibles;
     }
 }

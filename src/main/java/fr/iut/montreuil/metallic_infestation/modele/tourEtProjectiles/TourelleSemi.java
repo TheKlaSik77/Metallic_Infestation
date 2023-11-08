@@ -8,7 +8,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 public class TourelleSemi extends TourelleCiblageIndividuel {
 
     public TourelleSemi(Case position) {
-        super(position, 10, 5, Environnement.getInstance(), Terrain.getInstance(),200);
+        super(position, 10, 5, 200);
     }
 
     @Override
