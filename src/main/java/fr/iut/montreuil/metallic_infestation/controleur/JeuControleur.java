@@ -101,7 +101,6 @@ public class JeuControleur implements Initializable {
     private ImageView im5Pv;
     private EnnemisVue ennemisVue;
     private int vagueActuelle;
-
     private GestionnaireVagues gestionnaireVagues;
 
     private boolean vagueTerminee = true;
@@ -120,7 +119,6 @@ public class JeuControleur implements Initializable {
 
         TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
         this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
-
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
         ExplosionVue explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
@@ -203,37 +201,6 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
-        //TODO:
-        /*
-        env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
-            while (change.next()) {
-                if (change.wasRemoved()) {
-                    for (Laser removedLaser : change.getRemoved()) {
-                        laserVue.retirerLaser(removedLaser);
-                    }
-                }
-                if (change.wasAdded()) {
-                    for (Laser addedLaser : change.getAddedSubList()) {
-                        laserVue.creerLaser(addedLaser);
-                    }
-                }
-            }
-        });
-
-         */
-        //TODO:
-        /*
-        env.getListExplosions().addListener((ListChangeListener<Explosion>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    for (Explosion addedExplosion : change.getAddedSubList()) {
-                        explostionVue.explosion(addedExplosion);
-                    }
-                }
-            }
-        });
-
-         */
 
         terrainVue.afficherTerrain();
         gameLoop.play();
@@ -286,22 +253,22 @@ public class JeuControleur implements Initializable {
 
         tilePane.setOnMouseClicked(event -> {
 
-            Case c = new Case((int) event.getY() / env.getTerrain().getTailleCase(), (int) event.getX() / env.getTerrain().getTailleCase());
+            Case c = new Case((int) event.getY() / Terrain.getInstance().getTailleCase(), (int) event.getX() / Terrain.getInstance().getTailleCase());
 
             if (event.getButton() == MouseButton.PRIMARY){
-                if (this.env.getTerrain().emplacementVideSurCase(c)) {
+                if (Terrain.getInstance().emplacementVideSurCase(c)) {
                     boutiqueVue.achatTour(c);
-                } else if (this.env.getTerrain().cheminSurCase(c)){
+                } else if (Terrain.getInstance().emplacementVideSurCase(c)){
                     boutiqueVue.achatObstacle(c);
                 }
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
-            Case c = new Case((int) event.getY() / env.getTerrain().getTailleCase(), (int) event.getX() / env.getTerrain().getTailleCase());
+            Case c = new Case((int) event.getY() / Terrain.getInstance().getTailleCase(), (int) event.getX() / Terrain.getInstance().getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY) {
-                if (this.env.getTerrain().tourSurCase(c)) {
+                if (Terrain.getInstance().tourSurCase(c)) {
                     boutique.venteTour(c);
-                } else if (this.env.getTerrain().obstacleSurCase(c)){
+                } else if (Terrain.getInstance().obstacleSurCase(c)){
                    boutique.venteObstacle(c);
                 }
 

@@ -4,6 +4,7 @@ import fr.iut.montreuil.metallic_infestation.modele.effets.Effet;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ElementNonDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 public abstract class Obstacle extends ElementNonDeplacable implements Effet {
     private int cout;
@@ -19,9 +20,9 @@ public abstract class Obstacle extends ElementNonDeplacable implements Effet {
     }
 
     public void poserObstacle() {
-        if (this.environnement.getTerrain().cheminSurCase(this.getPosition())){
+        if (Terrain.getInstance().cheminSurCase(this.getPosition())){
             // On dit que la case est occupée par une tour
-            this.environnement.getTerrain().setCase(this.getPosition(),4);
+            Terrain.getInstance().setCase(this.getPosition(),4);
         }
     }
     public void appliquerEffet(Ennemi ennemi){
