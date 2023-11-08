@@ -25,12 +25,12 @@ public abstract class Ennemi extends ElementDeplacable{
             if (rand < 0.5){
                 int randY = (int)(Math.random()*736);
                 this.coordonnees = new Point(0,randY);
-                coordonneesChemin = getE().getTerrain().cheminSurCase(new Case((int)(randY) / getE().getTerrain().getTailleCase(),0));
-                //Faire apparaitre en aleatoire sur coté haut
+                coordonneesChemin = Terrain.getInstance().cheminSurCase(new Case((int)(randY) / Terrain.getInstance().getTailleCase(),0));
+                //Faire apparaitre en aleatoire coté haut
             } else {
                 int randX = (int)(Math.random()*736);
                 this.coordonnees = new Point(randX,0);
-                coordonneesChemin = getE().getTerrain().cheminSurCase(new Case(0,(int)(randX) / getE().getTerrain().getTailleCase()));
+                coordonneesChemin = Terrain.getInstance().cheminSurCase(new Case(0,(int)(randX) / Terrain.getInstance().getTailleCase()));
             }
         } while (!coordonneesChemin);
         //this.parcoursBFS = parcoursBFS;
@@ -52,8 +52,8 @@ public abstract class Ennemi extends ElementDeplacable{
 
     public void seDeplacer() {
 
-        int distanceX = this.caseDestination.getJ() * getE().getTerrain().getTailleCase() - this.getCoordonnees().getX();
-        int distanceY = this.caseDestination.getI() * getE().getTerrain().getTailleCase() - this.getCoordonnees().getY();
+        int distanceX = this.caseDestination.getJ() * Terrain.getInstance().getTailleCase() - this.getCoordonnees().getX();
+        int distanceY = this.caseDestination.getI() * Terrain.getInstance().getTailleCase() - this.getCoordonnees().getY();
 
         int deplacementX = Math.min(getVitesse(), Math.abs(distanceX));
         int deplacementY = Math.min(getVitesse(), Math.abs(distanceY));
@@ -97,7 +97,7 @@ public abstract class Ennemi extends ElementDeplacable{
     }
 
     public boolean aAtteintLaCible(){
-        return  this.getE().getTerrain().arriveeSurCase(this.getCase());
+        return  Terrain.getInstance().arriveeSurCase(this.getCase());
     }
 
     @Override
@@ -116,7 +116,7 @@ public abstract class Ennemi extends ElementDeplacable{
     public abstract void retablirVitesse();
 
     public boolean estSurChemin() {
-        return this.getE().getTerrain().getTerrain()[this.getCase().getI()][this.getCase().getJ()] == 1;
+        return Terrain.getInstance().getTerrain()[this.getCase().getI()][this.getCase().getJ()] == 1;
     }
 
     public void setCoordonnees(int x, int y){

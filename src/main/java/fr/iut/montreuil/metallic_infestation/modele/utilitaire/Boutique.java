@@ -57,17 +57,17 @@ public class Boutique {
     }
 
     public void venteTour(Case c) {
-        if (this.environnement.getTerrain().tourSurCase(c)){
+        if (Terrain.getInstance().tourSurCase(c)){
             this.environnement.getJoueur().crediterArgentProperty(environnement.retirerTour(c).getCout()/2);
-            this.environnement.getTerrain().setCase(c, 2);
+            Terrain.getInstance().setCase(c, 2);
         }
     }
 
     public void venteObstacle(Case c) {
-        if (this.environnement.getTerrain().obstacleSurCase(c)){
+        if (Terrain.getInstance().obstacleSurCase(c)){
             this.environnement.getJoueur().crediterArgentProperty(environnement.retirerObstacle(c).getCout()/2);
-            this.environnement.getTerrain().setCase(c, 1);
-            System.out.println(this.environnement.getTerrain().getTerrain()[c.getI()][c.getJ()]);
+            Terrain.getInstance().setCase(c, 1);
+            System.out.println(Terrain.getInstance().getTerrain()[c.getI()][c.getJ()]);
         }
     }
 }
