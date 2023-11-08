@@ -13,7 +13,7 @@ public class TourelleSemi extends TourelleCiblageIndividuel {
 
     @Override
     public Projectile creerProjectile() {
-        return null;
+        return new ProjectileSemi(this.getCoordonnes(),this.ennemiLePlusProche());
     }
 
 }
