@@ -28,7 +28,7 @@ public class StrategiePremieresVagues implements StrategieVague {
         ArrayList<Ennemi> listeEnnemisASpawn = new ArrayList<>();
         nombreEnnemis += ennemisSupplementaires;
         for (int i = 0; i < nombreEnnemis; i++) {
-            EnnemiFacile ennemiFacile = new EnnemiFacile(Environnement.getInstance(terrain));
+            EnnemiFacile ennemiFacile = new EnnemiFacile();
             listeEnnemisASpawn.add(ennemiFacile);
         }
         System.out.println(listeEnnemisASpawn.size());
