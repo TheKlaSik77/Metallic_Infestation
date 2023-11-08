@@ -22,19 +22,21 @@ public class Mine extends Obstacle {
     public int getPorteeExplosion() {
         return porteeExplosion;
     }
-
-    //TODO:
+    
     @Override
     public void actionObstacle() {
-/*
+        /*
         Environnement.getInstance().getTerrain().setCase(this.getPosition(), 1);
         Explosion explosion = new Explosion(this.getPosition().getCentreCase(), this.getDegats(), this.getPorteeExplosion());
         Environnement.getInstance().getListExplosions().add(explosion);
         explosion.infligerDegats();
         Environnement.getInstance().getTourDeJeu().getObstaclesASupp().add(this);
-*/
+        */
 
     }
 
-
+    @Override
+    public String getTypeObstacle() {
+        return TypeObstacle.Mine.name();
+    }
 }

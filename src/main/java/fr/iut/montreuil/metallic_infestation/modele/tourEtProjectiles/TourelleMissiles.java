@@ -8,7 +8,7 @@ public class TourelleMissiles extends TourelleCiblageIndividuel {
 
 
     public TourelleMissiles(Case position) {
-        super(position, 30, 6, 100);
+        super(position, 30, 6, Environnement.getInstance(), Terrain.getInstance(),100);
     }
 
     @Override
