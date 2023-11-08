@@ -52,6 +52,7 @@ public class UnTour {
 
         }
 
+
         actionObstacles(env);
         nettoyageFinDeTour(env);
         this.nbTours++;
