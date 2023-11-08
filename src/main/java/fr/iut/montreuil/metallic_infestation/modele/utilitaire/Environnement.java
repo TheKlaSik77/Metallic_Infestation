@@ -4,7 +4,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.effets.Explosion;
+import fr.iut.montreuil.metallic_infestation.modele.effets.Explosion;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.utilitaire.DistanceEnnemiCible;
 import fr.iut.montreuil.metallic_infestation.modele.vagues.GestionnaireVagues;
 import javafx.beans.property.IntegerProperty;

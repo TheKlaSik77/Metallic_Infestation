@@ -1,15 +1,18 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.effets.Effet;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ElementNonDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 
-public abstract class Obstacle extends ElementNonDeplacable {
+public abstract class Obstacle extends ElementNonDeplacable implements Effet {
     private int cout;
+    private Effet effet;
 
-    public Obstacle(Case c, int cout) {
+    public Obstacle(Case c, int cout, Effet effet) {
         super(c);
         this.cout = cout;
+        this.effet = effet;
     }
     public int getCout() {
         return cout;
@@ -21,6 +24,9 @@ public abstract class Obstacle extends ElementNonDeplacable {
             this.environnement.getTerrain().setCase(this.getPosition(),4);
         }
     }
+    public void appliquerEffet(Ennemi ennemi){
+        effet.appliquerEffet(ennemi);
+    }
     public boolean ennemisSurObstacle() {
         for (Ennemi e : environnement.getListeEnnemis()){
             if (e.getCase().equals(this.getPosition())){
@@ -29,8 +35,6 @@ public abstract class Obstacle extends ElementNonDeplacable {
         }
         return false;
     }
-
-    public abstract void actionObstacle();
 
     //Pour la BD
     public abstract String getTypeObstacle();
