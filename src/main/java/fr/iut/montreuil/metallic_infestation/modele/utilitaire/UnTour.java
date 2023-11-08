@@ -27,34 +27,16 @@ public class UnTour {
 
     public void unTour() {
 
-        Environnement env = Environnement.getInstance();
 
+        //TODO : En faire une variable (YASMINE)
         if (this.getNbTours() % 700 == 0 || this.getNbTours() == 100) {
-            env.setEnnemisASpawn(env.getGestionnaireVagues().lancerProchaineVague(env.getTerrain()));
+            Environnement.getInstance().setEnnemisASpawn(Environnement.getInstance().getGestionnaireVagues().lancerProchaineVague(Terrain.getInstance()));
         }
 
-        if (this.getNbTours() % 20 == 0 && !env.getEnnemisASpawn().isEmpty()) {
-            env.getListeEnnemis().add(env.getEnnemisASpawn().remove(env.getEnnemisASpawn().size() - 1));
+        if (this.getNbTours() % 20 == 0 && !Environnement.getInstance().getEnnemisASpawn().isEmpty()) {
+            Environnement.getInstance().getListeEnnemis().add(Environnement.getInstance().getEnnemisASpawn().remove(Environnement.getInstance().getEnnemisASpawn().size() - 1));
         }
 
-        if (this.getNbTours() % 2 == 0) {
-            actionEnnemis(env);
-        }
-
-        actionProjectiles(env);
-
-        for (Tourelle t: env.getListeTourelles()){
-            t.raffraichirEnnemi();
-            if (t.getEnnemisCibles() != null) {
-                Projectile p = t.creerProjectile();
-                env.ajouterProjectile(p);
-            }
-
-        }
-
-
-        actionObstacles(env);
-        nettoyageFinDeTour(env);
         this.nbTours++;
     }
 
@@ -90,21 +72,6 @@ public class UnTour {
         }
 
          */
-    }
-
-    public void actionObstacles(Environnement env){
-        if (!env.getListeObstacles().isEmpty()) {
-
-            for (int i = env.getListeObstacles().size() - 1; i >= 0; i--) {
-
-                for (Ennemi e : env.getListeEnnemis()) {
-                    this.ennemi = e;
-                    if (env.getListeObstacles().get(i).ennemisSurObstacle()) {
-                        env.getListeObstacles().get(i).actionObstacle();
-                    }
-                }
-            }
-        }
     }
 
     public void nettoyageFinDeTour(Environnement env){
