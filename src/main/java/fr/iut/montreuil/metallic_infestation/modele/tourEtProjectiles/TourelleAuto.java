@@ -7,24 +7,14 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
-public class TourelleAuto extends Tourelle {
-    public TourelleAuto(Case position) {
-        super(5,position,30,3, 0);
+public class TourelleAuto extends TourelleCiblageIndividuel {
+
+    public TourelleAuto(Case position, Environnement env, Terrain terrain) {
+        super(position, 20, 4, env, terrain,20);
     }
 
     @Override
-    public void infligerDegats() {
-        if(getEnnemiVise() != null) {
-            getEnnemiVise().decrementerPv(getDegats());
-            System.out.println(getEnnemiVise().getPv());
-
-        }
-    }
-
-    public Laser creerLaser() {
-        if (!environnement.estEstPresent(getEnnemiVise())){
-            return new Laser(this, getEnnemiVise());
-        }
-        return null;
+    public Projectile creerProjectile() {
+        return new Laser(this.getCoordonnes(),this.ennemiLePlusProche());
     }
 }

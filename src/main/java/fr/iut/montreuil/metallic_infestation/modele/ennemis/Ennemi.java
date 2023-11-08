@@ -3,24 +3,19 @@ package fr.iut.montreuil.metallic_infestation.modele.ennemis;
 
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 public abstract class Ennemi extends ElementDeplacable{
 
 
     private int pv;
     private int drop;
     private Case caseDestination;
-    private Environnement environnement;
+
 
     public Ennemi (int pv, int vitesse, int drop){
         super(new Point(0,0),vitesse);
         this.pv = pv;
         // Piece Lootées par les ennemis
         this.drop = drop;
-        this.environnement = Environnement.getInstance();
-        //this.terrain = terrain;
         // Position de Départ Aléatoire ( /!\ On part du principe que pour chaque map, les spawns des ennemis se trouvent en x = 0 et y aleatoire ou en y = 0 et x aléatoire
         boolean coordonneesChemin;
         do {
@@ -30,17 +25,17 @@ public abstract class Ennemi extends ElementDeplacable{
             if (rand < 0.5){
                 int randY = (int)(Math.random()*736);
                 this.coordonnees = new Point(0,randY);
-                coordonneesChemin = environnement.getTerrain().cheminSurCase(new Case((int)(randY) / environnement.getTerrain().getTailleCase(),0));
+                coordonneesChemin = getE().getTerrain().cheminSurCase(new Case((int)(randY) / getE().getTerrain().getTailleCase(),0));
                 //Faire apparaitre en aleatoire sur coté haut
             } else {
                 int randX = (int)(Math.random()*736);
                 this.coordonnees = new Point(randX,0);
-                coordonneesChemin = environnement.getTerrain().cheminSurCase(new Case(0,(int)(randX) / environnement.getTerrain().getTailleCase()));
+                coordonneesChemin = getE().getTerrain().cheminSurCase(new Case(0,(int)(randX) / getE().getTerrain().getTailleCase()));
             }
         } while (!coordonneesChemin);
         //this.parcoursBFS = parcoursBFS;
-        environnement.getParcoursBFS().remplirGrilleBFS();
-        this.caseDestination = environnement.getParcoursBFS().caseLaPlusProcheDArrivee(this.getCase());
+        getE().getParcoursBFS().remplirGrilleBFS();
+        this.caseDestination = getE().getParcoursBFS().caseLaPlusProcheDArrivee(this.getCase());
 
     }
     public int getPv(){
@@ -57,8 +52,8 @@ public abstract class Ennemi extends ElementDeplacable{
 
     public void seDeplacer() {
 
-        int distanceX = this.caseDestination.getJ() * environnement.getTerrain().getTailleCase() - this.getCoordonnees().getX();
-        int distanceY = this.caseDestination.getI() * environnement.getTerrain().getTailleCase() - this.getCoordonnees().getY();
+        int distanceX = this.caseDestination.getJ() * getE().getTerrain().getTailleCase() - this.getCoordonnees().getX();
+        int distanceY = this.caseDestination.getI() * getE().getTerrain().getTailleCase() - this.getCoordonnees().getY();
 
         int deplacementX = Math.min(getVitesse(), Math.abs(distanceX));
         int deplacementY = Math.min(getVitesse(), Math.abs(distanceY));
@@ -76,7 +71,7 @@ public abstract class Ennemi extends ElementDeplacable{
         }
 
         if (this.getCase().equals(this.caseDestination)) {
-            this.caseDestination = environnement.getParcoursBFS().caseLaPlusProcheDArrivee(this.caseDestination);
+            this.caseDestination = getE().getParcoursBFS().caseLaPlusProcheDArrivee(this.caseDestination);
         }
     }
 
@@ -102,7 +97,7 @@ public abstract class Ennemi extends ElementDeplacable{
     }
 
     public boolean aAtteintLaCible(){
-        return  this.environnement.getTerrain().arriveeSurCase(this.getCase());
+        return  this.getE().getTerrain().arriveeSurCase(this.getCase());
     }
 
     @Override
@@ -121,7 +116,7 @@ public abstract class Ennemi extends ElementDeplacable{
     public abstract void retablirVitesse();
 
     public boolean estSurChemin() {
-        return this.environnement.getTerrain().getTerrain()[this.getCase().getI()][this.getCase().getJ()] == 1;
+        return this.getE().getTerrain().getTerrain()[this.getCase().getI()][this.getCase().getJ()] == 1;
     }
 
     public void setCoordonnees(int x, int y){

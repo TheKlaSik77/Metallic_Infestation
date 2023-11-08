@@ -1,15 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
-import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Rotate;
-import java.net.URL;
 
 
 public class LaserVue {
@@ -21,7 +13,8 @@ public class LaserVue {
         this.environnement = environnement;
         this.zoneAffichageLaser = zoneAffichageLaser;
     }
-
+    //TODO:
+    /*
     public  void creerLaser(Laser laser) {
         if (laser.CordonnéeEnnemiArrive() != null) {
             double x1 = laser.CoordonnéeTourelleDepart().getX();
@@ -63,4 +56,5 @@ public class LaserVue {
             }
         }
     }
+    */
 }

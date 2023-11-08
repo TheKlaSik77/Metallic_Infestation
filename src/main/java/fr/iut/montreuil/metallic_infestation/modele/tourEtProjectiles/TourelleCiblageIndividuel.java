@@ -9,20 +9,16 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public abstract class TourelleCiblageIndividuel extends Tourelle{
-
-    //Par défaut juste en attendant le merge de Kylian qui va tout résoudre !
-    public TourelleCiblageIndividuel(int degats, Case position, int cout, int porteeTourelle, int porteeMissile) {
-        super(degats, position, cout, porteeTourelle, porteeMissile);
+    public TourelleCiblageIndividuel(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain,int vitesseAttaque) {
+        super(position, cout, porteeTourelle, env, terrain,vitesseAttaque);
     }
-//    public TourelleCiblageIndividuel(Case position, int cout, int porteeTourelle, Environnement env, Terrain terrain) {
-//        super(position, cout, porteeTourelle, env, terrain);
-//    }
-//
-//    public Ennemi ennemiLePlusProche() {
-//        ArrayList<Ennemi> tabDistanceEnnemiTrie = Environnement.getInstance().getEnnemiLesPlusProchesDePosition(this.getCoordonnes(),this.getPorteeTourelle());
-//        return tabDistanceEnnemiTrie.get(0);
-//    }
-//    public void raffraichirEnnemi(){
-//        ennemiLePlusProche();
-//    }
+
+    public Ennemi ennemiLePlusProche() {
+        ArrayList<Ennemi> tabDistanceEnnemiTrie = this.getEnv().getEnnemiLesPlusProchesDePosition(this.getCoordonnes(),this.getPorteeTourelle());
+        return tabDistanceEnnemiTrie.get(0);
+    }
+    public void raffraichirEnnemi(){
+        ennemiLePlusProche();
+    }
+
 }
