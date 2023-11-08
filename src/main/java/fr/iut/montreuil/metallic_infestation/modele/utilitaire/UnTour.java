@@ -39,6 +39,9 @@ public class UnTour {
         //TODO: Tours
         for (Tourelle t : Environnement.getInstance().getListeTourelles()){
             t.raffraichirEnnemi();
+            if (t.ennemiEstCible() && nbTours % t.getVitesseAttaque() == 0){
+                t.creerProjectile();
+            }
         }
         //TODO: Projectiles
 
