@@ -32,11 +32,11 @@ public class StrategieMilieuFin implements StrategieVague{
             typeEnnemi = random.nextInt(2);
             switch (typeEnnemi) {
                 case 0:
-                    EnnemiFacile ennemiFacile = new EnnemiFacile(Environnement.getInstance(terrain));
+                    EnnemiFacile ennemiFacile = new EnnemiFacile();
                     listeEnnemisASpawn.add(ennemiFacile);
                     break;
                 case 1:
-                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen(Environnement.getInstance(terrain));
+                    EnnemiMoyen ennemiMoyen = new EnnemiMoyen();
                     listeEnnemisASpawn.add(ennemiMoyen);
                     break;
             }
