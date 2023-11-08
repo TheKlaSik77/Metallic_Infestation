@@ -36,6 +36,13 @@ public class UnTour {
         if (this.getNbTours() % 20 == 0 && !Environnement.getInstance().getEnnemisASpawn().isEmpty()) {
             Environnement.getInstance().getListeEnnemis().add(Environnement.getInstance().getEnnemisASpawn().remove(Environnement.getInstance().getEnnemisASpawn().size() - 1));
         }
+        //TODO: Tours
+        for (Tourelle t : Environnement.getInstance().getListeTourelles()){
+            t.raffraichirEnnemi();
+        }
+        //TODO: Projectiles
+
+        //TODO: Obstacle
 
         this.nbTours++;
     }
