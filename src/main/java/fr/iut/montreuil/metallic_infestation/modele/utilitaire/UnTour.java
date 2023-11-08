@@ -43,40 +43,15 @@ public class UnTour {
 
         actionProjectiles(env);
 
-        if (this.getNbTours() % 20 == 0) {
-            for (Tourelle t : env.getListeTourelles()) {
-                if (t instanceof TourelleSemi) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectile();
-                        env.ajouterProjectile(p);
-                    }
-                }
+        for (Tourelle t: env.getListeTourelles()){
+            t.raffraichirEnnemi();
+            if (t.getEnnemisCibles() != null) {
+                Projectile p = t.creerProjectile();
+                env.ajouterProjectile(p);
             }
+
         }
 
-        if (this.getNbTours() % 100 == 0){
-            for (Tourelle t: env.getListeTourelles()){
-                if (t instanceof TourelleMissiles) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectileMissile();
-                        env.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-        
-        for (Tourelle t : env.getListeTourelles()) {
-            if (t instanceof TourelleAuto) {
-                t.raffraichirEnnemiVise();
-                if (t.getEnnemiVise() != null) {
-                    Laser l = ((TourelleAuto) t).creerLaser();
-                    env.ajouterLaser(l);
-                    t.infligerDegats();
-                }
-            }
-        }
 
         actionObstacles(env);
         nettoyageFinDeTour(env);
@@ -99,7 +74,8 @@ public class UnTour {
     }
 
     public void actionProjectiles(Environnement env){
-
+    //TODO: Modifier
+        /*
         if (this.getNbTours() % 2 == 0) {
             for (Projectile p : env.getListeProjectiles()) {
                 p.seDeplacer();
@@ -112,6 +88,8 @@ public class UnTour {
                 }
             }
         }
+
+         */
     }
 
     public void actionObstacles(Environnement env){
@@ -130,7 +108,8 @@ public class UnTour {
     }
 
     public void nettoyageFinDeTour(Environnement env){
-
+        //TODO : Modifier
+        /*
         for (Laser l : env.getListeLasers()){
             if (l.getEnnemiVise() == null){
                 env.getListeLasers().clear();
@@ -155,6 +134,8 @@ public class UnTour {
                 e.retablirVitesse();
             }
         }
+
+         */
         
     }
 

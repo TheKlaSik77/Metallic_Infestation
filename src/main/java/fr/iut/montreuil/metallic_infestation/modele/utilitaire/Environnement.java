@@ -4,6 +4,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.effets.Explosion;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.utilitaire.DistanceEnnemiCible;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -30,7 +31,7 @@ public class Environnement {
 
     private ParcoursBFS parcoursBFS;
     private GestionnaireVagues gestionnaireVagues;
-    private ObservableList<Laser> listeLasers;
+    //private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
     private UnTour tour;
 
@@ -39,7 +40,7 @@ public class Environnement {
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
-        this.listeLasers = FXCollections.observableArrayList();
+        //this.listeLasers = FXCollections.observableArrayList();
         this.listExplosions = FXCollections.observableArrayList();
         this.listeObstacles = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
@@ -64,9 +65,12 @@ public class Environnement {
     }
     public ObservableList<Tourelle> getListeTourelles() {return listeTourelles;}
     public ObservableList<Projectile> getListeProjectiles() {return listeProjectiles;}
+    /*
     public ObservableList<Laser> getListeLasers(){
         return listeLasers;
     }
+
+     */
     public ObservableList<Explosion> getListExplosions(){return listExplosions;}
     public ObservableList<Obstacle> getListeObstacles() {return this.listeObstacles;}
     public ParcoursBFS getParcoursBFS(){
@@ -142,7 +146,7 @@ public class Environnement {
     public void ajouterProjectile(Projectile p) {
         listeProjectiles.add(p);
     }
-
+    /*
     public void ajouterLaser(Laser p){
         if (p != null) {
             if (p.getEnnemiVise() != null && p.getTourelle() != null) {
@@ -151,14 +155,11 @@ public class Environnement {
         }
     }
 
-    /**
-     * Regarde si ennemi est déjà visé par un laser
-     * @param e
-     * @return
      */
+    /*
     public boolean estEstPresent (Ennemi e){
-        for (Laser l: listeLasers) {
-            if (e == l.getEnnemiVise()){
+        for (Projectile p: listeProjectiles) {
+            if (e == p.getEnnemiVise()){
                 return true;
             }
         }
@@ -172,7 +173,7 @@ public class Environnement {
             }
         }
     }
-
+    */
     public void setVagueActuelleProperty(int n ){
         this.vagueActuelleProperty().setValue(n);
     }
