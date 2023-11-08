@@ -34,5 +34,8 @@ public abstract class Obstacle extends ElementNonDeplacable {
 
     public abstract void actionObstacle();
 
+    //Pour la BD
+    public abstract String getTypeObstacle();
+
 
 }

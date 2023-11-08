@@ -29,7 +29,6 @@ public class Environnement {
     private ArrayList<Ennemi> ennemisASpawn;
 
     private ParcoursBFS parcoursBFS;
-    public int nbTours;
     private GestionnaireVagues gestionnaireVagues;
     private ObservableList<Laser> listeLasers;
     private ObservableList<Obstacle> listeObstacles;
@@ -50,7 +49,6 @@ public class Environnement {
         vagueActuelleProperty = new SimpleIntegerProperty(0);
         this.gestionnaireVagues = new GestionnaireVagues(this);
         this.tour = new UnTour();
-        nbTours = 1;
     }
     public static Environnement getInstance(){
         if (uniqueInstance==null){
@@ -175,7 +173,6 @@ public class Environnement {
         }
     }
 
-
     public void setVagueActuelleProperty(int n ){
         this.vagueActuelleProperty().setValue(n);
     }
@@ -188,10 +185,9 @@ public class Environnement {
     public void unTour() {
         this.tour.unTour();
     }
-    public int getNbTours(){return this.nbTours;}
 
     public UnTour getTourDeJeu(){return this.tour;}
-    public void incrementeNbTours(){this.nbTours++;}
+
     public ArrayList<Ennemi> getEnnemisASpawn(){return this.ennemisASpawn;}
     public void setEnnemisASpawn(ArrayList<Ennemi> ennemisASpawn){ this.ennemisASpawn = ennemisASpawn;}
 
@@ -216,6 +212,7 @@ public class Environnement {
         double dy = ennemi.getCoordonnees().getY() - coordonneeDepart.getY();
         return Math.sqrt(dx * dx + dy * dy);
     }
+
 
 }
 

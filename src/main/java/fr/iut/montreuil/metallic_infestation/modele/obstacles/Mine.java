@@ -34,4 +34,9 @@ public class Mine extends Obstacle {
 
 
     }
+
+    @Override
+    public String getTypeObstacle() {
+        return TypeObstacle.Mine.name();
+    }
 }

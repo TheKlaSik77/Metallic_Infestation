@@ -22,7 +22,6 @@ public class Joueur {
         return uniqueInstance;
     }
 
-
     public IntegerProperty argentProperty() {return this.argentProperty;}
     public IntegerProperty pvJoueurProprerty(){
         return this.pvJoueurProperty;
@@ -32,4 +31,5 @@ public class Joueur {
     public void crediterPvJoueurProperty (int credit){this.pvJoueurProperty.set(pvJoueurProperty.get()+credit);}
     public void debiterPvJoueurProperty (int debit){this.pvJoueurProperty.set(pvJoueurProperty.get()-debit);}
     public boolean achatPossible (int montant) {return argentProperty().get() >= montant;}
+
 }

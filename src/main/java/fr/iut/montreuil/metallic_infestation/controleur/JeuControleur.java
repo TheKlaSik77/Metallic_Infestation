@@ -41,7 +41,7 @@ public class JeuControleur implements Initializable {
     @FXML
     private Pane zoneAffichageObjets;
     private Timeline gameLoop;
-    private int temps;
+    private double temps;
     @FXML
     private Label ArgentProperty;
     @FXML
@@ -333,9 +333,10 @@ public class JeuControleur implements Initializable {
                             gameOverLabel.setVisible(true);
                             gameLoop.stop();
                         }
+                        temps = temps+gameLoop.getCurrentRate();
+//                        System.out.println(temps);
 
                     }
-
                 }
         );
         gameLoop.getKeyFrames().add(kf);
