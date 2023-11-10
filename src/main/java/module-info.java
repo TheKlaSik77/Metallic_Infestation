@@ -3,6 +3,7 @@ module com.application.metallic_infestation {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires java.sql;
 
     opens fr.iut.montreuil.metallic_infestation to javafx.fxml;
     exports fr.iut.montreuil.metallic_infestation;
