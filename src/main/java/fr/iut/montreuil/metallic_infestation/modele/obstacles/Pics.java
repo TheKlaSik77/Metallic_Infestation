@@ -18,4 +18,9 @@ public class Pics extends Obstacle {
     public String getTypeObstacle() {
         return TypeObstacle.Pics.name();
     }
+
+    @Override
+    public String getTypeObstacle() {
+        return TypeObstacle.Pics.name();
+    }
 }
