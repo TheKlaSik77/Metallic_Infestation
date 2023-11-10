@@ -4,11 +4,11 @@ import fr.iut.montreuil.metallic_infestation.JeuApplication;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
+import fr.iut.montreuil.metallic_infestation.modele.vagues.GestionnaireVagues;
 import fr.iut.montreuil.metallic_infestation.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -41,7 +41,7 @@ public class JeuControleur implements Initializable {
     @FXML
     private Pane zoneAffichageObjets;
     private Timeline gameLoop;
-    private int temps;
+    private double temps;
     @FXML
     private Label ArgentProperty;
     @FXML
@@ -203,6 +203,8 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
+        //TODO:
+        /*
         env.getListeLasers().addListener((ListChangeListener<Laser>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
@@ -218,6 +220,9 @@ public class JeuControleur implements Initializable {
             }
         });
 
+         */
+        //TODO:
+        /*
         env.getListExplosions().addListener((ListChangeListener<Explosion>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
@@ -227,6 +232,8 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
+
+         */
 
         terrainVue.afficherTerrain();
         gameLoop.play();
@@ -333,9 +340,10 @@ public class JeuControleur implements Initializable {
                             gameOverLabel.setVisible(true);
                             gameLoop.stop();
                         }
+                        temps = temps+gameLoop.getCurrentRate();
+//                        System.out.println(temps);
 
                     }
-
                 }
         );
         gameLoop.getKeyFrames().add(kf);

@@ -20,4 +20,9 @@ public class Pics extends Obstacle {
     public void actionObstacle(){
         actionnerPics(Environnement.getInstance().getTourDeJeu().getEnnemi());
     }
+
+    @Override
+    public String getTypeObstacle() {
+        return TypeObstacle.Pics.name();
+    }
 }

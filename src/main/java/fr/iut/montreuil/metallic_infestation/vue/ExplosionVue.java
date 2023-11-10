@@ -2,7 +2,6 @@ package fr.iut.montreuil.metallic_infestation.vue;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Explosion;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
@@ -23,7 +22,8 @@ public class ExplosionVue {
         this.environnement = environnement;
         this.zoneAffichageExplosion = zoneAffichageExplosion;
     }
-
+    //TODO : Changer ça
+    /*
     public void explosion(Explosion e){
         String imageUrl = "img/projectiles/missile/ex.png";
 
@@ -58,4 +58,5 @@ public class ExplosionVue {
 
         });
     }
+    */
 }

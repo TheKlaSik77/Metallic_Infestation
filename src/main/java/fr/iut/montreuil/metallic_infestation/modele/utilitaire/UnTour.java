@@ -14,69 +14,47 @@ public class UnTour {
     private ArrayList<Ennemi> ennemisASupp;
     private ArrayList<Projectile> listeProjectilesASupp;
     private ArrayList<Obstacle> listeObstaclesASupp;
+
+    public int nbTours;
+
     public UnTour() {
         this.ennemisASupp = new ArrayList<>();
         this.listeObstaclesASupp = new ArrayList<>();
         this.listeProjectilesASupp = new ArrayList<>();
         this.ennemi = null;
+        this.nbTours = 1;
     }
 
     public void unTour() {
 
         Environnement env = Environnement.getInstance();
 
-        if (env.getNbTours() % 700 == 0 || env.getNbTours() == 100) {
+        if (this.getNbTours() % 700 == 0 || this.getNbTours() == 100) {
             env.setEnnemisASpawn(env.getGestionnaireVagues().lancerProchaineVague(env.getTerrain()));
         }
 
-        if (env.getNbTours() % 20 == 0 && !env.getEnnemisASpawn().isEmpty()) {
+        if (this.getNbTours() % 20 == 0 && !env.getEnnemisASpawn().isEmpty()) {
             env.getListeEnnemis().add(env.getEnnemisASpawn().remove(env.getEnnemisASpawn().size() - 1));
         }
 
-        if (env.getNbTours() % 2 == 0) {
+        if (this.getNbTours() % 2 == 0) {
             actionEnnemis(env);
         }
 
         actionProjectiles(env);
 
-        if (env.getNbTours() % 20 == 0) {
-            for (Tourelle t : env.getListeTourelles()) {
-                if (t instanceof TourelleSemi) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectile();
-                        env.ajouterProjectile(p);
-                    }
-                }
+        for (Tourelle t: env.getListeTourelles()){
+            t.raffraichirEnnemi();
+            if (t.getEnnemisCibles() != null) {
+                Projectile p = t.creerProjectile();
+                env.ajouterProjectile(p);
             }
-        }
 
-        if (env.getNbTours() % 100 == 0){
-            for (Tourelle t: env.getListeTourelles()){
-                if (t instanceof TourelleMissiles) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectileMissile();
-                        env.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-        
-        for (Tourelle t : env.getListeTourelles()) {
-            if (t instanceof TourelleAuto) {
-                t.raffraichirEnnemiVise();
-                if (t.getEnnemiVise() != null) {
-                    Laser l = ((TourelleAuto) t).creerLaser();
-                    env.ajouterLaser(l);
-                    t.infligerDegats();
-                }
-            }
         }
 
         actionObstacles(env);
         nettoyageFinDeTour(env);
-        env.incrementeNbTours();
+        this.nbTours++;
     }
 
     public void actionEnnemis(Environnement env){
@@ -95,8 +73,9 @@ public class UnTour {
     }
 
     public void actionProjectiles(Environnement env){
-
-        if (env.getNbTours() % 2 == 0) {
+    //TODO: Modifier
+        /*
+        if (this.getNbTours() % 2 == 0) {
             for (Projectile p : env.getListeProjectiles()) {
                 p.seDeplacer();
                 if (p.arriveSurEnnemi()) {
@@ -108,6 +87,8 @@ public class UnTour {
                 }
             }
         }
+
+         */
     }
 
     public void actionObstacles(Environnement env){
@@ -126,7 +107,8 @@ public class UnTour {
     }
 
     public void nettoyageFinDeTour(Environnement env){
-
+        //TODO : Modifier
+        /*
         for (Laser l : env.getListeLasers()){
             if (l.getEnnemiVise() == null){
                 env.getListeLasers().clear();
@@ -143,7 +125,7 @@ public class UnTour {
         for (Ennemi e : ennemisASupp){
             env.retirerEnnemi(e);
         }
-        if(env.getNbTours() % 2 == 0) {
+        if(this.getNbTours() % 2 == 0) {
             env.getListeLasers().clear();
         }
         for (Ennemi e : env.getListeEnnemis()){
@@ -151,11 +133,15 @@ public class UnTour {
                 e.retablirVitesse();
             }
         }
+
+         */
         
     }
 
     public Ennemi getEnnemi(){return this.ennemi;}
 
     public ArrayList<Obstacle> getObstaclesASupp(){return this.listeObstaclesASupp;}
+
+    public int getNbTours(){return this.nbTours;}
     
 }
