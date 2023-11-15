@@ -10,4 +10,3 @@ public class ProjectileAuto extends Projectile{
         super(new DegatIndividuel(10),coordonnesDepart,1,ennemiVise);
     }
 
-}
