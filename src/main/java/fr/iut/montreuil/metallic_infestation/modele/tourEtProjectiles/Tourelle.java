@@ -3,16 +3,20 @@ package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileMissile;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class Tourelle extends ElementNonDeplacable {
+public abstract class Tourelle {
 
     private final int id;
+    private final Case position;
     private final int cout;
     private final int porteeTourelle; //En nombre de case
     private Environnement env;
@@ -22,9 +26,9 @@ public abstract class Tourelle extends ElementNonDeplacable {
     private int compteur = 0;
 
     public Tourelle(Case position, int cout, int porteeTourelle,int vitesseAttaque){
-        super(position);
         this.compteur++;
         this.id = compteur;
+        this.position = position;
         this.cout = cout;
         this.porteeTourelle = porteeTourelle;
         this.env = Environnement.getInstance();
@@ -35,6 +39,7 @@ public abstract class Tourelle extends ElementNonDeplacable {
     public Case getPosition(){
         return this.position;
     }
+
     public int getPorteeTourelle(){
         return this.porteeTourelle;
     }
