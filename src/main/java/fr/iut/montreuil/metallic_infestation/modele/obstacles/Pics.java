@@ -1,6 +1,8 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
 
+import fr.iut.montreuil.metallic_infestation.modele.effets.Effet;
+import fr.iut.montreuil.metallic_infestation.modele.effets.Ralentissement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
@@ -9,16 +11,12 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 public class Pics extends Obstacle {
 
     public Pics(Case c){
-        super(c,10);
+        super(c,10,new Ralentissement(1));
     }
 
-    public void actionnerPics(Ennemi e){
-        if(e != null){e.setVitesse(1);}
-    }
-    
     @Override
-    public void actionObstacle(){
-        actionnerPics(Environnement.getInstance().getTourDeJeu().getEnnemi());
+    public String getTypeObstacle() {
+        return TypeObstacle.Pics.name();
     }
 
     @Override
