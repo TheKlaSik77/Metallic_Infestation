@@ -14,13 +14,5 @@ public class Pics extends Obstacle {
         super(c,10,new Ralentissement(1));
     }
 
-    @Override
-    public String getTypeObstacle() {
-        return TypeObstacle.Pics.name();
-    }
 
-    @Override
-    public String getTypeObstacle() {
-        return TypeObstacle.Pics.name();
-    }
 }

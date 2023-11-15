@@ -1,24 +1,32 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.effets.Effet;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ElementNonDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 public abstract class Obstacle extends ElementNonDeplacable {
     private int cout;
-
-    public Obstacle(Case c, int cout) {
+    private Effet effet;
+    public Obstacle(Case c, int cout, Effet effet) {
         super(c);
         this.cout = cout;
+        this.effet = effet;
     }
     public int getCout() {
         return cout;
     }
 
+    public Effet getEffet() {
+        return effet;
+    }
+
     public void poserObstacle() {
-        if (this.environnement.getTerrain().cheminSurCase(this.getPosition())){
+        if (Terrain.getInstance().cheminSurCase(this.getPosition())){
             // On dit que la case est occupée par une tour
-            this.environnement.getTerrain().setCase(this.getPosition(),4);
+            Terrain.getInstance().setCase(this.getPosition(),4);
         }
     }
     public boolean ennemisSurObstacle() {
@@ -29,11 +37,15 @@ public abstract class Obstacle extends ElementNonDeplacable {
         }
         return false;
     }
-
-    public abstract void actionObstacle();
-
+    public void actionObstacle() {
+        for (Ennemi e : Environnement.getInstance().getListeEnnemis()){
+            this.getEffet().appliquerEffet(e);
+        }
+    }
     //Pour la BD
-    public abstract String getTypeObstacle();
 
+    public String getTypeObstacle() {
+        return TypeObstacle.Pics.name();
+    }
 
 }
