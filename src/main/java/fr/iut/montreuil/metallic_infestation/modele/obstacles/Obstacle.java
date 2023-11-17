@@ -37,7 +37,7 @@ public abstract class Obstacle extends ElementNonDeplacable {
         }
         return false;
     }
-    public void actionObstacle() {
+    public void actionnerObstacle() {
         for (Ennemi e : Environnement.getInstance().getListeEnnemis()){
             this.getEffet().appliquerEffet(e);
         }

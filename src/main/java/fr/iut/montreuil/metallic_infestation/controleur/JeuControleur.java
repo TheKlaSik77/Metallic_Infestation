@@ -286,30 +286,27 @@ public class JeuControleur implements Initializable {
 
         tilePane.setOnMouseClicked(event -> {
 
-            Case c = new Case((int) event.getY() / env.getTerrain().getTailleCase(), (int) event.getX() / env.getTerrain().getTailleCase());
+            Case c = new Case((int) event.getY() / Terrain.getInstance().getTailleCase(), (int) event.getX() / Terrain.getInstance().getTailleCase());
 
             if (event.getButton() == MouseButton.PRIMARY){
-                if (this.env.getTerrain().emplacementVideSurCase(c)) {
+                if (Terrain.getInstance().emplacementVideSurCase(c)) {
                     boutiqueVue.achatTour(c);
-                } else if (this.env.getTerrain().cheminSurCase(c)){
+                } else if (Terrain.getInstance().cheminSurCase(c)){
                     boutiqueVue.achatObstacle(c);
                 }
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
-            Case c = new Case((int) event.getY() / env.getTerrain().getTailleCase(), (int) event.getX() / env.getTerrain().getTailleCase());
+            Case c = new Case((int) event.getY() / Terrain.getInstance().getTailleCase(), (int) event.getX() / Terrain.getInstance().getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY) {
-                if (this.env.getTerrain().tourSurCase(c)) {
+                if (Terrain.getInstance().tourSurCase(c)) {
                     boutique.venteTour(c);
-                } else if (this.env.getTerrain().obstacleSurCase(c)){
+                } else if (Terrain.getInstance().obstacleSurCase(c)){
                    boutique.venteObstacle(c);
                 }
 
             }
-
         });
-
-
     }
 
 

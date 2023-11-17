@@ -27,7 +27,6 @@ public class UnTour {
 
     public void unTour() {
 
-
         //TODO : En faire une variable (YASMINE)
         if (this.getNbTours() % 700 == 0 || this.getNbTours() == 100) {
             Environnement.getInstance().setEnnemisASpawn(Environnement.getInstance().getGestionnaireVagues().lancerProchaineVague(Terrain.getInstance()));
@@ -36,84 +35,51 @@ public class UnTour {
         if (this.getNbTours() % 20 == 0 && !Environnement.getInstance().getEnnemisASpawn().isEmpty()) {
             Environnement.getInstance().getListeEnnemis().add(Environnement.getInstance().getEnnemisASpawn().remove(Environnement.getInstance().getEnnemisASpawn().size() - 1));
         }
-        //TODO: Tours
-        for (Tourelle t : Environnement.getInstance().getListeTourelles()){
-            t.raffraichirEnnemi();
-            if (t.ennemiEstCible() && nbTours % t.getVitesseAttaque() == 0){
-                t.creerProjectile();
-            }
-        }
-        //TODO: Projectiles
-
-        //TODO: Obstacle
-
+        actionEnnemis();
+        actionTours();
+        actionProjectiles();
+        actionObstacle();
         this.nbTours++;
     }
 
-    public void actionEnnemis(Environnement env){
+    public void actionObstacle(){
+        for (Obstacle o : Environnement.getInstance().getListeObstacles()){
+            if (o.ennemisSurObstacle()){
+                o.actionnerObstacle();
+                listeObstaclesASupp.add(o);
+            }
+        }
+    }
+    public void actionTours(){
+        for (Tourelle t : Environnement.getInstance().getListeTourelles()) {
+            t.raffraichirEnnemi();
+            if (t.ennemiEstCible() && nbTours % t.getVitesseAttaque() == 0) {
+                t.creerProjectile();
+            }
+        }
+    }
+    public void actionEnnemis(){
 
-        for (int idEnnemi = env.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-            Ennemi e = env.getListeEnnemis().get(idEnnemi);
+        for (Ennemi e : Environnement.getInstance().getListeEnnemis()) {
             e.seDeplacer();
             if (e.aAtteintLaCible()) {
-                ennemisASupp.add(e);
-                env.getJoueur().debiterPvJoueurProperty(e.getDrop());
+                Environnement.getInstance().getJoueur().debiterPvJoueurProperty(e.getDrop());
+                Environnement.getInstance().getListeEnnemis().remove(e);
             } else if (e.estMort()) {
-                ennemisASupp.add(e);
-                env.getJoueur().crediterArgentProperty(e.getDrop());
+                Environnement.getInstance().getJoueur().crediterArgentProperty(e.getDrop());
+                Environnement.getInstance().getListeEnnemis().remove(e);
             }
         }
     }
 
-    public void actionProjectiles(Environnement env){
-    //TODO: Modifier
-        /*
-        if (this.getNbTours() % 2 == 0) {
-            for (Projectile p : env.getListeProjectiles()) {
-                p.seDeplacer();
-                if (p.arriveSurEnnemi()) {
-                    if (p instanceof ProjectileMissile){
-                        env.getListExplosions().add(((ProjectileMissile) p).creerExplosion());
-                    }
-                    p.getTourelle().infligerDegats();
-                    listeProjectilesASupp.add(p);
-                }
+    public void actionProjectiles(){
+        for (Projectile p : Environnement.getInstance().getListeProjectiles()){
+            p.seDeplacer();
+            if (p.arriveSurEnnemi()){
+                p.appliquerEffet();
+                Environnement.getInstance().getListeProjectiles().remove(p);
             }
         }
-
-         */
-    }
-
-    public void nettoyageFinDeTour(Environnement env){
-        //TODO : Modifier
-        /*
-        for (Laser l : env.getListeLasers()){
-            if (l.getEnnemiVise() == null){
-                env.getListeLasers().clear();
-            }
-        }
-        for (Projectile p : listeProjectilesASupp) {
-            env.retirerProjectile(p);
-        }
-
-        for (Obstacle o : listeObstaclesASupp) {
-            env.getListeObstacles().remove(o);
-        }
-
-        for (Ennemi e : ennemisASupp){
-            env.retirerEnnemi(e);
-        }
-        if(this.getNbTours() % 2 == 0) {
-            env.getListeLasers().clear();
-        }
-        for (Ennemi e : env.getListeEnnemis()){
-            if (e.estSurChemin()){
-                e.retablirVitesse();
-            }
-        }
-
-         */
-        
     }
 
     public Ennemi getEnnemi(){return this.ennemi;}

@@ -2,7 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ElementDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.effets.Effet;
+import fr.iut.montreuil.metallic_infestation.modele.effets.Effet;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import javafx.scene.effect.Effect;
 
@@ -29,7 +29,7 @@ public abstract class Projectile extends ElementDeplacable {
     }
 
     public void appliquerEffet(){
-        effet.appliquerEffet(ennemiVise);
+        this.effet.appliquerEffet(ennemiVise);
     }
     public void seDeplacer(){
         int deltaX = this.getEnnemiVise().getCoordonnees().getX() - this.getCoordonnees().getX();
