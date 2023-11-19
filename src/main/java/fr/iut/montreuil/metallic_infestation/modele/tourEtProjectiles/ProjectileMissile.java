@@ -1,7 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.effets.Explosion;
+import fr.iut.montreuil.metallic_infestation.modele.effets.Explosion;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;

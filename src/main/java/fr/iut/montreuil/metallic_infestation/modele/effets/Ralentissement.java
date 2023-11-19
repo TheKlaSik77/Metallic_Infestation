@@ -10,6 +10,6 @@ public class Ralentissement implements Effet{
     }
     @Override
     public void appliquerEffet(Ennemi ennemi) {
-        ennemi.setVitesse(1);
+        ennemi.setVitesse(vitesse);
     }
 }

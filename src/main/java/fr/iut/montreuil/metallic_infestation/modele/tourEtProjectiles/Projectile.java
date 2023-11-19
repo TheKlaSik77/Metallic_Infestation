@@ -9,7 +9,6 @@ import javafx.scene.effect.Effect;
 public abstract class Projectile extends ElementDeplacable {
 
     private int id;
-    private Point coordonneesDepart;
     private Ennemi ennemiVise;
     private Effet effet;
     private static int compteur = 0;
@@ -17,13 +16,10 @@ public abstract class Projectile extends ElementDeplacable {
     protected Projectile(Effet effet, Point coordonneesDepart, int vitesse, Ennemi ennemiVise) {
         super(coordonneesDepart, vitesse);
         this.effet = effet;
-        this.coordonneesDepart = coordonneesDepart;
         this.ennemiVise = ennemiVise;
         this.id = compteur;
         compteur++;
     }
-
-
     public boolean equals(Projectile p){
         return this.getId() == p.getId();
     }
