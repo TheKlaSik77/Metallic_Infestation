@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 public interface StrategieVague {
 
-    ArrayList<Ennemi> genererEnnemisVague(Terrain terrain);
+    ArrayList<Ennemi> genererEnnemisVague();
 
 }

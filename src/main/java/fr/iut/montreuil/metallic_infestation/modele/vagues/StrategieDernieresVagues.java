@@ -22,7 +22,7 @@ public class StrategieDernieresVagues implements StrategieVague{
     }
 
     @Override
-    public ArrayList<Ennemi> genererEnnemisVague(Terrain terrain) {
+    public ArrayList<Ennemi> genererEnnemisVague() {
         ArrayList<Ennemi> listeEnnemisASpawn = new ArrayList<>();
         nombreEnnemis += ennemisSupplementaires;
         for (int i = 0; i < nombreEnnemis; i++) {

@@ -29,7 +29,7 @@ public class UnTour {
 
         //TODO : En faire une variable (YASMINE)
         if (this.getNbTours() % 700 == 0 || this.getNbTours() == 100) {
-            Environnement.getInstance().setEnnemisASpawn(Environnement.getInstance().getGestionnaireVagues().lancerProchaineVague(Terrain.getInstance()));
+            Environnement.getInstance().setEnnemisASpawn(Environnement.getInstance().getGestionnaireVagues().lancerProchaineVague());
         }
 
         if (this.getNbTours() % 20 == 0 && !Environnement.getInstance().getEnnemisASpawn().isEmpty()) {

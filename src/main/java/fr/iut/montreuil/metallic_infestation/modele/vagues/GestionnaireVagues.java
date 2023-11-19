@@ -9,26 +9,25 @@ import java.util.ArrayList;
 
 public class GestionnaireVagues {
     private final int NB_VAGUES_JEU = 15;
-    private Environnement environnement;
     private StrategieVague strategieVague;
 
 
-    public GestionnaireVagues(Environnement environnement) {
-        this.environnement = environnement;
+    public GestionnaireVagues() {
+
         strategieVague = StrategiePremieresVagues.getInstance();
     }
 
-    public ArrayList<Ennemi> lancerProchaineVague(Terrain terrainExperimental) {
+    public ArrayList<Ennemi> lancerProchaineVague() {
         Environnement.incrementerVagueActuelleProperty();
         if(!estDerniereVague()) {
-            determinerStrategie(terrainExperimental);
-            return lancerVague(terrainExperimental);
+            determinerStrategie();
+            return lancerVague();
         }
         return null;
     }
 
 
-    public void determinerStrategie(Terrain terrainExperimental) {
+    public void determinerStrategie() {
         if (Environnement.vagueActuelleProperty.get() > 3 && Environnement.vagueActuelleProperty.get() <= 6) {
             setVagueStrategy(StrategieMilieuDebut.getInstance());
 
@@ -44,8 +43,8 @@ public class GestionnaireVagues {
         this.strategieVague = strategy;
     }
 
-    public ArrayList<Ennemi> lancerVague(Terrain terrain) {
-        return strategieVague.genererEnnemisVague(terrain);
+    public ArrayList<Ennemi> lancerVague() {
+        return strategieVague.genererEnnemisVague();
     }
 
     public boolean estDerniereVague() {

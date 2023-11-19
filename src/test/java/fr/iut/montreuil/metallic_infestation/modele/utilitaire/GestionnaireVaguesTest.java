@@ -5,6 +5,7 @@ import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiDifficile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiFacile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiMoyen;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
+import fr.iut.montreuil.metallic_infestation.modele.vagues.GestionnaireVagues;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,15 +22,13 @@ class GestionnaireVaguesTest {
 
     @BeforeEach
     public void setUp() {
-        terrainExperimental = new Terrain();
-        environnement = new Environnement(terrainExperimental);
-        gestionnaireVagues = new GestionnaireVagues(environnement);
+        gestionnaireVagues = new GestionnaireVagues();
 
     }
 
     @Test
     public void testLancerProchaineVague_listeNonNull_PasDerniereVague() {
-        ArrayList<Ennemi> ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrainExperimental);
+        ArrayList<Ennemi> ennemisASpawn = gestionnaireVagues.lancerProchaineVague();
         assertNotNull(ennemisASpawn, "La liste des ennemis à spawner ne doit pas être nulle.");
         assertFalse(gestionnaireVagues.estDerniereVague(), "La dernière vague ne doit pas être atteinte.");
 
@@ -37,7 +36,7 @@ class GestionnaireVaguesTest {
 
     @Test
     public void testLancerVague() {
-        ArrayList<Ennemi> listeEnnemisASpawn = gestionnaireVagues.lancerVague(terrainExperimental);
+        ArrayList<Ennemi> listeEnnemisASpawn = gestionnaireVagues.lancerVague();
         assertNotNull(listeEnnemisASpawn, "La liste des ennemis à spawner ne devrait pas être nulle.");
         assertFalse(listeEnnemisASpawn.isEmpty(), "La liste des ennemis à spawner ne devrait pas être vide.");
 
@@ -46,19 +45,19 @@ class GestionnaireVaguesTest {
     @Test
     public void testLancerVague_DifferentsNombreEnnemis(){
         Environnement.vagueActuelleProperty.set(1);
-        ArrayList<Ennemi> listeEnnemis = gestionnaireVagues.lancerVague(terrainExperimental);
+        ArrayList<Ennemi> listeEnnemis = gestionnaireVagues.lancerVague();
         int expectedNombreEnnemis = 3;
         assertEquals(expectedNombreEnnemis, listeEnnemis.size(), "Le nombre d'ennemis pour la 1ère vague est correct.");
 
         // Test pour la 5ème vague
         Environnement.vagueActuelleProperty.set(5);
-        listeEnnemis = gestionnaireVagues.lancerVague(terrainExperimental);
+        listeEnnemis = gestionnaireVagues.lancerVague();
         expectedNombreEnnemis = 7;
         assertEquals(expectedNombreEnnemis, listeEnnemis.size(), "Le nombre d'ennemis pour la 5ème vague est correct.");
 
         // Test pour la 12ème vague
         Environnement.vagueActuelleProperty.set(12);
-        listeEnnemis = gestionnaireVagues.lancerVague(terrainExperimental);
+        listeEnnemis = gestionnaireVagues.lancerVague();
         expectedNombreEnnemis = 15;
         assertEquals(expectedNombreEnnemis, listeEnnemis.size(), "Le nombre d'ennemis pour la 12ème vague est correct.");
 
@@ -68,7 +67,7 @@ class GestionnaireVaguesTest {
     public void testLancerVague_DifferentesTypeEnnemis(){
         // test première vague
         Environnement.vagueActuelleProperty.set(1);
-        ArrayList<Ennemi> listeEnnemisASpawnVague1 = gestionnaireVagues.lancerVague(terrainExperimental);
+        ArrayList<Ennemi> listeEnnemisASpawnVague1 = gestionnaireVagues.lancerVague();
         assertTrue(listeEnnemisASpawnVague1.stream().allMatch(e -> e instanceof EnnemiFacile),
                 "Tous les ennemis dans la liste doivent être des ennemis faciles pour la vague 1.");
 
@@ -76,7 +75,7 @@ class GestionnaireVaguesTest {
         // test vague 3
         Environnement.vagueActuelleProperty.set(3);
 
-        ArrayList<Ennemi> listeEnnemisASpawnVague3 = gestionnaireVagues.lancerVague(terrainExperimental);
+        ArrayList<Ennemi> listeEnnemisASpawnVague3 = gestionnaireVagues.lancerVague();
         boolean estFacileVague3 = false;
         boolean estMoyenVague3= false;
 
@@ -94,7 +93,7 @@ class GestionnaireVaguesTest {
         // test vague 7
         Environnement.vagueActuelleProperty.set(7);
 
-        ArrayList<Ennemi> listeEnnemisASpawnVague7 = gestionnaireVagues.lancerVague(terrainExperimental);
+        ArrayList<Ennemi> listeEnnemisASpawnVague7 = gestionnaireVagues.lancerVague();
         boolean estFacileVague7 = false;
         boolean estMoyenVague7 = false;
         boolean estDifficileVague7 = false;
@@ -117,7 +116,7 @@ class GestionnaireVaguesTest {
 
         // test vague 10
         Environnement.vagueActuelleProperty.set(10);
-        ArrayList<Ennemi> listeEnnemisASpawnVague11 = gestionnaireVagues.lancerVague(terrainExperimental);
+        ArrayList<Ennemi> listeEnnemisASpawnVague11 = gestionnaireVagues.lancerVague();
         assertTrue(listeEnnemisASpawnVague11.stream().allMatch(e -> e instanceof EnnemiDifficile),
                 "Tous les ennemis dans la liste doivent être des ennemis difficiles pour la vague 11.");
     }

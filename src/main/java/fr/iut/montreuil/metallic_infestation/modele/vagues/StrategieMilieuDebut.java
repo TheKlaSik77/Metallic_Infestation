@@ -26,7 +26,7 @@ public class StrategieMilieuDebut implements StrategieVague{
     }
 
     @Override
-    public ArrayList<Ennemi> genererEnnemisVague(Terrain terrain) {
+    public ArrayList<Ennemi> genererEnnemisVague() {
         ArrayList<Ennemi> listeEnnemisASpawn = new ArrayList<>();
         Random random = new Random();
         nombreEnnemis += ennemisSupplementaires;

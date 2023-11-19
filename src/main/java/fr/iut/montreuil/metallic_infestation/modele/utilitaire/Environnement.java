@@ -39,7 +39,7 @@ public class Environnement {
         parcoursBFS.remplirGrilleBFS();
         this.joueur = Joueur.getInstance(100,1000);
         vagueActuelleProperty = new SimpleIntegerProperty(0);
-        this.gestionnaireVagues = new GestionnaireVagues(this);
+        this.gestionnaireVagues = new GestionnaireVagues();
         this.tour = new UnTour();
     }
     public static Environnement getInstance(){
